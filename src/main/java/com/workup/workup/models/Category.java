@@ -1,11 +1,12 @@
 package com.workup.workup.models;
 
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="categories")
-public class ProjectCategory {
+@Table(name = "categories")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -16,18 +17,34 @@ public class ProjectCategory {
     @ManyToMany(mappedBy = "categories")
     private List<Project> projects;
 
-    public ProjectCategory() {
+
+// ORDER IS REVERSED MEANING PARAMETERS ARE ENTERED OPPOSITE OF PROJECTS
+    @ManyToMany(mappedBy = "categories")
+    private List<Profile> profiles;
+
+    public Category() {
     }
 
-    public ProjectCategory(String name, List<Project> projects) {
+    public Category(String name, List<Project> projects) {
         this.name = name;
         this.projects = projects;
     }
 
-    public ProjectCategory(long id, String name, List<Project> projects) {
+    public Category(List<Profile> profiles, String name) {
+        this.name = name;
+        this.profile = profiles;
+    }
+
+    public Category(long id, String name, List<Project> projects) {
         this.id = id;
         this.name = name;
         this.projects = projects;
+    }
+
+    public Category(long id, List<Profile> profiles, String name) {
+        this.id = id;
+        this.name = name;
+        this.profile = profiles;
     }
 
     public long getId() {
@@ -53,4 +70,8 @@ public class ProjectCategory {
     public void setProjects(List<Project> ads) {
         this.projects = ads;
     }
+
+    public List<Profile> getProfiles() { return profiles; }
+
+    public void setProfiles(List<Profile> profiles) { this.profiles = profiles;}
 }
