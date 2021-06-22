@@ -1,4 +1,4 @@
-package com.workup.workup;
+package com.workup.workup.models;
 
 
 import javax.persistence.*;
