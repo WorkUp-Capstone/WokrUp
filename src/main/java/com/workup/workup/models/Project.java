@@ -45,7 +45,7 @@ public class Project {
             joinColumns = {@JoinColumn(name="project_id")},
             inverseJoinColumns = {@JoinColumn(name="category_id")}
     )
-    private List<ProjectCategory> categories;
+    private List<Category> categories;
 
     // USER MODEL NOT CREATED YET
     // DELETE COMMENTS ONCE USER MODEL CEREATED!!!!
@@ -62,7 +62,7 @@ public class Project {
     public Project(){}
 
     // Read constructor includes Id
-    public Project(long id, String title, String description, User ownerUser, User developerUser, List<ProjectImage> images, List<ProjectCategory> categories, Status status, java.sql.Date creationDate,java.sql.Date completedDate){
+    public Project(long id, String title, String description, User ownerUser, User developerUser, List<ProjectImage> images, List<Category> categories, Status status, java.sql.Date creationDate,java.sql.Date completedDate){
         this.id = id;
         this.title = title;
         this.description = description;
@@ -76,7 +76,7 @@ public class Project {
     }
 
     // Insert constructor no Id needed
-    public Project(String title, String description, User ownerUser, List<ProjectImage> images, List<ProjectCategory> categories, Status status, java.sql.Date creationDate){
+    public Project(String title, String description, User ownerUser, List<ProjectImage> images, List<Category> categories, Status status, java.sql.Date creationDate){
         this.title = title;
         this.description = description;
         this.ownerUser = ownerUser;
@@ -146,11 +146,11 @@ public class Project {
         this.images = images;
     }
 
-    public List<ProjectCategory> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<ProjectCategory> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 
