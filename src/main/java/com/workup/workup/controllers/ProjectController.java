@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class OwnerProfileController {
+public class ProjectController {
 
     //need to inject Dependencies for PROJECTS and USERS:
 //private final ProjectsRepository projectDao;
@@ -18,27 +18,6 @@ public class OwnerProfileController {
 //    this.projectDao = projectDao;
 //}
 
-    //View Single Profile:
-    @GetMapping("/owner-profile/{id}")
-    public String showOwnerProfile(@PathVariable long id, Model model){
-        //model.addAttribute("ownerProfile", daoName.getById(id));
-        return "users/owner-profile";
-    }
-
-    //edit selected project
-    @GetMapping("/owner-profile/edit{id}")
-    public String editProfileForm(@PathVariable long id, Model model){
-        //Object object = daoname.getBy(id);
-        //model.addAttribute("attributeName", attributeName);
-        return "users/edit-owner-profile";
-    }
-
-    //edit and save project
-    @PostMapping("/owner-profile/edit{id}")
-    public String editProfile(@PathVariable long id){
-        //need to include @RequestParams, Dao.getById(id), setters, dao.save(object)
-        return "redirect:/owner-profile/{id}";
-    }
 
     //display ALL projects
     @GetMapping("/owner-profile/projects")
