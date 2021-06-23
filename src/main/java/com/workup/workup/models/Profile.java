@@ -35,6 +35,9 @@ public class Profile {
     @OneToOne
     private User user;
 
+    @ManyToMany(mappedBy = "categories")
+    private List<Category> categories;
+
     // Empty Constructor for Spring
     public Profile() {}
 
