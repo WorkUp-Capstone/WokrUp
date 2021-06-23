@@ -43,7 +43,7 @@ public class Profile {
     public Profile() {}
 
     // Constructors
-    public Profile(String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url) {
+    public Profile(String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url, List<Category> categories) {
         this.about = about;
         this.portfolio_link = portfolio_link;
         this.resume_link = resume_link;
@@ -51,9 +51,10 @@ public class Profile {
         this.state = state;
         this.phone_number = phone_number;
         this.profile_image_url = profile_image_url;
+        this.categories = categories;
     }
 
-    public Profile(long id, String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url) {
+    public Profile(long id, String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url, List<Category> categories) {
         this.id = id;
         this.about = about;
         this.portfolio_link = portfolio_link;
@@ -62,6 +63,7 @@ public class Profile {
         this.state = state;
         this.phone_number = phone_number;
         this.profile_image_url = profile_image_url;
+        this.categories = categories;
     }
 
     public long getId() {
