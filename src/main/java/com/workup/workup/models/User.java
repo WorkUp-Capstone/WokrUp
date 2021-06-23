@@ -2,14 +2,58 @@ package com.workup.workup.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users")
 public class User {
 
-    public User(){
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(nullable = false, length = 50)
+    private String username;
+
+    @Column(nullable = false, length = 50)
+    private String email;
+
+    @Column(nullable = false, length = 250)
+    private String password;
+
+    @Column(nullable = false, length = 250)
+    private String firstName;
+
+    @Column(nullable = false, length = 250)
+    private String lastName;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    private List<Roles> roles;
+
+    // Empty constructor for Spring
+    public User() {}
+
+    //Insert Constructor
+    public User(long id, String username, String email, String password, String firstName, String lastName, List<Roles> roles)
+    {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roles = roles;
     }
 
+    public User(String username, String email, String password, String firstName, String lastName, List<Roles> roles)
+    {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roles = roles;
+    }
 
     public long getId() {
         return id;
@@ -19,20 +63,12 @@ public class User {
         this.id = id;
     }
 
-    public String getRole_id() {
-        return role_id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRole_id(String role_id) {
-        this.role_id = role_id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -51,63 +87,28 @@ public class User {
         this.password = password;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    //Insert Constructor
-    public User(long id, String role_id, String email, String password, String first_name, String last_name)
-    {
-        this.id = id;
-        this.role_id = role_id;
-        this.email = email;
-        this.password = password;
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public List<Roles> getRoles() {
+        return roles;
     }
 
-    public User(String role_id, String email, String password, String first_name, String last_name)
-    {
-        this.role_id = role_id;
-        this.email = email;
-        this.password = password;
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(nullable = false, length = 100)
-    private String role_id;
-
-    @Column(nullable = false, length = 50)
-    private String userName;
-
-    @Column(nullable = false, length = 50)
-    private String email;
-
-    @Column(nullable = false, length = 250)
-    private String password;
-
-    @Column(nullable = false, length = 250)
-    private String first_name;
-
-    @Column(nullable = false, length = 250)
-    private String last_name;
-
 
 }
