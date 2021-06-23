@@ -129,4 +129,9 @@ public class Profile {
     public void setProfile_image_url(String profile_image_url) {
         this.profile_image_url = profile_image_url;
     }
+
+    public List<Category> getCategories() { return categories; }
+
+    public void setCategories(List<Category> categories) { this.categories = categories; }
+
 }
