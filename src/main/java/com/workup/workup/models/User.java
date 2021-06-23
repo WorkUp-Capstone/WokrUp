@@ -22,10 +22,10 @@ public class User {
     private String password;
 
     @Column(nullable = false, length = 250)
-    private String firstName;
+    private String first_name;
 
     @Column(nullable = false, length = 250)
-    private String lastName;
+    private String last_name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<Roles> roles;
@@ -34,24 +34,24 @@ public class User {
     public User() {}
 
     //Insert Constructor
-    public User(long id, String username, String email, String password, String firstName, String lastName, List<Roles> roles)
+    public User(long id, String username, String email, String password, String first_name, String last_name, List<Roles> roles)
     {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.roles = roles;
     }
 
-    public User(String username, String email, String password, String firstName, String lastName, List<Roles> roles)
+    public User(String username, String email, String password, String first_name, String last_name, List<Roles> roles)
     {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.roles = roles;
     }
 
@@ -88,19 +88,19 @@ public class User {
     }
 
     public String getFirstName() {
-        return firstName;
+        return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(String first_name) {
+        this.first_name = first_name;
     }
 
     public String getLastName() {
-        return lastName;
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(String last_name) {
+        this.last_name = last_name;
     }
 
     public List<Roles> getRoles() {
