@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name="categories")
-public class ProjectCategory {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -16,18 +16,32 @@ public class ProjectCategory {
     @ManyToMany(mappedBy = "categories")
     private List<Project> projects;
 
-    public ProjectCategory() {
+    @ManyToMany(mappedBy = "categories")
+    private List<Profile> profiles;
+
+    public Category() {
     }
 
-    public ProjectCategory(String name, List<Project> projects) {
+    public Category(String name, List<Project> projects) {
         this.name = name;
         this.projects = projects;
     }
 
-    public ProjectCategory(long id, String name, List<Project> projects) {
+    public Category(long id, String name, List<Project> projects) {
         this.id = id;
         this.name = name;
         this.projects = projects;
+    }
+
+    public Category(List<Profile> profiles, String name) {
+        this.name = name;
+        this.profiles = profiles;
+    }
+
+    public Category(long id, List<Profile> profiles, String name) {
+        this.id = id;
+        this.name = name;
+        this.profiles = profiles;
     }
 
     public long getId() {
@@ -50,7 +64,16 @@ public class ProjectCategory {
         return projects;
     }
 
-    public void setProjects(List<Project> ads) {
-        this.projects = ads;
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public List<Profile> getProfiles() {
+        return profiles;
+    }
+
+    public void setProfiles(List<Profile> profiles) {
+        this.profiles = profiles;
     }
 }
+
