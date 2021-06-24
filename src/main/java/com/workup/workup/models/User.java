@@ -34,10 +34,9 @@ public class User {
     public User() {}
 
     //Insert Constructor
-    public User(long id, String username, String email, String password, String first_name, String last_name, List<Roles> roles)
+    public User(long id,String email, String password, String first_name, String last_name, List<Roles> roles)
     {
         this.id = id;
-        this.username = username;
         this.email = email;
         this.password = password;
         this.first_name = first_name;
@@ -45,9 +44,8 @@ public class User {
         this.roles = roles;
     }
 
-    public User(String username, String email, String password, String first_name, String last_name, List<Roles> roles)
+    public User(String email, String password, String first_name, String last_name, List<Roles> roles)
     {
-        this.username = username;
         this.email = email;
         this.password = password;
         this.first_name = first_name;
@@ -61,14 +59,6 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
