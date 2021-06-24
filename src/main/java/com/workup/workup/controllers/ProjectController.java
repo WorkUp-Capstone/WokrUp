@@ -1,6 +1,6 @@
 package com.workup.workup.controllers;
-
-import dao.ProjectsRepository;
+import com.workup.workup.dao.ProjectsRepository;
+import com.workup.workup.models.Project;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,32 +11,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProjectController {
 
-    //need to inject Dependencies for PROJECTS and USERS:
-//private final ProjectsRepository projectDao;
-//
-//public OwnerProfileController(ProjectsRepository projectDao){
-//    this.projectDao = projectDao;
-//}
 
+private final ProjectsRepository projectDao;
+public ProjectController(ProjectsRepository projectDao){
+    this.projectDao = projectDao;
+}
 
     //display ALL projects
     @GetMapping("/owner-profile/projects")
     public String projectsIndex(Model model){
-        //model.addAttribute("allProjects", daoName.findAll());
+        model.addAttribute("allProjects", projectDao.findAll());
         return "projects/index"; // ?? may need return refactor
     }
 
     //display selected single project
     @GetMapping("/owner-profile/projects/{id}")
     public String showProject(@PathVariable long id, Model model){
-        //model.addAttribute("showProject", daoName.getById(id));
+        model.addAttribute("showProject", projectDao.getById(id));
         return "projects/show";
     }
 
     //create a Project
     @GetMapping("/owner-profile/projects/create")
     public String viewProjectCreateForm(Model model){
-        //model.addAttribute("project", new Project());
+        model.addAttribute("project", new Project());
         return "projects/create";
     }
 
@@ -50,15 +48,22 @@ public class ProjectController {
     //edit selected project
     @GetMapping("/owner-profile/projects/edit{id}")
     public String editProjectForm(@PathVariable long id, Model model){
-        //Object object = daoname.getBy(id);
-        //model.addAttribute("project", project);
+        Project project = projectDao.getById(id);
+        model.addAttribute("project", project);
         return "projects/edit";
     }
 
     //edit and save project
+    /** TODO: need to include @RequestParams for categories and possibly files? */
+
     @PostMapping("/owner-profile/projects/edit{id}")
-    public String editProject(@PathVariable long id){
-        //need to include @RequestParams, Dao.getById(id), setters, dao.save(object)
+    public String editProject(@PathVariable long id, @RequestParam(name="title") String title, @RequestParam(name="description") String description){
+        Project project = projectDao.getById(id);
+
+        project.setTitle(title);
+        project.setDescription(description);
+
+        projectDao.save(project);
         return "redirect:/projects/{id}"; //where are we redirecting them? Profile or home
     }
 }
