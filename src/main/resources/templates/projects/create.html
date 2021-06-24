@@ -13,13 +13,14 @@
         <input name="title" th:field="*{title}"/>
         <br/>
         Overall Description of Project:
-        <input name="body" th:field="*{description}"/>
+        <input name="description" th:field="*{description}"/>
         <br/>
-        What category would you like to include in your project:
-        <!-- TODO: add a checkbox or select box depending on categories-->
+        What categories would you like to include in your project:<!--TODO: add a checkbox or select box depending on categories-->
         <br/>
-
-        <input type="submit"/>
+        Upload any corresponding files about your project here: (files upload)<!--TODO: add Filestack functionality here-->
+        <button type="button">Upload files</button>
+<br/>
+        <input type="submit" value="Save Project"/>
     </form>
 </div>
 </body>

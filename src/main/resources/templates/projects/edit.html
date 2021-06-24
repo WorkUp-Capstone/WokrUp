@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>WorkUp Edit Project</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head">
+    <title>Edit Page</title>
 </head>
 <body>
+<nav th:replace="partials/navbar :: navbar"></nav>
 
+<div class="container">
+    <h4><strong>Edit Project:</strong></h4>
+    <form th:action="@{/projects/edit/{id}(id=${project.id})}" method="POST">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" th:value="${project.title}">
+        <label for="description">Project Description</label>
+        <input type="text" name="description" id="description" th:value="${project.description}">
+
+        <!--TODO: need to include edit for categories, and file uploads and possibly other fields? -->
+        <button type="submit">Save Project</button>
+    </form>
+</div>
 </body>
 </html>
