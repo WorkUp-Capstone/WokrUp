@@ -24,12 +24,13 @@ public ProjectController(ProjectsRepository projectDao){
         return "projects/index"; // ?? may need return refactor
     }
 
+/**Lines below commented in the event we need to show one project outside of the card view in the projects' index (dev/home) *note that show.html does not exist*/
     //display selected single project
-    @GetMapping("/owner-profile/projects/{id}")
-    public String showProject(@PathVariable long id, Model model){
-        model.addAttribute("showProject", projectDao.getById(id));
-        return "projects/show";
-    }
+//    @GetMapping("/owner-profile/projects/{id}")
+//    public String showProject(@PathVariable long id, Model model){
+//        model.addAttribute("showProject", projectDao.getById(id));
+//        return "projects/show";
+//    }
 
     //create a Project
     @GetMapping("/owner-profile/projects/create")
