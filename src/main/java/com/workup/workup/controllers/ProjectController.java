@@ -1,6 +1,6 @@
 package com.workup.workup.controllers;
-
-import dao.ProjectsRepository;
+import com.workup.workup.dao.ProjectsRepository;
+import com.workup.workup.models.Project;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,32 +11,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProjectController {
 
-    //need to inject Dependencies for PROJECTS and USERS:
-//private final ProjectsRepository projectDao;
-//
-//public OwnerProfileController(ProjectsRepository projectDao){
-//    this.projectDao = projectDao;
-//}
 
+private final ProjectsRepository projectDao;
+public ProjectController(ProjectsRepository projectDao){
+    this.projectDao = projectDao;
+}
 
     //display ALL projects
     @GetMapping("/owner-profile/projects")
     public String projectsIndex(Model model){
-        //model.addAttribute("allProjects", daoName.findAll());
+
+        //model.addAttribute("allProjects", projectDao.findAll());
         return "projects/index"; // ?? may need return refactor
     }
 
     //display selected single project
     @GetMapping("/owner-profile/projects/{id}")
     public String showProject(@PathVariable long id, Model model){
-        //model.addAttribute("showProject", daoName.getById(id));
+        model.addAttribute("showProject", projectDao.getById(id));
         return "projects/show";
     }
 
     //create a Project
     @GetMapping("/owner-profile/projects/create")
     public String viewProjectCreateForm(Model model){
-        //model.addAttribute("project", new Project());
+        model.addAttribute("project", new Project());
         return "projects/create";
     }
 

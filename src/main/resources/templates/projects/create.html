@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head">
     <meta charset="UTF-8">
     <title>Create Project</title>
 </head>
 <body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
+    <h3>Create a new project: </h3>
+    <form th:action="@{/projects/create}" th:method="post" th:object="${project}">
+        Name of Project:
+        <input name="title" th:field="*{title}"/>
+        <br/>
+        Overall Description of Project:
+        <input name="body" th:field="*{description}"/>
+        <br/>
+        What category would you like to include in your project:
+        <!-- TODO: add a checkbox or select box depending on categories-->
+        <br/>
 
+        <input type="submit"/>
+    </form>
+</div>
 </body>
 </html>
