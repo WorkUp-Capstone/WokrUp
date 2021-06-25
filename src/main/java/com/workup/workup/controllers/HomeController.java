@@ -19,35 +19,6 @@ public class HomeController {
     }
 
     // TODO: post mapping for register
-    
-    
-    //Where is profile if profile was already created?
-    //DeveloperProfile
-    @GetMapping("/DeveloperProfile")
-    public String DeveloperProfile(){
-        return "DeveloperProfile";
-    }
-    
-    //OwnerProfile
-    @GetMapping("/ClientProfile")
-    public String ClientProfile(){
-        return "ClientProfile";
-    }
-    
-    @GetMapping("/partials/navbar")
-    private String Navbar() {
-        return "navbar";
-    }
-    
-        @GetMapping("/partials/head")
-    private String Head() {
-        return "head";
-    }
-    
-    @GetMapping("/partials/footer")
-    private String Footer() {
-        return "footer";
-    }
-    
-    
+
+
 }
