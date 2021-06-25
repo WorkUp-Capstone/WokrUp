@@ -36,7 +36,12 @@ public class Profile {
     @OneToOne
     private User user;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "categories",
+            joinColumns = {@JoinColumn(name="profile_id")},
+            inverseJoinColumns = {@JoinColumn(name="category_id")}
+    )
     private List<Category> categories;
 
     // Empty Constructor for Spring
