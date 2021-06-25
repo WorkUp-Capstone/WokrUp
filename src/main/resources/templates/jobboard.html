@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+<!--    Just using for testing take out on push-->
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+
+</head>
+<body>
+
+<!--using for testing. take out on push-->
+<style>
+
+    .mainJobBoardBox{
+        padding-top: 5%;
+        padding-right: 10%;
+        padding-left:10%;
+        align-items: center;
+    }
+    .input-group{
+        margin-bottom:0!important;
+    }
+    .row{
+        align-items: center;
+    }
+    .card{
+        width:100%;
+    }
+
+</style>
+
+<div class="container-fluid mainJobBoardBox" style="height: 85vw">
+    <div class="row">
+<!--        Title and search bar-->
+        <div class="col-md-12" style="display: flex; align-items: center; flex-direction:row; border-color: coral; border-style: solid;">
+
+            <h2>Job Board</h2>
+
+            <div class="input-group" style="display: flex; justify-content: end; margin-left:auto">
+                <div class="form-outline">
+                    <input type="search" id="form1" class="form-control" />
+                    <label class="form-label" for="form1">Search</label>
+                </div>
+                <button type="button" class="btn btn-dark" style="display: flex; justify-content: end; margin-left:auto">
+                    <i class="material-icons">search</i>
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="row" style="display: flex; border-color: coral; border-style: solid;">
+
+        <div class="col-md-3" style="border-color: coral; border-style: solid;">
+
+
+            <h3>categories</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    HTML jobs
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Javascript Jobs
+                </label>
+            </div>
+
+<!--            this is a bar for splitting the categories-->
+            <hr/>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    HTML jobs
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Javascript Jobs
+                </label>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="col-md-9" style="display: flex; border-color: coral; border-style: solid; flex-grow: 1;">
+
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Job</th>
+                    <th scope="col">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Twitter</td>
+                    <td>HTML</td>
+                    <td>
+                        <p>
+
+                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                More Dea
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+
+
+
+    </div>
+</div>
+
+
+</body>
+</html>
