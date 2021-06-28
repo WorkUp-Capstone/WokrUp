@@ -1,5 +1,6 @@
 package com.workup.workup.controllers;
 import com.workup.workup.dao.ProjectsRepository;
+import com.workup.workup.models.EmailService;
 import com.workup.workup.models.Project;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProjectController {
 
-
 private final ProjectsRepository projectDao;
-public ProjectController(ProjectsRepository projectDao){
+private final EmailService emailService;
+
+public ProjectController(ProjectsRepository projectDao, EmailService emailService){
     this.projectDao = projectDao;
+    this.emailService = emailService;
 }
 
     //display ALL projects
