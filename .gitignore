@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 
 ### project added ###
-!**/src/main/resources/application.properties
+src/main/resources/application.properties
 
 ### STS ###
 .apt_generated
@@ -36,5 +36,5 @@ build/
 .vscode/
 
 
-### Keys ###
+### API Keys ###
 src/main/resources/keys.js
