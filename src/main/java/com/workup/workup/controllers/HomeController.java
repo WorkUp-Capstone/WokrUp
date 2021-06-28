@@ -38,7 +38,7 @@ public class HomeController {
     @GetMapping("/home-projects")
     public String projectsIndex(Model model){
         model.addAttribute("allProjects", projectsDao.findAll());
-        return "projects/index";
+        return "home";
     }
 
     //Project index for Developers to view in their Home Page
