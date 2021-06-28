@@ -190,8 +190,4 @@ public class Project {
         }
     }
 
-
-    public User getOwner() {
-        return ownerUser;
-    }
 }
