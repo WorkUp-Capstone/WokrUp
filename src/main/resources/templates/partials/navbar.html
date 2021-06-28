@@ -38,7 +38,9 @@
                     <a class="nav-link" href="/owner-profile/projects/create">Create Project</a>
                 </li>
                 <li class="nav-item">
+                    <form th:action="@{/logout}" th:method="post">
                     <a class="nav-link" href="#">Logout</a>
+                    </form>
                 </li>
             </ul>
         </div>
