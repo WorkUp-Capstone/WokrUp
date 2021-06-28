@@ -1,6 +1,8 @@
 package com.workup.workup.models;
 
 
+import com.workup.workup.util.Password;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -66,12 +68,10 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() { return password; }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = Password.hash(password);
     }
 
     public String getFirstName() {
