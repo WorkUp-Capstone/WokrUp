@@ -3,9 +3,11 @@ package com.workup.workup.controllers;
 import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
+import com.workup.workup.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -21,17 +23,24 @@ public class HomeController {
         usersDao = usersRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/welcome")
     public String welcome(){
         return "welcome";
     }
 
+//create user
     @GetMapping("/register")
-    public String register(){
+    public String registerUser(Model model){
+        model.addAttribute("user", new User());
         return "registration";
     }
 
-    // TODO: post mapping for register
+//save user
+    @PostMapping("/register")
+    public String saveUser(@ModelAttribute User user){
+        usersDao.save(user);
+        return "redirect:/welcome"; //may need to redirect them somewhere else
+    }
 
 
     //Project index for Developers to view in their Home Page
