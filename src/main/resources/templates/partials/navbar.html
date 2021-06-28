@@ -6,10 +6,10 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
-    <a class="navbar-brand" href="/posts">WorkUp Projects</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    WorkUp
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
     <form action="/search">
         <input type="text" name="term" placeholder="Search term">
         <button class="btn">Search</button>
@@ -17,7 +17,7 @@
     <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
+                <a class="nav-link" href="#">Home</a>
             </li>
         </ul>
         <!-- Sign up/Login nav-links (not logged in) -->
@@ -35,7 +35,7 @@
         <div sec:authorize="isAuthenticated()">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/ads/create">Create Post</a>
+                    <a class="nav-link" href="/owner-profile/projects/create">Create Project</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Logout</a>
