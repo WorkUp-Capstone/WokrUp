@@ -38,7 +38,7 @@ public class Profile {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "categories",
+            name = "profile_categories",
             joinColumns = {@JoinColumn(name="profile_id")},
             inverseJoinColumns = {@JoinColumn(name="category_id")}
     )
