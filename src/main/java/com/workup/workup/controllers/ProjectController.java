@@ -69,5 +69,15 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
 
         projectDao.save(project);
         return "redirect:/projects/{id}"; //where are we redirecting them? Profile or home
+
     }
+
+
+//    need to discuss postmapping redirect plan as well as confirm how we will handle search ie. categories/description
+//    @GetMapping("/search")
+//   public String searchProject(@PathVariable String searchString, Model model){
+//
+//    }
+
+
 }
