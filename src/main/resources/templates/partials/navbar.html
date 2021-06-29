@@ -21,10 +21,11 @@
             </li>
         </ul>
         <!-- Sign up/Login nav-links (not logged in) -->
-        <div sec:authorize="!isAuthenticated()">
+<!--        <div sec:authorize="!isAuthenticated()">-->
+        <div>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/sign-up">Sign up</a>
+                    <a class="nav-link" href="/register">Sign up</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Login</a>
@@ -32,14 +33,15 @@
             </ul>
         </div>
         <!-- These items will only display if the user is logged in -->
-        <div sec:authorize="isAuthenticated()">
+<!--        <div sec:authorize="isAuthenticated()">-->
+        <div>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/owner-profile/projects/create">Create Project</a>
                 </li>
                 <li class="nav-item">
                     <form th:action="@{/logout}" th:method="post">
-                    <a class="nav-link" href="#">Logout</a>
+                    <a class="nav-link" href="/login?logout">Logout</a>
                     </form>
                 </li>
             </ul>
