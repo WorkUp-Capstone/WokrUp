@@ -27,6 +27,8 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<Roles> roles;
 
+    private String username = email;
+
     // Empty constructor for Spring
     public User() {}
 
@@ -48,6 +50,13 @@ public class User {
         this.first_name = first_name;
         this.last_name = last_name;
         this.roles = roles;
+    }
+
+    //copy constructor for login credentials
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        password = copy.password;
     }
 
     public long getId() {

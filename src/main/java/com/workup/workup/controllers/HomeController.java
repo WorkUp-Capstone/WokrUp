@@ -10,17 +10,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Controller
 public class HomeController {
     private ProjectsRepository projectsDao;
     private ProfileRepository profileDao;
     private UsersRepository usersDao;
+    private PasswordEncoder passwordEncoder;
 
-    public HomeController(ProjectsRepository projectsRepository, ProfileRepository profileRepository, UsersRepository usersRepository){
+
+    public HomeController(ProjectsRepository projectsRepository, ProfileRepository profileRepository, UsersRepository usersRepository, PasswordEncoder passwordEncoder){
         projectsDao = projectsRepository;
         profileDao = profileRepository;
         usersDao = usersRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/welcome")
@@ -38,6 +42,8 @@ public class HomeController {
 //save user
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user){
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
         usersDao.save(user);
         return "redirect:/welcome"; //may need to redirect them somewhere else
     }
