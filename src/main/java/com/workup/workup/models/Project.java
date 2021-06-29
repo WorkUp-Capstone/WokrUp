@@ -41,7 +41,7 @@ public class Project {
     // DELETE COMMENTS ONCE CATEGORIES MODEL CREATED!!!
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "categories",
+            name = "project_categories",
             joinColumns = {@JoinColumn(name="project_id")},
             inverseJoinColumns = {@JoinColumn(name="category_id")}
     )
