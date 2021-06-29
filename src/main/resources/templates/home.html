@@ -9,20 +9,10 @@
 <h1>Open Projects</h1>
 <br>
 <!--TODO: Need to reference user story again about card display, then what info comes up when user clicks on card-->
-<div class="container">
-    <div class="card">
-        <th:block th:each="project : ${allProjects}">
-            <h3 th:text="${project.title}"></h3>
-            <p th:text="${project.description}"></p>
-            <p th:text="${project.ownerUser}"></p>
-            <p th:text="${project.images}"></p>
-            <p th:text="${project.categories}"></p>
-            <p th:text="${project.creationDate}"></p>
-        </th:block>
-    </div>
+<div class="container" th:switch="${roles.role}">
 
     <!--TODO: Need to reference ONLY Project owners profiles-->
-    <div class="card">
+    <div class="card" th:case="'dev'">
         <th:block th:each="profile : ${developerProfiles}">
             <h3 th:text="${profile.name}"></h3>
             <p th:text="${profile.profile_image_url}"></p>
@@ -33,6 +23,17 @@
             <p th:text="${profile.state}"></p>
             <p th:text="${profile.phone_number}"></p>
 
+        </th:block>
+    </div>
+
+    <div class="project-card" th:case="*">
+        <th:block th:each="project : ${allProjects}">
+            <h3 th:text="${project.title}"></h3>
+            <p th:text="${project.description}"></p>
+            <p th:text="${project.ownerUser}"></p>
+            <p th:text="${project.images}"></p>
+            <p th:text="${project.categories}"></p>
+            <p th:text="${project.creationDate}"></p>
         </th:block>
     </div>
     <!--TODO: extract info based on role -->
