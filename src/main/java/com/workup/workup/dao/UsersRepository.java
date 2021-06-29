@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 // USER REPOSITORY
 // USER MODEL NOT CONNECTED YET! DELETE WHEN CONNECTED!!!! //
 public interface UsersRepository extends JpaRepository<User, Long> {
+
     User findByUsername(String email);
 
 }
