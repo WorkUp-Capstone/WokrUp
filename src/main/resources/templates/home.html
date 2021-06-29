@@ -9,8 +9,10 @@
 <h1>Open Projects</h1>
 <br>
 <!--TODO: Need to reference user story again about card display, then what info comes up when user clicks on card-->
-<div class="container">
-    <div class="card">
+<div class="container" th:switch="${roles.role}">
+
+
+    <div class="project-card" th:case="*">
         <th:block th:each="project : ${allProjects}">
             <h3 th:text="${project.title}"></h3>
             <p th:text="${project.description}"></p>
@@ -22,7 +24,7 @@
     </div>
 
     <!--TODO: Need to reference ONLY Project owners profiles-->
-    <div class="card">
+    <div class="card" th:case="'dev'">
         <th:block th:each="profile : ${developerProfiles}">
             <h3 th:text="${profile.name}"></h3>
             <p th:text="${profile.profile_image_url}"></p>
