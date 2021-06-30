@@ -27,8 +27,6 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<Roles> roles;
 
-    private String username = email;
-
     // Empty constructor for Spring
     public User() {}
 
