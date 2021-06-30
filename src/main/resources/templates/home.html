@@ -12,7 +12,7 @@
 <div class="container" th:switch="${roles.role}">
 
     <!--TODO: Need to reference ONLY Project owners profiles-->
-    <div class="card" th:case="'dev'">
+    <div class="card" th:case="'developer'">
         <th:block th:each="profile : ${developerProfiles}">
             <h3 th:text="${profile.name}"></h3>
             <p th:text="${profile.profile_image_url}"></p>

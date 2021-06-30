@@ -47,7 +47,6 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
     }
 
     @PostMapping("/projects/create")
-    @ResponseBody
     public String createProject(
                               @RequestParam(name = "title") String title,
                               @RequestParam(name = "description") String description,
@@ -65,11 +64,11 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
         // save changes
 
         projectDao.save(newProject);
-        return "redirect:/projects";
+        return "redirect:/projects/edit/" + newProject.getId(); //where are we redirecting them? Profile or home
     }
 
     //edit selected project
-    @GetMapping("/owner-profile/projects/edit{id}")
+    @GetMapping("/projects/edit/{id}")
     public String editProjectForm(@PathVariable long id, Model model){
         Project project = projectDao.getById(id);
         model.addAttribute("project", project);
@@ -79,7 +78,7 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
     //edit and save project
     /** TODO: need to include @RequestParams for categories and possibly files? */
 
-    @PostMapping("/owner-profile/projects/edit{id}")
+    @PostMapping("/projects/edit/{id}")
     public String editProject(@PathVariable long id, @RequestParam(name="title") String title, @RequestParam(name="description") String description){
         Project project = projectDao.getById(id);
 
@@ -87,7 +86,7 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
         project.setDescription(description);
 
         projectDao.save(project);
-        return "redirect:/projects/{id}"; //where are we redirecting them? Profile or home
+        return "redirect:/projects/edit/{id}"; //where are we redirecting them? Profile or home
 
     }
 
