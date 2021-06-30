@@ -9,13 +9,19 @@
 <div class="container">
     <h3>Create a new project: </h3>
     <form th:action="@{/projects/create}" th:method="post" th:object="${project}">
-        Name of Project:
-        <input name="title" th:field="*{title}"/>
+        <label for="title">Name of Project:</label>
+        <input name="title" id="title" th:field="*{title}"/>
         <br/>
-        Overall Description of Project:
-        <input name="description" th:field="*{description}"/>
+        <label for="description">Overall Description of Project:</label>
+        <input name="description" id="description" th:field="*{description}"/>
         <br/>
-        What categories would you like to include in your project:<!--TODO: add a checkbox or select box depending on categories-->
+        <!--TODO: add a checkbox or select box depending on categories-->
+        <label for="categories">What categories would you like to include in your project:</label>
+        <br>(Default values for testing)
+        <select th:field="*{categories}" id="categories">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+        </select>
         <br/>
         Upload any corresponding files about your project here: (files upload)<!--TODO: add Filestack functionality here-->
         <button type="button">Upload files</button>
