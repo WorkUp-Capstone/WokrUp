@@ -55,6 +55,7 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
                               @AuthenticationPrincipal User user){
         // find post
         Project newProject = new Project();
+        Status newStatus = new Status();
         // edit post
         newProject.setTitle(title);
         newProject.setDescription(description);
@@ -62,6 +63,7 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
         newProject.setOwnerUser(user);
         newProject.setStatus(status);
         // save changes
+
         projectDao.save(newProject);
         return "redirect:/projects";
     }

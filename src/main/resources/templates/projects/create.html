@@ -19,7 +19,7 @@
         <br/>
         Categories:
         <div>
-        <input id="E-mail service" type="checkbox" name="categories" th:field="*{categories}" th:value="E-Mail service">
+        <input id="E-mail service" type="checkbox" name="categories" th:field="*{categories}" th:value="Email_service">
         <label for="E-mail service"></label>
         </div>
         <div>
@@ -27,11 +27,11 @@
             <label for="Database"></label>
         </div>
         <div>
-            <input id="UI/UX" type="checkbox" name="categories" th:field="*{categories}" th:value="UI/UX">
+            <input id="UI/UX" type="checkbox" name="categories" th:field="*{categories}" th:value="UI_UX">
             <label for="UI/UX"></label>
         </div>
         <div>
-            <input id="RESTful API" type="checkbox" name="categories" th:field="*{categories}" th:value="RESTful API">
+            <input id="RESTful API" type="checkbox" name="categories" th:field="*{categories}" th:value="RESTful_API">
             <label for="RESTful API"></label>
         </div>
         <div>
@@ -67,18 +67,26 @@
             <label for="MySQL"></label>
         </div>
         <div>
-            <input id="Full-Stack Development" type="checkbox" name="categories" th:field="*{categories}" th:value="Full-stack development">
+            <input id="Full-Stack Development" type="checkbox" name="categories" th:field="*{categories}" th:value="Full_stack_development">
             <label for="Full-Stack Development"></label>
         </div>
         <div>
-            <input id="Back-end development" type="checkbox" name="categories" th:field="*{categories}" th:value="Back-end development">
+            <input id="Back-end development" type="checkbox" name="categories" th:field="*{categories}" th:value="Back_end_development">
             <label for="Back-end development"></label>
         </div>
         <div>
-            <input id="Front-end development" type="checkbox" name="categories" th:field="*{categories}" th:value="Front-end development">
+            <input id="Front-end development" type="checkbox" name="categories" th:field="*{categories}" th:value="Front_end_development">
             <label for="Front-end development"></label>
         </div>
             <br/>
+        <div>
+            <label>
+                <select th:field="*{status}">
+                    <option th:value="Open">Open</option>
+                    <option th:value="In_progress">In progress</option>
+                </select>
+            </label>
+        </div>
         Upload any corresponding files about your project here: (files upload)<!--TODO: add Filestack functionality here-->
         <button type="button">Upload files</button>
 <br/>
