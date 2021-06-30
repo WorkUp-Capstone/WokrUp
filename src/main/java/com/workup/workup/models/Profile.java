@@ -47,7 +47,7 @@ public class Profile {
     public Profile() {}
 
     // Constructors
-    public Profile(String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url, List<Category> categories) {
+    public Profile(String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url, List<Category> categories, User user) {
         this.about = about;
         this.portfolio_link = portfolio_link;
         this.resume_link = resume_link;
@@ -56,9 +56,10 @@ public class Profile {
         this.phone_number = phone_number;
         this.profile_image_url = profile_image_url;
         this.categories = categories;
+        this.user = user;
     }
 
-    public Profile(long id, String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url, List<Category> categories) {
+    public Profile(long id, String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url, List<Category> categories, User user) {
         this.id = id;
         this.about = about;
         this.portfolio_link = portfolio_link;
@@ -68,6 +69,7 @@ public class Profile {
         this.phone_number = phone_number;
         this.profile_image_url = profile_image_url;
         this.categories = categories;
+        this.user = user;
     }
 
     public long getId() {
@@ -137,5 +139,13 @@ public class Profile {
     public List<Category> getCategories() { return categories; }
 
     public void setCategories(List<Category> categories) { this.categories = categories; }
+
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
 
 }

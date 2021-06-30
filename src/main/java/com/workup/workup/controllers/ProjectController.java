@@ -1,23 +1,26 @@
 package com.workup.workup.controllers;
 import com.workup.workup.dao.ProjectsRepository;
+import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.EmailService;
 import com.workup.workup.models.Project;
+import com.workup.workup.models.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ProjectController {
 
 private final ProjectsRepository projectDao;
 private final EmailService emailService;
+private final UsersRepository userDao;
 
-public ProjectController(ProjectsRepository projectDao, EmailService emailService){
+public ProjectController(ProjectsRepository projectDao, EmailService emailService, UsersRepository userDao){
     this.projectDao = projectDao;
     this.emailService = emailService;
+    this.userDao = userDao;
+
 }
 
     //display ALL projects
@@ -44,9 +47,13 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
 
     //save created project
     @PostMapping("/owner-profile/projects/create")
-    public String projectCreateForm(){
-        //need to include @requestParams, dao.getById(id), setters, dao.save(project)
-        return "redirect:/projects/index"; //not sure where we would be redirecting the user here?
+    public String projectCreateForm(@ModelAttribute Project project){
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        project.setOwnerUser(user);
+        Project saveProject = projectDao.save(project);
+
+        return "redirect:/owner-profile/projects/" + saveProject.getId();
     }
 
     //edit selected project

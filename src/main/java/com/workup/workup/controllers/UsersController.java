@@ -25,19 +25,19 @@ public class UsersController {
     @GetMapping("/owner-profile/{id}")
     public String showOwnerProfile(@PathVariable long id, Model model){
         model.addAttribute("ownerProfile", profileDao.getById(id));
-        return "users/owner-profile";
+        return "users/view-profile";
     }
 
     //edit selected profile
-    @GetMapping("/owner-profile/edit/{id}")
+    @GetMapping("/owner-profile/edit")
     public String editProfileForm(@PathVariable long id, Model model){
         Profile profileToEdit = profileDao.getById(id);
         model.addAttribute("editOwnerProfile", profileToEdit);
-        return "users/edit-owner-profile";
+        return "users/edit-profile";
     }
 
     //edit and save profile
-    @PostMapping("/owner-profile/edit/{id}")
+    @PostMapping("/owner-profile/edit")
     @ResponseBody
     public String editProfile(@PathVariable long id,
                               @RequestParam(name = "about") String about,
@@ -59,7 +59,7 @@ public class UsersController {
         foundProfile.setProfile_image_url(profile_image_url);
         // save changes
         profileDao.save(foundProfile);
-        return "redirect:/owner-profile/{id}";
+        return "redirect:/owner-profile/" + foundProfile.getId();
     }
 
     //TODO: edit user attributes (First name, last name, password)
