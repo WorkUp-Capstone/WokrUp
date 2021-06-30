@@ -17,11 +17,11 @@
     <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="/welcome">Home</a>
             </li>
         </ul>
         <!-- Sign up/Login nav-links (not logged in) -->
-<!--        <div sec:authorize="!isAuthenticated()">-->
+        <div sec:authorize="!isAuthenticated()">
         <div>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -32,8 +32,9 @@
                 </li>
             </ul>
         </div>
+            </div>
         <!-- These items will only display if the user is logged in -->
-<!--        <div sec:authorize="isAuthenticated()">-->
+        <div sec:authorize="isAuthenticated()">
         <div>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -46,6 +47,7 @@
                 </li>
             </ul>
         </div>
+    </div>
     </div>
 </nav>
 </body>
