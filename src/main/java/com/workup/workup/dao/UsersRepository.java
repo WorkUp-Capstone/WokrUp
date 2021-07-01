@@ -12,6 +12,7 @@ import javax.management.relation.Role;
 // USER MODEL NOT CONNECTED YET! DELETE WHEN CONNECTED!!!! //
 public interface UsersRepository extends JpaRepository<User, Long> {
 
+
     User findByEmail(String email);
 
     User findByRoles(User roles);
