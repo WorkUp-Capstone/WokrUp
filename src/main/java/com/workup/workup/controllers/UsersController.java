@@ -24,7 +24,8 @@ public class UsersController {
     //View Single Profile:
     @GetMapping("/owner-profile/{id}")
     public String showOwnerProfile(@PathVariable long id, Model model){
-        model.addAttribute("ownerProfile", profileDao.getById(id));
+        Profile profile = profileDao.findById(id);
+        model.addAttribute("ownerProfile", profile);
         return "users/view-profile";
     }
 
