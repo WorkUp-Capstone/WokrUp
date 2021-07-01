@@ -10,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.workup.workup.models.Roles;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import javax.management.relation.Role;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -58,20 +61,24 @@ public class HomeController {
         return "redirect:/owner-profile/" + profile.getId();
     }
 
-
+    //TODO: need to reach role parameter for a user
     //Project index for Developers to view in their Home Page
-    @GetMapping("/home-projects")
-    public String projectsIndex(Model model){
-        model.addAttribute("allProjects", projectsDao.findAll());
+    @GetMapping("/home")
+    public String projectsIndex(Model model,
+                                @RequestParam(name = "roles") List<Role> roles){
+            User foundRole = usersDao.findByRoles((User) roles);
+            model.addAttribute("allProjects", projectsDao.findAll());
+            usersDao.save(foundRole);
         return "home";
     }
 
     //Project index for Developers to view in their Home Page
-    @GetMapping("/home-developers")
-    public String developersIndex(Model model){
-        model.addAttribute("allDevs", profileDao.findAll()); //need to find relationship for developer roles to pass in the parameter (this is most likely wrong)
-        return "users/view-profile";
-    }
+//    @GetMapping("/home")
+//    public String developersIndex(Model model){
+//        model.addAttribute("allDevs", profileDao.findAll()); //need to find relationship for developer roles to pass in the parameter (this is most likely wrong)
+//        return "users/owner-profile";
+//    }
+
 
 
 
