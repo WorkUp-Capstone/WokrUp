@@ -58,16 +58,15 @@ public class HomeController {
         profile.setUser(newUser);
 
         // use the profile repo to save the new profile
-         profile = profileDao.save(profile);
+         profileDao.save(profile);
 
-        return "redirect:/owner-profile/" + profile.getId();
+        return "redirect:/login";
     }
 
     //TODO: need to reach role parameter for a user
     //Project index for Developers to view in their Home Page
     @GetMapping("/home")
-    public String projectsIndex(Model model,
-                                @RequestParam(name = "roles") List<Role> roles){
+    public String projectsIndex(Model model, @RequestParam(name="roles") List<Role> roles){
             User foundRole = usersDao.findByRoles((User) roles);
             model.addAttribute("allProjects", projectsDao.findAll());
             usersDao.save(foundRole);

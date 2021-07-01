@@ -5,15 +5,13 @@ import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
 import com.workup.workup.services.EmailService;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.workup.workup.models.Profile;
 import com.workup.workup.models.Status;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import java.sql.Date;
-import java.util.Calendar;
+
 
 
 @Controller

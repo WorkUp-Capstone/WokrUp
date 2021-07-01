@@ -7,7 +7,7 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="container">
     <div class="card">
-        <form th:action="@{/owner-profile/}" th:method="post">
+        <form th:action="@{/owner-profile}" th:method="post">
         <th:block th:each="profile : ${ownerProfile}">
             <p th:text="${ownerProfile.profile_image_url}"></p>
             <p th:text="${ownerProfile.about}"></p>
