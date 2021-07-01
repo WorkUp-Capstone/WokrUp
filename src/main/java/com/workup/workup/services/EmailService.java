@@ -1,5 +1,6 @@
-package com.workup.workup.models;
+package com.workup.workup.services;
 
+import com.workup.workup.models.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;

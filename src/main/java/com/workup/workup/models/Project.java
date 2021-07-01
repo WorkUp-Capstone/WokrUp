@@ -29,7 +29,7 @@ public class Project {
     @Column (nullable = true)
     private Date completionDate;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Status status;
 
     // PROJECT IMAGES MODEL NOT CREATED
