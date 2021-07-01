@@ -58,9 +58,9 @@ public class HomeController {
         profile.setUser(newUser);
 
         // use the profile repo to save the new profile
-         profile = profileDao.save(profile);
+         profileDao.save(profile);
 
-        return "redirect:/owner-profile/" + profile.getId();
+        return "redirect:/login";
     }
 
     //TODO: need to reach role parameter for a user
