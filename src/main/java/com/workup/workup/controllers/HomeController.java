@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.workup.workup.models.Roles;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.management.relation.Role;
 import java.util.List;
 
@@ -78,9 +80,4 @@ public class HomeController {
 //        model.addAttribute("allDevs", profileDao.findAll()); //need to find relationship for developer roles to pass in the parameter (this is most likely wrong)
 //        return "users/owner-profile";
 //    }
-
-
-
-
-
 }

@@ -2,9 +2,9 @@ package com.workup.workup.controllers;
 
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
-import com.workup.workup.models.EmailService;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
+import com.workup.workup.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
