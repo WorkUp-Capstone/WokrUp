@@ -25,22 +25,20 @@ public class UsersController {
     @GetMapping("/owner-profile/{id}")
     public String showOwnerProfile(@PathVariable long id, Model model){
         model.addAttribute("ownerProfile", profileDao.getById(id));
-        return "users/owner-profile";
+        return "users/view-profile";
     }
 
     //edit selected profile
     @GetMapping("/owner-profile/edit/{id}")
     public String editProfileForm(@PathVariable long id, Model model){
-        Profile profileToEdit = profileDao.getById(id);
+        Profile profileToEdit = profileDao.findById(id);
         model.addAttribute("editOwnerProfile", profileToEdit);
-        return "users/edit-owner-profile";
+        return "users/edit-profile";
     }
 
     //edit and save profile
     @PostMapping("/owner-profile/edit/{id}")
-    @ResponseBody
-    public String editProfile(@PathVariable long id,
-                              @RequestParam(name = "about") String about,
+    public String editProfile(@PathVariable long id,@RequestParam(name = "about") String about,
                               @RequestParam(name = "portfolio_link") String portfolio_link,
                               @RequestParam(name = "resume_link") String resume_link,
                               @RequestParam(name = "city") String city,

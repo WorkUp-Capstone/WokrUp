@@ -104,5 +104,4 @@ public class User {
     public void setRoles(List<Roles> roles) {
         this.roles = roles;
     }
-
 }

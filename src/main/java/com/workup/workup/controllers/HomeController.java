@@ -3,13 +3,15 @@ package com.workup.workup.controllers;
 import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
-import com.workup.workup.models.Roles;
+import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import com.workup.workup.models.Roles;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import javax.management.relation.Role;
 import java.util.List;
 
@@ -45,8 +47,18 @@ public class HomeController {
     public String saveUser(@ModelAttribute User user){
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
-        usersDao.save(user);
-        return "redirect:/welcome"; //may need to redirect them somewhere else
+        User newUser = usersDao.save(user);
+
+       //instantiate a new profile
+        Profile profile = new Profile();
+
+        // set profile user to saved user in db
+        profile.setUser(newUser);
+
+        // use the profile repo to save the new profile
+         profile = profileDao.save(profile);
+
+        return "redirect:/owner-profile/" + profile.getId();
     }
 
     //TODO: need to reach role parameter for a user
@@ -66,6 +78,7 @@ public class HomeController {
 //        model.addAttribute("allDevs", profileDao.findAll()); //need to find relationship for developer roles to pass in the parameter (this is most likely wrong)
 //        return "users/owner-profile";
 //    }
+
 
 
 
