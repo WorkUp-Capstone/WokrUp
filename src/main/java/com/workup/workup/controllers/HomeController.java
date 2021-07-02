@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import com.workup.workup.models.Roles;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -66,8 +65,8 @@ public class HomeController {
     //TODO: need to reach role parameter for a user
     //Project index for Developers to view in their Home Page
     @GetMapping("/home")
-    public String projectsIndex(Model model, @RequestParam(name="roles") List<Role> roles){
-            User foundRole = usersDao.findByRoles((User) roles);
+    public String projectsIndex(Model model, @RequestParam(name="role") Role role){
+            User foundRole = usersDao.findByRole(role);
             model.addAttribute("allProjects", projectsDao.findAll());
             usersDao.save(foundRole);
         return "home";
@@ -79,9 +78,4 @@ public class HomeController {
 //        model.addAttribute("allDevs", profileDao.findAll()); //need to find relationship for developer roles to pass in the parameter (this is most likely wrong)
 //        return "users/owner-profile";
 //    }
-
-
-
-
-
 }
