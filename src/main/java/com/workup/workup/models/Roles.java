@@ -2,11 +2,10 @@ package com.workup.workup.models;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "role")
-public class Role {
+@Table(name = "roles")
+public class Roles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,19 +14,15 @@ public class Role {
     @Column (nullable = false)
     private String role;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
-    private List<User> users;
-
     // Constructors
-    public Role() {}
+    public Roles() {}
 
-    public Role(long id, String role, List<User> users) {
+    public Roles(long id, String role) {
         this.id = id;
         this.role = role;
-        this.users = users;
     }
 
-    public Role(String role, List<User> users) { this.role = role; this.users = users; }
+    public Roles(String role) { this.role = role; }
 
     // Getters/Setters
     public long getId() {
@@ -44,13 +39,5 @@ public class Role {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 }

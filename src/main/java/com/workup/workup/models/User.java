@@ -2,6 +2,7 @@ package com.workup.workup.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -23,31 +24,30 @@ public class User {
     @Column(nullable = false, length = 250)
     private String last_name;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    private List<Roles> roles;
 
     // Empty constructor for Spring
     public User() {}
 
     //Insert Constructor
-    public User(long id,String email, String password, String first_name, String last_name, Role role)
+    public User(long id,String email, String password, String first_name, String last_name, List<Roles> roles)
     {
         this.id = id;
         this.email = email;
         this.password = password;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.role = role;
+        this.roles = roles;
     }
 
-    public User(String email, String password, String first_name, String last_name, Role role)
+    public User(String email, String password, String first_name, String last_name, List<Roles> roles)
     {
         this.email = email;
         this.password = password;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.role = role;
+        this.roles = roles;
     }
 
     //copy constructor for login credentials
@@ -97,11 +97,11 @@ public class User {
         this.last_name = last_name;
     }
 
-    public Role getRoles() {
-        return role;
+    public List<Roles> getRoles() {
+        return roles;
     }
 
-    public void setRoles(Role roles) {
-        this.role = role;
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
     }
 }
