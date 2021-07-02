@@ -27,11 +27,14 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @OneToOne
+    private Profile profile;
+
     // Empty constructor for Spring
     public User() {}
 
     //Insert Constructor
-    public User(long id,String email, String password, String first_name, String last_name, Role role)
+    public User(long id,String email, String password, String first_name, String last_name, Role role, Profile profile)
     {
         this.id = id;
         this.email = email;
@@ -39,6 +42,7 @@ public class User {
         this.first_name = first_name;
         this.last_name = last_name;
         this.role = role;
+        this.profile = profile;
     }
 
     public User(String email, String password, String first_name, String last_name, Role role)
@@ -103,5 +107,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Profile getProfile(){
+        return profile;
+    }
+
+    public void setProfile(Profile profile){
+        this.profile = profile;
     }
 }

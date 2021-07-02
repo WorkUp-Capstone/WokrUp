@@ -5,6 +5,8 @@ import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,18 +48,23 @@ public class HomeController {
 //save user
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user){
+        Profile profile = new Profile();
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         User newUser = usersDao.save(user);
+        profile.setUser(newUser);
+        user.setProfile(profile);
+        profileDao.save(profile);
+        usersDao.save(newUser);
+
+
 
        //instantiate a new profile
-        Profile profile = new Profile();
+
 
         // set profile user to saved user in db
-        profile.setUser(newUser);
 
         // use the profile repo to save the new profile
-         profileDao.save(profile);
 
         return "redirect:/login";
     }
@@ -65,10 +72,14 @@ public class HomeController {
     //TODO: need to reach role parameter for a user
     //Project index for Developers to view in their Home Page
     @GetMapping("/home")
-    public String projectsIndex(Model model, @RequestParam(name="role") Role role){
-            User foundRole = usersDao.findByRole(role);
+    public String projectsIndex(Model model,
+                                @AuthenticationPrincipal User user){
+//            Role role = user.setRole();
+            model.addAttribute("userRole", user.getRole());
             model.addAttribute("allProjects", projectsDao.findAll());
-            usersDao.save(foundRole);
+//            model.addAttribute("developerProfile", profileDao.getProfileByUserIs(usersDao.findByRole(user.getRole().getId());
+        model.addAttribute("developerProfile", user.getProfile());
+//            usersDao.save(foundRole);
         return "home";
     }
 
