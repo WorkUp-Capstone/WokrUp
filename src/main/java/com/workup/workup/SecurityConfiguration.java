@@ -1,6 +1,5 @@
 package com.workup.workup;
 
-//import com.workup.workup.services.UserDetailsLoader;
 import com.workup.workup.services.UserDetailsLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,7 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /** Logout configuration */
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login?logout") // append a query string value, need to verify where they get sent after logout
+                .logoutSuccessUrl("/login?logout")
+                // append a query string value, need to verify where they get sent after logout
 
                 /** Pages that can be viewed without having to log in */
                 .and()
@@ -58,8 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/owner-profile/projects/create",
                         "/owner-profile/projects/edit/{id}",
-                        "/owner-profile/{id}",
-                        "/owner-profile/edit/{id}"
+                        "/owner-profile",
+                        "/owner-profile/edit"
                 )
                 .authenticated()
         ;
