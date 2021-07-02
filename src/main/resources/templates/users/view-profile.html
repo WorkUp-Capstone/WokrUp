@@ -19,6 +19,9 @@
             <p th:text="${ownerProfile.categories}"></p>
         </th:block>
         </form>
+        <form th:action="@{/owner-profile/edit}" th:method="get">
+            <button>Edit Profile</button>
+        </form>
     </div>
 </div>
 </body>
