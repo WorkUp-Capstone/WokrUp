@@ -4,6 +4,7 @@ import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
+import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,10 @@ public class UsersController {
         Profile profile;
         profile = profileDao.getProfileByUserIs(user);
         model.addAttribute("ownerProfile", profile);
+
+        Project project;
+        project = projectsDao.findProjectByOwnerUser(user);
+        model.addAttribute("ownerProject", project);
         return "users/view-profile";
     }
 
