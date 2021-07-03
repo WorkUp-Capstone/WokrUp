@@ -74,19 +74,11 @@ public class HomeController {
     @GetMapping("/home")
     public String projectsIndex(Model model,
                                 @AuthenticationPrincipal User user){
-//            Role role = user.setRole();
             model.addAttribute("userRole", user.getRole());
             model.addAttribute("allProjects", projectsDao.findAll());
-//            model.addAttribute("developerProfile", profileDao.getProfileByUserIs(usersDao.findByRole(user.getRole().getId());
         model.addAttribute("developerProfile", user.getProfile());
-//            usersDao.save(foundRole);
         return "home";
     }
 
-    //Project index for Developers to view in their Home Page
-//    @GetMapping("/home")
-//    public String developersIndex(Model model){
-//        model.addAttribute("allDevs", profileDao.findAll()); //need to find relationship for developer roles to pass in the parameter (this is most likely wrong)
-//        return "users/owner-profile";
-//    }
+
 }
