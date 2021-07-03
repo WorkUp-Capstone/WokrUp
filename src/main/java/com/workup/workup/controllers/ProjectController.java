@@ -2,6 +2,7 @@ package com.workup.workup.controllers;
 
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
+import com.workup.workup.models.Category;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
 import com.workup.workup.services.EmailService;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import com.workup.workup.models.Status;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import java.sql.Date;
-
+import java.util.List;
 
 
 @Controller
@@ -73,36 +74,43 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
 //        return "redirect:/projects/edit/" + newProject.getId();
     }
 
-        //View project on owner's profile
-//        @GetMapping("/owner-profile")
-//    public String showProject(Model model){
-//            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//            Project project;
-//            project = projectDao.getProjectByOwnerUserIs(user);
-//        model.addAttribute("showProject", project);
-//        return "users/view-profile";
-//    }
-
     //edit selected project
-    @GetMapping("/projects/edit/{id}")
-    public String editProjectForm(@PathVariable long id, Model model){
-        Project project = projectDao.getById(id);
-        model.addAttribute("project", project);
+    @GetMapping("/projects/edit")
+    public String editProjectForm(Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Project projectToEdit = projectDao.getProjectByOwnerUserIs(user);
+        model.addAttribute("editProject", projectToEdit);
         return "projects/edit";
     }
+
+//    @GetMapping("/projects/edit/{id}")
+//    public String editProjectForm(@PathVariable long id, Model model){
+//        Project project = projectDao.getById(id);
+//        model.addAttribute("project", project);
+//        return "projects/edit";
+//    }
 
     //edit and save project
     /** TODO: need to include @RequestParams for categories and possibly files? */
 
-    @PostMapping("/projects/edit/{id}")
-    public String editProject(@PathVariable long id, @RequestParam(name="title") String title, @RequestParam(name="description") String description){
-        Project project = projectDao.getById(id);
+    @PostMapping("/projects/edit")
+    public String editProject(@RequestParam(name="title") String title,
+                              @RequestParam(name="description") String description,
+                              @RequestParam(name="status") Status status
+                              //,@RequestParam(name="categories")Category categories
+                              ){
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Project project = projectDao.getProjectByOwnerUserIs(user);
 
         project.setTitle(title);
         project.setDescription(description);
+        project.setStatus(status);
+        //project.setCategories((List<Category>)categories);
 
         projectDao.save(project);
-        return "redirect:/projects/edit/"; //where are we redirecting them? Profile or home
+        return "redirect:/owner-profile";
 
     }
 

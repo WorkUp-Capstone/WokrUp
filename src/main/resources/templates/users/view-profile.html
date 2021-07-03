@@ -6,6 +6,7 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="container">
+    <h3>My Profile</h3>
     <div class="card">
         <form th:action="@{/owner-profile}" th:method="post">
             <th:block th:each="profile : ${ownerProfile}">
@@ -23,22 +24,22 @@
             <button>Edit Profile</button>
         </form>
     </div>
-
+<br>
+    <h3>My Projects</h3>
     <div class="card">
-        <h3>My Projects</h3>
         <form th:action="@{/owner-profile}" th:method="post">
             <th:block th:each="project : ${ownerProject}">
                 <p th:text="${ownerProject.title}"></p>
                 <p th:text="${ownerProject.description}"></p>
                 <p th:text="${ownerProject.status}"></p>
-<!--                <p th:text="${showProject.creationDate}"></p>-->
-<!--                <p th:text="${showProject.categories}"></p>-->
+                <p th:text="${ownerProject.creationDate}"></p>
+                <p th:text="${ownerProject.categories}"></p>
                 <p th:text="${ownerProject.ownerUser}"></p>
             </th:block>
         </form>
-        <!--        <form th:action="@{/owner-profile/edit}" th:method="get">-->
-        <!--            <button>Edit Profile</button>-->
-        <!--        </form>-->
+                <form th:action="@{/projects/edit}" th:method="get">
+                    <button>Edit Project</button>
+                </form>
     </div>
 </div>
 </body>
