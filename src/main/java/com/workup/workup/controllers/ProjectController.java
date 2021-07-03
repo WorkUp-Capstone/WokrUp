@@ -5,6 +5,7 @@ import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
 import com.workup.workup.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,20 +56,32 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
                               @RequestParam(name = "title") String title,
                               @RequestParam(name = "description") String description,
                               @RequestParam(name = "status") Status status,
-                              @AuthenticationPrincipal User user){
-        // find post
+                              @AuthenticationPrincipal User user) {
+
         Project newProject = new Project();
         Status newStatus = new Status();
-        // edit post
+
         newProject.setTitle(title);
         newProject.setDescription(description);
         newProject.setCreationDate(new Date(System.currentTimeMillis()));
         newProject.setOwnerUser(user);
         newProject.setStatus(status);
-        // save changes
+
         projectDao.save(newProject);
-        return "redirect:/projects/edit/" + newProject.getId(); //where are we redirecting them? Profile or home
+        return "redirect:/owner-profile";
+
+//        return "redirect:/projects/edit/" + newProject.getId();
     }
+
+        //View project on owner's profile
+//        @GetMapping("/owner-profile")
+//    public String showProject(Model model){
+//            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//            Project project;
+//            project = projectDao.getProjectByOwnerUserIs(user);
+//        model.addAttribute("showProject", project);
+//        return "users/view-profile";
+//    }
 
     //edit selected project
     @GetMapping("/projects/edit/{id}")
@@ -89,7 +102,7 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
         project.setDescription(description);
 
         projectDao.save(project);
-        return "redirect:/projects/edit/{id}"; //where are we redirecting them? Profile or home
+        return "redirect:/projects/edit/"; //where are we redirecting them? Profile or home
 
     }
 

@@ -6,19 +6,19 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="container">
-    <form th:action="@{/owner-profile}" th:method="post">
     <div class="card">
-        <th:block th:each="profile : ${ownerProfile}">
-            <p th:text="${ownerProfile.profile_image_url}"></p>
-            <p th:text="${ownerProfile.about}"></p>
-            <p th:text="${ownerProfile.portfolio_link}"></p>
-            <p th:text="${ownerProfile.resume_link}"></p>
-            <p th:text="${ownerProfile.city}"></p>
-            <p th:text="${ownerProfile.state}"></p>
-            <p th:text="${ownerProfile.phone_number}"></p>
-            <p th:text="${ownerProfile.categories}"></p>
-        </th:block>
-
+        <form th:action="@{/owner-profile}" th:method="post">
+            <th:block th:each="profile : ${ownerProfile}">
+                <p th:text="${ownerProfile.profile_image_url}"></p>
+                <p th:text="${ownerProfile.about}"></p>
+                <p th:text="${ownerProfile.portfolio_link}"></p>
+                <p th:text="${ownerProfile.resume_link}"></p>
+                <p th:text="${ownerProfile.city}"></p>
+                <p th:text="${ownerProfile.state}"></p>
+                <p th:text="${ownerProfile.phone_number}"></p>
+                <p th:text="${ownerProfile.categories}"></p>
+            </th:block>
+        </form>
         <form th:action="@{/owner-profile/edit}" th:method="get">
             <button>Edit Profile</button>
         </form>
@@ -26,19 +26,20 @@
 
     <div class="card">
         <h3>My Projects</h3>
+        <form th:action="@{/owner-profile}" th:method="post">
             <th:block th:each="project : ${ownerProject}">
                 <p th:text="${ownerProject.title}"></p>
                 <p th:text="${ownerProject.description}"></p>
                 <p th:text="${ownerProject.status}"></p>
-                <p th:text="${ownerProject.creationDate}"></p>
-                <p th:text="${ownerProject.categories}"></p>
+<!--                <p th:text="${showProject.creationDate}"></p>-->
+<!--                <p th:text="${showProject.categories}"></p>-->
                 <p th:text="${ownerProject.ownerUser}"></p>
             </th:block>
-        <form th:action="@{/projects/edit/{id}(id=${ownerProject.id})}" th:method="get">
-            <button>Edit Profile</button>
         </form>
+        <!--        <form th:action="@{/owner-profile/edit}" th:method="get">-->
+        <!--            <button>Edit Profile</button>-->
+        <!--        </form>-->
     </div>
-    </form>
 </div>
 </body>
 </html>

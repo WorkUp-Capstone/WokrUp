@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
 // PROJECT REPOSITORY
 // PROJECT MODEL NOT CREATED OR CONNECTED YET! DELETE WHEN CONNECTED!!!! //
 public interface ProjectsRepository extends JpaRepository<Project, Long> {
-    Project findProjectByOwnerUser(User user);
+    Project getProjectByOwnerUserIs(User user);
 }
