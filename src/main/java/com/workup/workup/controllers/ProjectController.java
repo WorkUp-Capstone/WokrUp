@@ -57,6 +57,7 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
                               @RequestParam(name = "title") String title,
                               @RequestParam(name = "description") String description,
                               @RequestParam(name = "status") Status status,
+
                               @AuthenticationPrincipal User user) {
 
         Project newProject = new Project();
@@ -67,6 +68,7 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
         newProject.setCreationDate(new Date(System.currentTimeMillis()));
         newProject.setOwnerUser(user);
         newProject.setStatus(status);
+
 
         projectDao.save(newProject);
         return "redirect:/owner-profile";
@@ -104,6 +106,7 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
 
         Project project = projectDao.getProjectByOwnerUserIs(user);
 
+        project.setOwnerUser(user);
         project.setTitle(title);
         project.setDescription(description);
         project.setStatus(status);

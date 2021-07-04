@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/head :: head">
     <title>Edit Page</title>
 </head>
@@ -12,7 +12,7 @@
             <div class="card">
                 <article class="card-body">
                     <h4><strong>Edit Project:</strong></h4>
-                    <form th:action="@{/projects/edit}" method="POST" th:object="${editProject}">
+                    <form th:action="@{/projects/edit}" method="post" th:object="${editProject}">
                             <div class="col form-group">
                                 <label for="title">Title</label>
                                 <input th:field="*{title}" type="text" name="title" id="title" class="form-control">
