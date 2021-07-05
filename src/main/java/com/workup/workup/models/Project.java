@@ -48,7 +48,8 @@ public class Project{
     private List<Category> categories;
 
     // USER MODEL NOT CREATED YET
-    // DELETE COMMENTS ONCE USER MODEL CEREATED!!!!
+
+    // DELETE COMMENTS ONCE USER MODEL CREATED!!!!
     @ManyToOne
     @JoinColumn(name = "owner_user_id")
     private User user;
