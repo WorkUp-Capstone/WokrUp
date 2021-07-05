@@ -2,6 +2,7 @@ package com.workup.workup.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -26,6 +27,9 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ownerUser")
+    private List<Project> project;
 
     // Empty constructor for Spring
     public User() {}
@@ -103,5 +107,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Project> getProject() {
+        return project;
+    }
+
+    public void setProject(List<Project> project) {
+        this.project = project;
     }
 }

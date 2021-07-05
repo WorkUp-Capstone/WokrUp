@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class UsersController {
 
@@ -32,8 +34,8 @@ public class UsersController {
         profile = profileDao.getProfileByUserIs(user);
         model.addAttribute("ownerProfile", profile);
 
-        Project project;
-        project = projectsDao.getProjectByOwnerUserIs(user);
+        //List<Project> projectList;
+        Project project = projectsDao.getProjectByOwnerUserIs(user);
         model.addAttribute("ownerProject", project);
         return "users/view-profile";
     }
