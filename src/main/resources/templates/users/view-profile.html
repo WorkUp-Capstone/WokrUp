@@ -34,15 +34,13 @@
     <th:block th:each="project : ${ownerProject}">
     <div class="card">
         <form th:action="@{/owner-profile}" th:method="post">
-                <p th:text="${ownerProject.title}"></p>
-                <p th:text="${ownerProject.description}"></p>
-                <p th:text="${ownerProject.status}"></p>
-                <p th:text="${ownerProject.creationDate}"></p>
-                <p th:text="${ownerProject.categories}"></p>
+                <p th:text="${project.title}"></p>
+                <p th:text="${project.description}"></p>
+                <p th:text="${project.status}"></p>
+                <p th:text="${project.creationDate}"></p>
+                <p th:text="${project.categories}"></p>
         </form>
-                <form th:action="@{/projects/edit}" th:method="get">
-                    <button>Edit Project</button>
-                </form>
+        <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
     </div>
     </th:block>
 </div>

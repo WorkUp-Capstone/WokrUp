@@ -66,7 +66,7 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
         newProject.setTitle(title);
         newProject.setDescription(description);
         newProject.setCreationDate(new Date(System.currentTimeMillis()));
-        newProject.setOwnerUser(user);
+        newProject.setUser(user);
         newProject.setStatus(status);
 
         projectDao.save(newProject);
@@ -74,11 +74,14 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
 
     }
 
+    //need to create one for ALL projects in a list method
+
+
     //edit selected project
-    @GetMapping("/projects/edit")
-    public String editProjectForm(Model model){
+    @GetMapping("/projects/{id}/edit")
+    public String editProjectForm(Model model, @PathVariable Long id){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Project projectToEdit = projectDao.getProjectByOwnerUserIs(user);
+        Project projectToEdit = projectDao.getById(id);
         model.addAttribute("editProject", projectToEdit);
         return "projects/edit";
     }
@@ -86,8 +89,9 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
     //edit and save project
     /** TODO: need to include @RequestParams for categories and possibly files? */
 
-    @PostMapping("/projects/edit")
-    public String editProject(@RequestParam(name="title") String title,
+    @PostMapping("/projects/{id}/edit")
+    public String editProject(@PathVariable Long id,
+                              @RequestParam(name="title") String title,
                               @RequestParam(name="description") String description,
                               @RequestParam(name="status") Status status
                               //,@RequestParam(name="categories")Category categories
@@ -95,9 +99,9 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Project project = projectDao.getProjectByOwnerUserIs(user);
+        Project project = projectDao.getById(id);
 
-        project.setOwnerUser(user);
+        project.setUser(user);
         project.setTitle(title);
         project.setDescription(description);
         project.setStatus(status);

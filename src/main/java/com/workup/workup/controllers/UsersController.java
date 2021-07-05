@@ -31,12 +31,13 @@ public class UsersController {
     public String showOwnerProfile(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Profile profile;
+        User logged = usersDao.getById(user.getId());
         profile = profileDao.getProfileByUserIs(user);
         model.addAttribute("ownerProfile", profile);
 
-        //List<Project> projectList;
-        Project project = projectsDao.getProjectByOwnerUserIs(user);
-        model.addAttribute("ownerProject", project);
+        List<Project> projectList;
+        projectList = projectsDao.getAllProjectsByUserIdIs(logged.getId());
+        model.addAttribute("ownerProject", projectList);
         return "users/view-profile";
     }
 
