@@ -29,8 +29,8 @@ public class Project{
     @Column (nullable = true)
     private Date completionDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Status status;
+    @Column
+    private String status;
 
     // PROJECT IMAGES MODEL NOT CREATED
     // DELETE COMMENTS ONCE IMAGES MODEL CREATED!!!
@@ -64,7 +64,8 @@ public class Project{
     public Project(){}
 
     // Read constructor includes Id
-    public Project(long id, String title, String description, User user, User developerUser, List<ProjectImage> images, List<Category> categories, Status status, java.sql.Date creationDate,java.sql.Date completedDate){
+
+    public Project(long id, String title, String description, User user, User developerUser, List<ProjectImage> images, List<Category> categories, String status, java.sql.Date creationDate,java.sql.Date completedDate){
         this.id = id;
         this.title = title;
         this.description = description;
@@ -78,7 +79,8 @@ public class Project{
     }
 
     // Insert constructor no Id needed
-    public Project(String title, String description, User user, List<ProjectImage> images, List<Category> categories, Status status, java.sql.Date creationDate){
+
+    public Project(String title, String description, User user, List<ProjectImage> images, List<Category> categories, String status, java.sql.Date creationDate){
         this.title = title;
         this.description = description;
         this.user = user;
@@ -132,11 +134,11 @@ public class Project{
         this.completionDate = completionDate;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

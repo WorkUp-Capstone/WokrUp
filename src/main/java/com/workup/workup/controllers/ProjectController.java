@@ -57,18 +57,14 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
                               @RequestParam(name = "title") String title,
                               @RequestParam(name = "description") String description,
                               @RequestParam(name = "status") Status status,
-
                               @AuthenticationPrincipal User user) {
 
         Project newProject = new Project();
-        Status newStatus = new Status();
-
         newProject.setTitle(title);
         newProject.setDescription(description);
         newProject.setCreationDate(new Date(System.currentTimeMillis()));
         newProject.setUser(user);
-        newProject.setStatus(status);
-
+        newProject.setStatus("open");
         projectDao.save(newProject);
         return "redirect:/owner-profile";
 
@@ -93,7 +89,7 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
     public String editProject(@PathVariable Long id,
                               @RequestParam(name="title") String title,
                               @RequestParam(name="description") String description,
-                              @RequestParam(name="status") Status status
+                              @RequestParam(name="status") String status
                               //,@RequestParam(name="categories")Category categories
                               ){
 
