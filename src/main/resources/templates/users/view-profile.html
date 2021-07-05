@@ -16,7 +16,8 @@
             <p th:text="${ownerProfile.city}"></p>
             <p th:text="${ownerProfile.state}"></p>
             <p th:text="${ownerProfile.phone_number}"></p>
-            <p th:text="${ownerProfile.categories}"></p>
+            <th:block th:each="category : ${ownerProfile.categories}">
+            <p th:text="${category.name}"></p>
         </th:block>
         </form>
         <form th:action="@{/owner-profile/edit}" th:method="get">

@@ -1,8 +1,10 @@
 package com.workup.workup.controllers;
 
+import com.workup.workup.dao.CategoryRepository;
 import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
+import com.workup.workup.models.Category;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,17 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class UsersController {
 
     private UsersRepository usersDao;
     private ProfileRepository profileDao;
     private ProjectsRepository projectsDao;
+    private CategoryRepository categoryDao;
 
-    public UsersController(UsersRepository usersRepository, ProjectsRepository projectsRepository, ProfileRepository profileRepository) {
+    public UsersController(UsersRepository usersRepository, ProjectsRepository projectsRepository, ProfileRepository profileRepository, CategoryRepository categoryRepository) {
         usersDao = usersRepository;
         projectsDao = projectsRepository;
         profileDao = profileRepository;
+        categoryDao = categoryRepository;
     }
 
     //View Single Profile:
@@ -35,10 +41,11 @@ public class UsersController {
 
     //edit selected profile
     @GetMapping("/owner-profile/edit")
-    public String editProfileForm(@ModelAttribute Profile profileToEdit, Model model){
+    public String editProfileForm(@ModelAttribute Profile profileToEdit, Model profileModel, Model categoryModel){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
        profileToEdit = profileDao.getProfileByUserIs(user);
-        model.addAttribute("editOwnerProfile", profileToEdit);
+       categoryModel.addAttribute("categoryList", categoryDao.findAll());
+        profileModel.addAttribute("editOwnerProfile", profileToEdit);
         return "users/edit-profile";
     }
 
@@ -49,6 +56,7 @@ public class UsersController {
                               @RequestParam(name = "resume_link") String resume_link,
                               @RequestParam(name = "city") String city,
                               @RequestParam(name = "state") String state,
+                              @RequestParam(name = "categories") List<Category> categories,
                               @RequestParam(name = "phone_number") String phone_number,
                               @RequestParam(name = "profile_image_url") String profile_image_url){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -59,6 +67,7 @@ public class UsersController {
         foundProfile.setPortfolio_link((portfolio_link));
         foundProfile.setResume_link(resume_link);
         foundProfile.setCity(city);
+        foundProfile.setCategories(categories);
         foundProfile.setState(state);
         foundProfile.setPhone_number(phone_number);
         foundProfile.setProfile_image_url(profile_image_url);
