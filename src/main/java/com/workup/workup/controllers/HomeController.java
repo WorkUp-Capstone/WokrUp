@@ -54,7 +54,6 @@ public class HomeController {
         User newUser = usersDao.save(user);
         profile.setUser(newUser);
         Profile newProfile = profileDao.save(profile);
-        newUser.setProfile(newProfile);
         usersDao.save(newUser);
 
 
@@ -76,7 +75,6 @@ public class HomeController {
                                 @AuthenticationPrincipal User user){
             model.addAttribute("userRole", user.getRole().getRole());
             model.addAttribute("allProjects", projectsDao.findAll());
-            model.addAttribute("developerProfile", user.getProfile());
         return "home";
     }
 
