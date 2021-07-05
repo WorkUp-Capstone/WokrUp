@@ -2,6 +2,7 @@ package com.workup.workup.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -27,14 +28,15 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToOne
-    private Profile profile;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Project> projectList;
 
     // Empty constructor for Spring
     public User() {}
 
     //Insert Constructor
-    public User(long id,String email, String password, String first_name, String last_name, Role role, Profile profile)
+    public User(long id,String email, String password, String first_name, String last_name, Role role)
     {
         this.id = id;
         this.email = email;
@@ -42,7 +44,6 @@ public class User {
         this.first_name = first_name;
         this.last_name = last_name;
         this.role = role;
-        this.profile = profile;
     }
 
     public User(String email, String password, String first_name, String last_name, Role role)
@@ -110,12 +111,12 @@ public class User {
         this.role = role;
     }
 
-    public Profile getProfile(){
-        return profile;
+
+    public List<Project> getProject() {
+        return projectList;
     }
 
-    public void setProfile(Profile profile){
-        this.profile = profile;
+    public void setProject(List<Project> project) {
+        this.projectList = project;
     }
-
 }

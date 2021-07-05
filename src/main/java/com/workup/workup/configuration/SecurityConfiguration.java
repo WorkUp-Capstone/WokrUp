@@ -1,4 +1,4 @@
-package com.workup.workup;
+package com.workup.workup.configuration;
 
 import com.workup.workup.services.UserDetailsLoader;
 import org.springframework.context.annotation.Bean;
