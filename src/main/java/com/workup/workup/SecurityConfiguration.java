@@ -59,7 +59,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/owner-profile/projects/create",
                         "/owner-profile/projects/edit/{id}",
                         "/owner-profile",
-                        "/owner-profile/edit"
+                        "/owner-profile/edit",
+                        "/home"
                 )
                 .authenticated()
         ;

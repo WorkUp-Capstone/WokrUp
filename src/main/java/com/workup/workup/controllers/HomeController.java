@@ -53,8 +53,8 @@ public class HomeController {
         user.setPassword(hash);
         User newUser = usersDao.save(user);
         profile.setUser(newUser);
-        user.setProfile(profile);
-        profileDao.save(profile);
+        Profile newProfile = profileDao.save(profile);
+        newUser.setProfile(newProfile);
         usersDao.save(newUser);
 
 
@@ -74,9 +74,9 @@ public class HomeController {
     @GetMapping("/home")
     public String projectsIndex(Model model,
                                 @AuthenticationPrincipal User user){
-            model.addAttribute("userRole", user.getRole());
+            model.addAttribute("userRole", user.getRole().getRole());
             model.addAttribute("allProjects", projectsDao.findAll());
-        model.addAttribute("developerProfile", user.getProfile());
+            model.addAttribute("developerProfile", user.getProfile());
         return "home";
     }
 

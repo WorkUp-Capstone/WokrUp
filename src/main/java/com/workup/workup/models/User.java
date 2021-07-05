@@ -23,7 +23,7 @@ public class User {
     @Column(nullable = false, length = 250)
     private String last_name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
 
@@ -59,6 +59,7 @@ public class User {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         email = copy.email;
         password = copy.password;
+        role = copy.role;
     }
 
     public long getId() {
