@@ -48,8 +48,11 @@ public class Project {
     private List<Category> categories;
 
     // USER MODEL NOT CREATED YET
+
     // DELETE COMMENTS ONCE USER MODEL CREATED!!!!
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "owner_user_id")
+
     private User ownerUser;
 
     // SHOULD THIS BE A DIFFERENT RELATIONSHIP????

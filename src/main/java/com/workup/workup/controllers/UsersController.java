@@ -4,11 +4,14 @@ import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
+import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class UsersController {
@@ -25,26 +28,30 @@ public class UsersController {
 
     //View Single Profile:
     @GetMapping("/owner-profile")
-    public String showOwnerProfile(Model model){
+    public String showOwnerProfile(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Profile profile;
         profile = profileDao.getProfileByUserIs(user);
         model.addAttribute("ownerProfile", profile);
+
+        //List<Project> projectList;
+        Project project = projectsDao.getProjectByOwnerUserIs(user);
+        model.addAttribute("ownerProject", project);
         return "users/view-profile";
     }
 
     //edit selected profile
     @GetMapping("/owner-profile/edit")
-    public String editProfileForm(@ModelAttribute Profile profileToEdit, Model model){
+    public String editProfileForm(Model model){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-       profileToEdit = profileDao.getProfileByUserIs(user);
+        Profile profileToEdit = profileDao.getProfileByUserIs(user);
         model.addAttribute("editOwnerProfile", profileToEdit);
         return "users/edit-profile";
     }
 
     //edit and save profile
     @PostMapping("/owner-profile/edit")
-    public String editProfile(@ModelAttribute Profile foundProfile, @RequestParam(name = "about") String about,
+    public String editProfile(@RequestParam(name = "about") String about,
                               @RequestParam(name = "portfolio_link") String portfolio_link,
                               @RequestParam(name = "resume_link") String resume_link,
                               @RequestParam(name = "city") String city,
@@ -53,7 +60,7 @@ public class UsersController {
                               @RequestParam(name = "profile_image_url") String profile_image_url){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        foundProfile = profileDao.getProfileByUserIs(user);
+        Profile foundProfile = profileDao.getProfileByUserIs(user);
         foundProfile.setUser(user);
         foundProfile.setAbout(about);
         foundProfile.setPortfolio_link((portfolio_link));
