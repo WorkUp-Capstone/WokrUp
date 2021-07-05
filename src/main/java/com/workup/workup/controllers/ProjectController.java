@@ -54,17 +54,15 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
     public String createProject(
                               @RequestParam(name = "title") String title,
                               @RequestParam(name = "description") String description,
-                              @RequestParam(name = "status") Status status,
                               @AuthenticationPrincipal User user){
         // find post
         Project newProject = new Project();
-        Status newStatus = new Status();
         // edit post
         newProject.setTitle(title);
         newProject.setDescription(description);
         newProject.setCreationDate(new Date(System.currentTimeMillis()));
         newProject.setOwnerUser(user);
-        newProject.setStatus(status);
+        newProject.setStatus("open");
         // save changes
         projectDao.save(newProject);
         return "redirect:/projects/edit/" + newProject.getId(); //where are we redirecting them? Profile or home

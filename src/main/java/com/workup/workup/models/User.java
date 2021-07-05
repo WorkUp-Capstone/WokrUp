@@ -117,4 +117,5 @@ public class User {
     public void setProfile(Profile profile){
         this.profile = profile;
     }
+
 }
