@@ -69,11 +69,9 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
         newProject.setOwnerUser(user);
         newProject.setStatus(status);
 
-
         projectDao.save(newProject);
         return "redirect:/owner-profile";
 
-//        return "redirect:/projects/edit/" + newProject.getId();
     }
 
     //edit selected project
@@ -84,13 +82,6 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
         model.addAttribute("editProject", projectToEdit);
         return "projects/edit";
     }
-
-//    @GetMapping("/projects/edit/{id}")
-//    public String editProjectForm(@PathVariable long id, Model model){
-//        Project project = projectDao.getById(id);
-//        model.addAttribute("project", project);
-//        return "projects/edit";
-//    }
 
     //edit and save project
     /** TODO: need to include @RequestParams for categories and possibly files? */
