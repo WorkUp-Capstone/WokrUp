@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "projects")
-public class Project {
+public class Project{
 
     // TABLE CREATION AND COLUMNS
 
@@ -52,8 +52,7 @@ public class Project {
     // DELETE COMMENTS ONCE USER MODEL CREATED!!!!
     @ManyToOne
     @JoinColumn(name = "owner_user_id")
-
-    private User ownerUser;
+    private User user;
 
     // SHOULD THIS BE A DIFFERENT RELATIONSHIP????
     @OneToOne
@@ -65,11 +64,11 @@ public class Project {
     public Project(){}
 
     // Read constructor includes Id
-    public Project(long id, String title, String description, User ownerUser, User developerUser, List<ProjectImage> images, List<Category> categories, Status status, java.sql.Date creationDate,java.sql.Date completedDate){
+    public Project(long id, String title, String description, User user, User developerUser, List<ProjectImage> images, List<Category> categories, Status status, java.sql.Date creationDate,java.sql.Date completedDate){
         this.id = id;
         this.title = title;
         this.description = description;
-        this.ownerUser = ownerUser;
+        this.user = user;
         this.developerUser = developerUser;
         this.images = images;
         this.categories = categories;
@@ -79,10 +78,10 @@ public class Project {
     }
 
     // Insert constructor no Id needed
-    public Project(String title, String description, User ownerUser, List<ProjectImage> images, List<Category> categories, Status status, java.sql.Date creationDate){
+    public Project(String title, String description, User user, List<ProjectImage> images, List<Category> categories, Status status, java.sql.Date creationDate){
         this.title = title;
         this.description = description;
-        this.ownerUser = ownerUser;
+        this.user = user;
         this.images = images;
         this.categories = categories;
         this.status = status;
@@ -157,12 +156,12 @@ public class Project {
         this.categories = categories;
     }
 
-    public User getOwnerUser() {
-        return ownerUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setOwnerUser(User ownerUser) {
-        this.ownerUser = ownerUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public User getDeveloperUser() {

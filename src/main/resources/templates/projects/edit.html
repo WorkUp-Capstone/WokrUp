@@ -12,7 +12,7 @@
             <div class="card">
                 <article class="card-body">
                     <h4><strong>Edit Project:</strong></h4>
-                    <form th:action="@{/projects/edit}" method="post" th:object="${editProject}">
+                    <form th:action="@{/projects/{id}/edit(id=${editProject.getId()})}" method="post" th:object="${editProject}">
                             <div class="col form-group">
                                 <label for="title">Title</label>
                                 <input th:field="*{title}" type="text" name="title" id="title" class="form-control">

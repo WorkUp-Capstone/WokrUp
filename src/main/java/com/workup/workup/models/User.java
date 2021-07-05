@@ -28,8 +28,8 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ownerUser")
-    private List<Project> project;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Project> projectList;
 
     // Empty constructor for Spring
     public User() {}
@@ -110,10 +110,10 @@ public class User {
     }
 
     public List<Project> getProject() {
-        return project;
+        return projectList;
     }
 
     public void setProject(List<Project> project) {
-        this.project = project;
+        this.projectList = project;
     }
 }
