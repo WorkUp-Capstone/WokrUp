@@ -22,6 +22,11 @@ public class Category {
     public Category() {
     }
 
+    public Category(long id, String name) {
+        this.name = name;
+        this.id = id;
+    }
+
     public Category(String name, List<Project> projects) {
         this.name = name;
         this.projects = projects;
@@ -75,5 +80,6 @@ public class Category {
     public void setProfiles(List<Profile> profiles) {
         this.profiles = profiles;
     }
+
 }
 
