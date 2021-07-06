@@ -1,4 +1,9 @@
 USE workup_db;
+INSERT INTO role(role)
+VALUES ('owner'), ('developer');
+
+INSERT INTO status(status)
+VALUES ('open'), ('in progress');
 
 INSERT INTO role(role)
 VALUES('owner'), ('developer');
