@@ -13,33 +13,33 @@
                         <div class="form-row">
                             <div class="col form-group">
                                 <label>First Name </label>
-                                <input th:field="*{firstName}" type="text" class="form-control">
+                                <input th:field="*{firstName}" type="text" class="form-control" th:required="required">
                             </div>
                             <div class="col form-group">
                                 <label>Last Name</label>
-                                <input th:field="*{lastName}" type="text" class="form-control">
+                                <input th:field="*{lastName}" type="text" class="form-control" th:required="required">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Choose your account type:</label>
                             <label class="form-check form-check-inline">
                                 <input th:field="*{role.id}" class="form-check-input" type="radio" name="role"
-                                       th:value="${1}" id="1">
+                                       th:value="${1}" id="1" th:required="required">
                                 <span class="form-check-label">Project Owner</span>
                             </label>
                             <label class="form-check form-check-inline">
                                 <input th:field="*{role.id}" class="form-check-input" type="radio" name="role"
-                                       th:value="${2}" id="2">
+                                       th:value="${2}" id="2" th:required="required">
                                 <span class="form-check-label">Developer</span>
                             </label>
                         </div>
                         <div class="form-group">
                             <label>Email address</label>
-                            <input th:field="*{email}" type="email" class="form-control">
+                            <input th:field="*{email}" type="email" class="form-control" th:required="required">
                         </div>
                         <div class="form-group">
                             <label>Create password</label>
-                            <input th:field="*{password}" class="form-control" type="password" name="password">
+                            <input th:field="*{password}" class="form-control" type="password" name="password" th:required="required">
                         </div>
                         <div class="form-group">
                             <br>
