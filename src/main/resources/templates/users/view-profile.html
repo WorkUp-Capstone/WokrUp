@@ -11,7 +11,7 @@
         <div class="card">
             <form th:action="@{/owner-profile}" th:method="post">
         <th:block th:each="profile : ${ownerProfile}">
-            <p th:text="${ownerProfile.profile_image_url}"></p>
+            <img th:href="${ownerProfile.profile_image_url}">
             <p th:text="${ownerProfile.about}"></p>
             <p th:text="${ownerProfile.portfolio_link}"></p>
             <p th:text="${ownerProfile.resume_link}"></p>

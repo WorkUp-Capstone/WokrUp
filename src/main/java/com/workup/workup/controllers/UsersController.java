@@ -8,6 +8,7 @@ import com.workup.workup.models.Category;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,10 @@ public class UsersController {
     private ProfileRepository profileDao;
     private ProjectsRepository projectsDao;
     private CategoryRepository categoryDao;
+
+    //Filestack API Key Import:
+    @Value("${filestack.api.key}")
+    private String filestackApi; //use this anywhere you need it
 
     public UsersController(UsersRepository usersRepository, ProjectsRepository projectsRepository, ProfileRepository profileRepository, CategoryRepository categoryRepository) {
         usersDao = usersRepository;
@@ -47,11 +52,13 @@ public class UsersController {
 
     //edit selected profile
     @GetMapping("/owner-profile/edit")
-    public String editProfileForm(@ModelAttribute Profile profileToEdit, Model profileModel, Model categoryModel){
+    public String editProfileForm(Model profileModel, Model categoryModel, Model filestackModel){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-       profileToEdit = profileDao.getProfileByUserIs(user);
+
        categoryModel.addAttribute("categoryList", categoryDao.findAll());
-        profileModel.addAttribute("editOwnerProfile", profileToEdit);
+        profileModel.addAttribute("editOwnerProfile", profileDao.getProfileByUserIs(user));
+        filestackModel.addAttribute("filestackapi", filestackApi);
+
         return "users/edit-profile";
     }
 
