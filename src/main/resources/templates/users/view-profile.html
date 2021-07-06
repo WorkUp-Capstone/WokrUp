@@ -36,7 +36,7 @@
         <form th:action="@{/owner-profile}" th:method="post">
                 <p th:text="${project.title}"></p>
                 <p th:text="${project.description}"></p>
-                <p th:text="${project.status}"></p>
+                <p th:text="${project.status.toUpperCase().replace('_', ' ')}"></p>
                 <p th:text="${project.creationDate}"></p>
                 <p th:text="${project.categories}"></p>
         </form>
