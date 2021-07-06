@@ -34,3 +34,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### API Keys ###
+src/main/resources/keys.js
