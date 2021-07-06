@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "password-strength-meter": "^2.1.0"
+  }
+}

@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-lg-8 mt-5">
             <div class="card">
                 <article class="card-body">
                     <form th:action="@{/register}" th:method="post" th:object="${user}">
@@ -37,9 +37,14 @@
                             <label>Email address</label>
                             <input th:field="*{email}" type="email" class="form-control" th:required="required">
                         </div>
-                        <div class="form-group">
-                            <label>Create password</label>
-                            <input th:field="*{password}" class="form-control" type="password" name="password" th:required="required">
+                        <div class="form-group pass-strength-visible">
+                            <label for="password">Create password</label>
+                            <div class="input-group" id="show_hide_password">
+                                <input type="password" class="form-control" id="password" autocomplete="off" th:field="*{password}" th:required="required"/>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <br>
@@ -53,10 +58,54 @@
             </div>
         </div> <!-- col.//-->
     </div> <!-- row.//-->
-
-
 </div>
 <!--container end.//-->
+
+<script src="./js/password-strength-meter/password.min.js"></script>
+<script src="./js/password-strength-meter/password.min.css"></script>
+
+<script>
+    $('#password').password({
+        closestSelector: '.input-group',
+        enterPass: 'Type your password',
+        shortPass: 'Must be at least 8 characters long',
+        containsField: 'The password contains your username',
+        steps: {
+            // Easily change the steps' expected score here
+            13: 'Really insecure password',
+            33: 'Weak; try combining letters & numbers',
+            67: 'Medium; try using special characters',
+            94: 'Strong password',
+        },
+        showPercent: false,
+        showText: true, // shows the text tips
+        animate: true, // whether or not to animate the progress bar on input blur/focus
+        animateSpeed: 'fast', // the above animation speed
+        field: false, // select the match field (selector or jQuery instance) for better password checks
+        fieldPartialMatch: true, // whether to check for partials in field
+        minimumLength: 8 // minimum password length (below this threshold, the score is 0)
+    });
+</script>
+
+<script>
+    var input = $("#show_hide_password input");
+    var icon = $("#show_hide_password i");
+
+    icon.on('click', function (event) {
+        event.preventDefault();
+
+        if (input.attr("type") === "text") {
+            input.attr('type', 'password');
+            icon.addClass("fa-eye-slash");
+            icon.removeClass("fa-eye");
+
+        } else if (input.attr("type") === "password") {
+            input.attr('type', 'text');
+            icon.removeClass("fa-eye-slash");
+            icon.addClass("fa-eye");
+        }
+    });
+</script>
 
 <br><br>
 
