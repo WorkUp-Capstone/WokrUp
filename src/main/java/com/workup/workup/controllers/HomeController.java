@@ -6,7 +6,6 @@ import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.management.relation.Role;
-import java.util.List;
 
 @Controller
 public class HomeController {
