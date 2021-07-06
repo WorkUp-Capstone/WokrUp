@@ -60,7 +60,7 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     public String createProject(
                               @RequestParam(name = "title") String title,
                               @RequestParam(name = "description") String description,
-                              @RequestParam(name = "categories") List<Category> categoryList,
+                              @RequestParam(name = "categories") List<Category> categoryList, @RequestParam(name = "status") String status,
                               @AuthenticationPrincipal User user) {
 
         Project newProject = new Project();
@@ -68,6 +68,7 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
         newProject.setDescription(description);
         newProject.setCategories(categoryList);
         newProject.setCreationDate(new Date(System.currentTimeMillis()));
+        newProject.setStatus(status);
         newProject.setUser(user);
         projectDao.save(newProject);
         return "redirect:/owner-profile";
