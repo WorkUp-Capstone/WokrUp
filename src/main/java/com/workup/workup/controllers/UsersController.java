@@ -6,6 +6,7 @@ import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Category;
 import com.workup.workup.models.Profile;
+import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -31,11 +32,16 @@ public class UsersController {
 
     //View Single Profile:
     @GetMapping("/owner-profile")
-    public String showOwnerProfile(Model model){
+    public String showOwnerProfile(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Profile profile;
+        User logged = usersDao.getById(user.getId());
         profile = profileDao.getProfileByUserIs(user);
         model.addAttribute("ownerProfile", profile);
+
+        List<Project> projectList;
+        projectList = projectsDao.getAllProjectsByUserIdIs(logged.getId());
+        model.addAttribute("ownerProject", projectList);
         return "users/view-profile";
     }
 
@@ -51,7 +57,7 @@ public class UsersController {
 
     //edit and save profile
     @PostMapping("/owner-profile/edit")
-    public String editProfile(@ModelAttribute Profile foundProfile, @RequestParam(name = "about") String about,
+    public String editProfile(@RequestParam(name = "about") String about,
                               @RequestParam(name = "portfolio_link") String portfolio_link,
                               @RequestParam(name = "resume_link") String resume_link,
                               @RequestParam(name = "city") String city,
@@ -61,7 +67,7 @@ public class UsersController {
                               @RequestParam(name = "profile_image_url") String profile_image_url){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        foundProfile = profileDao.getProfileByUserIs(user);
+        Profile foundProfile = profileDao.getProfileByUserIs(user);
         foundProfile.setUser(user);
         foundProfile.setAbout(about);
         foundProfile.setPortfolio_link((portfolio_link));

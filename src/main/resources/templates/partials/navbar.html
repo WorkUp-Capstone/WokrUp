@@ -39,15 +39,15 @@
         <div sec:authorize="isAuthenticated()">
         <div>
             <ul class="navbar-nav ml-auto">
+<!--                <li class="nav-item">Welcome-->
+<!--                    <span th:text="${#authentication.getPrincipal()}"></span>-->
+<!--                </li>-->
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/owner-profile}">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/owner-profile/projects/create">Create Project</a>
-                </li>
-                <li class="nav-item">
                     <form th:action="@{/logout}" th:method="post">
-                    <a class="nav-link" href="/login?logout">Logout</a>
+                        <button class="btn-link btn">Logout</button>
                     </form>
                 </li>
             </ul>
@@ -57,4 +57,3 @@
 </nav>
 </body>
 </html>
-<!--TODO: Access profile from navBar as a logged in user. Note: Id is not getting passed correctly at line 43. Then navBar buttons.... again-->

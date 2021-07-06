@@ -21,6 +21,10 @@ public class Role {
     // Constructors
     public Role() {}
 
+    public Role(String role) {
+        this.role = role;
+    }
+
     public Role(long id, String role, List<User> users) {
         this.id = id;
         this.role = role;

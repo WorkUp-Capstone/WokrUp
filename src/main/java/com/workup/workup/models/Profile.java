@@ -36,6 +36,7 @@ public class Profile {
     @OneToOne
     private User user;
 
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "profile_categories",
