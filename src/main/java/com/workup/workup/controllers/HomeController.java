@@ -5,7 +5,7 @@ import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
-import org.springframework.data.domain.Pageable;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.management.relation.Role;
-import java.util.List;
 
 @Controller
 public class HomeController {
@@ -49,31 +45,21 @@ public class HomeController {
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user){
         Profile profile = new Profile();
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        User newUser = usersDao.save(user);
-        profile.setUser(newUser);
-        Profile newProfile = profileDao.save(profile);
-        usersDao.save(newUser);
-
-
-
-       //instantiate a new profile
-
-
-        // set profile user to saved user in db
-
-        // use the profile repo to save the new profile
+        if (!StringUtils.isEmpty(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        // saves user and instantiates new profile
+        profile.setUser(usersDao.save(user));
+        profileDao.save(profile);
 
         return "redirect:/login";
     }
 
-    //TODO: need to reach role parameter for a user
     //Project index for Developers to view in their Home Page
     @GetMapping("/home")
     public String projectsIndex(Model model,
                                 @AuthenticationPrincipal User user){
-            model.addAttribute("userRole", user.getRole().getRole());
+            model.addAttribute("userRole", user.getRole());
             model.addAttribute("allProjects", projectsDao.findAll());
         return "home";
     }

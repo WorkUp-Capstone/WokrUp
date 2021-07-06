@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.workup.workup.models.Status;
+//import com.workup.workup.models.Status;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import java.sql.Date;
 import java.util.List;
@@ -61,7 +61,6 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
                               @RequestParam(name = "title") String title,
                               @RequestParam(name = "description") String description,
                               @RequestParam(name = "categories") List<Category> categoryList,
-                              @RequestParam(name = "status") Status status,
                               @AuthenticationPrincipal User user) {
 
         Project newProject = new Project();
@@ -70,7 +69,6 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
         newProject.setCategories(categoryList);
         newProject.setCreationDate(new Date(System.currentTimeMillis()));
         newProject.setUser(user);
-        newProject.setStatus(status.getStatus());
         projectDao.save(newProject);
         return "redirect:/owner-profile";
 
