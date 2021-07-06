@@ -167,8 +167,12 @@ public class Project{
     }
 
     //    // MAYBE NEEDED FOR DATE CREATION AND COMPLETION WILL NEED TESTING DONE!!!!
+    @Lob
+    @Column(columnDefinition = "BLOB")
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
+    @Lob
+    @Column(columnDefinition = "BLOB")
     private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private java.sql.Date parseDate(String date) {
         try {
