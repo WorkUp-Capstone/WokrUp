@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head">
+    <title>WorkUp Projects</title>
 </head>
 <body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<br>
+<h1>Open Projects</h1>
+<br>
+<!--TODO: Need to reference user story again about card display, then what info comes up when user clicks on card-->
+<div class="container" th:switch="${userRole}">
 
+    <!--TODO: Need to reference ONLY Project owners profiles-->
+    <div class="card" th:case="'owner'">
+        <th:block th:each="profile : ${developerProfile}">
+            <h3 th:text="${developerProfile.about}"></h3>
+            <p th:text="${developerProfile.profile_image_url}"></p>
+            <p th:text="${developerProfile.portfolio_link}"></p>
+            <p th:text="${developerProfile.resume_link}"></p>
+            <p th:text="${developerProfile.categories}"></p>
+            <p th:text="${developerProfile.city}"></p>
+            <p th:text="${developerProfile.state}"></p>
+            <p th:text="${developerProfile.phone_number}"></p>
+
+        </th:block>
+    </div>
+
+    <div class="project-card" th:case="'developer'">
+        <th:block th:each="project : ${allProjects}">
+
+            <h3 th:text="${project.title}"></h3>
+            <p th:text="${project.description}"></p>
+            <p th:text="${project.ownerUser}"></p>
+            <p th:text="${project.images}"></p>
+            <p th:text="${project.categories}"></p>
+            <p th:text="${project.creationDate}"></p>
+        </th:block>
+    </div>
+    <!--TODO: extract info based on role -->
+</div>
 </body>
 </html>
