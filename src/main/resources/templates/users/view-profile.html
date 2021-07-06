@@ -20,7 +20,9 @@
             <p th:text="${ownerProfile.phone_number}"></p>
             <th:block th:each="category : ${ownerProfile.categories}">
             <p th:text="${category.name}"></p>
+            </th:block>
         </th:block>
+
         </form>
         <form th:action="@{/owner-profile/edit}" th:method="get">
             <button>Edit Profile</button>
