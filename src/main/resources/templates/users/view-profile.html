@@ -12,13 +12,13 @@
             <form th:action="@{/owner-profile}" th:method="post">
         <th:block th:each="profile : ${ownerProfile}">
                 <p th:text="${ownerProfile.profile_image_url}"></p>
-                <p th:text="${ownerProfile.about}"></p>
-                <p th:text="${ownerProfile.portfolio_link}"></p>
-                <p th:text="${ownerProfile.resume_link}"></p>
-                <p th:text="${ownerProfile.city}"></p>
-                <p th:text="${ownerProfile.state}"></p>
-                <p th:text="${ownerProfile.phone_number}"></p>
-                <p th:text="${ownerProfile.categories}"></p>
+            <p><strong>About Me: </strong><span th:text="${ownerProfile.about}"></span></p>
+            <p><strong>Portfolio Link: </strong><span th:text="${ownerProfile.portfolio_link}"></span></p>
+            <p><strong>Resume Link: </strong><span th:text="${ownerProfile.resume_link}"></span></p>
+            <p><strong>City: </strong><span th:text="${ownerProfile.city}"></span></p>
+            <p><strong>State: </strong><span th:text="${ownerProfile.state}"></span></p>
+            <p><strong>Phone Number: </strong><span th:text="${ownerProfile.phone_number}"></span></p>
+            <p><strong>Categories</strong><span th:text="${ownerProfile.categories}"></span></p>
             </th:block>
     </form>
         <form th:action="@{/owner-profile/edit}" th:method="get">
