@@ -1,7 +1,7 @@
 
 USE workup_db;
 INSERT INTO role(role)
-VALUES ('project_owner'), ('developer');
+VALUES ('owner'), ('developer');
 
 INSERT INTO status(status)
 VALUES ('open'), ('in progress');
