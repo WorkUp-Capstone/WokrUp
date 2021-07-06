@@ -22,7 +22,6 @@
             <p th:text="${category.name}"></p>
             </th:block>
         </th:block>
-
         </form>
         <form th:action="@{/owner-profile/edit}" th:method="get">
             <button>Edit Profile</button>
@@ -41,7 +40,9 @@
                 <p th:text="${project.description}"></p>
                 <p th:text="${project.status}"></p>
                 <p th:text="${project.creationDate}"></p>
-                <p th:text="${project.categories}"></p>
+            <th:block th:each="category : ${ownerProfile.categories}">
+                <p th:text="${category.name}"></p>
+            </th:block>
         </form>
         <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
     </div>

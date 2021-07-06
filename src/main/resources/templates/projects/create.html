@@ -17,73 +17,80 @@
         <br/>
         What categories would you like to include in your project:
         <br/>
-        Categories:
-        <div>
-        <input id="E-mail service" type="checkbox" name="categories" th:field="*{categories}" th:value="Email_service">
-        <label for="E-mail service">E-mail Service</label>
+        <div class="form-group">
+            <label>Categories</label>
+            <select multiple th:field="*{categories}" class="form-control">
+                <div th:block th:each="category: ${categoryList}">
+                    <option th:text="${category.name}" th:value="${category.id}"></option>
+                </div>
+            </select>
         </div>
-        <div>
-            <input id="Database" type="checkbox" name="categories" th:field="*{categories}" th:value="Database">
-            <label for="Database">Database</label>
-        </div>
-        <div>
-            <input id="UI/UX" type="checkbox" name="categories" th:field="*{categories}" th:value="UI_UX">
-            <label for="UI/UX">UI/UX</label>
-        </div>
-        <div>
-            <input id="RESTful API" type="checkbox" name="categories" th:field="*{categories}" th:value="RESTful_API">
-            <label for="RESTful API">RESTful API</label>
-        </div>
-        <div>
-            <input id="Authentication" type="checkbox" name="categories" th:field="*{categories}" th:value="Authentication">
-            <label for="Authentication">Authentication</label>
-        </div>
-        <div>
-            <input id="JavaScript" type="checkbox" name="categories" th:field="*{categories}" th:value="JavaScript">
-            <label for="JavaScript">JavaScript</label>
-        </div>
-        <div>
-            <input id="AJAX" type="checkbox" name="categories" th:field="*{categories}" th:value="AJAX">
-            <label for="AJAX">AJAX</label>
-        </div>
-        <div>
-            <input id="JQuery" type="checkbox" name="categories" th:field="*{categories}" th:value="JQuery">
-            <label for="JQuery">JQuery</label>
-        </div>
-        <div>
-            <input id="Java" type="checkbox" name="categories" th:field="*{categories}" th:value="Java">
-            <label for="Java">Java</label>
-        </div>
-        <div>
-            <input id="Spring" type="checkbox" name="categories" th:field="*{categories}" th:value="Spring">
-            <label for="Spring">Spring</label>
-        </div>
-        <div>
-            <input id="CSS" type="checkbox" name="categories" th:field="*{categories}" th:value="CSS">
-            <label for="CSS">CSS</label>
-        </div>
-        <div>
-            <input id="MySQL" type="checkbox" name="categories" th:field="*{categories}" th:value="MySQL">
-            <label for="MySQL">MySQL</label>
-        </div>
-        <div>
-            <input id="Full-Stack Development" type="checkbox" name="categories" th:field="*{categories}" th:value="Full_stack_development">
-            <label for="Full-Stack Development">Full-Stack Web Development</label>
-        </div>
-        <div>
-            <input id="Back-end development" type="checkbox" name="categories" th:field="*{categories}" th:value="Back_end_development">
-            <label for="Back-end development">Back-end Development</label>
-        </div>
-        <div>
-            <input id="Front-end development" type="checkbox" name="categories" th:field="*{categories}" th:value="Front_end_development">
-            <label for="Front-end development">Front-end Development</label>
-        </div>
-            <br/>
+<!--        <div>-->
+<!--        <input id="E-mail service" type="checkbox" name="categories" th:field="*{categories}" th:value="Email_service">-->
+<!--        <label for="E-mail service">E-mail Service</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="Database" type="checkbox" name="categories" th:field="*{categories}" th:value="Database">-->
+<!--            <label for="Database">Database</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="UI/UX" type="checkbox" name="categories" th:field="*{categories}" th:value="UI_UX">-->
+<!--            <label for="UI/UX">UI/UX</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="RESTful API" type="checkbox" name="categories" th:field="*{categories}" th:value="RESTful_API">-->
+<!--            <label for="RESTful API">RESTful API</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="Authentication" type="checkbox" name="categories" th:field="*{categories}" th:value="Authentication">-->
+<!--            <label for="Authentication">Authentication</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="JavaScript" type="checkbox" name="categories" th:field="*{categories}" th:value="JavaScript">-->
+<!--            <label for="JavaScript">JavaScript</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="AJAX" type="checkbox" name="categories" th:field="*{categories}" th:value="AJAX">-->
+<!--            <label for="AJAX">AJAX</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="JQuery" type="checkbox" name="categories" th:field="*{categories}" th:value="JQuery">-->
+<!--            <label for="JQuery">JQuery</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="Java" type="checkbox" name="categories" th:field="*{categories}" th:value="Java">-->
+<!--            <label for="Java">Java</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="Spring" type="checkbox" name="categories" th:field="*{categories}" th:value="Spring">-->
+<!--            <label for="Spring">Spring</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="CSS" type="checkbox" name="categories" th:field="*{categories}" th:value="CSS">-->
+<!--            <label for="CSS">CSS</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="MySQL" type="checkbox" name="categories" th:field="*{categories}" th:value="MySQL">-->
+<!--            <label for="MySQL">MySQL</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="Full-Stack Development" type="checkbox" name="categories" th:field="*{categories}" th:value="Full_stack_development">-->
+<!--            <label for="Full-Stack Development">Full-Stack Web Development</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="Back-end development" type="checkbox" name="categories" th:field="*{categories}" th:value="Back_end_development">-->
+<!--            <label for="Back-end development">Back-end Development</label>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input id="Front-end development" type="checkbox" name="categories" th:field="*{categories}" th:value="Front_end_development">-->
+<!--            <label for="Front-end development">Front-end Development</label>-->
+<!--        </div>-->
+<!--            <br/>-->
         <div>
             <label>
                 <select th:field="*{status}">
-                    <option th:value="Open">Open</option>
-                    <option th:value="In_progress">In progress</option>
+                    <option th:value="1">Open</option>
+                    <option th:value="2">In progress</option>
                 </select>
             </label>
         </div>
