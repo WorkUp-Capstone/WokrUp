@@ -1,5 +1,6 @@
 package com.workup.workup.controllers;
 
+import com.workup.workup.dao.CategoryRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Category;
@@ -19,11 +20,13 @@ import java.util.List;
 @Controller
 public class ProjectController {
 
+    private final CategoryRepository categoryDao;
 private final ProjectsRepository projectDao;
 private final EmailService emailService;
 private final UsersRepository userDao;
 
-public ProjectController(ProjectsRepository projectDao, EmailService emailService, UsersRepository userDao){
+public ProjectController(CategoryRepository categoryDao, ProjectsRepository projectDao, EmailService emailService, UsersRepository userDao){
+    this.categoryDao = categoryDao;
     this.projectDao = projectDao;
     this.emailService = emailService;
     this.userDao = userDao;
@@ -47,8 +50,9 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
 
     //create a Project
     @GetMapping("/owner-profile/projects/create")
-    public String viewProjectCreateForm(Model model){
+    public String viewProjectCreateForm(Model model, Model categoryModel){
         model.addAttribute("project", new Project());
+        categoryModel.addAttribute("categoryList", categoryDao.findAll());
         return "projects/create";
     }
 
@@ -56,15 +60,17 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
     public String createProject(
                               @RequestParam(name = "title") String title,
                               @RequestParam(name = "description") String description,
+                              @RequestParam(name = "categories") List<Category> categoryList,
                               @RequestParam(name = "status") Status status,
                               @AuthenticationPrincipal User user) {
 
         Project newProject = new Project();
         newProject.setTitle(title);
         newProject.setDescription(description);
+        newProject.setCategories(categoryList);
         newProject.setCreationDate(new Date(System.currentTimeMillis()));
         newProject.setUser(user);
-        newProject.setStatus("open");
+        newProject.setStatus(status.getStatus());
         projectDao.save(newProject);
         return "redirect:/owner-profile";
 
