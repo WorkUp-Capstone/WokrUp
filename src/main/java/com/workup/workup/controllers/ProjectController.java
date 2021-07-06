@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.workup.workup.models.Status;
+//import com.workup.workup.models.Status;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import java.sql.Date;
 import java.util.List;
@@ -56,7 +56,6 @@ public ProjectController(ProjectsRepository projectDao, EmailService emailServic
     public String createProject(
                               @RequestParam(name = "title") String title,
                               @RequestParam(name = "description") String description,
-                              @RequestParam(name = "status") Status status,
                               @AuthenticationPrincipal User user) {
 
         Project newProject = new Project();

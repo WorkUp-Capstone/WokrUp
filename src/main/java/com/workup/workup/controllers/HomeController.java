@@ -60,7 +60,6 @@ public class HomeController {
         return "redirect:/login";
     }
 
-    //TODO: need to reach role parameter for a user
     //Project index for Developers to view in their Home Page
     @GetMapping("/home")
     public String projectsIndex(Model model,
