@@ -32,13 +32,9 @@ public class Project{
     @Column
     private String status;
 
-    // PROJECT IMAGES MODEL NOT CREATED
-    // DELETE COMMENTS ONCE IMAGES MODEL CREATED!!!
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<ProjectImage> images;
 
-    // PROJECT CATEGORIES MODEL NOT CREATED
-    // DELETE COMMENTS ONCE CATEGORIES MODEL CREATED!!!
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "project_categories",
@@ -47,14 +43,10 @@ public class Project{
     )
     private List<Category> categories;
 
-    // USER MODEL NOT CREATED YET
-
-    // DELETE COMMENTS ONCE USER MODEL CREATED!!!!
     @ManyToOne
     @JoinColumn(name = "owner_user_id")
     private User user;
 
-    // SHOULD THIS BE A DIFFERENT RELATIONSHIP????
     @OneToOne
     private User developerUser;
 
