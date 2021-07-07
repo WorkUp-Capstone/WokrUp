@@ -10,12 +10,15 @@
         <div class="col-md-6">
             <div class="card">
                 <article class="card-body">
-                    <form th:action="@{/owner-profile/edit}" method="post" th:object="${editOwnerProfile}">
+                    <form id="image" th:action="@{/owner-profile/edit}" method="post" th:object="${editOwnerProfile}">
                         <div class="col form-group">
-                            <label for="profileImg"></label>
+                            <div class="col form-group">
+                                <label for="profileImg"></label>
+
+                                <input th:type="hidden" id="stashFSurl" name="stashFSurl" th:value="replacement" th:field="*{profile_image_url}">
+                            </div>
                             <button type="button" id="profileImg">Upload Profile Image</button>
-                            <input th:type="hidden" id="stashFSurl" name="stashFSurl" th:value="replacement" th:field="*{profile_image_url}">
-                        </div>
+
                         <div class="form-row">
                             <div class="col form-group">
                                 <label>About </label>
@@ -111,6 +114,7 @@
                             <br>
                             <button type="submit" class="btn btn-primary btn-block">Edit</button>
                         </div> <!-- form-group// -->
+                        </div>
                     </form>
                 </article> <!-- card-body end .// -->
 
@@ -138,8 +142,11 @@
                 function (res){
                     $("stashFSurl").val(res.filesUploaded[0].url)
                     console.log(res.filesUploaded[0].url);
-                }
-        }
+                },
+            onUploadDone: (res) =>
+                $('#image').append(`<input type="hidden" name="profile_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),
+                imageDim: [200, 200]
+                    }
 
         $("#profileImg").click(function (){
             client.picker(options).open();

@@ -11,7 +11,8 @@
         <div class="card">
             <form th:action="@{/owner-profile}" th:method="post">
         <th:block th:each="profile : ${ownerProfile}">
-            <img th:href="${ownerProfile.profile_image_url}">
+<!--            does this go here or in edit? -->
+ <img th:src="${ownerProfile.profile_image_url}">
             <p th:text="${ownerProfile.about}"></p>
             <p th:text="${ownerProfile.portfolio_link}"></p>
             <p th:text="${ownerProfile.resume_link}"></p>

@@ -71,7 +71,7 @@ public class UsersController {
                               @RequestParam(name = "state") String state,
                               @RequestParam(name = "categories") List<Category> categories,
                               @RequestParam(name = "phone_number") String phone_number,
-                              @RequestParam(name = "profile_image_url") String profile_image_url){
+                              @RequestParam(name = "profile_img") String profile_image_url){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Profile foundProfile = profileDao.getProfileByUserIs(user);
