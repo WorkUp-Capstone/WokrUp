@@ -5,8 +5,10 @@ import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Category;
 import com.workup.workup.models.Project;
+import com.workup.workup.models.ProjectImage;
 import com.workup.workup.models.User;
 import com.workup.workup.services.EmailService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,9 @@ public class ProjectController {
 private final ProjectsRepository projectDao;
 private final EmailService emailService;
 private final UsersRepository userDao;
+
+    @Value("${filestack.api.key}")
+    private String filestackApi;
 
 public ProjectController(CategoryRepository categoryDao, ProjectsRepository projectDao, EmailService emailService, UsersRepository userDao){
     this.categoryDao = categoryDao;
@@ -50,9 +55,10 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
     //create a Project
     @GetMapping("/owner-profile/projects/create")
-    public String viewProjectCreateForm(Model model, Model categoryModel){
-        model.addAttribute("project", new Project());
+    public String viewProjectCreateForm(Model projectModel, Model categoryModel){
+        projectModel.addAttribute("project", new Project());
         categoryModel.addAttribute("categoryList", categoryDao.findAll());
+
         return "projects/create";
     }
 
@@ -74,8 +80,6 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
         return "redirect:/owner-profile";
 
     }
-
-    //need to create one for ALL projects in a list method
 
 
     //edit selected project
@@ -112,6 +116,24 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
         return "redirect:/owner-profile";
 
     }
+
+//    //create project images:
+//    @GetMapping("/owner-profile/projects/create/{id}/images")
+//    public String viewProjectImages(@PathVariable long id, Model projectModel, Model filestackModel){
+//        projectModel.addAttribute("project", projectDao.getProjectsById(id));
+//        filestackModel.addAttribute("filestackApi", filestackApi);
+//        return "projects/create";
+//    }
+//
+//    //save project images:
+//    @PostMapping("/owner-profile/projects/create/{id}/images")
+//    public String saveProjectImages(@PathVariable long id, @RequestParam(name = "project_img") List<ProjectImage> projectImages){
+//
+//        ProjectImage project = projectDao.getProjectsById(id));
+//        project.setImages(projectImages);
+//        projectDao.save(project);
+//        return "projects/create";
+//    }
 
 
 //    need to discuss postmapping redirect plan as well as confirm how we will handle search ie. categories/description
