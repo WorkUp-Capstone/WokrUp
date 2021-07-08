@@ -9,4 +9,6 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
     Profile getProfileByUserIs(User user);
 
+    Profile getProfileByUserId(long id);
+
 }

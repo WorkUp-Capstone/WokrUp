@@ -10,42 +10,49 @@
 
     <h3>My Profile</h3>
     <div class="card">
-        <form th:action="@{/owner-profile}" th:method="post">
+        <form th:action="@{owner-profile/profileImg/add}" th:method="get">
             <th:block th:each="profile : ${ownerProfile}">
                 <div class="col form-group">
-                <img th:src="${ownerProfile.profile_image_url}">
+                    <img th:src="${ownerProfile.profile_image_url}">
                 </div>
+                <button>Edit Profile Photo</button>
+            </th:block>
+        </form>
+        <form th:action="@{/owner-profile}" th:method="post">
+            <th:block th:each="profile : ${ownerProfile}">
                     <div class="col form-group">
-                        <label>About Me:</label>
+                        <label><strong>Me:</strong></label>
                         <p th:text="${ownerProfile.about}"></p>
                     </div>
                     <div class="col form-group">
-                        <label>Portfolio:</label>
+                        <label><strong>Portfolio:</strong></label>
                         <p th:text="${ownerProfile.portfolio_link}"></p>
-<!--                <p th:text="${ownerProfile.portfolio_link}"></p>-->
+
                     </div>
                     <div class="col form-group">
-                        <label>Resume:</label>
+                        <label><strong>Resume:</strong></label>
                         <p th:text="${ownerProfile.resume_link}"></p>
                     </div>
                     <div class="col form-group">
-                        <label>City: </label>
+                        <label><strong>City: </strong></label>
                         <p th:text="${ownerProfile.city}"></p>
                     </div>
                     <div class="col form-group">
-                        <label>State: </label>
+                        <label><strong>State: </strong></label>
                         <p th:text="${ownerProfile.state}"></p>
                     </div>
                     <div class="col form-group">
-                        <label>Phone Number: </label>
+                        <label><strong>Phone Number: </strong></label>
                         <p th:text="${ownerProfile.phone_number}"></p>
                     </div>
                     <div class="col form-group">
-                        <label>Category: </label>
+                        <label><strong>Category: </strong></label>
                             <th:block th:each="category : ${ownerProfile.categories}">
                                                     <p th:text="${category.name}"></p>
                                                 </th:block>
                     </div>
+<!--                <p th:text="${ownerProfile.about}"></p>-->
+<!--                <p th:text="${ownerProfile.portfolio_link}"></p>-->
 <!--                <p th:text="${ownerProfile.resume_link}"></p>-->
 <!--                <p th:text="${ownerProfile.city}"></p>-->
 <!--                <p th:text="${ownerProfile.state}"></p>-->
@@ -77,7 +84,7 @@
                 <th:block th:each="category : ${ownerProfile.categories}">
                     <p th:text="${category.name}"></p>
                 </th:block>
-                <img th:src="${project.images}">
+<!--                <img th:src="${project.images}">-->
             </form>
             <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
         </div>

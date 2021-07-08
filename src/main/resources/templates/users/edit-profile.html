@@ -10,14 +10,11 @@
         <div class="col-md-6">
             <div class="card">
                 <article class="card-body">
-                    <form id="image" th:action="@{/owner-profile/edit}" method="post" th:object="${editOwnerProfile}">
-                        <div class="col form-group">
-                            <div class="col form-group">
-                                <label for="profileImg"></label>
 
-<!--                                <input th:type="hidden" id="stashFSurl" name="stashFSurl" th:value="replacement" th:field="*{profile_image_url}">-->
-                            </div>
-                            <button type="button" id="profileImg">Upload Profile Image</button>
+                    <form th:action="@{/owner-profile/edit}" method="post" th:object="${editOwnerProfile}">
+                        <div class="col form-group">
+
+
 
 
                             <div class="col form-group">
@@ -28,7 +25,6 @@
                                 <label>Portfolio Link</label>
                                 <input th:field="*{portfolio_link}" type="text" class="form-control">
                             </div> <!-- form-group end.// -->
-
 
                         <div class="col form-group">
                             <label>Resume Link</label>
@@ -112,7 +108,7 @@
 
                         <div class="form-group">
                             <br>
-                            <button type="submit" class="btn btn-primary btn-block">Edit</button>
+                            <button type="submit" class="btn btn-primary btn-block">Save Profile</button>
                         </div> <!-- form-group// -->
                         </div>
                     </form>
@@ -128,30 +124,6 @@
 <!--container end.//-->
 
 <br><br>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-<script th:inline="javascript">
-    (function (){
-        var filestackapi = [[${filestackapi}]];
-        console.log(filestackapi);
 
-        const client = filestack.init(filestackapi);
-
-        const options = {
-            onUploadDone:
-                function (res){
-                    $("stashFSurl").val(res.filesUploaded[0].url)
-                    console.log(res.filesUploaded[0].url);
-                },
-            onUploadDone: (res) =>
-                $('#image').append(`<input type="hidden" name="profile_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),
-                imageDim: [200, 200]
-                    }
-
-        $("#profileImg").click(function (){
-            client.picker(options).open();
-        })
-    })();
-</script>
 </body>
 </html>

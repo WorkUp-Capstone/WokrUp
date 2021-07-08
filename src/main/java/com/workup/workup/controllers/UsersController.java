@@ -70,8 +70,9 @@ public class UsersController {
                               @RequestParam(name = "city") String city,
                               @RequestParam(name = "state") String state,
                               @RequestParam(name = "categories") List<Category> categories,
-                              @RequestParam(name = "phone_number") String phone_number,
-                              @RequestParam(name = "profile_img") String profile_image_url){
+                              @RequestParam(name = "phone_number") String phone_number
+                              //@RequestParam(name = "profile_img") String profile_image_url)
+    ){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Profile foundProfile = profileDao.getProfileByUserIs(user);
@@ -83,11 +84,35 @@ public class UsersController {
         foundProfile.setCategories(categories);
         foundProfile.setState(state);
         foundProfile.setPhone_number(phone_number);
-        foundProfile.setProfile_image_url(profile_image_url);
+//        if(profile_image_url == null){
+//            profile_image_url = "empty";
+//        }
+//        foundProfile.setProfile_image_url(profile_image_url);
 
         profileDao.save(foundProfile);
         return "redirect:/owner-profile";
     }
+
+    @GetMapping("/owner-profile/profileImg/add")
+    public String viewProfileImg(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        model.addAttribute("filestackapi", filestackApi);
+        model.addAttribute("userProfile", profileDao.getProfileByUserIs(user));
+
+        return "users/add-profile-img";
+    }
+
+    @PostMapping("/owner-profile/profileImg/add")
+    public String saveProfileImg(@RequestParam(name="profile_img") String profile_image_url){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Profile profile = profileDao.getProfileByUserIs(user);
+        profile.setProfile_image_url(profile_image_url);
+        profileDao.save(profile);
+        return "redirect:/owner-profile";
+    }
+
 
     //TODO: edit user attributes (First name, last name, password)
 }

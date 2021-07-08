@@ -27,8 +27,8 @@ private final ProjectsRepository projectDao;
 private final EmailService emailService;
 private final UsersRepository userDao;
 
-    @Value("${filestack.api.key}")
-    private String filestackApi;
+//    @Value("${filestack.api.key}")
+//    private String filestackApi;
 
 public ProjectController(CategoryRepository categoryDao, ProjectsRepository projectDao, EmailService emailService, UsersRepository userDao){
     this.categoryDao = categoryDao;
