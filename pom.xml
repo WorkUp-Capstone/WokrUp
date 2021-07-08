@@ -77,6 +77,21 @@
             <version>0.41</version>
         </dependency>
 
+<!--    SearchBar Functionality    -->
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-orm -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search-orm</artifactId>
+            <version>5.11.5.Final</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-elasticsearch -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search-elasticsearch</artifactId>
+            <version>5.11.5.Final</version>
+        </dependency>
+
     </dependencies>
 
     <build>
