@@ -1,14 +1,17 @@
 package com.workup.workup.models;
 
 
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.apache.lucene.analysis.core.StopFilterFactory;
+import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
+import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Indexed
+@NormalizerDef(name = "lowercase", filters = {@TokenFilterDef(factory = LowerCaseFilterFactory.class), @TokenFilterDef(factory = StopFilterFactory.class), @TokenFilterDef(factory = SnowballPorterFilterFactory.class)})
 @Table(name="users")
 public class User {
 
@@ -23,18 +26,18 @@ public class User {
     private String password;
 
     @Column(nullable = false, length = 250)
-    @Field
+    @Field(name = "firstName", normalizer = @Normalizer(definition = "lowercase"))
     private String first_name;
 
     @Column(nullable = false, length = 250)
-    @Field
+    @Field(name = "lastName", normalizer = @Normalizer(definition = "lowercase"))
     private String last_name;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
 
-
+    @ContainedIn
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Project> projectList;
 

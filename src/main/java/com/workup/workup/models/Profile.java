@@ -1,14 +1,17 @@
 package com.workup.workup.models;
 
 
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.apache.lucene.analysis.core.StopFilterFactory;
+import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
+import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Indexed
+@Indexed(index = "idx_profile")
+@NormalizerDef(name = "lowercase", filters = {@TokenFilterDef(factory = LowerCaseFilterFactory.class), @TokenFilterDef(factory = StopFilterFactory.class), @TokenFilterDef(factory = SnowballPorterFilterFactory.class)})
 @Table(name = "profiles")
 public class Profile {
 
@@ -26,11 +29,13 @@ public class Profile {
     private String resume_link;
 
     @Column
-    @Field
+    @Field(name = "city", normalizer = @Normalizer(definition = "lowercase"))
+    @SortableField
     private String city;
 
     @Column
-    @Field
+    @Field(name = "state", normalizer = @Normalizer(definition = "lowercase"))
+    @SortableField
     private String state;
 
     @Column(length = 10)
@@ -42,9 +47,10 @@ public class Profile {
     @OneToOne
     private User user;
 
-
+    @ContainedIn
     @ManyToMany(cascade = CascadeType.ALL)
-    @Field
+//    @Field(name = "profileCategories", normalizer = @Normalizer(definition = "lowercase"))
+//    @SortableField
     @JoinTable(
             name = "profile_categories",
             joinColumns = {@JoinColumn(name="profile_id")},
