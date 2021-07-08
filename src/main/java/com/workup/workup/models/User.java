@@ -1,6 +1,8 @@
 package com.workup.workup.models;
 
 
+import com.workup.workup.validation.ValidPassword;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class User {
     private String email;
 
     @Column(nullable = false, length = 250)
+    @ValidPassword
     private String password;
 
     @Column(nullable = false, length = 250)
@@ -120,4 +123,5 @@ public class User {
         this.projectList = project;
     }
 
+    public String getMatchingPassword() { return password; }
 }
