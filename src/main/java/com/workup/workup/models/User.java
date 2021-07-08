@@ -1,10 +1,14 @@
 package com.workup.workup.models;
 
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Indexed
 @Table(name="users")
 public class User {
 
@@ -19,9 +23,11 @@ public class User {
     private String password;
 
     @Column(nullable = false, length = 250)
+    @Field
     private String first_name;
 
     @Column(nullable = false, length = 250)
+    @Field
     private String last_name;
 
     @ManyToOne(fetch = FetchType.EAGER)
