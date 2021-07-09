@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/head :: head">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-</head>
+<head th:replace="partials/head :: head"></head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
@@ -73,6 +71,7 @@
                                 </li>
                             </ul>
                         </div>
+<!--                        <input src="src/main/resources/static/img/default-person-icon.png" hidden-->
                         <div class="form-group">
                             <br>
                             <button type="submit" class="btn btn-primary btn-block">Register</button>

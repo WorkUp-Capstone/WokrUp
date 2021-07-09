@@ -1,5 +1,9 @@
 package com.workup.workup.models;
 
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -8,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Entity
+//@Indexed
 @Table(name = "projects")
 public class Project{
 
@@ -18,9 +23,11 @@ public class Project{
     private long id;
 
     @Column(nullable = false, length = 200)
+//    @FullTextField
     private String title;
 
     @Column(nullable = false)
+//    @FullTextField
     private String description;
 
     @Column (nullable = false)
@@ -29,13 +36,14 @@ public class Project{
     @Column (nullable = true)
     private Date completionDate;
 
-    @Column
+    @Column (nullable = false)
     private String status;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<ProjectImage> images;
 
     @ManyToMany(cascade = CascadeType.ALL)
+//    @IndexedEmbedded
     @JoinTable(
             name = "project_categories",
             joinColumns = {@JoinColumn(name="project_id")},

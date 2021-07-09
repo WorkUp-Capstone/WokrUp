@@ -1,10 +1,16 @@
 package com.workup.workup.models;
 
 
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+//@Indexed
 @Table(name = "profiles")
 public class Profile {
 
@@ -22,9 +28,11 @@ public class Profile {
     private String resume_link;
 
     @Column
+//    @KeywordField
     private String city;
 
     @Column
+//    @FullTextField
     private String state;
 
     @Column(length = 10)
@@ -34,10 +42,12 @@ public class Profile {
     private String profile_image_url;
 
     @OneToOne
+//    @IndexedEmbedded
     private User user;
 
 
     @ManyToMany(cascade = CascadeType.ALL)
+//    @IndexedEmbedded
     @JoinTable(
             name = "profile_categories",
             joinColumns = {@JoinColumn(name="profile_id")},

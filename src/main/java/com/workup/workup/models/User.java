@@ -1,6 +1,8 @@
 package com.workup.workup.models;
 
 
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
@@ -27,9 +29,11 @@ public class User {
     private String passwordRepeat;
 
     @Column(nullable = false, length = 250)
+//    @KeywordField
     private String first_name;
 
     @Column(nullable = false, length = 250)
+//    @KeywordField
     private String last_name;
 
     @ManyToOne(fetch = FetchType.EAGER)

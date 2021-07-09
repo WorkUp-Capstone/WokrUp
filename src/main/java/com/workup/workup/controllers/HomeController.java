@@ -4,20 +4,18 @@ import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
-import com.workup.workup.models.Role;
 import com.workup.workup.models.User;
 import org.apache.commons.lang3.StringUtils;
-import org.passay.PasswordValidator;
+import com.workup.workup.models.Project;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -29,13 +27,13 @@ public class HomeController {
 
 
     public HomeController(ProjectsRepository projectsRepository, ProfileRepository profileRepository, UsersRepository usersRepository, PasswordEncoder passwordEncoder){
-        projectsDao = projectsRepository;
-        profileDao = profileRepository;
-        usersDao = usersRepository;
+        this.projectsDao = projectsRepository;
+        this.profileDao = profileRepository;
+        this.usersDao = usersRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/welcome")
+    @GetMapping("/")
     public String welcome(){
         return "welcome";
     }
@@ -49,11 +47,10 @@ public class HomeController {
 
 //save user
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute @Valid User user){
 
-        // TODO: if password does not meet constraints, return "register"
-
+    public String saveUser(@ModelAttribute User user){
         Profile profile = new Profile();
+
         if (!StringUtils.isEmpty(user.getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setPasswordRepeat(passwordEncoder.encode(user.getPasswordRepeat()));
@@ -75,6 +72,50 @@ public class HomeController {
         model.addAttribute("devProfiles", profileDao.getAllByUserRole_Id(user.getRole().getId()));
 
         return "home";
+    }
+
+
+    //      METHODS NEEDED FOR SEARCH TO WORK DECENT
+//    IMPROVEMENTS THAT ARE NEEDED ARE PARTIAL/FUZZY INTERPRETATION AND STATE IS ACTING FUNNY
+    public List<Long> projectSearch(String searchString) {
+        return projectsDao.projectSearch(searchString);
+    }
+
+    public List<Long> devSearch(String searchString) {
+        return profileDao.devSearch(searchString);
+    }
+
+    @GetMapping("/search")
+    public String search(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
+        if (user.getRole().getRole().equalsIgnoreCase("developer")) {
+            List<Long> searchResult = projectSearch(keyword);
+            if (searchResult.isEmpty()) {
+                List<Project> searchResults = projectsDao.findAll();
+                model.addAttribute("searchResults", searchResults);
+                model.addAttribute("searchString", "No Results for '" + keyword + "'");
+                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
+            } else {
+                List<Project> searchResults = projectsDao.findAllById(searchResult);
+                model.addAttribute("searchResults", searchResults);
+                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
+                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
+            }
+        } else {
+            List<Long> searchResult = devSearch(keyword);
+            if (searchResult.isEmpty()) {
+                List<Profile> searchResults = profileDao.findAll();
+                model.addAttribute("searchResults", searchResults);
+                model.addAttribute("searchString", "No Results for '" + keyword + "'");
+                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
+            } else {
+                List<Profile> searchResults = profileDao.findAllById(searchResult);
+                model.addAttribute("searchResults", searchResults);
+                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
+                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
+            }
+        }
+        model.addAttribute("userRole", user.getRole().getRole());
+        return "/search_result";
     }
 
 

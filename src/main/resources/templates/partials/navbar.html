@@ -12,9 +12,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
     WorkUp
     <!--object placeholder while search is being built-->
-    <form action="/search">
-        <input type="text" name="term" placeholder="Search term">
-        <button class="btn">Search</button>
+    <form th:action="@{/search}" method="get">
+        <input type="search" name="keyword">
+        <button type=submit class="btn">Search</button>
     </form>
     <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav ml-auto">
@@ -43,7 +43,7 @@
 <!--                    <span th:text="${#authentication.getPrincipal()}"></span>-->
 <!--                </li>-->
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/owner-profile}">Profile</a>
+                    <a class="nav-link" th:href="@{/profile}">Profile</a>
                 </li>
                 <li class="nav-item">
                     <form th:action="@{/logout}" th:method="post">

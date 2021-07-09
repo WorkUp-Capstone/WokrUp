@@ -1,13 +1,8 @@
 package com.workup.workup.controllers;
 
-import com.workup.workup.dao.CategoryRepository;
-import com.workup.workup.dao.ProfileRepository;
-import com.workup.workup.dao.ProjectsRepository;
-import com.workup.workup.dao.UsersRepository;
-import com.workup.workup.models.Category;
-import com.workup.workup.models.Profile;
-import com.workup.workup.models.Project;
-import com.workup.workup.models.User;
+import com.workup.workup.dao.*;
+import com.workup.workup.models.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,16 +17,22 @@ public class UsersController {
     private ProfileRepository profileDao;
     private ProjectsRepository projectsDao;
     private CategoryRepository categoryDao;
+    private final ImagesRepository imageDao;
 
-    public UsersController(UsersRepository usersRepository, ProjectsRepository projectsRepository, ProfileRepository profileRepository, CategoryRepository categoryRepository) {
+    //Filestack API Key Import:
+    @Value("${filestack.api.key}")
+    private String filestackApi;
+
+    public UsersController(UsersRepository usersRepository, ProjectsRepository projectsRepository, ProfileRepository profileRepository, CategoryRepository categoryRepository,ImagesRepository imageDao) {
         usersDao = usersRepository;
         projectsDao = projectsRepository;
         profileDao = profileRepository;
         categoryDao = categoryRepository;
+        this.imageDao = imageDao;
     }
 
     //View Single Profile:
-    @GetMapping("/owner-profile")
+    @GetMapping("/profile")
     public String showOwnerProfile(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Profile profile;
@@ -42,29 +43,31 @@ public class UsersController {
         List<Project> projectList;
         projectList = projectsDao.getAllProjectsByUserIdIs(logged.getId());
         model.addAttribute("ownerProject", projectList);
+
         return "users/view-profile";
     }
 
     //edit selected profile
-    @GetMapping("/owner-profile/edit")
-    public String editProfileForm(@ModelAttribute Profile profileToEdit, Model profileModel, Model categoryModel){
+    @GetMapping("/profile/edit")
+    public String editProfileForm(Model profileModel, Model categoryModel, Model filestackModel){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-       profileToEdit = profileDao.getProfileByUserIs(user);
+
        categoryModel.addAttribute("categoryList", categoryDao.findAll());
-        profileModel.addAttribute("editOwnerProfile", profileToEdit);
+        profileModel.addAttribute("editOwnerProfile", profileDao.getProfileByUserIs(user));
+        filestackModel.addAttribute("filestackapi", filestackApi);
+
         return "users/edit-profile";
     }
 
     //edit and save profile
-    @PostMapping("/owner-profile/edit")
+    @PostMapping("/profile/edit")
     public String editProfile(@RequestParam(name = "about") String about,
                               @RequestParam(name = "portfolio_link") String portfolio_link,
                               @RequestParam(name = "resume_link") String resume_link,
                               @RequestParam(name = "city") String city,
                               @RequestParam(name = "state") String state,
                               @RequestParam(name = "categories") List<Category> categories,
-                              @RequestParam(name = "phone_number") String phone_number,
-                              @RequestParam(name = "profile_image_url") String profile_image_url){
+                              @RequestParam(name = "phone_number") String phone_number){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Profile foundProfile = profileDao.getProfileByUserIs(user);
@@ -76,11 +79,34 @@ public class UsersController {
         foundProfile.setCategories(categories);
         foundProfile.setState(state);
         foundProfile.setPhone_number(phone_number);
-        foundProfile.setProfile_image_url(profile_image_url);
-
         profileDao.save(foundProfile);
-        return "redirect:/owner-profile";
+        return "redirect:/profile";
     }
+
+    //create profile image:
+    @GetMapping("/profile/profileImg/add")
+    public String viewProfileImg(Model model) {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        model.addAttribute("filestackapi", filestackApi);
+        model.addAttribute("userProfile", profileDao.getProfileByUserIs(user));
+
+        return "users/add-profile-img";
+    }
+
+    //Save profile image
+    @PostMapping("/profile/profileImg/add")
+    public String saveProfileImg(@RequestParam(name="profile_img") String profile_image_url){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Profile profile = profileDao.getProfileByUserIs(user);
+        profile.setProfile_image_url(profile_image_url);
+
+        profileDao.save(profile);
+        return "redirect:/profile";
+    }
+
 
     //TODO: edit user attributes (First name, last name, password)
 }
