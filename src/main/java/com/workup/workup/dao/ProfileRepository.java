@@ -13,8 +13,9 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
     Profile findById(long id);
 
     Profile getProfileByUserIs(User user);
-  
-    List<Profile> getAllByUserRole_Id(Long id);
+
+    // NO LONGER NEEDED FOR HOME VIEWS
+//    List<Profile> getAllByUserRole_Id(Long id);
 
     Profile getProfileByUserId(long id);
 

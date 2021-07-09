@@ -61,14 +61,28 @@ public class HomeController {
         return "redirect:/login";
     }
 
+    // NO LONGER NEEDED FOR HOME VIEW BUT COULD BE USED TO REFACTORED CLUNCKY WORKING CODE
     //Project index for Developers to view in their Home Page
+//    @GetMapping("/home")
+//    public String projectsIndex(Model model,
+//                                @AuthenticationPrincipal User user){
+//
+//            model.addAttribute("userRole", user.getRole().getRole());
+//            model.addAttribute("allProjects", projectsDao.findAll());
+//        model.addAttribute("devProfiles", profileDao.getAllByUserRole_Id(user.getRole().getId()));
+//        return "home";
+//    }
     @GetMapping("/home")
-    public String projectsIndex(Model model,
-                                @AuthenticationPrincipal User user){
-      
-            model.addAttribute("userRole", user.getRole().getRole());
-            model.addAttribute("allProjects", projectsDao.findAll());
-        model.addAttribute("devProfiles", profileDao.getAllByUserRole_Id(user.getRole().getId()));
+    public String home(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
+        if (user.getRole().getRole().equalsIgnoreCase("developer")) {
+                List<Project> allProjects = projectsDao.findAll();
+                model.addAttribute("allProjects", allProjects);
+        } else {
+
+                List<Profile> devProfiles = profileDao.findAll();
+                model.addAttribute("devProfiles", devProfiles);
+            }
+        model.addAttribute("userRole", user.getRole().getRole());
         return "home";
     }
 

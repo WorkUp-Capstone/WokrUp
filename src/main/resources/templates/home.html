@@ -18,7 +18,9 @@
             <p th:text="${profile.profile_image_url}"></p>
             <p th:text="${profile.portfolio_link}"></p>
             <p th:text="${profile.resume_link}"></p>
-            <p th:text="${profile.categories}"></p>
+            <th:block th:each="category : ${profile.categories}">
+                <li th:text="${category.name}"></li>
+            </th:block>
             <p th:text="${profile.city}"></p>
             <p th:text="${profile.state}"></p>
             <p th:text="${profile.phone_number}"></p>
@@ -32,7 +34,9 @@
             <h3 th:text="${project.title}" ></h3>
             <p th:text="${project.description}"></p>
             <p th:text="${project.images}"></p>
-            <p th:text="${project.categories}"></p>
+            <th:block th:each="category : ${project.categories}">
+                <li th:text="${category.name}"></li>
+            </th:block>
             <p th:text="${project.creationDate}"></p>
         </th:block>
     </div>
