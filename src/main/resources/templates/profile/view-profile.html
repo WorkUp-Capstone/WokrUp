@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head">
+    <title>Owner Profile</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
+
+    <h3>My Profile</h3>
+        <div class="card">
+            <form th:action="@{/profile}" th:method="post">
+        <th:block th:each="profile : ${ownerProfile}">
+            <p th:text="${ownerProfile.profile_image_url}"></p>
+            <p th:text="${ownerProfile.about}"></p>
+            <p th:text="${ownerProfile.portfolio_link}"></p>
+            <p th:text="${ownerProfile.resume_link}"></p>
+            <p th:text="${ownerProfile.city}"></p>
+            <p th:text="${ownerProfile.state}"></p>
+            <p th:text="${ownerProfile.phone_number}"></p>
+            <th:block th:each="category : ${ownerProfile.categories}">
+            <p th:text="${category.name}"></p>
+        </th:block>
+        </th:block>
+        </form>
+        <form th:action="@{/profile/edit}" th:method="get">
+            <button>Edit Profile</button>
+        </form>
+    </div>
+<br>
+    <h3>My Projects</h3>
+    <form th:action="@{profile/projects/create}" th:method="get">
+        <button>Add Project</button>
+    </form>
+    <br>
+    <th:block th:each="project : ${ownerProject}">
+    <div class="card">
+        <form th:action="@{/profile}" th:method="post">
+                <p th:text="${project.title}"></p>
+                <p th:text="${project.description}"></p>
+                <p th:text="${project.status.toUpperCase().replace('_', ' ')}"></p>
+                <p th:text="${project.creationDate}"></p>
+            <th:block th:each="category : ${ownerProfile.categories}">
+                <p th:text="${category.name}"></p>
+            </th:block>
+        </form>
+        <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
+    </div>
+    </th:block>
+</div>
+</body>
+</html>
