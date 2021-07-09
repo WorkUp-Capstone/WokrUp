@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head">
+  <title>Project Images</title>
+</head>
+<body>
+
+<form th:action="@{/owner-profile/projects/images}" method="post">
+
+<th:block th:each="projectImage : ${projectImageList}">
+  <div class="col form-group">
+    <img th:src="${projectImage.path}">
+  </div>
+</th:block>
+
+</form>
+
+</body>
+</html>

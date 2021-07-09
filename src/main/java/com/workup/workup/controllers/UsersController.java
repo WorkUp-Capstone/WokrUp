@@ -44,8 +44,6 @@ public class UsersController {
         projectList = projectsDao.getAllProjectsByUserIdIs(logged.getId());
         model.addAttribute("ownerProject", projectList);
 
-//        List<ProjectImage> projectImageList = imageDao.getProjectImagePathByProject();
-//        model.addAttribute("")
         return "users/view-profile";
     }
 

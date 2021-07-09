@@ -55,9 +55,15 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
     //create a Project
     @GetMapping("/owner-profile/projects/create")
-    public String viewProjectCreateForm(Model projectModel, Model categoryModel){
+    public String viewProjectCreateForm(Model model, Model projectModel, Model categoryModel){
         projectModel.addAttribute("project", new Project());
         categoryModel.addAttribute("categoryList", categoryDao.findAll());
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User logged = userDao.getById(user.getId());
+
+        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(logged.getId());
+        model.addAttribute("projectImageList", projectImageList);
 
         return "projects/create";
     }
@@ -81,6 +87,18 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
     }
 
+    @GetMapping("/owner-profile/projects/images")
+    public String viewProjectImages(Model model){
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User logged = userDao.getById(user.getId());
+
+        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(logged.getId());
+        model.addAttribute("projectImageList", projectImageList);
+
+        return "projects/view-project-images";
+    }
 
     //edit selected project
     @GetMapping("/projects/{id}/edit")
@@ -119,7 +137,7 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
 //    //create project images:
     @GetMapping("/owner-profile/projectImg/{id}/add")
-    public String viewProjectImages(Model model, @PathVariable Long id){
+    public String viewProjectImagesForm(Model model, @PathVariable Long id){
 
 //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
