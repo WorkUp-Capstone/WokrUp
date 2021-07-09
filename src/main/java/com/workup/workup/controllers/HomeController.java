@@ -62,9 +62,9 @@ public class HomeController {
     public String projectsIndex(Model model,
                                 @AuthenticationPrincipal User user){
 
-            model.addAttribute("userRole", user.getRole());
+            model.addAttribute("userRole", user.getRole().getRole());
             model.addAttribute("allProjects", projectsDao.findAll());
-        model.addAttribute("devProfiles", profileDao.getAllByRole(user.getRole().getId()));
+        model.addAttribute("devProfiles", profileDao.getAllByUserRole_Id(user.getRole().getId()));
         return "home";
     }
 
