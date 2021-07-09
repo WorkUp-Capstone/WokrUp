@@ -59,7 +59,7 @@ public class HomeController {
     @GetMapping("/home")
     public String projectsIndex(Model model,
                                 @AuthenticationPrincipal User user){
-            model.addAttribute("userRole", user.getRole());
+            model.addAttribute("userRole", user.getRole().getRole());
             model.addAttribute("allProjects", projectsDao.findAll());
         return "home";
     }
