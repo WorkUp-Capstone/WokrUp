@@ -2,13 +2,21 @@ package com.workup.workup.controllers;
 
 import com.workup.workup.dao.*;
 import com.workup.workup.models.*;
-import com.workup.workup.services.EmailService;
 import org.springframework.beans.factory.annotation.Value;
+import com.workup.workup.dao.CategoryRepository;
+import com.workup.workup.dao.ProfileRepository;
+import com.workup.workup.dao.ProjectsRepository;
+import com.workup.workup.dao.UsersRepository;
+import com.workup.workup.models.Category;
+import com.workup.workup.models.Profile;
+import com.workup.workup.models.Project;
+import com.workup.workup.models.User;
+import com.workup.workup.services.EmailService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-//import com.workup.workup.models.Status;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import java.sql.Date;
 import java.util.List;
@@ -17,11 +25,11 @@ import java.util.List;
 @Controller
 public class ProjectController {
 
-    private final CategoryRepository categoryDao;
+private final CategoryRepository categoryDao;
+private final ProfileRepository profileDao;
 private final ProjectsRepository projectDao;
 private final EmailService emailService;
 private final UsersRepository userDao;
-private final ProfileRepository profileDao;
 private final ImagesRepository imageDao;
 
     @Value("${filestack.api.key}")
@@ -33,19 +41,22 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     this.projectDao = projectDao;
     this.emailService = emailService;
     this.userDao = userDao;
-    this.profileDao = profileDao;
+    this.profilesDao = profilesDao;
     this.imageDao = imageDao;
 
 }
 
+
     //display ALL projects
     @GetMapping("/owner-profile/projects")
-    public String projectsIndex(Model model){
+    public String projectsIndex(Model model) {
         model.addAttribute("allProjects", projectDao.findAll());
         return "projects/index"; // ?? may need return refactor
     }
 
-/**Lines below commented in the event we need to show one project outside of the card view in the projects' index (dev/home) *note that show.html does not exist*/
+    /**
+     * Lines below commented in the event we need to show one project outside of the card view in the projects' index (dev/home) *note that show.html does not exist
+     */
     //display selected single project
 //    @GetMapping("/owner-profile/projects/{id}")
 //    public String showProject(@PathVariable long id, Model model){
@@ -55,30 +66,26 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
     //create a Project
     @GetMapping("/owner-profile/projects/create")
-    public String viewProjectCreateForm(Model model, Model projectModel, Model categoryModel){
-        projectModel.addAttribute("project", new Project());
+    public String viewProjectCreateForm(Model model, Model categoryModel) {
+        model.addAttribute("project", new Project());
         categoryModel.addAttribute("categoryList", categoryDao.findAll());
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-//        User logged = userDao.getById(user.getId());
-//
-//        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(logged.getId());
-//        model.addAttribute("projectImageList", projectImageList);
 
         return "projects/create";
     }
 
     @PostMapping("/projects/create")
     public String createProject(
-                              @RequestParam(name = "title") String title,
-                              @RequestParam(name = "description") String description,
-                              @RequestParam(name = "categories") List<Category> categoryList, @RequestParam(name = "status") String status,
-                              @AuthenticationPrincipal User user) {
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "description") String description,
+            @RequestParam(name = "categories") List<Category> categoryList,
+            @RequestParam(name = "status") String status,
+            @AuthenticationPrincipal User user) {
 
         Project newProject = new Project();
         newProject.setTitle(title);
         newProject.setDescription(description);
         newProject.setCategories(categoryList);
+        newProject.setStatus(status);
         newProject.setCreationDate(new Date(System.currentTimeMillis()));
         newProject.setStatus(status);
         newProject.setUser(user);
@@ -102,7 +109,7 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
     //edit selected project
     @GetMapping("/projects/{id}/edit")
-    public String editProjectForm(Model model, @PathVariable Long id){
+    public String editProjectForm(Model model, @PathVariable Long id) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Project projectToEdit = projectDao.getById(id);
         model.addAttribute("editProject", projectToEdit);
@@ -110,15 +117,18 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     }
 
     //edit and save project
-    /** TODO: need to include @RequestParams for categories and possibly files? */
+
+    /**
+     * TODO: need to include @RequestParams for categories and possibly files?
+     */
 
     @PostMapping("/projects/{id}/edit")
     public String editProject(@PathVariable Long id,
-                              @RequestParam(name="title") String title,
-                              @RequestParam(name="description") String description,
-                              @RequestParam(name="status") String status
+                              @RequestParam(name = "title") String title,
+                              @RequestParam(name = "description") String description,
+                              @RequestParam(name = "status") String status
                               //,@RequestParam(name="categories")Category categories
-                              ){
+    ) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -132,7 +142,6 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
         projectDao.save(project);
         return "redirect:/owner-profile";
-
     }
 
 //    //create project images:
@@ -175,11 +184,8 @@ ProjectImage image = new ProjectImage();
     }
 
 
-//    need to discuss postmapping redirect plan as well as confirm how we will handle search ie. categories/description
-//    @GetMapping("/search")
-//   public String searchProject(@PathVariable String searchString, Model model){
-//
-//    }
+
+
 
 
 }
