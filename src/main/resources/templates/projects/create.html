@@ -24,18 +24,26 @@
                     </div>
                 </select>
             </label>
+            <div>
+                <label style="visibility:hidden">Project Status
+                    <select th:field="*{status}">
+                        <option th:value="open" selected>Open</option>
+                        <option th:value="in_progress">In progress</option>
+                    </select>
+                </label>
+            </div>
             <br/>
             <input type="submit" value="Save Project"/>
         </form>
 
-        <form th:action="@{owner-profile/projectImg/add}" th:method="get">
-            <th:block th:each="projectImage: ${projectImageList}">
-                <div class="col form-group">
-                    <img th:src="${projectImage.path}">
-                </div>
-                <button>Edit Project Image(s)</button>
-            </th:block>
-        </form>
+<!--        <form th:action="@{owner-profile/projectImg/add}" th:method="get">-->
+<!--            <th:block th:each="projectImage: ${projectImageList}">-->
+<!--                <div class="col form-group">-->
+<!--                    <img th:src="${projectImage.path}">-->
+<!--                </div>-->
+<!--                <button>Edit Project Image(s)</button>-->
+<!--            </th:block>-->
+<!--        </form>-->
 
 
     </div>

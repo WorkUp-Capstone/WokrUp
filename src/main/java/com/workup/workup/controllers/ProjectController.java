@@ -58,12 +58,12 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     public String viewProjectCreateForm(Model model, Model projectModel, Model categoryModel){
         projectModel.addAttribute("project", new Project());
         categoryModel.addAttribute("categoryList", categoryDao.findAll());
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        User logged = userDao.getById(user.getId());
-
-        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(logged.getId());
-        model.addAttribute("projectImageList", projectImageList);
+//        User logged = userDao.getById(user.getId());
+//
+//        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(logged.getId());
+//        model.addAttribute("projectImageList", projectImageList);
 
         return "projects/create";
     }
@@ -139,11 +139,17 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     @GetMapping("/owner-profile/projectImg/{id}/add")
     public String viewProjectImagesForm(Model model, @PathVariable Long id){
 
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User logged = userDao.getById(user.getId());
 
         Project addProjectImg = projectDao.getById(id);
         model.addAttribute("addProjectImg", addProjectImg);
         model.addAttribute("filestackapi", filestackApi);
+
+        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(addProjectImg.getId());
+
+        model.addAttribute("projectImageList", projectImageList);
         //model.addAttribute("project", projectDao.getProjectByUserIs(user));
 //        model.addAttribute("image", imageDao.getImageByProjectId(user));
 
