@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
+
 @Controller
 public class HomeController {
     private ProjectsRepository projectsDao;
@@ -59,8 +61,10 @@ public class HomeController {
     @GetMapping("/home")
     public String projectsIndex(Model model,
                                 @AuthenticationPrincipal User user){
+
             model.addAttribute("userRole", user.getRole());
             model.addAttribute("allProjects", projectsDao.findAll());
+        model.addAttribute("devProfiles", profileDao.getAllByRole(user.getRole().getId()));
         return "home";
     }
 
