@@ -33,7 +33,7 @@ public class HomeController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/welcome")
+    @GetMapping("/")
     public String welcome(){
         return "welcome";
     }
