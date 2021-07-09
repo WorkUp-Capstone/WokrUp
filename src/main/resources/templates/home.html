@@ -13,15 +13,15 @@
 
     <!--TODO: Need to reference ONLY Project owners profiles-->
     <div class="card" th:case="'owner'">
-        <th:block th:each="profile : ${developerProfile}">
-            <h3 th:text="${developerProfile.about}"></h3>
-            <p th:text="${developerProfile.profile_image_url}"></p>
-            <p th:text="${developerProfile.portfolio_link}"></p>
-            <p th:text="${developerProfile.resume_link}"></p>
-            <p th:text="${developerProfile.categories}"></p>
-            <p th:text="${developerProfile.city}"></p>
-            <p th:text="${developerProfile.state}"></p>
-            <p th:text="${developerProfile.phone_number}"></p>
+        <th:block th:each="profile : ${devProfiles} ">
+            <h3 th:text="${profile.about}"></h3>
+            <p th:text="${profile.profile_image_url}"></p>
+            <p th:text="${profile.portfolio_link}"></p>
+            <p th:text="${profile.resume_link}"></p>
+            <p th:text="${profile.categories}"></p>
+            <p th:text="${profile.city}"></p>
+            <p th:text="${profile.state}"></p>
+            <p th:text="${profile.phone_number}"></p>
 
         </th:block>
     </div>
@@ -29,9 +29,8 @@
     <div class="project-card" th:case="'developer'">
         <th:block th:each="project : ${allProjects}">
 
-            <h3 th:text="${project.title}"></h3>
+            <h3 th:text="${project.title}" ></h3>
             <p th:text="${project.description}"></p>
-            <p th:text="${project.ownerUser}"></p>
             <p th:text="${project.images}"></p>
             <p th:text="${project.categories}"></p>
             <p th:text="${project.creationDate}"></p>

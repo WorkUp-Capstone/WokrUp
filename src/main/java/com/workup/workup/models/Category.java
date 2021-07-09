@@ -1,9 +1,13 @@
 package com.workup.workup.models;
 
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+//@Indexed
 @Table(name="categories")
 public class Category {
     @Id
@@ -11,6 +15,7 @@ public class Category {
     private long id;
 
     @Column(nullable = false)
+//    @KeywordField
     private String name;
 
     @ManyToMany(mappedBy = "categories")

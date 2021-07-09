@@ -16,5 +16,6 @@ public interface UsersRepository extends JpaRepository<User, Long> {
 
     User findByRole(Role role);
 
+    User findByRoleIsNot(Role role);
 
 }
