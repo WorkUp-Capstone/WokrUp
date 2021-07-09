@@ -122,6 +122,4 @@ public class User {
     public void setProject(List<Project> project) {
         this.projectList = project;
     }
-
-    public String getMatchingPassword() { return password; }
 }

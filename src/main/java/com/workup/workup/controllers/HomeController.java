@@ -4,6 +4,7 @@ import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
+import com.workup.workup.models.Role;
 import com.workup.workup.models.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -61,6 +62,7 @@ public class HomeController {
                                 @AuthenticationPrincipal User user){
             model.addAttribute("userRole", user.getRole());
             model.addAttribute("allProjects", projectsDao.findAll());
+            model.addAttribute("devProfiles", profileDao.getAllByRole(user.getRole().getId()));
         return "home";
     }
 

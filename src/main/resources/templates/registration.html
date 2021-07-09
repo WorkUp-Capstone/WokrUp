@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/head :: head"></head>
+<head th:replace="/partials/head :: head">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script th:src="@{/resources/pwstrength.js}"></script>
+</head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
@@ -40,9 +43,10 @@
                         <div class="form-group">
                             <label for="password">Create password</label>
                             <div class="input-group" id="show_hide_password">
-                                <input th:field="*{password}" type="password" class="form-control" id="password" autocomplete="off" th:required="required"/>
+                                <input th:field="*{password}" type="password" class="form-control" value="" id="password" autocomplete="new-password" th:required="required"/>
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                                    <span id="passwordError" class="alert alert-danger col-sm-4" style="display:none"></span>
                                 </div>
                             </div>
                         </div>
@@ -79,6 +83,28 @@
             icon.addClass("fa-eye");
         }
     });
+</script>
+<script th:inline="javascript">
+        $(document).ready(function () {
+            var options = {
+                common: {minChar: 8},
+                ui: {
+                    showVerdictsInsideProgressBar: true,
+                    showErrors: true,
+                    errorMessages: {
+                        wordLength: [[#{error.wordLength}]],
+                        wordNotEmail: [[#{error.wordNotEmail}]],
+                        wordSequences: [[#{error.wordSequences}]],
+                        wordLowercase: [[#{error.wordLowercase}]],
+                        wordUppercase: [[#{error.wordUppercase}]],
+                        wordOneNumber: [[#{error.wordOneNumber}]],
+                        wordOneSpecialChar: [[#{error.wordOneSpecialChar}]]
+                    }
+                }
+            };
+            $('#password').pwstrength(options);
+        });
+
 </script>
 
 <br><br>
