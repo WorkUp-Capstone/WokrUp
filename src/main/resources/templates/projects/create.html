@@ -9,7 +9,7 @@
 <div class="container">
     <div class="form-group">
         <h3>Create a new project: </h3>
-        <form th:action="@{/projects/create}" th:method="post" th:object="${project}" id="images">
+        <form th:action="@{/projects/create}" th:method="post" th:object="${project}">
 
             <label>Name of Project:</label>
             <input name="title" th:field="*{title}"/>
@@ -33,44 +33,22 @@
                     </select>
                 </label>
             </div>
-
-<!--            <label for="projectImg">Upload any corresponding files or images about your project here:</label>-->
-<!--            <div class="col form-group">-->
-<!--                <div class="col form-group">-->
-<!--                    <input th:type="hidden" id="stashFSurl" name="stashFSurl" th:value="replacement" th:field="*{images}">-->
-<!--                </div>-->
-<!--                <button type="button" id="projectImg">Upload files</button>-->
-<!--                <br/>-->
-<!--                <input type="submit" value="Save Project"/>-->
-<!--            </div>-->
+            <br/>
+            <input type="submit" value="Save Project"/>
         </form>
+
+            <form th:action="@{owner-profile/projectImg/add}" th:method="get">
+                <th:block th:each="project: ${project}">
+                <div class="col form-group">
+                    <img th:src="${project.images}">
+                </div>
+                    <button>Edit Project Image(s)</button>
+                </th:block>
+            </form>
+
+
+
 </div>
 </div>
-
-<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>-->
-<!--<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>-->
-<!--<script th:inline="javascript">-->
-<!--    (function (){-->
-<!--        var filestackapi = [[${filestackapi}]];-->
-<!--        console.log(filestackapi);-->
-
-<!--        const client = filestack.init(filestackapi);-->
-
-<!--        const options = {-->
-<!--            onUploadDone:-->
-<!--                function (res){-->
-<!--                    $("stashFSurl").val(res.filesUploaded[0].url)-->
-<!--                    console.log(res.filesUploaded[0].url);-->
-<!--                },-->
-<!--            onUploadDone: (res) =>-->
-<!--                $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),-->
-<!--            imageDim: [200, 400]-->
-<!--        }-->
-
-<!--        $("#projectImg").click(function (){-->
-<!--            client.picker(options).open();-->
-<!--        })-->
-<!--    })();-->
-<!--</script>-->
 </body>
 </html>

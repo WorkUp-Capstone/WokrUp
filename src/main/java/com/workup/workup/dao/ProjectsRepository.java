@@ -18,7 +18,9 @@ import java.util.*;
 public interface ProjectsRepository extends JpaRepository<Project, Long> {
     Project getProjectByUserIs(User user);
 
+
+
     // need to add "find ALL by" projects in a list
     List<Project> getAllProjectsByUserIdIs(Long ownerUserId);
-    List<ProjectImage> getProjectsById(Long projectId);
+
 }

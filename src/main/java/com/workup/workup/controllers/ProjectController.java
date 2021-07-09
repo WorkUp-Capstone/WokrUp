@@ -1,12 +1,7 @@
 package com.workup.workup.controllers;
 
-import com.workup.workup.dao.CategoryRepository;
-import com.workup.workup.dao.ProjectsRepository;
-import com.workup.workup.dao.UsersRepository;
-import com.workup.workup.models.Category;
-import com.workup.workup.models.Project;
-import com.workup.workup.models.ProjectImage;
-import com.workup.workup.models.User;
+import com.workup.workup.dao.*;
+import com.workup.workup.models.*;
 import com.workup.workup.services.EmailService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,15 +21,20 @@ public class ProjectController {
 private final ProjectsRepository projectDao;
 private final EmailService emailService;
 private final UsersRepository userDao;
+private final ProfileRepository profileDao;
+private final ImagesRepository imageDao;
 
-//    @Value("${filestack.api.key}")
-//    private String filestackApi;
+    @Value("${filestack.api.key}")
+    private String filestackApi;
 
-public ProjectController(CategoryRepository categoryDao, ProjectsRepository projectDao, EmailService emailService, UsersRepository userDao){
+public ProjectController(CategoryRepository categoryDao, ProjectsRepository projectDao, EmailService emailService, UsersRepository userDao, ProfileRepository profileDao,
+                         ImagesRepository imageDao){
     this.categoryDao = categoryDao;
     this.projectDao = projectDao;
     this.emailService = emailService;
     this.userDao = userDao;
+    this.profileDao = profileDao;
+    this.imageDao = imageDao;
 
 }
 
@@ -118,22 +118,38 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     }
 
 //    //create project images:
-//    @GetMapping("/owner-profile/projects/create/{id}/images")
-//    public String viewProjectImages(@PathVariable long id, Model projectModel, Model filestackModel){
-//        projectModel.addAttribute("project", projectDao.getProjectsById(id));
-//        filestackModel.addAttribute("filestackApi", filestackApi);
-//        return "projects/create";
-//    }
-//
-//    //save project images:
-//    @PostMapping("/owner-profile/projects/create/{id}/images")
-//    public String saveProjectImages(@PathVariable long id, @RequestParam(name = "project_img") List<ProjectImage> projectImages){
-//
-//        ProjectImage project = projectDao.getProjectsById(id));
-//        project.setImages(projectImages);
-//        projectDao.save(project);
-//        return "projects/create";
-//    }
+    @GetMapping("/owner-profile/projectImg/{id}/add")
+    public String viewProjectImages(Model model, @PathVariable Long id){
+
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Project addProjectImg = projectDao.getById(id);
+        model.addAttribute("addProjectImg", addProjectImg);
+        model.addAttribute("filestackapi", filestackApi);
+        //model.addAttribute("project", projectDao.getProjectByUserIs(user));
+//        model.addAttribute("image", imageDao.getImageByProjectId(user));
+
+        return "projects/add-project-img";
+    }
+
+    //save project images:
+    @PostMapping("/owner-profile/projectImg/{id}/add")
+    public String saveProjectImages(@PathVariable Long id, @RequestParam(name = "project_img") String project_img_path){
+        //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+ProjectImage image = new ProjectImage();
+
+        //ProjectImage image = imageDao.getProjectImagePathByProject(project);
+
+       Project project = projectDao.getById(id);
+        image.setPath(project_img_path);
+        image.setProject(project);
+
+
+        imageDao.save(image);
+
+        return "projects/create";
+    }
 
 
 //    need to discuss postmapping redirect plan as well as confirm how we will handle search ie. categories/description

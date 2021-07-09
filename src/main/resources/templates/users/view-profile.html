@@ -21,7 +21,7 @@
         <form th:action="@{/owner-profile}" th:method="post">
             <th:block th:each="profile : ${ownerProfile}">
                     <div class="col form-group">
-                        <label><strong>Me:</strong></label>
+                        <label><strong>About Me:</strong></label>
                         <p th:text="${ownerProfile.about}"></p>
                     </div>
                     <div class="col form-group">
@@ -60,8 +60,8 @@
 <!--                <th:block th:each="category : ${ownerProfile.categories}">-->
 <!--                    <p th:text="${category.name}"></p>-->
 <!--                </th:block>-->
-
             </th:block>
+
         </form>
         <form th:action="@{/owner-profile/edit}" th:method="get">
             <button>Edit Profile</button>
@@ -69,7 +69,9 @@
     </div>
     </div>
     <br>
+
     <h3>My Projects</h3>
+
     <form th:action="@{owner-profile/projects/create}" th:method="get">
         <button>Add Project</button>
     </form>
@@ -84,9 +86,15 @@
                 <th:block th:each="category : ${ownerProfile.categories}">
                     <p th:text="${category.name}"></p>
                 </th:block>
-<!--                <img th:src="${project.images}">-->
+                <div class="col form-group">
+                    <img th:src="${project.images}">
+                </div>
             </form>
+
             <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
+<br>
+            <a th:href="@{/owner-profile/projectImg/{id}/add(id=${project.getId()})}">Add Project Image</a>
+
         </div>
     </th:block>
 </div>

@@ -44,7 +44,9 @@ public class HomeController {
 //save user
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user){
+
         Profile profile = new Profile();
+
         if (!StringUtils.isEmpty(user.getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }

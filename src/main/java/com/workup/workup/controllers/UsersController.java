@@ -26,7 +26,7 @@ public class UsersController {
 
     //Filestack API Key Import:
     @Value("${filestack.api.key}")
-    private String filestackApi; //use this anywhere you need it
+    private String filestackApi;
 
     public UsersController(UsersRepository usersRepository, ProjectsRepository projectsRepository, ProfileRepository profileRepository, CategoryRepository categoryRepository) {
         usersDao = usersRepository;
@@ -70,9 +70,7 @@ public class UsersController {
                               @RequestParam(name = "city") String city,
                               @RequestParam(name = "state") String state,
                               @RequestParam(name = "categories") List<Category> categories,
-                              @RequestParam(name = "phone_number") String phone_number
-                              //@RequestParam(name = "profile_img") String profile_image_url)
-    ){
+                              @RequestParam(name = "phone_number") String phone_number){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Profile foundProfile = profileDao.getProfileByUserIs(user);
@@ -84,17 +82,14 @@ public class UsersController {
         foundProfile.setCategories(categories);
         foundProfile.setState(state);
         foundProfile.setPhone_number(phone_number);
-//        if(profile_image_url == null){
-//            profile_image_url = "empty";
-//        }
-//        foundProfile.setProfile_image_url(profile_image_url);
-
         profileDao.save(foundProfile);
         return "redirect:/owner-profile";
     }
 
+    //create profile image:
     @GetMapping("/owner-profile/profileImg/add")
     public String viewProfileImg(Model model) {
+
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         model.addAttribute("filestackapi", filestackApi);
@@ -103,12 +98,14 @@ public class UsersController {
         return "users/add-profile-img";
     }
 
+    //Save profile image
     @PostMapping("/owner-profile/profileImg/add")
     public String saveProfileImg(@RequestParam(name="profile_img") String profile_image_url){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Profile profile = profileDao.getProfileByUserIs(user);
         profile.setProfile_image_url(profile_image_url);
+
         profileDao.save(profile);
         return "redirect:/owner-profile";
     }
