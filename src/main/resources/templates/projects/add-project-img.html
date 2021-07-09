@@ -35,7 +35,8 @@
 
     const options = {
       onUploadDone: (res) =>
-              $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`)
+              $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),
+      imageDim: [200, 400]
     }
 
     $("#picker").click(function (){
