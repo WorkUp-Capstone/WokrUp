@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head"></head>
+
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="col form-group">
+
+  <form id="images" th:action="@{/owner-profile/projectImg/{id}/add((id=${addProjectImg.getId()}))}" method="post" th:object="${addProjectImg}">
+
+    <label for="projectImg">Upload supporting documents or photos for your project</label>
+
+
+    <input type="hidden" id="projectImg">
+
+    <button id="picker" type="button">Upload</button>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+<th:block th:each="projectImage : ${projectImageList}">
+  <div class="col form-group">
+    <img th:src="${projectImage.path}">
+  </div>
+</th:block>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+
+<script th:inline="javascript">
+  (function (){
+    const filestackapi = [[${filestackapi}]];
+    console.log(filestackapi);
+    const client = filestack.init(filestackapi);
+
+    const options = {
+      onUploadDone: (res) =>
+              $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),
+      imageDim: [200, 400]
+    }
+
+    $("#picker").click(function (){
+      client.picker(options).open();
+    })
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head"></head>
+
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="col form-group">
+    <form id="image" th:action="@{/owner-profile/profileImg/add}" method="post" th:object="${userProfile}">
+
+        <label for="profileImg">Select a profile image</label>
+
+      <input type="hidden" id="profileImg">
+
+      <button id="picker" type="button">Select Photo</button>
+    <input type="submit" value="Submit">
+    </form>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+
+<script th:inline="javascript">
+  (function (){
+    const filestackapi = [[${filestackapi}]];
+    console.log(filestackapi);
+    const client = filestack.init(filestackapi);
+
+    const options = {
+      onUploadDone: (res) =>
+              $('#image').append(`<input type="hidden" name="profile_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),
+      imageDim: [200, 200]
+    }
+
+    $("#picker").click(function (){
+      client.picker(options).open();
+    })
+  })();
+</script>
+</body>
+</html>

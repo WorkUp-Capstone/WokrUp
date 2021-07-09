@@ -7,98 +7,46 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="container">
-    <h3>Create a new project: </h3>
-    <form th:action="@{/projects/create}" th:method="post" th:object="${project}">
-        Name of Project:
-        <input name="title" th:field="*{title}"/>
-        <br/>
-        Overall Description of Project:
-        <input name="description" th:field="*{description}"/>
-        <br/>
-        What categories would you like to include in your project:
-        <br/>
-        <div class="form-group">
-            <label>Categories</label>
-            <select multiple th:field="*{categories}" class="form-control">
-                <div th:block th:each="category: ${categoryList}">
-                    <option th:text="${category.name}" th:value="${category.id}"></option>
-                </div>
-            </select>
-        </div>
-<!--        <div>-->
-<!--        <input id="E-mail service" type="checkbox" name="categories" th:field="*{categories}" th:value="Email_service">-->
-<!--        <label for="E-mail service">E-mail Service</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="Database" type="checkbox" name="categories" th:field="*{categories}" th:value="Database">-->
-<!--            <label for="Database">Database</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="UI/UX" type="checkbox" name="categories" th:field="*{categories}" th:value="UI_UX">-->
-<!--            <label for="UI/UX">UI/UX</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="RESTful API" type="checkbox" name="categories" th:field="*{categories}" th:value="RESTful_API">-->
-<!--            <label for="RESTful API">RESTful API</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="Authentication" type="checkbox" name="categories" th:field="*{categories}" th:value="Authentication">-->
-<!--            <label for="Authentication">Authentication</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="JavaScript" type="checkbox" name="categories" th:field="*{categories}" th:value="JavaScript">-->
-<!--            <label for="JavaScript">JavaScript</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="AJAX" type="checkbox" name="categories" th:field="*{categories}" th:value="AJAX">-->
-<!--            <label for="AJAX">AJAX</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="JQuery" type="checkbox" name="categories" th:field="*{categories}" th:value="JQuery">-->
-<!--            <label for="JQuery">JQuery</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="Java" type="checkbox" name="categories" th:field="*{categories}" th:value="Java">-->
-<!--            <label for="Java">Java</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="Spring" type="checkbox" name="categories" th:field="*{categories}" th:value="Spring">-->
-<!--            <label for="Spring">Spring</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="CSS" type="checkbox" name="categories" th:field="*{categories}" th:value="CSS">-->
-<!--            <label for="CSS">CSS</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="MySQL" type="checkbox" name="categories" th:field="*{categories}" th:value="MySQL">-->
-<!--            <label for="MySQL">MySQL</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="Full-Stack Development" type="checkbox" name="categories" th:field="*{categories}" th:value="Full_stack_development">-->
-<!--            <label for="Full-Stack Development">Full-Stack Web Development</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="Back-end development" type="checkbox" name="categories" th:field="*{categories}" th:value="Back_end_development">-->
-<!--            <label for="Back-end development">Back-end Development</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input id="Front-end development" type="checkbox" name="categories" th:field="*{categories}" th:value="Front_end_development">-->
-<!--            <label for="Front-end development">Front-end Development</label>-->
-<!--        </div>-->
-<!--            <br/>-->
-        <div>
-            <label>
-                <select th:field="*{status}">
-                    <option th:value="open" selected>Open</option>
-                    <option th:value="in_progress">In progress</option>
+    <div class="form-group">
+        <h3>Create a new project: </h3>
+        <form th:action="@{/projects/create}" th:method="post" th:object="${project}">
+
+            <label>Name of Project:</label>
+            <input name="title" th:field="*{title}"/>
+
+            <label>Overall Description of Project:</label>
+            <input name="description" th:field="*{description}"/>
+
+            <label>What categories would you like to include in your project:
+                <select multiple th:field="*{categories}" class="form-control">
+                    <div th:block th:each="category: ${categoryList}">
+                        <option th:text="${category.name}" th:value="${category.id}"></option>
+                    </div>
                 </select>
             </label>
-        </div>
-        Upload any corresponding files about your project here: (files upload)<!--TODO: add Filestack functionality here-->
-        <button type="button">Upload files</button>
-<br/>
-        <input type="submit" value="Save Project"/>
-    </form>
+            <div>
+                <label style="visibility:hidden">Project Status
+                    <select th:field="*{status}">
+                        <option th:value="open" selected>Open</option>
+                        <option th:value="in_progress">In progress</option>
+                    </select>
+                </label>
+            </div>
+            <br/>
+            <input type="submit" value="Save Project"/>
+        </form>
+
+<!--        <form th:action="@{owner-profile/projectImg/add}" th:method="get">-->
+<!--            <th:block th:each="projectImage: ${projectImageList}">-->
+<!--                <div class="col form-group">-->
+<!--                    <img th:src="${projectImage.path}">-->
+<!--                </div>-->
+<!--                <button>Edit Project Image(s)</button>-->
+<!--            </th:block>-->
+<!--        </form>-->
+
+
+    </div>
 </div>
 </body>
 </html>

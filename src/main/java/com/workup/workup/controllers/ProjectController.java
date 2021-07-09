@@ -1,5 +1,8 @@
 package com.workup.workup.controllers;
 
+import com.workup.workup.dao.*;
+import com.workup.workup.models.*;
+import org.springframework.beans.factory.annotation.Value;
 import com.workup.workup.dao.CategoryRepository;
 import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
@@ -15,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-
 import java.sql.Date;
 import java.util.List;
 
@@ -23,19 +25,27 @@ import java.util.List;
 @Controller
 public class ProjectController {
 
-    private final CategoryRepository categoryDao;
-    private final ProjectsRepository projectDao;
-    private final EmailService emailService;
-    private final UsersRepository userDao;
-    private final ProfileRepository profilesDao;
+private final CategoryRepository categoryDao;
+private final ProfileRepository profileDao;
+private final ProjectsRepository projectDao;
+private final EmailService emailService;
+private final UsersRepository userDao;
+private final ImagesRepository imageDao;
 
-    public ProjectController(CategoryRepository categoryDao, ProjectsRepository projectDao, EmailService emailService, UsersRepository userDao, ProfileRepository profilesDao) {
-        this.categoryDao = categoryDao;
-        this.projectDao = projectDao;
-        this.emailService = emailService;
-        this.userDao = userDao;
-        this.profilesDao = profilesDao;
-    }
+    @Value("${filestack.api.key}")
+    private String filestackApi;
+
+public ProjectController(CategoryRepository categoryDao, ProjectsRepository projectDao, EmailService emailService, UsersRepository userDao, ProfileRepository profileDao,
+                         ImagesRepository imageDao){
+    this.categoryDao = categoryDao;
+    this.projectDao = projectDao;
+    this.emailService = emailService;
+    this.userDao = userDao;
+    this.profilesDao = profilesDao;
+    this.imageDao = imageDao;
+
+}
+
 
     //display ALL projects
     @GetMapping("/owner-profile/projects")
@@ -59,6 +69,7 @@ public class ProjectController {
     public String viewProjectCreateForm(Model model, Model categoryModel) {
         model.addAttribute("project", new Project());
         categoryModel.addAttribute("categoryList", categoryDao.findAll());
+
         return "projects/create";
     }
 
@@ -76,14 +87,25 @@ public class ProjectController {
         newProject.setCategories(categoryList);
         newProject.setStatus(status);
         newProject.setCreationDate(new Date(System.currentTimeMillis()));
+        newProject.setStatus(status);
         newProject.setUser(user);
         projectDao.save(newProject);
         return "redirect:/owner-profile";
 
     }
 
-    //need to create one for ALL projects in a list method
+    @GetMapping("/owner-profile/projects/images")
+    public String viewProjectImages(Model model){
 
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User logged = userDao.getById(user.getId());
+
+        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(logged.getId());
+        model.addAttribute("projectImageList", projectImageList);
+
+        return "projects/view-project-images";
+    }
 
     //edit selected project
     @GetMapping("/projects/{id}/edit")
@@ -119,6 +141,45 @@ public class ProjectController {
         //project.setCategories((List<Category>)categories);
 
         projectDao.save(project);
+        return "redirect:/owner-profile";
+    }
+
+//    //create project images:
+    @GetMapping("/owner-profile/projectImg/{id}/add")
+    public String viewProjectImagesForm(Model model, @PathVariable Long id){
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User logged = userDao.getById(user.getId());
+
+        Project addProjectImg = projectDao.getById(id);
+        model.addAttribute("addProjectImg", addProjectImg);
+        model.addAttribute("filestackapi", filestackApi);
+
+        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(addProjectImg.getId());
+
+        model.addAttribute("projectImageList", projectImageList);
+        //model.addAttribute("project", projectDao.getProjectByUserIs(user));
+//        model.addAttribute("image", imageDao.getImageByProjectId(user));
+
+        return "projects/add-project-img";
+    }
+
+    //save project images:
+    @PostMapping("/owner-profile/projectImg/{id}/add")
+    public String saveProjectImages(@PathVariable Long id, @RequestParam(name = "project_img") String path){
+
+ProjectImage image = new ProjectImage();
+
+       Project project = projectDao.getById(id);
+
+        //image.setId(id);
+        image.setPath(path);
+        image.setProject(project);
+
+
+        imageDao.save(image);
+
         return "redirect:/owner-profile";
     }
 
