@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/partials/head :: head">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script th:src="@{/resources/pwstrength.js}"></script>
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
@@ -13,6 +12,10 @@
             <div class="card">
                 <article class="card-body">
                     <form th:action="@{/register}" th:method="post" th:object="${user}">
+                        <p class="error-message"
+                           th:if="${#fields.hasGlobalErrors()}"
+                           th:each="error : ${#fields.errors('global')}"
+                           th:text="${error}">Validation error</p>
                         <div class="form-row">
                             <div class="col form-group">
                                 <label>First Name </label>
@@ -40,15 +43,35 @@
                             <label>Email address</label>
                             <input th:field="*{email}" type="email" class="form-control" th:required="required">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
                             <label for="password">Create password</label>
                             <div class="input-group" id="show_hide_password">
-                                <input th:field="*{password}" type="password" class="form-control" value="" id="password" autocomplete="new-password" th:required="required"/>
+                                <input th:field="*{password}" th:unless="${#fields.hasErrors('password')}" type="password" class="form-control" value="" id="password" autocomplete="new-password" th:required="required"/>
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
-                                    <span id="passwordError" class="alert alert-danger col-sm-4" style="display:none"></span>
+                                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger col-sm-4" style=""></span>
                                 </div>
                             </div>
+                            <ul class="text-left"
+                                th:each="error: ${#fields.errors('password')}">
+                                <li th:each="message : ${error.split(',')}">
+                                    <p class="error-message"
+                                       th:text="${message}"></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group" th:classappend="${#fields.hasErrors('passwordRepeat')}? 'has-error':''">
+                            <label for="passwordRepeat">Confirm password</label>
+                            <input type="password" th:unless="${#fields.hasErrors('passwordsEqual')}" id="passwordRepeat" class="form-control "
+                                   placeholder="Password" th:field="*{passwordRepeat}" th:required="required">
+                            <span class="error" th:if="${#fields.hasErrors('passwordsEqual')}" th:errors="*{passwordsEqual}"></span>
+                            <ul class="text-left"
+                                th:each="error: ${#fields.errors('passwordRepeat')}">
+                                <li th:each="message : ${error.split(',')}">
+                                    <p class="error-message"
+                                       th:text="${message}"></p>
+                                </li>
+                            </ul>
                         </div>
                         <div class="form-group">
                             <br>
@@ -84,29 +107,8 @@
         }
     });
 </script>
-<script th:inline="javascript">
-        $(document).ready(function () {
-            var options = {
-                common: {minChar: 8},
-                ui: {
-                    showVerdictsInsideProgressBar: true,
-                    showErrors: true,
-                    errorMessages: {
-                        wordLength: [[#{error.wordLength}]],
-                        wordNotEmail: [[#{error.wordNotEmail}]],
-                        wordSequences: [[#{error.wordSequences}]],
-                        wordLowercase: [[#{error.wordLowercase}]],
-                        wordUppercase: [[#{error.wordUppercase}]],
-                        wordOneNumber: [[#{error.wordOneNumber}]],
-                        wordOneSpecialChar: [[#{error.wordOneSpecialChar}]]
-                    }
-                }
-            };
-            $('#password').pwstrength(options);
-        });
-
-</script>
-
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
 <br><br>
 
 </body>

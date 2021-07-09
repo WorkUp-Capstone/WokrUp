@@ -4,6 +4,9 @@ package com.workup.workup.models;
 import com.workup.workup.validation.ValidPassword;
 
 import javax.persistence.*;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -21,6 +24,8 @@ public class User {
     @ValidPassword
     private String password;
 
+    private String passwordRepeat;
+
     @Column(nullable = false, length = 250)
     private String first_name;
 
@@ -31,9 +36,10 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Project> projectList;
+
+    private boolean passwordsEqual;
 
     // Empty constructor for Spring
     public User() {}
@@ -90,6 +96,10 @@ public class User {
         this.password = password;
     }
 
+    public String getPasswordRepeat() { return passwordRepeat; }
+
+    public void setPasswordRepeat(String passwordRepeat) { this.passwordRepeat = passwordRepeat; }
+
     public String getFirstName() {
         return first_name;
     }
@@ -114,7 +124,6 @@ public class User {
         this.role = role;
     }
 
-
     public List<Project> getProject() {
         return projectList;
     }
@@ -122,4 +131,9 @@ public class User {
     public void setProject(List<Project> project) {
         this.projectList = project;
     }
+
+    public void setPasswordsEqual(boolean passwordsEqual) { this.passwordsEqual = passwordsEqual; }
+
+    @AssertTrue(message = "Passwords should match")
+    public boolean isPasswordsEqual() { return password != null && password.equals(passwordRepeat); }
 }

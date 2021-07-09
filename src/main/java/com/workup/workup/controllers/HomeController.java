@@ -10,11 +10,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -46,10 +48,16 @@ public class HomeController {
 
 //save user
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user){
+    public String saveUser(@ModelAttribute @Valid User user,
+                           BindingResult result){
+        if(result.hasErrors()) {
+            return "registration";
+        }
+
         Profile profile = new Profile();
         if (!StringUtils.isEmpty(user.getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setPasswordRepeat(passwordEncoder.encode(user.getPasswordRepeat()));
         }
         // saves user and instantiates new profile
         profile.setUser(usersDao.save(user));
@@ -65,7 +73,6 @@ public class HomeController {
       
         model.addAttribute("userRole", user.getRole().getRole());
         model.addAttribute("allProjects", projectsDao.findAll());
-        model.addAttribute("devProfiles", profileDao.getAllByRole(user.getRole().getId()));
         model.addAttribute("devProfiles", profileDao.getAllByUserRole_Id(user.getRole().getId()));
 
         return "home";
