@@ -7,10 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+import java.util.List;
+
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
     Profile findById(long id);
 
     Profile getProfileByUserIs(User user);
+  
+    List<Profile> getAllByUserRole_Id(Long id);
 
     @Query(value = "SELECT Distinct profiles.id FROM profiles" +
             "    JOIN profile_categories ON profiles.id = profile_categories.profile_id" +
