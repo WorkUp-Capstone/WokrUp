@@ -5,15 +5,15 @@ import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.management.relation.Role;
 import java.util.List;
 
 @Controller
@@ -46,36 +46,27 @@ public class HomeController {
 //save user
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user){
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        User newUser = usersDao.save(user);
-
-       //instantiate a new profile
         Profile profile = new Profile();
-
-        // set profile user to saved user in db
-        profile.setUser(newUser);
-
-        // use the profile repo to save the new profile
-         profileDao.save(profile);
+        if (!StringUtils.isEmpty(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        // saves user and instantiates new profile
+        profile.setUser(usersDao.save(user));
+        profileDao.save(profile);
 
         return "redirect:/login";
     }
 
-    //TODO: need to reach role parameter for a user
     //Project index for Developers to view in their Home Page
     @GetMapping("/home")
-    public String projectsIndex(Model model, @RequestParam(name="role") Role role){
-            User foundRole = usersDao.findByRole(role);
+    public String projectsIndex(Model model,
+                                @AuthenticationPrincipal User user){
+      
+            model.addAttribute("userRole", user.getRole().getRole());
             model.addAttribute("allProjects", projectsDao.findAll());
-            usersDao.save(foundRole);
+        model.addAttribute("devProfiles", profileDao.getAllByUserRole_Id(user.getRole().getId()));
         return "home";
     }
 
-    //Project index for Developers to view in their Home Page
-//    @GetMapping("/home")
-//    public String developersIndex(Model model){
-//        model.addAttribute("allDevs", profileDao.findAll()); //need to find relationship for developer roles to pass in the parameter (this is most likely wrong)
-//        return "users/owner-profile";
-//    }
+
 }

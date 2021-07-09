@@ -6,40 +6,45 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-lg-8 mt-5">
             <div class="card">
                 <article class="card-body">
                     <form th:action="@{/register}" th:method="post" th:object="${user}">
                         <div class="form-row">
                             <div class="col form-group">
                                 <label>First Name </label>
-                                <input th:field="*{firstName}" type="text" class="form-control">
+                                <input th:field="*{firstName}" type="text" class="form-control" th:required="required">
                             </div>
                             <div class="col form-group">
                                 <label>Last Name</label>
-                                <input th:field="*{lastName}" type="text" class="form-control">
+                                <input th:field="*{lastName}" type="text" class="form-control" th:required="required">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Choose your account type:</label>
                             <label class="form-check form-check-inline">
                                 <input th:field="*{role.id}" class="form-check-input" type="radio" name="role"
-                                       th:value="${1}" id="1">
+                                       th:value="${1}" id="1" th:required="required">
                                 <span class="form-check-label">Project Owner</span>
                             </label>
                             <label class="form-check form-check-inline">
                                 <input th:field="*{role.id}" class="form-check-input" type="radio" name="role"
-                                       th:value="${2}" id="2">
+                                       th:value="${2}" id="2" th:required="required">
                                 <span class="form-check-label">Developer</span>
                             </label>
                         </div>
                         <div class="form-group">
                             <label>Email address</label>
-                            <input th:field="*{email}" type="email" class="form-control">
+                            <input th:field="*{email}" type="email" class="form-control" th:required="required">
                         </div>
                         <div class="form-group">
-                            <label>Create password</label>
-                            <input th:field="*{password}" class="form-control" type="password" name="password">
+                            <label for="password">Create password</label>
+                            <div class="input-group" id="show_hide_password">
+                                <input th:field="*{password}" type="password" class="form-control" id="password" autocomplete="off" th:required="required"/>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <br>
@@ -53,10 +58,28 @@
             </div>
         </div> <!-- col.//-->
     </div> <!-- row.//-->
-
-
 </div>
 <!--container end.//-->
+
+<script>
+    var input = $("#show_hide_password input");
+    var icon = $("#show_hide_password i");
+
+    icon.on('click', function (event) {
+        event.preventDefault();
+
+        if (input.attr("type") === "text") {
+            input.attr('type', 'password');
+            icon.addClass("fa-eye-slash");
+            icon.removeClass("fa-eye");
+
+        } else if (input.attr("type") === "password") {
+            input.attr('type', 'text');
+            icon.removeClass("fa-eye-slash");
+            icon.addClass("fa-eye");
+        }
+    });
+</script>
 
 <br><br>
 

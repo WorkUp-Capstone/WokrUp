@@ -14,6 +14,11 @@
 <th:block th:each="project : ${allProjects}">
     <h3 th:text="${project.title}"></h3>
     <p th:text="${project.description}"></p>
+    <ul>
+        <th:block th:each="category : ${project.categories}">
+            <li th:text="${category.name}"></li>
+        </th:block>
+    </ul>
 </th:block>
     </div>
 </div>

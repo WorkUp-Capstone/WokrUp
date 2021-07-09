@@ -7,16 +7,40 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 
 <div class="container">
-    <h4><strong>Edit Project:</strong></h4>
-    <form th:action="@{/projects/edit/{id}(id=${project.id})}" method="POST">
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" th:value="${project.title}">
-        <label for="description">Project Description</label>
-        <input type="text" name="description" id="description" th:value="${project.description}">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <article class="card-body">
+                    <h4><strong>Edit Project:</strong></h4>
+                    <form th:action="@{/projects/{id}/edit(id=${editProject.getId()})}" method="post" th:object="${editProject}">
+                            <div class="col form-group">
+                                <label for="title">Title</label>
+                                <input th:field="*{title}" type="text" name="title" id="title" class="form-control">
+                            </div>
+                            <div class="col form-group">
+                                <label for="description">Project Description</label>
+                                <input th:field="*{description}" type="text" name="description" id="description"
+                                       class="form-control">
+                            </div>
+                            <div class="col form-group">
+                                <label for="status">Status</label>
+                                <select th:field="*{status}" name="status" id="status" class="form-control"><option th:value="Open">Open</option>
+                                    <option th:value="In_progress">In progress</option></select>
+                            </div>
 
-        <!--TODO: need to include edit for categories, and file uploads and possibly other fields? -->
-        <button type="submit">Save Project</button>
-    </form>
+                            <!--        <div class="col form-group">        -->
+                            <!--        <label for="categories">Categories</label>-->
+                            <!--        <input th:field="*{categories}" type="checkbox" name="categories" id="categories">-->
+                            <!--        </div>-->
+                        <!--TODO: need to include edit for categories, and file uploads and possibly other fields? -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Save Project</button>
+                        </div>
+                    </form>
+                </article>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
