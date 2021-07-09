@@ -12,6 +12,6 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
     Profile getProfileByUserIs(User user);
 
-    List<Profile> getAllByRole(Long id);
+    List<Profile> getAllByUserRole_Id(Long id);
 
 }

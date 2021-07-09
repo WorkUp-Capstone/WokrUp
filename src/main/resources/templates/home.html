@@ -29,9 +29,8 @@
     <div class="project-card" th:case="'developer'">
         <th:block th:each="project : ${allProjects}">
 
-            <h3 th:text="${project.title}"></h3>
+            <h3 th:text="${project.title}" ></h3>
             <p th:text="${project.description}"></p>
-            <p th:text="${project.ownerUser}"></p>
             <p th:text="${project.images}"></p>
             <p th:text="${project.categories}"></p>
             <p th:text="${project.creationDate}"></p>
