@@ -17,6 +17,10 @@ import java.util.*;
 public interface ProjectsRepository extends JpaRepository<Project, Long> {
     Project getProjectByUserIs(User user);
 
+    @Query(value = "SELECT * FROM projects WHERE MATCH(title, description, status)" +
+    "AGAINST (?1)", nativeQuery = true)
+    List<Project> productSearch(String keyword);
+
     // need to add "find ALL by" projects in a list
     List<Project> getAllProjectsByUserIdIs(Long ownerUserId);
 }

@@ -1,9 +1,8 @@
 package com.workup.workup.models;
 
-import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
-import org.apache.lucene.analysis.core.StopFilterFactory;
-import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
-import org.hibernate.search.annotations.*;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -13,8 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Entity
-@Indexed(index = "idx_project")
-@NormalizerDef(name = "lowercase", filters = {@TokenFilterDef(factory = LowerCaseFilterFactory.class), @TokenFilterDef(factory = StopFilterFactory.class), @TokenFilterDef(factory = SnowballPorterFilterFactory.class)})
+//@Indexed
 @Table(name = "projects")
 public class Project{
 
@@ -25,11 +23,11 @@ public class Project{
     private long id;
 
     @Column(nullable = false, length = 200)
-    @Field(name = "title", normalizer = @Normalizer(definition = "lowercase"))
+//    @FullTextField
     private String title;
 
     @Column(nullable = false)
-    @Field(name = "description", normalizer = @Normalizer(definition = "lowercase"))
+//    @FullTextField
     private String description;
 
     @Column (nullable = false)
@@ -38,16 +36,14 @@ public class Project{
     @Column (nullable = true)
     private Date completionDate;
 
-    @Column
+    @Column (nullable = false)
     private String status;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<ProjectImage> images;
 
-    @ContainedIn
     @ManyToMany(cascade = CascadeType.ALL)
-//    @Field(name = "projectCategories", normalizer = @Normalizer(definition = "lowercase"))
-//    @SortableField
+//    @IndexedEmbedded
     @JoinTable(
             name = "project_categories",
             joinColumns = {@JoinColumn(name="project_id")},

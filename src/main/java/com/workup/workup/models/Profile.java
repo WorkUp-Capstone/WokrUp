@@ -1,17 +1,16 @@
 package com.workup.workup.models;
 
 
-import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
-import org.apache.lucene.analysis.core.StopFilterFactory;
-import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
-import org.hibernate.search.annotations.*;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Indexed(index = "idx_profile")
-@NormalizerDef(name = "lowercase", filters = {@TokenFilterDef(factory = LowerCaseFilterFactory.class), @TokenFilterDef(factory = StopFilterFactory.class), @TokenFilterDef(factory = SnowballPorterFilterFactory.class)})
+//@Indexed
 @Table(name = "profiles")
 public class Profile {
 
@@ -29,13 +28,11 @@ public class Profile {
     private String resume_link;
 
     @Column
-    @Field(name = "city", normalizer = @Normalizer(definition = "lowercase"))
-    @SortableField
+//    @KeywordField
     private String city;
 
     @Column
-    @Field(name = "state", normalizer = @Normalizer(definition = "lowercase"))
-    @SortableField
+//    @FullTextField
     private String state;
 
     @Column(length = 10)
@@ -45,12 +42,12 @@ public class Profile {
     private String profile_image_url;
 
     @OneToOne
+//    @IndexedEmbedded
     private User user;
 
-    @ContainedIn
+
     @ManyToMany(cascade = CascadeType.ALL)
-//    @Field(name = "profileCategories", normalizer = @Normalizer(definition = "lowercase"))
-//    @SortableField
+//    @IndexedEmbedded
     @JoinTable(
             name = "profile_categories",
             joinColumns = {@JoinColumn(name="profile_id")},

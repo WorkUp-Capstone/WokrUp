@@ -15,6 +15,8 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <hibernate.version>5.4.32.Final</hibernate.version>
+        <elasticsearch.version>7.10.0</elasticsearch.version>
     </properties>
     <dependencies>
         <dependency>
@@ -77,24 +79,18 @@
             <version>0.41</version>
         </dependency>
 
-<!--    SearchBar Functionality    -->
+        <!--    SearchBar Functionality    -->
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-orm -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-orm</artifactId>
-            <version>5.11.5.Final</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.projectlombok</groupId>-->
+<!--            <artifactId>lombok</artifactId>-->
+<!--        </dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-elasticsearch -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-elasticsearch</artifactId>
-            <version>5.11.5.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.hibernate.search</groupId>-->
+<!--            <artifactId>hibernate-search-mapper-orm</artifactId>-->
+<!--            <version>6.0.5.Final</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 

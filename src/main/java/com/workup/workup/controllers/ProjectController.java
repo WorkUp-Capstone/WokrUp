@@ -7,6 +7,7 @@ import com.workup.workup.models.Category;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
 import com.workup.workup.services.EmailService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,12 +62,14 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
                               @RequestParam(name = "title") String title,
                               @RequestParam(name = "description") String description,
                               @RequestParam(name = "categories") List<Category> categoryList,
+                              @RequestParam(name = "status") String status,
                               @AuthenticationPrincipal User user) {
 
         Project newProject = new Project();
         newProject.setTitle(title);
         newProject.setDescription(description);
         newProject.setCategories(categoryList);
+        newProject.setStatus(status);
         newProject.setCreationDate(new Date(System.currentTimeMillis()));
         newProject.setUser(user);
         projectDao.save(newProject);
@@ -113,8 +116,22 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     }
 
 
+    public List<Project> productSearch(String searchString){
+        return projectDao.productSearch(searchString);
+    }
+
+    @GetMapping("/search")
+    public String search(@Param("searchString") String keyword, Model model){
+        model.addAttribute("searchString", keyword);
+        model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
+
+        List<Project> searchResults = productSearch(keyword);
+        model.addAttribute("searchResults", searchResults);
+
+        return "projects/search_result";
+    }
+
 //    need to discuss postmapping redirect plan as well as confirm how we will handle search ie. categories/description
-//    @GetMapping("/search")
 //   public String searchProject(@PathVariable String searchString, Model model){
 //
 //    }
