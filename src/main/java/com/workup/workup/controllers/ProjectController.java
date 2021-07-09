@@ -134,21 +134,20 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
     //save project images:
     @PostMapping("/owner-profile/projectImg/{id}/add")
-    public String saveProjectImages(@PathVariable Long id, @RequestParam(name = "project_img") String project_img_path){
-        //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String saveProjectImages(@PathVariable Long id, @RequestParam(name = "project_img") String path){
 
 ProjectImage image = new ProjectImage();
 
-        //ProjectImage image = imageDao.getProjectImagePathByProject(project);
-
        Project project = projectDao.getById(id);
-        image.setPath(project_img_path);
+
+        //image.setId(id);
+        image.setPath(path);
         image.setProject(project);
 
 
         imageDao.save(image);
 
-        return "projects/create";
+        return "redirect:/projects/create";
     }
 
 

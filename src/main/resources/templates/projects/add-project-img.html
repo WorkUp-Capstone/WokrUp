@@ -6,9 +6,10 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="col form-group">
 
-  <form id="images" th:action="@{/owner-profile/projectImg/add}" method="post" th:object="${addProjectImg}">
+  <form id="images" th:action="@{/owner-profile/projectImg/{id}/add((id=${addProjectImg.getId()}))}" method="post" th:object="${addProjectImg}">
 
     <label for="projectImg">Upload supporting documents or photos for your project</label>
+
     <input type="hidden" id="projectImg">
 
     <button id="picker" type="button">Upload</button>
@@ -27,8 +28,7 @@
 
     const options = {
       onUploadDone: (res) =>
-              $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),
-      imageDim: [200, 400]
+              $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`)
     }
 
     $("#picker").click(function (){
