@@ -123,47 +123,8 @@ public class ProjectController {
     }
 
 
-//      METHODS NEEDED FOR SEARCH TO WORK DECENT
-//    IMPROVEMENTS THAT ARE NEEDED ARE PARTIAL/FUZZY INTERPRETATION AND STATE IS ACTING FUNNY
-    public List<Long> projectSearch(String searchString) {
-        return projectDao.projectSearch(searchString);
-    }
 
-    public List<Long> devSearch(String searchString) {
-        return profilesDao.devSearch(searchString);
-    }
 
-    @GetMapping("/search")
-    public String search(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
-        if (user.getRole().getRole().equalsIgnoreCase("developer")) {
-            List<Long> searchResult = projectSearch(keyword);
-            if (searchResult.isEmpty()) {
-                List<Project> searchResults = projectDao.findAll();
-                model.addAttribute("searchResults", searchResults);
-                model.addAttribute("searchString", "No Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
-            } else {
-                List<Project> searchResults = projectDao.findAllById(searchResult);
-                model.addAttribute("searchResults", searchResults);
-                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
-            }
-        } else {
-            List<Long> searchResult = devSearch(keyword);
-            if (searchResult.isEmpty()) {
-                List<Profile> searchResults = profilesDao.findAll();
-                model.addAttribute("searchResults", searchResults);
-                model.addAttribute("searchString", "No Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
-            } else {
-                List<Profile> searchResults = profilesDao.findAllById(searchResult);
-                model.addAttribute("searchResults", searchResults);
-                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
-            }
-        }
-        return "projects/search_result";
-    }
 
 
 }
