@@ -41,7 +41,7 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     this.projectDao = projectDao;
     this.emailService = emailService;
     this.userDao = userDao;
-    this.profilesDao = profilesDao;
+    this.profileDao = profileDao;
     this.imageDao = imageDao;
 
 }
