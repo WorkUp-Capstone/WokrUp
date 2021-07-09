@@ -83,12 +83,17 @@
                 <p th:text="${project.description}"></p>
                 <p th:text="${project.status.toUpperCase().replace('_', ' ')}"></p>
                 <p th:text="${project.creationDate}"></p>
+
                 <th:block th:each="category : ${ownerProfile.categories}">
                     <p th:text="${category.name}"></p>
                 </th:block>
+
+                <th:block th:each="project : ${ProjectImage}">
                 <div class="col form-group">
-                    <img th:src="${project.images}">
+                    <img th:src="${projectImage.path}">
                 </div>
+                </th:block>
+
             </form>
 
             <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>

@@ -1,13 +1,7 @@
 package com.workup.workup.controllers;
 
-import com.workup.workup.dao.CategoryRepository;
-import com.workup.workup.dao.ProfileRepository;
-import com.workup.workup.dao.ProjectsRepository;
-import com.workup.workup.dao.UsersRepository;
-import com.workup.workup.models.Category;
-import com.workup.workup.models.Profile;
-import com.workup.workup.models.Project;
-import com.workup.workup.models.User;
+import com.workup.workup.dao.*;
+import com.workup.workup.models.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,16 +17,18 @@ public class UsersController {
     private ProfileRepository profileDao;
     private ProjectsRepository projectsDao;
     private CategoryRepository categoryDao;
+    private final ImagesRepository imageDao;
 
     //Filestack API Key Import:
     @Value("${filestack.api.key}")
     private String filestackApi;
 
-    public UsersController(UsersRepository usersRepository, ProjectsRepository projectsRepository, ProfileRepository profileRepository, CategoryRepository categoryRepository) {
+    public UsersController(UsersRepository usersRepository, ProjectsRepository projectsRepository, ProfileRepository profileRepository, CategoryRepository categoryRepository,ImagesRepository imageDao) {
         usersDao = usersRepository;
         projectsDao = projectsRepository;
         profileDao = profileRepository;
         categoryDao = categoryRepository;
+        this.imageDao = imageDao;
     }
 
     //View Single Profile:
@@ -47,6 +43,9 @@ public class UsersController {
         List<Project> projectList;
         projectList = projectsDao.getAllProjectsByUserIdIs(logged.getId());
         model.addAttribute("ownerProject", projectList);
+
+//        List<ProjectImage> projectImageList = imageDao.getProjectImagePathByProject();
+//        model.addAttribute("")
         return "users/view-profile";
     }
 

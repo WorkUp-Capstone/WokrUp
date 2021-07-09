@@ -147,7 +147,7 @@ ProjectImage image = new ProjectImage();
 
         imageDao.save(image);
 
-        return "redirect:/projects/create";
+        return "redirect:/owner-profile";
     }
 
 
