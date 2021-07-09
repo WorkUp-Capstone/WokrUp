@@ -1,9 +1,8 @@
 package com.workup.workup.models;
 
 
-import com.workup.workup.validation.ValidPassword;
-
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
@@ -21,7 +20,8 @@ public class User {
     private String email;
 
     @Column(nullable = false, length = 250)
-    @ValidPassword
+    @Valid
+    @Min(value = 8, message = "Password must be 8 characters long")
     private String password;
 
     private String passwordRepeat;

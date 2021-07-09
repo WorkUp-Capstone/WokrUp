@@ -7,6 +7,7 @@ import com.workup.workup.models.Profile;
 import com.workup.workup.models.Role;
 import com.workup.workup.models.User;
 import org.apache.commons.lang3.StringUtils;
+import org.passay.PasswordValidator;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,11 +49,9 @@ public class HomeController {
 
 //save user
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute @Valid User user,
-                           BindingResult result){
-        if(result.hasErrors()) {
-            return "registration";
-        }
+    public String saveUser(@ModelAttribute @Valid User user){
+
+        // TODO: if password does not meet constraints, return "register"
 
         Profile profile = new Profile();
         if (!StringUtils.isEmpty(user.getPassword())) {
