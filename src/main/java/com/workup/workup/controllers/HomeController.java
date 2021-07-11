@@ -97,37 +97,41 @@ public class HomeController {
         return profileDao.devSearch(searchString);
     }
 
+
+    // THINGS TO ADD REMOVE MINIMUM CHARACTERS TO SEARCH
     @GetMapping("/search")
     public String search(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
+        List<Project> projectSearchResults;
+        List<Profile> profileSearchResults;
         if (user.getRole().getRole().equalsIgnoreCase("developer")) {
             List<Long> searchResult = projectSearch(keyword);
             if (searchResult.isEmpty()) {
-                List<Project> searchResults = projectsDao.findAll();
-                model.addAttribute("searchResults", searchResults);
+                projectSearchResults = projectsDao.findAll();
+                model.addAttribute("searchResults", projectSearchResults);
                 model.addAttribute("searchString", "No Results for '" + keyword + "'");
                 model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
             } else {
-                List<Project> searchResults = projectsDao.findAllById(searchResult);
-                model.addAttribute("searchResults", searchResults);
+                projectSearchResults = projectsDao.findAllById(searchResult);
+                model.addAttribute("searchResults", projectSearchResults);
                 model.addAttribute("searchString", "Search Results for '" + keyword + "'");
                 model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
             }
         } else {
             List<Long> searchResult = devSearch(keyword);
             if (searchResult.isEmpty()) {
-                List<Profile> searchResults = profileDao.findAll();
-                model.addAttribute("searchResults", searchResults);
+                profileSearchResults = profileDao.findAll();
+                model.addAttribute("searchResults", profileSearchResults);
                 model.addAttribute("searchString", "No Results for '" + keyword + "'");
                 model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
             } else {
-                List<Profile> searchResults = profileDao.findAllById(searchResult);
-                model.addAttribute("searchResults", searchResults);
+                profileSearchResults = profileDao.findAllById(searchResult);
+                model.addAttribute("searchResults", profileSearchResults);
                 model.addAttribute("searchString", "Search Results for '" + keyword + "'");
                 model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
             }
         }
         model.addAttribute("userRole", user.getRole().getRole());
-        return "/search_result";
+        return "search_result";
     }
 
 
