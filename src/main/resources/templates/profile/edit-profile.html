@@ -5,11 +5,9 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="container">
-
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <article class="card-body">
                     <form th:action="@{/profile/edit}" method="post" th:object="${editOwnerProfile}">
                         <div class="form-row">
                             <div class="col form-group">
@@ -115,7 +113,6 @@
                             <button type="submit" class="btn btn-primary btn-block">Edit</button>
                         </div> <!-- form-group// -->
                     </form>
-                </article> <!-- card-body end .// -->
 
             </div> <!-- card.// -->
         </div> <!-- col.//-->
@@ -125,7 +122,6 @@
 
 </div>
 <!--container end.//-->
-
 <br><br>
 
 </body>
