@@ -3,11 +3,11 @@ package com.workup.workup.models;
 
 //import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 
+import com.workup.workup.services.UniqueEmail;
+import org.checkerframework.common.aliasing.qual.Unique;
+
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -18,11 +18,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 50)
+    @UniqueEmail(message = "")
+    @Email(message = "Email is invalid")
+    @Column(nullable = false, unique = true, length = 50)
     private String email;
 
     @Column(nullable = false, length = 250)
-    @Valid
     @Min(value = 8, message = "Password must be 8 characters long")
     private String password;
 
@@ -43,6 +44,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Project> projectList;
 
+    @AssertTrue
     private boolean passwordsEqual;
 
     // Empty constructor for Spring
@@ -139,5 +141,5 @@ public class User {
     public void setPasswordsEqual(boolean passwordsEqual) { this.passwordsEqual = passwordsEqual; }
 
     @AssertTrue(message = "Passwords should match")
-    public boolean isPasswordsEqual() { return password != null && password.equals(passwordRepeat); }
+    public boolean isPasswordsEqual() { return passwordsEqual && password.equals(passwordRepeat); }
 }

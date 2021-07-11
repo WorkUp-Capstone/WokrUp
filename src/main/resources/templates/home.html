@@ -13,6 +13,7 @@
     <div class="card" th:case="'owner'">
         <h4>Our Developers</h4>
         <th:block th:each="profile : ${devProfiles} ">
+
             <h3 th:text="${profile.user.firstName}"> </h3><h3 th:text="${profile.user.lastName}"></h3><p th:text="${profile.profile_image_url}"></p>
             <h4>About </h4><h4 th:text="${profile.user.firstName}"></h4>
             <p th:text="${profile.about}"></p>

@@ -11,12 +11,17 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Controller
 public class HomeController {
@@ -48,18 +53,28 @@ public class HomeController {
 //save user
     @PostMapping("/register")
 
-    public String saveUser(@ModelAttribute User user){
+    public ModelAndView saveUser(@ModelAttribute @Valid User user, BindingResult bindingResult, ModelMap modelMap){
         Profile profile = new Profile();
+        String password = user.getPassword();
+        String passwordRepeat = user.getPasswordRepeat();
+        ModelAndView modelAndView = new ModelAndView();
+        boolean strongPassword = Pattern.matches("\\Q[a-zA-Z0-9]!#$%&()*+,-./:;<=>?@^_`|~\\E", password);
 
-        if (!StringUtils.isEmpty(user.getPassword())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setPasswordRepeat(passwordEncoder.encode(user.getPasswordRepeat()));
+        if (!StringUtils.isEmpty(password) && !(bindingResult.hasErrors()) && user.isPasswordsEqual() && strongPassword) {
+            user.setPassword(passwordEncoder.encode(password));
+            user.setPasswordRepeat(passwordEncoder.encode(passwordRepeat));
+            modelAndView.addObject("successMessage", "User registered successfully!");
+            // saves user and instantiates new profile
+            profile.setUser(usersDao.save(user));
+            profileDao.save(profile);
+
+        } else {
+            modelAndView.addObject("successMessage", "Please resolve errors in the form.");
         }
-        // saves user and instantiates new profile
-        profile.setUser(usersDao.save(user));
-        profileDao.save(profile);
-
-        return "redirect:/login";
+        modelMap.addAttribute("bindingResult", bindingResult);
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("registration");
+        return modelAndView;
     }
 
     // NO LONGER NEEDED FOR HOME VIEW BUT COULD BE USED TO REFACTORED CLUNCKY WORKING CODE

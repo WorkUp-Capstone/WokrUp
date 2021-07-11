@@ -9,11 +9,18 @@
         <div class="col-lg-8 mt-5">
             <div class="card">
                 <article class="card-body">
-                    <form th:action="@{/register}" th:method="post" th:object="${user}">
-                        <p class="error-message"
-                           th:if="${#fields.hasGlobalErrors()}"
-                           th:each="error : ${#fields.errors('global')}"
-                           th:text="${error}">Validation error</p>
+                    <form autocomplete="off" th:action="@{/register}" th:method="post" th:object="${user}">
+                        <div>
+                            <span th:utext="${successMessage}"></span>
+                            <div class="alert alert-success alert-dismissible col-sm-12"
+                                 th:if="${(bindingResult != null && bindingResult.getAllErrors() != null)}">
+                                <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">x</button>
+                                <ul th:each="data: ${bindingResult.getAllErrors()}">
+                                    <li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="col form-group">
                                 <label>First Name </label>
