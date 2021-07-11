@@ -20,12 +20,12 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
     Profile getProfileByUserId(long id);
 
     @Query(value = "SELECT Distinct profiles.id FROM profiles" +
-            "    JOIN profile_categories ON profiles.id = profile_categories.profile_id" +
-            "    JOIN categories ON profile_categories.category_id = categories.id" +
+            "   LEFT JOIN profile_categories ON profiles.id = profile_categories.profile_id" +
+            "    LEFT JOIN categories ON profile_categories.category_id = categories.id" +
             "    JOIN users ON profiles.user_id = users.id" +
             "    WHERE " +
-            "  (Match(name) AGAINST (?1)) OR" +
             "  (Match(city, state) AGAINST (?1)) OR" +
+            "  (Match(name) AGAINST (?1)) OR" +
             "  (Match(first_name, last_name) AGAINST (?1))"
             , nativeQuery = true)
     List<Long> devSearch(String searchString);
