@@ -1,0 +1,7 @@
+.row{
+    flex-wrap: nowrap;
+}
+
+.col{
+    flex-grow: revert;
+}

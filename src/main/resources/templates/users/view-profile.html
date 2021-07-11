@@ -5,11 +5,12 @@
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container mx-5">
 <h3>My Profile</h3>
 
-<div class="card flex-row justify-content-evenly m-4">
-    <div class="main-content row justify-content">
-        <div class="profile-photo col-auto">
+<div class="card row d-flex justify-content-between mx-0">
+    <div class="main-content row">
+        <div class="profile-photo col-md-auto col-sm-auto mr-5">
             <form th:action="@{profile/profileImg/add}" th:method="get">
                 <th:block th:each="profile : ${ownerProfile}">
                     <div>
@@ -24,9 +25,9 @@
             </form>
         </div>
 
-        <div class="user-info row" th:action="@{/profile/edit}">
+        <div class="user-info row mx-md-n5 align-items-center" th:action="@{/profile/edit}">
             <th:block th:each="profile : ${ownerProfile}">
-                <div class="col-md-auto col-sm-auto m-auto">
+                <div class="col px-md-5 ml-auto col-sm-auto justify-content-between">
 
                     <div class="row">
                         <label class="col"><strong>About Me: </strong></label>
@@ -51,7 +52,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-auto col-sm-auto" m-auto>
+                <div class="col-sm-auto col-px-md-5 ml-auto justify-content-between">
                     <div class="row">
                         <label class="col"><strong>City: </strong></label>
                         <div th:text="${ownerProfile.city}"></div>
@@ -71,10 +72,11 @@
             </th:block>
         </div><!-- row user info-->
     </div><!-- row main content-->
+</div><!-- card-->
 </div><!-- container-->
 <br>
 
-<div class="container">
+<div class="container mx-5">
     <h3>My Projects</h3>
 
     <form th:action="@{profile/projects/create}" th:method="get">
@@ -82,16 +84,30 @@
     </form>
     <br>
     <th:block th:each="project : ${ownerProject}">
-        <div class="card">
+        <div class="card w-50 m-0 col">
             <form th:action="@{/profile}" th:method="post">
-                <p th:text="${project.title}"></p>
-                <p th:text="${project.description}"></p>
-                <p th:text="${project.status.toUpperCase().replace('_', ' ')}"></p>
-                <p th:text="${project.creationDate}"></p>
-
-                <th:block th:each="category : ${ownerProfile.categories}">
-                    <p th:text="${category.name}"></p>
-                </th:block>
+                <div class="row">
+                    <label class="col"><strong>Project Title:</strong></label>
+                    <div th:text="${project.title}"></div>
+                </div>
+                <div class="row">
+                    <label class="col"><strong>Project Description: </strong></label>
+                        <div th:text="${project.description}"></div>
+                </div>
+                <div class="row">
+                    <label class="col"><strong>Status: </strong></label>
+                        <div th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
+                </div>
+                <div class="row">
+                    <label class="col"><strong>Project Created: </strong></label>
+                        <div th:text="${project.creationDate}"></div>
+                </div>
+                <div class="row">
+                    <label class="col"><strong>Project Category: </strong></label>
+                    <th:block th:each="category : ${ownerProfile.categories}">
+                            <div th:text="${category.name}"></div>
+                    </th:block>
+                </div>
 
             </form>
 
