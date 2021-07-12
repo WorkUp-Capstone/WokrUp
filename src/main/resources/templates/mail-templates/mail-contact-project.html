@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+    <p>Greetings <span th:text="${project.getUser.getFullName}"></span>,</p>
+    <p>A developer has selected a project you posted to work on. Their contact information and profile are available below for viewing,
+      if you like the fit of this developer make sure to contact them with more details on the project below. If you feel they are not
+      an appropriate fit change the status of this project back to open in your profile!</p>
+    <br>
+    <p>Project Title: <span th:text="${project.title}"> </span></p>
+    <p>Project Description: <span th:text="${project.description}"> </span></p>
+    <p>Project CreationDate: <span th:text="${project.creationDate}"> </span></p>
+    <br>
+    <p>Name: <span th:text="${primaryUser.fullName}"></span></p>
+    <p>Contact: <span th:text="${primaryUser.email}"></span></p>
+    <p>About: <span th:text="${primaryProfile.about}"></span></p>
+    <p>Competencies:
+    <ul>
+      <th:block th:each="category : ${primaryProfile.getCategories}">
+        <li th:text="${category.name}"></li>
+      </th:block>
+    </ul>
+    </p>
+    <hr>
+    <p>Sincerely, <br>
+      The WorkUp Team</p>
+  </div>
+</div>
+</body>
+</html>

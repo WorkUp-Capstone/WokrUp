@@ -5,6 +5,7 @@ import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
+import com.workup.workup.services.Email.EmailServiceImplementation;
 import com.workup.workup.services.Validation;
 import org.apache.commons.lang3.StringUtils;
 import com.workup.workup.models.Project;
@@ -18,12 +19,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
+
 
 @Controller
 public class HomeController {
@@ -31,13 +37,15 @@ public class HomeController {
     private ProfileRepository profileDao;
     private UsersRepository usersDao;
     private PasswordEncoder passwordEncoder;
+    private final EmailServiceImplementation email;
 
 
-    public HomeController(ProjectsRepository projectsRepository, ProfileRepository profileRepository, UsersRepository usersRepository, PasswordEncoder passwordEncoder){
+    public HomeController(ProjectsRepository projectsRepository, ProfileRepository profileRepository, UsersRepository usersRepository, PasswordEncoder passwordEncoder, EmailServiceImplementation email){
         this.projectsDao = projectsRepository;
         this.profileDao = profileRepository;
         this.usersDao = usersRepository;
         this.passwordEncoder = passwordEncoder;
+        this.email = email;
     }
 
     @GetMapping("/")
@@ -184,6 +192,36 @@ public class HomeController {
         }
         model.addAttribute("userRole", user.getRole().getRole());
         return "search_result";
+    }
+
+
+    @PostMapping("/home")
+    public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId) throws MessagingException, IOException {
+        Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
+        User contactUser = usersDao.getById(devId);
+        User primaryUser = usersDao.getById(user.getId());
+        HashMap<String,Object> emailbody = new HashMap<String,Object>();
+        emailbody.put("contactUser", contactUser);
+        emailbody.put("primaryProfile", primaryProfile);
+        emailbody.put("primaryUser", primaryUser);
+        email.sendUserMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
+        return "redirect:/home";
+    }
+
+    @PostMapping("/home/contact")
+    public String contactProject(@AuthenticationPrincipal User user, @RequestParam(name = "projectID") Long projectId) throws MessagingException, IOException, MessagingException, IOException {
+        Project project = projectsDao.getProjectById(projectId);
+        Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
+        User contactUser = usersDao.getById(project.getUser().getId());
+        User primaryUser = usersDao.getById(user.getId());
+        HashMap<String,Object> emailbody = new HashMap<String,Object>();
+        emailbody.put("project", project);
+        emailbody.put("primaryProfile", primaryProfile);
+        emailbody.put("primaryUser", primaryUser);
+        project.setStatus("in progress");
+        projectsDao.saveAndFlush(project);
+        email.sendProjectMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
+        return "redirect:/home";
     }
 
 
