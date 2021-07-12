@@ -2,6 +2,7 @@ package com.workup.workup.controllers;
 
 import com.workup.workup.dao.*;
 import com.workup.workup.models.*;
+import com.workup.workup.services.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,7 @@ public class UsersController {
         projectList = projectsDao.getAllProjectsByUserIdIs(logged.getId());
         model.addAttribute("ownerProject", projectList);
 
-        return "users/view-profile";
+        return "profile/view-profile";
     }
 
     //edit selected profile
@@ -56,7 +57,7 @@ public class UsersController {
         profileModel.addAttribute("editOwnerProfile", profileDao.getProfileByUserIs(user));
         filestackModel.addAttribute("filestackapi", filestackApi);
 
-        return "users/edit-profile";
+        return "profile/edit-profile";
     }
 
     //edit and save profile
@@ -92,7 +93,7 @@ public class UsersController {
         model.addAttribute("filestackapi", filestackApi);
         model.addAttribute("userProfile", profileDao.getProfileByUserIs(user));
 
-        return "users/add-profile-img";
+        return "profile/add-profile-img";
     }
 
     //Save profile image

@@ -122,8 +122,8 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     public String editProject(@PathVariable Long id,
                               @RequestParam(name = "title") String title,
                               @RequestParam(name = "description") String description,
-                              @RequestParam(name = "status") String status
-                              //,@RequestParam(name="categories")Category categories
+                              @RequestParam(name = "status") String status,
+                              @RequestParam(name="categories")List<Category> categories
     ) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -134,7 +134,7 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
         project.setTitle(title);
         project.setDescription(description);
         project.setStatus(status);
-        //project.setCategories((List<Category>)categories);
+        project.setCategories(categories);
 
         projectDao.save(project);
         return "redirect:/profile";

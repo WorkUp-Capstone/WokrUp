@@ -1,0 +1,11 @@
+.profile-view{
+    flex-wrap: nowrap;
+}
+
+#user-info .col{
+    flex-grow: revert;
+}
+
+.names{
+    padding: 0; !important;
+}

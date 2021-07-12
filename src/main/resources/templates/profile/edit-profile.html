@@ -96,12 +96,12 @@
                         </div> <!-- form-group end.// -->
                         <div class="form-group">
                             <label>Categories</label>
-                            <p class="tip" style="color: firebrick; font-size: 8pt">*shift+click: selects consecutive, command+click: selects individual categories</p>
                             <select multiple th:field="*{categories}" class="form-control">
                                 <div th:block th:each="category: ${categoryList}">
                                     <option th:text="${category.name}" th:value="${category.id}"></option>
                                 </div>
                             </select>
+                            <p>Shift and click to select multiple.</p>
                         </div>
 
                         <div class="form-group">

@@ -35,7 +35,7 @@
 
     <div class="project-card" th:case="'developer'">
         <h4>Currently Open Projects</h4>
-        <th:block th:each="project : ${allProjects}" th:if="${project.status} ? 'OPEN'">
+        <th:block th:each="project : ${openProjects}">
             <h3 th:text="${project.title}" ></h3>
             <h3>Project Description</h3>
             <p th:text="${project.description}"></p>
