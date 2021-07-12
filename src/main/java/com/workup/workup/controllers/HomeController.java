@@ -219,6 +219,7 @@ public class HomeController {
         emailbody.put("primaryProfile", primaryProfile);
         emailbody.put("primaryUser", primaryUser);
         project.setStatus("in progress");
+        project.setDeveloperUser(contactUser);
         projectsDao.saveAndFlush(project);
         email.sendProjectMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
         return "redirect:/home";
