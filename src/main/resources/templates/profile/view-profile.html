@@ -27,24 +27,24 @@
 
         <div class="user-info row mx-md-n5 align-items-center" th:action="@{/profile/edit}">
             <th:block th:each="profile : ${ownerProfile}">
-                <div class="col px-md-5 ml-auto col-sm-auto justify-content-between">
+                <div id="user-info" class="col px-md-5 ml-auto col-sm-auto justify-content-between">
 
-                    <div class="row">
+                    <div class="row profile-view">
                         <label class="col"><strong>About Me: </strong></label>
                         <div th:text="${ownerProfile.about}"></div>
                     </div>
 
-                    <div class="row">
+                    <div class="row profile-view">
                         <label class="col"><strong>Portfolio:</strong></label>
                         <div th:text="${ownerProfile.portfolio_link}"></div>
                     </div>
 
-                    <div class="row">
+                    <div class="row profile-view">
                         <label class="col"><strong>Resume Link:</strong></label>
                         <div th:text="${ownerProfile.resume_link}"></div>
                     </div>
 
-                    <div class="row">
+                    <div class="row profile-view">
                         <label class="col"><strong>Categories: </strong></label>
                         <th:block th:each="category : ${ownerProfile.categories}">
                             <div th:text="${category.name}"></div>
@@ -53,17 +53,17 @@
                 </div>
 
                 <div class="col-sm-auto col-px-md-5 ml-auto justify-content-between">
-                    <div class="row">
+                    <div class="row profile-view">
                         <label class="col"><strong>City: </strong></label>
                         <div th:text="${ownerProfile.city}"></div>
                     </div>
 
-                    <div class="row">
+                    <div class="row profile-view">
                         <label class="col"><strong>State: </strong></label>
                         <div th:text="${ownerProfile.state}"></div>
                     </div>
 
-                    <div class="row">
+                    <div class="row profile-view">
                         <label class="col"><strong>Phone Number: </strong></label>
                         <div th:text="${ownerProfile.phone_number}"></div>
                     </div>
@@ -86,24 +86,24 @@
     <th:block th:each="project : ${ownerProject}">
         <div class="card w-50 m-0 col">
             <form th:action="@{/profile}" th:method="post">
-                <div class="row">
+                <div class="row profile-view">
                     <label class="col"><strong>Project Title:</strong></label>
                     <div th:text="${project.title}"></div>
                 </div>
-                <div class="row">
+                <div class="row profile-view">
                     <label class="col"><strong>Project Description: </strong></label>
                         <div th:text="${project.description}"></div>
                 </div>
-                <div class="row">
+                <div class="row profile-view">
                     <label class="col"><strong>Status: </strong></label>
                         <div th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
                 </div>
-                <div class="row">
+                <div class="row profile-view">
                     <label class="col"><strong>Project Created: </strong></label>
                         <div th:text="${project.creationDate}"></div>
                 </div>
-                <div class="row">
-                    <label class="col"><strong>Project Category: </strong></label>
+                <div class="row profile-view">
+                    <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
                     <th:block th:each="category : ${ownerProfile.categories}">
                             <div th:text="${category.name}"></div>
                     </th:block>

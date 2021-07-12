@@ -10,12 +10,12 @@
             <div class="card">
                 <article class="card-body">
                     <form autocomplete="off" th:action="@{/register}" th:method="post" th:object="${user}">
-                        <div class="form-row">
-                            <div class="col form-group">
+                        <div class="names form-row">
+                            <div class="form-group">
                                 <label>First Name </label>
                                 <input th:field="*{firstName}" type="text" class="form-control" th:required="required">
                             </div>
-                            <div class="col form-group">
+                            <div class="form-group">
                                 <label>Last Name</label>
                                 <input th:field="*{lastName}" type="text" class="form-control" th:required="required">
                             </div>
