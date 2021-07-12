@@ -94,7 +94,7 @@ public class EmailServiceImplementation implements EmailService{
             Context thymeleafContext = new Context();
             thymeleafContext.setVariables(templateModel);
 
-            String htmlBody = thymeleafTemplateEngine.process("mail-contact-user.html", thymeleafContext);
+            String htmlBody = thymeleafTemplateEngine.process("mail-templates/mail-contact-user.html", thymeleafContext);
 
             sendHtmlMessage(to, subject, htmlBody);
         }

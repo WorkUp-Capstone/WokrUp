@@ -61,7 +61,7 @@ public class HomeController {
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user) throws MessagingException, IOException {
         Profile profile = new Profile();
-////        email.sendHtmlMessage(user.getEmail(), user.getFirstName() + user.getLastName(),"<h1> Fuck You bud </h1><img src=\"cid:attachment.png\">");
+//////        email.sendHtmlMessage(user.getEmail(), user.getFirstName() + user.getLastName(),"<h1> Fuck You bud </h1><img src=\"cid:attachment.png\">");
 //        HashMap<String,Object> emailbody = new HashMap<>();
 //            emailbody.put("recipientName","sdfsadfsd");
 //            emailbody.put("text", "Love you some chocolate dont ya");
