@@ -43,12 +43,13 @@
                             <label class="col"><strong>Resume Link:</strong></label>
                             <div th:text="${ownerProfile.resume_link}"></div>
                         </div>
-
-                        <div class="row profile-view">
-                            <label class="col"><strong>Categories: </strong></label>
-                            <th:block th:each="category : ${ownerProfile.categories}">
-                                <div th:text="${category.name}"></div>
-                            </th:block>
+                        <div th:if="${ownerProfile.user.role.getId() == 2}">
+                            <div class="row profile-view">
+                                <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+                                <th:block th:each="category : ${ownerProfile.categories}">
+                                    <div th:text="${category.name}"></div>
+                                </th:block>
+                            </div>
                         </div>
                     </div>
 
