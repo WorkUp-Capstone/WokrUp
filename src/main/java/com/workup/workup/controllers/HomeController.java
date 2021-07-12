@@ -6,7 +6,11 @@ import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
+import com.workup.workup.services.Email.EmailConfiguration;
+import com.workup.workup.services.Email.EmailServiceImplementation;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -16,7 +20,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static java.util.Map.entry;
 
 @Controller
 public class HomeController {
@@ -24,13 +34,15 @@ public class HomeController {
     private ProfileRepository profileDao;
     private UsersRepository usersDao;
     private PasswordEncoder passwordEncoder;
+    private final EmailServiceImplementation email;
 
 
-    public HomeController(ProjectsRepository projectsRepository, ProfileRepository profileRepository, UsersRepository usersRepository, PasswordEncoder passwordEncoder){
+    public HomeController(ProjectsRepository projectsRepository, ProfileRepository profileRepository, UsersRepository usersRepository, PasswordEncoder passwordEncoder, EmailServiceImplementation email){
         this.projectsDao = projectsRepository;
         this.profileDao = profileRepository;
         this.usersDao = usersRepository;
         this.passwordEncoder = passwordEncoder;
+        this.email = email;
     }
 
     @GetMapping("/")
@@ -47,10 +59,15 @@ public class HomeController {
 
 //save user
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user){
-
+    public String saveUser(@ModelAttribute User user) throws MessagingException, IOException {
         Profile profile = new Profile();
-
+////        email.sendHtmlMessage(user.getEmail(), user.getFirstName() + user.getLastName(),"<h1> Fuck You bud </h1><img src=\"cid:attachment.png\">");
+//        HashMap<String,Object> emailbody = new HashMap<>();
+//            emailbody.put("recipientName","sdfsadfsd");
+//            emailbody.put("text", "Love you some chocolate dont ya");
+//            emailbody.put("senderName","asdfasdfadsf");
+//
+//        email.sendMessageUsingThymeleafTemplate(user.getEmail(), user.getFirstName() + user.getLastName(), emailbody);
         if (!StringUtils.isEmpty(user.getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
