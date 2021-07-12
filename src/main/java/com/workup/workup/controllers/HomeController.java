@@ -5,6 +5,8 @@ import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
+import com.workup.workup.services.Email.EmailServiceImplementation;
+import com.workup.workup.services.Validation;
 import org.apache.commons.lang3.StringUtils;
 import com.workup.workup.models.Project;
 import org.springframework.data.repository.query.Param;
@@ -17,7 +19,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
+import javax.validation.Valid;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -200,7 +209,7 @@ public class HomeController {
     }
 
     @PostMapping("/home/contact")
-    public String contactProject(@AuthenticationPrincipal User user, @RequestParam(name = "projectID") Long projectId) throws MessagingException, IOException {
+    public String contactProject(@AuthenticationPrincipal User user, @RequestParam(name = "projectID") Long projectId) throws MessagingException, IOException, MessagingException, IOException {
         Project project = projectsDao.getProjectById(projectId);
         Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
         User contactUser = usersDao.getById(project.getUser().getId());
