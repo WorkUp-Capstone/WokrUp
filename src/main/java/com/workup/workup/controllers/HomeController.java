@@ -4,19 +4,25 @@ import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
-import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
+import com.workup.workup.services.Validation;
 import org.apache.commons.lang3.StringUtils;
+import com.workup.workup.models.Project;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Controller
 public class HomeController {
@@ -47,18 +53,53 @@ public class HomeController {
 
 //save user
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user){
 
+    public ModelAndView saveUser(@ModelAttribute @Valid User user){
         Profile profile = new Profile();
+        String password = user.getPassword();
+        String email = user.getEmail();
+        List<User> allUsers = usersDao.findAll();
+        String passwordRepeat = user.getPasswordRepeat();
+        ModelAndView modelAndView = new ModelAndView();
+        boolean strongPassword = Pattern.matches("[a-zA-Z0-9]", password);
+        boolean isPasswordConfirmed = password.equals(passwordRepeat);
 
-        if (!StringUtils.isEmpty(user.getPassword())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Validation validate = new Validation();
+        modelAndView.setViewName("registration");
+        modelAndView.addObject("user", user);
+
+//        validate.emailHasError(email);
+
+        if (validate.emailHasError(email)) {
+            String emailError = "Input a proper email (___@mailservice.com)";
+            modelAndView.addObject("emailError", emailError);
+            return modelAndView;
         }
-        // saves user and instantiates new profile
-        profile.setUser(usersDao.save(user));
-        profileDao.save(profile);
+        if (validate.emailExists(email, allUsers)) {
+            String emailExistsError = "This email is already registered";
+            modelAndView.addObject("emailExistsError", emailExistsError);
+            return modelAndView;
+        }
+        if (validate.passwordHasError(password) || strongPassword) {
+            String passwordError = "Password should be at least 8 digits long and must contain at least one special character";
+            modelAndView.addObject("passwordError", passwordError);
+            return modelAndView;
+        }
+        if (!isPasswordConfirmed) {
+            String passwordMatchError = "Passwords do not match";
+            modelAndView.addObject("confirmPass", passwordMatchError);
+            return modelAndView;
+        }
+        if (!StringUtils.isEmpty(password)) {
+            user.setPassword(passwordEncoder.encode(password));
+            user.setPasswordRepeat(passwordEncoder.encode(passwordRepeat));
+            // saves user and instantiates new profile
+            profile.setUser(usersDao.save(user));
+            profileDao.save(profile);
 
-        return "redirect:/login";
+        }
+        modelAndView.setViewName("/login");
+        return modelAndView;
     }
 
     // NO LONGER NEEDED FOR HOME VIEW BUT COULD BE USED TO REFACTORED CLUNCKY WORKING CODE
@@ -78,7 +119,6 @@ public class HomeController {
                 List<Project> allProjects = projectsDao.findAll();
                 model.addAttribute("allProjects", allProjects);
         } else {
-
                 List<Profile> devProfiles = profileDao.findAll();
                 model.addAttribute("devProfiles", devProfiles);
             }

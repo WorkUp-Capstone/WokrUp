@@ -3,7 +3,12 @@ package com.workup.workup.models;
 
 //import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 
+import com.workup.workup.services.UniqueEmail;
+import org.checkerframework.common.aliasing.qual.Unique;
+
+
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -14,11 +19,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 50)
+    @UniqueEmail(message = "")
+    @Email(message = "Email is invalid")
+    @Column(nullable = false, unique = true, length = 50)
     private String email;
 
     @Column(nullable = false, length = 250)
+    @Min(value = 8, message = "Password must be 8 characters long")
     private String password;
+
+    private String passwordRepeat;
 
     @Column(nullable = false, length = 250)
 //    @KeywordField
@@ -32,9 +42,10 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Project> projectList;
+
+    private boolean passwordsEqual;
 
     // Empty constructor for Spring
     public User() {}
@@ -91,6 +102,10 @@ public class User {
         this.password = password;
     }
 
+    public String getPasswordRepeat() { return passwordRepeat; }
+
+    public void setPasswordRepeat(String passwordRepeat) { this.passwordRepeat = passwordRepeat; }
+
     public String getFirstName() {
         return first_name;
     }
@@ -115,7 +130,6 @@ public class User {
         this.role = role;
     }
 
-
     public List<Project> getProject() {
         return projectList;
     }
@@ -124,4 +138,8 @@ public class User {
         this.projectList = project;
     }
 
+    public void setPasswordsEqual(boolean passwordsEqual) { this.passwordsEqual = passwordsEqual; }
+
+    @AssertTrue(message = "Passwords should match")
+    public boolean isPasswordsEqual() { return passwordsEqual && password.equals(passwordRepeat); }
 }
