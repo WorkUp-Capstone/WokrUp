@@ -30,4 +30,6 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
             "  (Match(first_name, last_name) AGAINST (?1))"
             , nativeQuery = true)
     List<Long> devSearch(String searchString);
+
+    List<Profile> getAllByUserRole_Id(long id);
 }
