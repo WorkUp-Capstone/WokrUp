@@ -21,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -115,14 +116,25 @@ public class HomeController {
 //    }
     @GetMapping("/home")
     public String home(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
-        if (user.getRole().getRole().equalsIgnoreCase("developer")) {
-                List<Project> allProjects = projectsDao.findAll();
-                model.addAttribute("allProjects", allProjects);
-        } else {
-                List<Profile> devProfiles = profileDao.getAllByUserRole_Id(2);
-                model.addAttribute("devProfiles", devProfiles);
-            }
         model.addAttribute("userRole", user.getRole().getRole());
+        List<Profile> profiles = profileDao.findAll();
+        List<Profile> devProfiles = new ArrayList<>();
+        List<Project> projects = projectsDao.findAll();
+        List<Project> openProjects = new ArrayList<>();
+
+        for(Project project : projects) {
+            if (project.getStatus().contains("open")) {
+                openProjects.add(project);
+            }
+        }
+
+        for(Profile profile : profiles) {
+            if (profile.getUser().getRole().getId() == 2) {
+                devProfiles.add(profile);
+            }
+        }
+        model.addAttribute("openProjects", openProjects);
+        model.addAttribute("devProfiles", devProfiles);
         return "home";
     }
 
