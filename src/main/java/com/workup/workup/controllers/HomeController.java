@@ -119,7 +119,7 @@ public class HomeController {
                 List<Project> allProjects = projectsDao.findAll();
                 model.addAttribute("allProjects", allProjects);
         } else {
-                List<Profile> devProfiles = profileDao.findAll();
+                List<Profile> devProfiles = profileDao.getAllByUserRole_Id(2);
                 model.addAttribute("devProfiles", devProfiles);
             }
         model.addAttribute("userRole", user.getRole().getRole());
