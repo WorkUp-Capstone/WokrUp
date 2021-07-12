@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p th:text="${recipientName}"></p>
-<p th:text="${text}"></p>
-<p>I made an oopsie doodle</p>
-<p>
-    <em th:text="${senderName}"></em> <br />
-</p>
+        <p>Greetings <span th:text="${contactUser.fullName}"></span>,</p>
+        <p>Your profile was selected by a WorkUp user to guage your interest in working for them. If interested, respond
+            via one of the options listed on their contact information below!; we have provided some information from
+            their profile so you aren't going in cold. Good Luck!!</p>
+        <p>Name: <span th:text="${primaryUser.fullName}"></span></p>
+        <p>Contact: <span th:text="${primaryUser.email}"></span></p>
+        <p>About: <span th:text="${primaryProfile.about}"></span></p>
+        <p>Sincerely,
+            The WorkUp Team</p>
 </body>
 </html>

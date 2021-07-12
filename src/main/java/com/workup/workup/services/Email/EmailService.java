@@ -32,7 +32,13 @@ public interface EmailService {
             String pathToAttachment
     );
 
-    void sendMessageUsingThymeleafTemplate(
+    void sendUserMessageUsingThymeleafTemplate(
+            String to,
+            String subject,
+            HashMap<String, Object> templateModel
+    ) throws IOException, MessagingException;
+
+    void sendProjectMessageUsingThymeleafTemplate(
             String to,
             String subject,
             HashMap<String, Object> templateModel

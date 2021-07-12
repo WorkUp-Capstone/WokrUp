@@ -90,7 +90,7 @@ public class EmailServiceImplementation implements EmailService{
     }
 
     @Override
-    public void sendMessageUsingThymeleafTemplate(String to, String subject, HashMap<String, Object> templateModel) throws IOException, MessagingException {
+    public void sendUserMessageUsingThymeleafTemplate(String to, String subject, HashMap<String, Object> templateModel) throws IOException, MessagingException {
             Context thymeleafContext = new Context();
             thymeleafContext.setVariables(templateModel);
 
@@ -98,5 +98,16 @@ public class EmailServiceImplementation implements EmailService{
 
             sendHtmlMessage(to, subject, htmlBody);
         }
+
+
+    @Override
+    public void sendProjectMessageUsingThymeleafTemplate(String to, String subject, HashMap<String, Object> templateModel) throws IOException, MessagingException {
+        Context thymeleafContext = new Context();
+        thymeleafContext.setVariables(templateModel);
+
+        String htmlBody = thymeleafTemplateEngine.process("mail-templates/mail-contact-project.html", thymeleafContext);
+
+        sendHtmlMessage(to, subject, htmlBody);
     }
+}
 
