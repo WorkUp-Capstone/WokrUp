@@ -96,7 +96,7 @@
                             </div> <!-- form-group end.// -->
                             <div th:if="${editOwnerProfile.user.role.getId() == 2}">
                                 <div class="form-group">
-                                    <label>Categories</label>
+                                    <label>Preferred Languages/Frameworks</label>
                                     <select multiple th:field="*{categories}" class="form-control">
                                         <div th:block th:each="category: ${categoryList}">
                                             <option th:text="${category.name}" th:value="${category.id}"></option>
