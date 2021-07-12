@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "config.jsKeys.filestack",
+      "type": "java.lang.String",
+      "description": "Description for config.jsKeys.filestack."
+  }
+] }
