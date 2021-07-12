@@ -107,7 +107,7 @@ public class HomeController {
             profileDao.save(profile);
 
         }
-        modelAndView.setViewName("/login");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 
