@@ -21,7 +21,7 @@ public class UsersController {
     private final ImagesRepository imageDao;
 
     //Filestack API Key Import:
-    @Value("${filestack.api.key}")
+    @Value("${config.jsKeys.filestack}")
     private String filestackApi;
 
     public UsersController(UsersRepository usersRepository, ProjectsRepository projectsRepository, ProfileRepository profileRepository, CategoryRepository categoryRepository,ImagesRepository imageDao) {

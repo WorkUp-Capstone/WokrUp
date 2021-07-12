@@ -28,7 +28,7 @@ private final ProjectsRepository projectDao;
 private final UsersRepository userDao;
 private final ImagesRepository imageDao;
 
-    @Value("${filestack.api.key}")
+    @Value("${config.jsKeys.filestack}")
     private String filestackApi;
 
 public ProjectController(CategoryRepository categoryDao, ProjectsRepository projectDao, UsersRepository userDao, ProfileRepository profileDao,
