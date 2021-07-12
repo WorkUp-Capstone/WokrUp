@@ -13,15 +13,16 @@
             <div class="profile-photo col-md-auto col-sm-auto mr-5">
                 <form th:action="@{profile/profileImg/add}" th:method="get">
                     <th:block th:each="profile : ${ownerProfile}">
+                        <div th:if="${ownerProfile.profile_image_url == null}">
+                            <div>
+                                <img src="/img/default-person-icon.png" alt="default pic" width="100" height="100">
+                            </div>
+                        </div>
                         <div>
                             <img th:src="${ownerProfile.profile_image_url}">
                         </div>
                         <button>Edit Photo</button>
                     </th:block>
-                </form>
-                <br>
-                <form th:action="@{/profile/edit}" th:method="get">
-                    <button>Edit Profile</button>
                 </form>
             </div>
 
@@ -44,7 +45,7 @@
                             <div th:text="${ownerProfile.resume_link}"></div>
                         </div>
                         <div th:if="${ownerProfile.user.role.getId() == 2}">
-                            <div class="row profile-view">
+                            <div class="row">
                                 <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
                                 <th:block th:each="category : ${ownerProfile.categories}">
                                     <div th:text="${category.name}"></div>
@@ -69,7 +70,12 @@
                             <div th:text="${ownerProfile.phone_number}"></div>
                         </div>
                     </div>
-
+                    <br>
+                    <div class="col edit-profile-btn ml-5">
+                    <form th:action="@{/profile/edit}" th:method="get">
+                        <button>Edit Profile</button>
+                    </form>
+                    </div>
                 </th:block>
             </div><!-- row user info-->
         </div><!-- row main content-->
