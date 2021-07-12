@@ -6,12 +6,9 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="col form-group">
 
+  <label>Upload supporting documents or photos for your project</label>
+
   <form id="images" th:action="@{/profile/projectImg/{id}/add((id=${addProjectImg.getId()}))}" method="post" th:object="${addProjectImg}">
-
-    <label for="projectImg">Upload supporting documents or photos for your project</label>
-
-
-    <input type="hidden" id="projectImg">
 
     <button id="picker" type="button">Select File</button>
 
@@ -35,8 +32,11 @@
     const client = filestack.init(filestackapi);
 
     const options = {
-      onUploadDone: (res) =>
-              $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),
+      onUploadDone: (res) =>{
+              $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`);
+
+      $('#images').prepend(`<embed width="800" height="1000" src='${res.filesUploaded[0].url}'>`);
+  },
       accept:["image/*", ".pdf", "text/*"]
     }
 
