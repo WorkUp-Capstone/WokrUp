@@ -20,7 +20,7 @@
 
 <th:block th:each="projectImage : ${projectImageList}">
   <div class="col form-group">
-    <img th:src="${projectImage.path}">
+    <embed th:width="800" th:height="1000" th:src="${projectImage.path}">
   </div>
 </th:block>
 
@@ -36,7 +36,7 @@
     const options = {
       onUploadDone: (res) =>
               $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),
-      imageDim: [200, 400]
+      accept:["image/*", ".pdf", "text/*"]
     }
 
     $("#picker").click(function (){
