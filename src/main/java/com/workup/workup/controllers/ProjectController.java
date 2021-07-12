@@ -8,18 +8,14 @@ import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Category;
-import com.workup.workup.models.Profile;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
-import com.workup.workup.services.EmailService;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import java.sql.Date;
-import java.text.AttributedString;
 import java.util.List;
 
 
@@ -29,18 +25,16 @@ public class ProjectController {
 private final CategoryRepository categoryDao;
 private final ProfileRepository profileDao;
 private final ProjectsRepository projectDao;
-private final EmailService emailService;
 private final UsersRepository userDao;
 private final ImagesRepository imageDao;
 
     @Value("${filestack.api.key}")
     private String filestackApi;
 
-public ProjectController(CategoryRepository categoryDao, ProjectsRepository projectDao, EmailService emailService, UsersRepository userDao, ProfileRepository profileDao,
+public ProjectController(CategoryRepository categoryDao, ProjectsRepository projectDao, UsersRepository userDao, ProfileRepository profileDao,
                          ImagesRepository imageDao){
     this.categoryDao = categoryDao;
     this.projectDao = projectDao;
-    this.emailService = emailService;
     this.userDao = userDao;
     this.profileDao = profileDao;
     this.imageDao = imageDao;

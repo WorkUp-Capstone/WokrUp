@@ -6,6 +6,7 @@ import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
 import com.workup.workup.services.Validation;
+import com.workup.workup.services.Email.EmailServiceImplementation;
 import org.apache.commons.lang3.StringUtils;
 import com.workup.workup.models.Project;
 import org.springframework.data.repository.query.Param;
@@ -19,11 +20,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 import java.util.regex.Pattern;
+
 
 @Controller
 public class HomeController {
@@ -31,13 +34,15 @@ public class HomeController {
     private ProfileRepository profileDao;
     private UsersRepository usersDao;
     private PasswordEncoder passwordEncoder;
+    private final EmailServiceImplementation email;
 
 
-    public HomeController(ProjectsRepository projectsRepository, ProfileRepository profileRepository, UsersRepository usersRepository, PasswordEncoder passwordEncoder){
+    public HomeController(ProjectsRepository projectsRepository, ProfileRepository profileRepository, UsersRepository usersRepository, PasswordEncoder passwordEncoder, EmailServiceImplementation email){
         this.projectsDao = projectsRepository;
         this.profileDao = profileRepository;
         this.usersDao = usersRepository;
         this.passwordEncoder = passwordEncoder;
+        this.email = email;
     }
 
     @GetMapping("/")
@@ -54,7 +59,6 @@ public class HomeController {
 
 //save user
     @PostMapping("/register")
-
     public ModelAndView saveUser(@ModelAttribute @Valid User user){
         Profile profile = new Profile();
         String password = user.getPassword();
