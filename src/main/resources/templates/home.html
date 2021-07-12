@@ -5,35 +5,53 @@
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<br>
-<h1>Open Projects</h1>
-<br>
+
 <!--TODO: Need to reference user story again about card display, then what info comes up when user clicks on card-->
 <div class="container" th:switch="${userRole}">
 
     <!--TODO: Need to reference ONLY Project owners profiles-->
     <div class="card" th:case="'owner'">
+        <h4>Our Developers</h4>
         <th:block th:each="profile : ${devProfiles} ">
-            <h3 th:text="${profile.about}"></h3>
-            <p th:text="${profile.profile_image_url}"></p>
+
+            <h3 th:text="${profile.user.firstName}"> </h3><h3 th:text="${profile.user.lastName}"></h3><p th:text="${profile.profile_image_url}"></p>
+            <h4>About </h4><h4 th:text="${profile.user.firstName}"></h4>
+            <p th:text="${profile.about}"></p>
+            <h4>Portfolio</h4>
             <p th:text="${profile.portfolio_link}"></p>
+            <h4>Resume</h4>
             <p th:text="${profile.resume_link}"></p>
-            <p th:text="${profile.categories}"></p>
-            <p th:text="${profile.city}"></p>
-            <p th:text="${profile.state}"></p>
-            <p th:text="${profile.phone_number}"></p>
+            <h4>Programming Skills</h4>
+            <th:block th:each="category : ${profile.categories}">
+                <li th:text="${category.name}"></li>
+            </th:block>
+            <form th:action="@{/home}" method="post">
+                <input type="hidden" th:name="profileID" th:value="${profile.getUser().getId()}">
+                <button type="submit" class="btn-outline-success" id="claim-project">Claim Developer</button>
+            </form>
 
         </th:block>
     </div>
 
     <div class="project-card" th:case="'developer'">
-        <th:block th:each="project : ${allProjects}">
-
+        <h4>Currently Open Projects</h4>
+        <th:block th:each="project : ${openProjects}">
             <h3 th:text="${project.title}" ></h3>
+            <h3>Project Description</h3>
             <p th:text="${project.description}"></p>
+            <h3>Project Images</h3>
             <p th:text="${project.images}"></p>
-            <p th:text="${project.categories}"></p>
+            <h3> Skills Required</h3>
+            <th:block th:each="category : ${project.categories}">
+                <li th:text="${category.name}"></li>
+            </th:block>
+            <h3>Project Creation Date:</h3>
             <p th:text="${project.creationDate}"></p>
+            <form th:action="@{/home/contact}" method="post">
+                <input type="hidden" th:name="projectID" th:value="${project.getId()}">
+                <button type="submit" class="btn-outline-success">Claim Project</button>
+            </form>
+
         </th:block>
     </div>
     <!--TODO: extract info based on role -->

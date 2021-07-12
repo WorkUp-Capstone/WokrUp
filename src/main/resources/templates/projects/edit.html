@@ -9,38 +9,42 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
-                <article class="card-body">
-                    <h4><strong>Edit Project:</strong></h4>
                     <form th:action="@{/projects/{id}/edit(id=${editProject.getId()})}" method="post" th:object="${editProject}">
+                        <h4><strong>Edit Project:</strong></h4>
                             <div class="col form-group">
                                 <label for="title">Title</label>
-                                <input th:field="*{title}" type="text" name="title" id="title" class="form-control">
-                            </div>
-                            <div class="col form-group">
-                                <label for="description">Project Description</label>
-                                <input th:field="*{description}" type="text" name="description" id="description"
-                                       class="form-control">
-                            </div>
-                            <div class="col form-group">
-                                <label for="status">Status</label>
-                                <select th:field="*{status}" name="status" id="status" class="form-control"><option th:value="Open">Open</option>
-                                    <option th:value="In_progress">In progress</option></select>
+                                <input th:field="*{title}" type="text" name="title" id="title" class="form-control" placeholder="Title">
                             </div>
 
-                            <!--        <div class="col form-group">        -->
-                            <!--        <label for="categories">Categories</label>-->
-                            <!--        <input th:field="*{categories}" type="checkbox" name="categories" id="categories">-->
-                            <!--        </div>-->
-                        <!--TODO: need to include edit for categories, and file uploads and possibly other fields? -->
+                            <div class="col form-group">
+                                <label for="description">Project Description</label>
+                                <input th:field="*{description}" type="text" name="description" id="description" class="form-control" placeholder="Description">
+                            </div>
+
+                            <div class="col form-group">
+                                <label for="status">Status</label>
+                                <select th:field="*{status}" name="status" id="status" class="form-control">
+                                    <option th:value="Open">Open</option>
+                                    <option th:value="In_progress">In progress</option>
+                                    <option th:value="CLosed">Closed</option>
+                                </select>
+                            </div>
+
+                            <div class="col form-group">
+                                <label for="status">Categories</label>
+                                <select multiple th:field="*{categories}" class="form-control">
+                                    <div th:block th:each="category: ${categoryList}">
+                                        <option th:text="${category.name}" th:value="${category.id}"></option>
+                                    </div>
+                                </select>
+                            </div>
+
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Save Project</button>
                         </div>
                     </form>
-                </article>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

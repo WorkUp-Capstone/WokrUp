@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head">
+    <title>Owner Profile</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container mx-5">
+    <h3>My Profile</h3>
+
+    <div class="card row d-flex justify-content-between mx-0">
+        <div class="main-content row">
+            <div class="profile-photo col-md-auto col-sm-auto mr-5">
+                <form th:action="@{profile/profileImg/add}" th:method="get">
+                    <th:block th:each="profile : ${ownerProfile}">
+                        <div>
+                            <img th:src="${ownerProfile.profile_image_url}">
+                        </div>
+                        <button>Edit Photo</button>
+                    </th:block>
+                </form>
+                <br>
+                <form th:action="@{/profile/edit}" th:method="get">
+                    <button>Edit Profile</button>
+                </form>
+            </div>
+
+            <div class="user-info row mx-md-n5 align-items-center" th:action="@{/profile/edit}">
+                <th:block th:each="profile : ${ownerProfile}">
+                    <div id="user-info" class="col px-md-5 ml-auto col-sm-auto justify-content-between">
+
+                        <div class="row profile-view">
+                            <label class="col"><strong>About Me: </strong></label>
+                            <div th:text="${ownerProfile.about}"></div>
+                        </div>
+
+                        <div class="row profile-view">
+                            <label class="col"><strong>Portfolio:</strong></label>
+                            <div th:text="${ownerProfile.portfolio_link}"></div>
+                        </div>
+
+                        <div class="row profile-view">
+                            <label class="col"><strong>Resume Link:</strong></label>
+                            <div th:text="${ownerProfile.resume_link}"></div>
+                        </div>
+                        <div th:if="${ownerProfile.user.role.getId() == 2}">
+                            <div class="row profile-view">
+                                <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+                                <th:block th:each="category : ${ownerProfile.categories}">
+                                    <div th:text="${category.name}"></div>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-auto col-px-md-5 ml-auto justify-content-between">
+                        <div class="row profile-view">
+                            <label class="col"><strong>City: </strong></label>
+                            <div th:text="${ownerProfile.city}"></div>
+                        </div>
+
+                        <div class="row profile-view">
+                            <label class="col"><strong>State: </strong></label>
+                            <div th:text="${ownerProfile.state}"></div>
+                        </div>
+
+                        <div class="row profile-view">
+                            <label class="col"><strong>Phone Number: </strong></label>
+                            <div th:text="${ownerProfile.phone_number}"></div>
+                        </div>
+                    </div>
+
+                </th:block>
+            </div><!-- row user info-->
+        </div><!-- row main content-->
+    </div><!-- card-->
+</div><!-- container-->
+<br>
+
+
+<div class="container mx-5">
+    <h3>My Projects</h3>
+    <div th:if="${ownerProfile.user.role.getId() == 1}">
+        <form th:action="@{profile/projects/create}" th:method="get">
+            <button>Add Project</button>
+        </form>
+        <br>
+        <th:block th:each="project : ${ownerProject}">
+            <div class="card w-50 m-0 col">
+                <form th:action="@{/profile}" th:method="post">
+                    <div class="row profile-view">
+                        <label class="col"><strong>Project Title:</strong></label>
+                        <div th:text="${project.title}"></div>
+                    </div>
+                    <div class="row profile-view">
+                        <label class="col"><strong>Project Description: </strong></label>
+                        <div th:text="${project.description}"></div>
+                    </div>
+                    <div class="row profile-view">
+                        <label class="col"><strong>Status: </strong></label>
+                        <div th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
+                    </div>
+                    <div class="row profile-view">
+                        <label class="col"><strong>Project Created: </strong></label>
+                        <div th:text="${project.creationDate}"></div>
+                    </div>
+                    <div class="row profile-view">
+                        <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+                        <th:block th:each="category : ${ownerProfile.categories}">
+                            <div th:text="${category.name}"></div>
+                        </th:block>
+                    </div>
+
+                </form>
+
+                <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
+                <br>
+                <a th:href="@{/profile/projectImg/{id}/add(id=${project.getId()})}">Manage Project Images</a>
+
+            </div>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>

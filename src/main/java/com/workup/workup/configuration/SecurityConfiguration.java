@@ -56,10 +56,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/owner-profile/projects/create",
-                        "/owner-profile/projects/edit/{id}",
-                        "/owner-profile",
-                        "/owner-profile/edit",
+                        "/profile/projects/create",
+                        "/profile/projects/edit/{id}",
+                        "/profile",
+                        "/profile/edit",
                         "/home"
                 )
                 .authenticated()
