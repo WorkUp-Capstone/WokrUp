@@ -10,7 +10,6 @@ import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Category;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
-import com.workup.workup.services.Email.EmailConfiguration;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +25,6 @@ public class ProjectController {
 private final CategoryRepository categoryDao;
 private final ProfileRepository profileDao;
 private final ProjectsRepository projectDao;
-//private final EmailConfiguration emailConfiguration;
 private final UsersRepository userDao;
 private final ImagesRepository imageDao;
 
@@ -37,7 +35,6 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
                          ImagesRepository imageDao){
     this.categoryDao = categoryDao;
     this.projectDao = projectDao;
-//    this.emailConfiguration = emailConfiguration;
     this.userDao = userDao;
     this.profileDao = profileDao;
     this.imageDao = imageDao;
