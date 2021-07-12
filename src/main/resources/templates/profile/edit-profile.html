@@ -94,7 +94,7 @@
                                 <label>Phone Number</label>
                                 <input th:field="*{phone_number}" type="text" class="form-control">
                             </div> <!-- form-group end.// -->
-                            <div th:if="${editOwnerProfile.user.role.getId() == 2}">
+                           <!-- <div th:if="${editOwnerProfile.user.role.getId() == 2}"> -->
                                 <div class="form-group">
                                     <label>Preferred Languages/Frameworks</label>
                                     <select multiple th:field="*{categories}" class="form-control">
@@ -103,9 +103,8 @@
                                         </div>
                                     </select>
                                 </div>
-                            </select>
-                            <p>Shift and click to select multiple.</p>
-                        </div>
+                                <p>Shift and click to select multiple.</p>
+
 
                         <div class="form-group">
                             <br>
