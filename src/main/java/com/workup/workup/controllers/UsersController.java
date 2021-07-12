@@ -45,7 +45,7 @@ public class UsersController {
         projectList = projectsDao.getAllProjectsByUserIdIs(logged.getId());
         model.addAttribute("ownerProject", projectList);
 
-        return "users/view-profile";
+        return "profile/view-profile";
     }
 
     //edit selected profile
@@ -57,7 +57,7 @@ public class UsersController {
         profileModel.addAttribute("editOwnerProfile", profileDao.getProfileByUserIs(user));
         filestackModel.addAttribute("filestackapi", filestackApi);
 
-        return "users/edit-profile";
+        return "profile/edit-profile";
     }
 
     //edit and save profile
@@ -93,7 +93,7 @@ public class UsersController {
         model.addAttribute("filestackapi", filestackApi);
         model.addAttribute("userProfile", profileDao.getProfileByUserIs(user));
 
-        return "users/add-profile-img";
+        return "profile/add-profile-img";
     }
 
     //Save profile image
