@@ -6,6 +6,7 @@ package com.workup.workup.models;
 import com.workup.workup.services.UniqueEmail;
 import org.checkerframework.common.aliasing.qual.Unique;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.List;
@@ -44,7 +45,6 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Project> projectList;
 
-    @AssertTrue
     private boolean passwordsEqual;
 
     // Empty constructor for Spring

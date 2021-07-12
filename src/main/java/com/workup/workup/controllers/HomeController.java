@@ -5,6 +5,7 @@ import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
+import com.workup.workup.services.Validation;
 import org.apache.commons.lang3.StringUtils;
 import com.workup.workup.models.Project;
 import org.springframework.data.repository.query.Param;
@@ -53,27 +54,51 @@ public class HomeController {
 //save user
     @PostMapping("/register")
 
-    public ModelAndView saveUser(@ModelAttribute @Valid User user, BindingResult bindingResult, ModelMap modelMap){
+    public ModelAndView saveUser(@ModelAttribute @Valid User user){
         Profile profile = new Profile();
         String password = user.getPassword();
+        String email = user.getEmail();
+        List<User> allUsers = usersDao.findAll();
         String passwordRepeat = user.getPasswordRepeat();
         ModelAndView modelAndView = new ModelAndView();
-        boolean strongPassword = Pattern.matches("\\Q[a-zA-Z0-9]!#$%&()*+,-./:;<=>?@^_`|~\\E", password);
+        boolean strongPassword = Pattern.matches("[a-zA-Z0-9]", password);
+        boolean isPasswordConfirmed = password.equals(passwordRepeat);
 
-        if (!StringUtils.isEmpty(password) && !(bindingResult.hasErrors()) && user.isPasswordsEqual() && strongPassword) {
+        Validation validate = new Validation();
+        modelAndView.setViewName("registration");
+        modelAndView.addObject("user", user);
+
+//        validate.emailHasError(email);
+
+        if (validate.emailHasError(email)) {
+            String emailError = "Input a proper email (___@mailservice.com)";
+            modelAndView.addObject("emailError", emailError);
+            return modelAndView;
+        }
+        if (validate.emailExists(email, allUsers)) {
+            String emailExistsError = "This email is already registered";
+            modelAndView.addObject("emailExistsError", emailExistsError);
+            return modelAndView;
+        }
+        if (validate.passwordHasError(password) || strongPassword) {
+            String passwordError = "Password should be at least 8 digits long and must contain at least one special character";
+            modelAndView.addObject("passwordError", passwordError);
+            return modelAndView;
+        }
+        if (!isPasswordConfirmed) {
+            String passwordMatchError = "Passwords do not match";
+            modelAndView.addObject("confirmPass", passwordMatchError);
+            return modelAndView;
+        }
+        if (!StringUtils.isEmpty(password)) {
             user.setPassword(passwordEncoder.encode(password));
             user.setPasswordRepeat(passwordEncoder.encode(passwordRepeat));
-            modelAndView.addObject("successMessage", "User registered successfully!");
             // saves user and instantiates new profile
             profile.setUser(usersDao.save(user));
             profileDao.save(profile);
 
-        } else {
-            modelAndView.addObject("successMessage", "Please resolve errors in the form.");
         }
-        modelMap.addAttribute("bindingResult", bindingResult);
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("registration");
+        modelAndView.setViewName("/login");
         return modelAndView;
     }
 

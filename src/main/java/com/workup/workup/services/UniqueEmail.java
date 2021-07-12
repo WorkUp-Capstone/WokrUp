@@ -1,5 +1,7 @@
 package com.workup.workup.services;
 
+import com.workup.workup.models.User;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
