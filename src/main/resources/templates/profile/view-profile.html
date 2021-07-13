@@ -8,20 +8,21 @@
 <div class="container mx-5">
     <h3>My Profile</h3>
 
-    <div class="card row d-flex justify-content-between mx-0">
-        <div class="main-content row">
+    <div class="card row justify-content-between mx-0">
+        <div class="main-content row p-3">
             <div class="profile-photo col-md-auto col-sm-auto mr-5">
                 <form th:action="@{profile/profileImg/add}" th:method="get">
                     <th:block th:each="profile : ${ownerProfile}">
+                        <div th:if="${ownerProfile.profile_image_url == null}">
+                            <div>
+                                <img src="/img/default-person-icon.png" alt="default pic" width="100" height="100">
+                            </div>
+                        </div>
                         <div>
                             <img th:src="${ownerProfile.profile_image_url}">
                         </div>
                         <button>Edit Photo</button>
                     </th:block>
-                </form>
-                <br>
-                <form th:action="@{/profile/edit}" th:method="get">
-                    <button>Edit Profile</button>
                 </form>
             </div>
 
@@ -29,6 +30,10 @@
                 <th:block th:each="profile : ${ownerProfile}">
                     <div id="user-info" class="col px-md-5 ml-auto col-sm-auto justify-content-between">
 
+                        <div class="row profile-view">
+                            <label class="col"><strong>My Name: </strong></label>
+                            <div th:text="${ownerProfile.user.getFullName()}"></div>
+                        </div>
                         <div class="row profile-view">
                             <label class="col"><strong>About Me: </strong></label>
                             <div th:text="${ownerProfile.about}"></div>
@@ -44,8 +49,9 @@
                             <div th:text="${ownerProfile.resume_link}"></div>
                         </div>
                         <div th:if="${ownerProfile.user.role.getId() == 2}">
+
                             <div class="row profile-view">
-                                <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+                                <label class="col"><strong>Preferred Languages/Frameworks</strong></label>
                                 <th:block th:each="category : ${ownerProfile.categories}">
                                     <div th:text="${category.name}"></div>
                                 </th:block>
@@ -68,8 +74,17 @@
                             <label class="col"><strong>Phone Number: </strong></label>
                             <div th:text="${ownerProfile.phone_number}"></div>
                         </div>
+                        <div class="row profile-view">
+                            <label class="col"><strong>Email: </strong></label>
+                            <div th:text="${ownerProfile.user.getEmail()}"></div>
+                        </div>
                     </div>
-
+                    <br>
+                    <div class="col edit-profile-btn ml-5">
+                    <form th:action="@{/profile/edit}" th:method="get">
+                        <button>Edit Profile</button>
+                    </form>
+                    </div>
                 </th:block>
             </div><!-- row user info-->
         </div><!-- row main content-->
@@ -86,28 +101,28 @@
         </form>
         <br>
         <th:block th:each="project : ${ownerProject}">
-            <div class="card w-50 m-0 col">
+            <div class="card w-50 m-2 p-3">
                 <form th:action="@{/profile}" th:method="post">
                     <div class="row profile-view">
                         <label class="col"><strong>Project Title:</strong></label>
-                        <div th:text="${project.title}"></div>
+                        <div class="col" th:text="${project.title}"></div>
                     </div>
                     <div class="row profile-view">
                         <label class="col"><strong>Project Description: </strong></label>
-                        <div th:text="${project.description}"></div>
+                        <div class="col" th:text="${project.description}"></div>
                     </div>
                     <div class="row profile-view">
                         <label class="col"><strong>Status: </strong></label>
-                        <div th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
+                        <div class="col" th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
                     </div>
                     <div class="row profile-view">
                         <label class="col"><strong>Project Created: </strong></label>
-                        <div th:text="${project.creationDate}"></div>
+                        <div class="col" th:text="${project.creationDate}"></div>
                     </div>
                     <div class="row profile-view">
                         <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
                         <th:block th:each="category : ${ownerProfile.categories}">
-                            <div th:text="${category.name}"></div>
+                            <div class="col" th:text="${category.name}"></div>
                         </th:block>
                     </div>
 
