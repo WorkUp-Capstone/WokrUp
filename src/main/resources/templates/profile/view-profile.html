@@ -31,6 +31,10 @@
                     <div id="user-info" class="col px-md-5 ml-auto col-sm-auto justify-content-between">
 
                         <div class="row profile-view">
+                            <label class="col"><strong>My Name: </strong></label>
+                            <div th:text="${ownerProfile.user.getFullName()}"></div>
+                        </div>
+                        <div class="row profile-view">
                             <label class="col"><strong>About Me: </strong></label>
                             <div th:text="${ownerProfile.about}"></div>
                         </div>
@@ -68,6 +72,10 @@
                         <div class="row profile-view">
                             <label class="col"><strong>Phone Number: </strong></label>
                             <div th:text="${ownerProfile.phone_number}"></div>
+                        </div>
+                        <div class="row profile-view">
+                            <label class="col"><strong>Email: </strong></label>
+                            <div th:text="${ownerProfile.user.getEmail()}"></div>
                         </div>
                     </div>
                     <br>
