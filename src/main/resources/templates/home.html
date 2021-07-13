@@ -46,7 +46,7 @@
                 <div class="row profile-view">
                     <h5 class="col">Programming Skills</h5>
                     <th:block th:each="category : ${profile.categories}">
-                        <li class="col" th:text="${category.name}"></li>
+                        <div class="col" th:text="${category.name}"></div>
                     </th:block>
                 </div>
 
@@ -77,12 +77,12 @@
                 <div class="row profile-view">
                     <h5 class="col"> Skills Required</h5>
                     <th:block th:each="category : ${project.categories}">
-                        <li class="col" th:text="${category.name}"></li>
+                        <div class="col" th:text="${category.name}"></div>
                     </th:block>
                 </div>
                 <div class="row profile-view">
                     <label class="col"><strong>Created By: </strong></label>
-                    <p th:text="${project.user.getFullName()}"></p>
+                    <p class="col" th:text="${project.user.getFullName()}"></p>
                 </div>
                 <div class="row profile-view">
                     <h5 class="col">Project Creation Date:</h5>
