@@ -28,22 +28,26 @@
 <script th:inline="javascript">
   (function (){
     const filestackapi = [[${filestackapi}]];
-    console.log(filestackapi);
     const client = filestack.init(filestackapi);
 
     const options = {
+      imageDim:[500,null],
+      maxFiles:5,
+      accept:["image/*", ".pdf", "text/*"],
+
       onUploadDone: (res) =>{
               $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`);
 
       $('#images').prepend(`<embed width="800" height="1000" src='${res.filesUploaded[0].url}'>`);
   },
-      accept:["image/*", ".pdf", "text/*"]
+
     }
 
     $("#picker").click(function (){
       client.picker(options).open();
     })
   })();
+
 </script>
 </body>
 </html>
