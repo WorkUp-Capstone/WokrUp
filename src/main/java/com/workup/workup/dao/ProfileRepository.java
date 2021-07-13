@@ -5,6 +5,7 @@ import com.workup.workup.models.Role;
 import com.workup.workup.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -32,4 +33,8 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
     List<Long> devSearch(String searchString);
 
     List<Profile> getAllByUserRole_Id(long id);
+
+    @Query(value = "from Profile p where p.about like %:keyword% or p.city like %:keyword% or p.state like %:keyword% or p.phone_number like %:keyword%")
+    List<Profile> getProfilesByKeyword(@Param("keyword")String keyword);
+
 }

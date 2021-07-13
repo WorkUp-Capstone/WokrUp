@@ -3,8 +3,9 @@ package com.workup.workup.models;
 
 //import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 
-import com.workup.workup.services.UniqueEmail;
-import org.checkerframework.common.aliasing.qual.Unique;
+import com.workup.workup.services.validation.UniqueEmail;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 
 import javax.persistence.*;

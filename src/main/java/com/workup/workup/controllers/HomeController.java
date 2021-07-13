@@ -6,15 +6,17 @@ import com.workup.workup.dao.UsersRepository;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
 import com.workup.workup.services.Email.EmailServiceImplementation;
-import com.workup.workup.services.Validation;
+import com.workup.workup.services.ProfileService;
+import com.workup.workup.services.ProjectService;
+import com.workup.workup.services.UserService;
+import com.workup.workup.services.validation.Validation;
 import org.apache.commons.lang3.StringUtils;
 import com.workup.workup.models.Project;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +40,9 @@ public class HomeController {
     private UsersRepository usersDao;
     private PasswordEncoder passwordEncoder;
     private final EmailServiceImplementation email;
+    @Autowired private ProjectService projectService;
+    @Autowired private UserService userService;
+    @Autowired private ProfileService profileService;
 
 
     public HomeController(ProjectsRepository projectsRepository, ProfileRepository profileRepository, UsersRepository usersRepository, PasswordEncoder passwordEncoder, EmailServiceImplementation email){
@@ -62,7 +67,6 @@ public class HomeController {
 
 //save user
     @PostMapping("/register")
-
     public ModelAndView saveUser(@ModelAttribute @Valid User user){
         Profile profile = new Profile();
         String password = user.getPassword();
@@ -76,8 +80,6 @@ public class HomeController {
         Validation validate = new Validation();
         modelAndView.setViewName("registration");
         modelAndView.addObject("user", user);
-
-//        validate.emailHasError(email);
 
         if (validate.emailHasError(email)) {
             String emailError = "Input a proper email (___@mailservice.com)";
@@ -111,19 +113,8 @@ public class HomeController {
         return modelAndView;
     }
 
-    // NO LONGER NEEDED FOR HOME VIEW BUT COULD BE USED TO REFACTORED CLUNCKY WORKING CODE
-    //Project index for Developers to view in their Home Page
-//    @GetMapping("/home")
-//    public String projectsIndex(Model model,
-//                                @AuthenticationPrincipal User user){
-//
-//            model.addAttribute("userRole", user.getRole().getRole());
-//            model.addAttribute("allProjects", projectsDao.findAll());
-//        model.addAttribute("devProfiles", profileDao.getAllByUserRole_Id(user.getRole().getId()));
-//        return "home";
-//    }
     @GetMapping("/home")
-    public String home(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
+    public String home(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("userRole", user.getRole().getRole());
         List<Profile> profiles = profileDao.findAll();
         List<Profile> devProfiles = new ArrayList<>();
@@ -146,57 +137,8 @@ public class HomeController {
         return "home";
     }
 
-
-    //      METHODS NEEDED FOR SEARCH TO WORK DECENT
-//    IMPROVEMENTS THAT ARE NEEDED ARE PARTIAL/FUZZY INTERPRETATION AND STATE IS ACTING FUNNY
-    public List<Long> projectSearch(String searchString) {
-        return projectsDao.projectSearch(searchString);
-    }
-
-    public List<Long> devSearch(String searchString) {
-        return profileDao.devSearch(searchString);
-    }
-
-
-    // THINGS TO ADD REMOVE MINIMUM CHARACTERS TO SEARCH
-    @GetMapping("/search")
-    public String search(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
-        List<Project> projectSearchResults;
-        List<Profile> profileSearchResults;
-        if (user.getRole().getRole().equalsIgnoreCase("developer")) {
-            List<Long> searchResult = projectSearch(keyword);
-            if (searchResult.isEmpty()) {
-                projectSearchResults = projectsDao.findAll();
-                model.addAttribute("searchResults", projectSearchResults);
-                model.addAttribute("searchString", "No Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
-            } else {
-                projectSearchResults = projectsDao.findAllById(searchResult);
-                model.addAttribute("searchResults", projectSearchResults);
-                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
-            }
-        } else {
-            List<Long> searchResult = devSearch(keyword);
-            if (searchResult.isEmpty()) {
-                profileSearchResults = profileDao.findAll();
-                model.addAttribute("searchResults", profileSearchResults);
-                model.addAttribute("searchString", "No Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
-            } else {
-                profileSearchResults = profileDao.findAllById(searchResult);
-                model.addAttribute("searchResults", profileSearchResults);
-                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
-            }
-        }
-        model.addAttribute("userRole", user.getRole().getRole());
-        return "search_result";
-    }
-
-
     @PostMapping("/home")
-    public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId) throws MessagingException, IOException {
+    public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId, @RequestParam String keyword, Model model) throws MessagingException, IOException {
         Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
         User contactUser = usersDao.getById(devId);
         User primaryUser = usersDao.getById(user.getId());
@@ -207,6 +149,51 @@ public class HomeController {
         email.sendUserMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
         return "redirect:/home";
     }
+
+    @GetMapping("/home/search")
+    public String searchResults(Model model, @AuthenticationPrincipal User user, String keyword) {
+        model.addAttribute("userRole", user.getRole().getRole());
+        List<Profile> profiles = profileService.getProfilesByKeyword(keyword);
+        List<Profile> foundProfiles = new ArrayList<>();
+        List<Project> projects = projectService.getProjectsByKeyword(keyword);
+        List<Project> foundProjects = new ArrayList<>();
+
+        model.addAttribute("keyword", keyword);
+
+//        model.addAttribute("foundProfiles", profileService.getProfilesByKeyword(keyword));
+//        model.addAttribute("foundProfiles", userService.getUsersByKeyword(keyword));
+//        model.addAttribute("foundProjects", projectService.getProjectsByKeyword(keyword));
+
+        for(Project project : projects) {
+                if (project.getStatus().contains("open")) {
+
+                    foundProjects.add(project);
+                }
+        }
+
+        for(Profile profile : profiles) {
+                if (profile.getUser().getRole().getId() == 2) {
+//                    model.addAttribute("foundProjects", userService.getUsersByKeyword(keyword));
+                    foundProfiles.add(profile);
+                }
+        }
+        model.addAttribute("foundProjects", foundProjects);
+        model.addAttribute("foundProfiles", foundProfiles);
+        return "search";
+    }
+
+    @PostMapping("/home/search")
+    public String searchHome(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId, @RequestParam String keyword, Model model) throws MessagingException, IOException {
+        profileDao.getProfileByUserId(user.getId());
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("foundProfiles", profileService.getProfilesByKeyword(keyword));
+        model.addAttribute("foundUsers", userService.getUsersByKeyword(keyword));
+        model.addAttribute("foundProjects", projectService.getProjectsByKeyword(keyword));
+        return "redirect:/home";
+    }
+
+
+
 
     @PostMapping("/home/contact")
     public String contactProject(@AuthenticationPrincipal User user, @RequestParam(name = "projectID") Long projectId) throws MessagingException, IOException, MessagingException, IOException {
@@ -225,4 +212,50 @@ public class HomeController {
     }
 
 
+    //      METHODS NEEDED FOR SEARCH TO WORK DECENT
+//    IMPROVEMENTS THAT ARE NEEDED ARE PARTIAL/FUZZY INTERPRETATION AND STATE IS ACTING FUNNY
+//    public List<Long> projectSearch(String searchString) {
+//        return projectsDao.projectSearch(searchString);
+//    }
+//
+//    public List<Long> devSearch(String searchString) {
+//        return profileDao.devSearch(searchString);
+//    }
+
+
+    // THINGS TO ADD REMOVE MINIMUM CHARACTERS TO SEARCH
+//    @GetMapping("/search")
+//    public String search(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
+//        List<Project> projectSearchResults;
+//        List<Profile> profileSearchResults;
+//        if (user.getRole().getRole().equalsIgnoreCase("developer")) {
+//            List<Long> searchResult = projectSearch(keyword);
+//            if (searchResult.isEmpty()) {
+//                projectSearchResults = projectsDao.findAll();
+//                model.addAttribute("searchResults", projectSearchResults);
+//                model.addAttribute("searchString", "No Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
+//            } else {
+//                projectSearchResults = projectsDao.findAllById(searchResult);
+//                model.addAttribute("searchResults", projectSearchResults);
+//                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
+//            }
+//        } else {
+//            List<Long> searchResult = devSearch(keyword);
+//            if (searchResult.isEmpty()) {
+//                profileSearchResults = profileDao.findAll();
+//                model.addAttribute("searchResults", profileSearchResults);
+//                model.addAttribute("searchString", "No Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
+//            } else {
+//                profileSearchResults = profileDao.findAllById(searchResult);
+//                model.addAttribute("searchResults", profileSearchResults);
+//                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
+//            }
+//        }
+//        model.addAttribute("userRole", user.getRole().getRole());
+//        return "search_result";
+//    }
 }

@@ -19,7 +19,7 @@
     <!--TODO: Need to reference ONLY Project owners profiles-->
     <div class="card" th:case="'owner'">
         <h4>Our Developers</h4>
-        <th:block th:each="profile : ${devProfiles}">
+        <th:block th:each="profile : ${foundProfiles}">
 
             <h3 th:text="${profile.user.firstName}"> </h3><h3 th:text="${profile.user.lastName}"></h3><p th:text="${profile.profile_image_url}"></p>
             <h4>About </h4><h4 th:text="${profile.user.firstName}"></h4>
@@ -42,7 +42,7 @@
 
     <div class="project-card" th:case="'developer'">
         <h4>Currently Open Projects</h4>
-        <th:block th:each="project : ${openProjects}" class="project-block">
+        <th:block th:each="project : ${foundProjects}" class="project-block">
             <h3 th:text="${project.title}" ></h3>
             <h3>Project Description</h3>
             <p th:text="${project.description}"></p>
