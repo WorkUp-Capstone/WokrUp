@@ -224,5 +224,13 @@ public class HomeController {
         return "redirect:/home";
     }
 
+    @GetMapping("/about-us")
+    public String about(){
+        return "about-us";
+    }
 
+    @GetMapping("/tos")
+    public String tos(){
+        return "tos";
+    }
 }

@@ -9,3 +9,12 @@
 .names{
     padding: 0; !important;
 }
+
+html,
+body {
+    height: 100%;
+}
+
+#sticky-footer{
+    flex-shrink: 0;
+}
