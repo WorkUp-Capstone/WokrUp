@@ -7,11 +7,10 @@
 <div class="col form-group">
     <form id="image" th:action="@{/profile/profileImg/add}" method="post" th:object="${userProfile}">
 
-        <label for="profileImg">Select a profile image</label>
-
-      <input type="hidden" id="profileImg">
+        <label>Select a profile image</label>
 
       <button id="picker" type="button">Select Photo</button>
+
     <input type="submit" value="Submit">
     </form>
     </div>
@@ -26,8 +25,12 @@
     const client = filestack.init(filestackapi);
 
     const options = {
-      onUploadDone: (res) =>
-              $('#image').append(`<input type="hidden" name="profile_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),
+      onUploadDone: (res) => {
+          $('#image').append(`<input type="hidden" name="profile_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`);
+
+          $('#image').prepend(`<img src='${res.filesUploaded[0].url}'>`);
+      },
+
       imageDim: [100, 100],
         accept:["image/*"]
     }
