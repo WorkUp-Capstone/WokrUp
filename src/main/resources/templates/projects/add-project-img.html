@@ -12,7 +12,7 @@
 
     <button id="picker" type="button">Select File</button>
 
-    <input type="submit" value="Add File">
+    <input style="display: none" class="submit" type="submit" value="Submit File to project">
   </form>
 
 <!--  <form th:action="@{/profile/projectImg/{id}/delete(id=${projectImage.getId()})}" th:method="POST">-->
@@ -50,6 +50,8 @@
 
     $("#picker").click(function (){
       client.picker(options).open();
+
+      document.querySelector(".submit").style.display="block";
     })
 
   })();
