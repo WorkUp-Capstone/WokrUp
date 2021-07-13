@@ -4,6 +4,7 @@ import com.workup.workup.dao.*;
 import com.workup.workup.models.*;
 import com.workup.workup.services.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,10 +38,12 @@ public class UsersController {
     public String showOwnerProfile(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Profile profile;
-        User logged = usersDao.getById(user.getId());
+
         profile = profileDao.getProfileByUserIs(user);
         model.addAttribute("ownerProfile", profile);
-
+        User logged = profile.getUser();
+        model.addAttribute("authenticatedUser", user);
+        model.addAttribute("ownerUser", logged);
         List<Project> projectList;
         projectList = projectsDao.getAllProjectsByUserIdIs(logged.getId());
         model.addAttribute("ownerProject", projectList);
@@ -107,6 +110,22 @@ public class UsersController {
         profileDao.save(profile);
         return "redirect:/profile";
     }
+
+
+    // viewing project owner profile from home as dev
+    @PostMapping("/home/view-prospect")
+    public String viewProspect(@RequestParam(name = "ownerID") Long id, Model model, @AuthenticationPrincipal User user){
+        Profile prospectProfile = profileDao.getProfileByUserId(id);
+        List<Project> prospectProjects = projectsDao.getAllProjectsByUserIdIs(id);
+        User prospectUser = prospectProfile.getUser();
+        model.addAttribute("authenticatedUser", user);
+        model.addAttribute("ownerUser", prospectUser);
+        model.addAttribute("ownerProfile", prospectProfile);
+        model.addAttribute("ownerProject", prospectProjects);
+        return "profile/view-profile";
+    }
+
+
 
 
     //TODO: edit user attributes (First name, last name, password)

@@ -131,7 +131,7 @@ public class HomeController {
         List<Project> openProjects = new ArrayList<>();
 
         for(Project project : projects) {
-            if (project.getStatus().contains("open")) {
+            if (project.getStatus().contains("Open")) {
                 openProjects.add(project);
             }
         }
