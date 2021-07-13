@@ -13,45 +13,92 @@
     <div class="card" th:case="'owner'">
         <h4>Our Developers</h4>
         <th:block th:each="profile : ${devProfiles} ">
+            <div class="card w-50 m-2 p-3 col">
+<div class="profile-photo">
+                <div th:if="${profile.profile_image_url == null}">
+                    <div>
+                        <img src="/img/default-person-icon.png" alt="default pic" width="100" height="100">
+                    </div>
+                </div>
+                <div>
+                    <img th:src="${profile.profile_image_url}">
+                </div>
+</div>
+                <div class="row profile-view">
+                    <h3 class="col" th:text="${profile.user.getFullName()}"></h3>
+                </div>
 
-            <h3 th:text="${profile.user.firstName}"> </h3><h3 th:text="${profile.user.lastName}"></h3><p th:text="${profile.profile_image_url}"></p>
-            <h4>About </h4><h4 th:text="${profile.user.firstName}"></h4>
-            <p th:text="${profile.about}"></p>
-            <h4>Portfolio</h4>
-            <p th:text="${profile.portfolio_link}"></p>
-            <h4>Resume</h4>
-            <p th:text="${profile.resume_link}"></p>
-            <h4>Programming Skills</h4>
-            <th:block th:each="category : ${profile.categories}">
-                <li th:text="${category.name}"></li>
-            </th:block>
-            <form th:action="@{/home}" method="post">
-                <input type="hidden" th:name="profileID" th:value="${profile.getUser().getId()}">
-                <button type="submit" class="btn-outline-success" id="claim-project">Claim Developer</button>
-            </form>
+                <div class="row profile-view">
+                    <h5 class="col">About </h5>
+                    <p class="col" th:text="${profile.about}"></p>
+                </div>
 
+                <div class="row profile-view">
+                    <h5 class="col">Portfolio</h5>
+                    <p class="col" th:text="${profile.portfolio_link}"></p>
+                </div>
+
+                <div class="row profile-view">
+                    <h5 class="col">Resume</h5>
+                    <p class="col" th:text="${profile.resume_link}"></p>
+                </div>
+
+                <div class="row profile-view">
+                    <h5 class="col">Programming Skills</h5>
+                    <th:block th:each="category : ${profile.categories}">
+                        <div class="col" th:text="${category.name}"></div>
+                    </th:block>
+                </div>
+
+
+                <form th:action="@{/home}" method="post">
+                    <input type="hidden" th:name="profileID" th:value="${profile.getUser().getId()}">
+
+                    <button type="submit" class="btn-outline-success" id="claim-project">Claim Developer</button>
+                </form>
+            </div>
         </th:block>
     </div>
+
 
     <div class="project-card" th:case="'developer'">
         <h4>Currently Open Projects</h4>
         <th:block th:each="project : ${openProjects}">
-            <h3 th:text="${project.title}" ></h3>
-            <h3>Project Description</h3>
-            <p th:text="${project.description}"></p>
-            <h3>Project Images</h3>
-            <p th:text="${project.images}"></p>
-            <h3> Skills Required</h3>
-            <th:block th:each="category : ${project.categories}">
-                <li th:text="${category.name}"></li>
-            </th:block>
-            <h3>Project Creation Date:</h3>
-            <p th:text="${project.creationDate}"></p>
-            <form th:action="@{/home/contact}" method="post">
-                <input type="hidden" th:name="projectID" th:value="${project.getId()}">
-                <button type="submit" class="btn-outline-success">Claim Project</button>
-            </form>
+            <div class="card w-50 m-2 p-3 col">
+                <div class="row profile-view">
+                    <h3 class="col" th:text="${project.title}"></h3>
+                </div>
 
+                <div class="row profile-view">
+                    <h5 class="col">Project Description</h5>
+                    <p class="col" th:text="${project.description}"></p>
+                </div>
+
+                <div class="row profile-view">
+                    <h5 class="col"> Skills Required</h5>
+                    <th:block th:each="category : ${project.categories}">
+                        <div class="col" th:text="${category.name}"></div>
+                    </th:block>
+                </div>
+                <div class="row profile-view">
+                    <label class="col"><strong>Created By: </strong></label>
+                    <p class="col" th:text="${project.user.getFullName()}"></p>
+                </div>
+                <div class="row profile-view">
+                    <h5 class="col">Project Creation Date:</h5>
+                    <p class="col" th:text="${project.creationDate}"></p>
+                </div>
+
+                <div class="row profile-view">
+                    <input type="hidden" th:name="projectIma" th:value="${project.getImages()}">
+                    <a th:href="@{/profile/projects/images}"><span><h5 class="col">Project Images</h5></span></a>
+                </div>
+
+                <form th:action="@{/home/contact}" method="post">
+                    <input type="hidden" th:name="projectID" th:value="${project.getId()}">
+                    <button type="submit" class="btn-outline-success">Claim Project</button>
+                </form>
+            </div>
         </th:block>
     </div>
     <!--TODO: extract info based on role -->
