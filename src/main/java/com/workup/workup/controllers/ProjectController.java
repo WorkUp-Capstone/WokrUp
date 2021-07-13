@@ -89,18 +89,18 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
     }
 
-    @GetMapping("/profile/projects/images")
-    public String viewProjectImages(Model model){
-
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        User logged = userDao.getById(user.getId());
-
-        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(logged.getId());
-        model.addAttribute("projectImageList", projectImageList);
-
-        return "projects/view-project-images";
-    }
+//    @GetMapping("/profile/projects/images")
+//    public String viewProjectImages(Model model){
+//
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//        User logged = userDao.getById(user.getId());
+//
+//        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(logged.getId());
+//        model.addAttribute("projectImageList", projectImageList);
+//
+//        return "projects/view-project-images";
+//    }
 
     //edit selected project
     @GetMapping("/projects/{id}/edit")
@@ -178,6 +178,12 @@ ProjectImage image = new ProjectImage();
 
         return "redirect:/profile";
     }
+
+//    @PostMapping("/profile/projectImg/{id}/delete")
+//    public String deleteProjectImages(@PathVariable long id){
+//        imageDao.deleteById(id);
+//        return "redirect:/projects/add-project-img";
+//    }
 
 
 
