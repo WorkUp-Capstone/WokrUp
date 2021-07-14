@@ -90,8 +90,9 @@
                 </div>
 
                 <div class="row profile-view">
-                    <input type="hidden" th:name="projectIma" th:value="${project.getImages()}">
-                    <a th:href="@{/profile/projects/images}"><span><h5 class="col">Project Images</h5></span></a>
+                    <th:block th:each="image :${project.getImages()}">
+                        <img th:href="${image.getPath()}" alt="image">
+                    </th:block>
                 </div>
 
 <!--                <form th:action="@{/home/claimed-project}" method="post">-->

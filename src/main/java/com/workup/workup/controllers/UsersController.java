@@ -42,12 +42,12 @@ public class UsersController {
         profile = profileDao.getProfileByUserIs(user);
         model.addAttribute("ownerProfile", profile);
         User logged = profile.getUser();
+        List<Project> openProjects = projectsDao.getAllprojectsByStatusAndUser("Open", logged);
+        List<Project> restrictedProjects = projectsDao.getAllprojectsByStatusAndUser("in progress", logged);
+        model.addAttribute("ownerOpenProject", openProjects);
+        model.addAttribute("ownerRestrictedProject", restrictedProjects);
         model.addAttribute("authenticatedUser", user);
         model.addAttribute("ownerUser", logged);
-        List<Project> projectList;
-        projectList = projectsDao.getAllProjectsByUserIdIs(logged.getId());
-        model.addAttribute("ownerProject", projectList);
-
         return "profile/view-profile";
     }
 
@@ -116,12 +116,13 @@ public class UsersController {
     @PostMapping("/home/view-prospect")
     public String viewProspect(@RequestParam(name = "ownerID") Long id, Model model, @AuthenticationPrincipal User user){
         Profile prospectProfile = profileDao.getProfileByUserId(id);
-        List<Project> prospectProjects = projectsDao.getAllProjectsByUserIdIs(id);
         User prospectUser = prospectProfile.getUser();
+
+        List<Project> ownerProjects = projectsDao.getAllprojectsByStatusAndUser("Open", prospectUser);
         model.addAttribute("authenticatedUser", user);
         model.addAttribute("ownerUser", prospectUser);
         model.addAttribute("ownerProfile", prospectProfile);
-        model.addAttribute("ownerProject", prospectProjects);
+        model.addAttribute("ownerProject", ownerProjects);
         return "profile/view-profile";
     }
 

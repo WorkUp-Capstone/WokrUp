@@ -8,12 +8,12 @@
 <div th:switch="${authenticatedUser.getId() == ownerUser.getId()}">
     <!--  normal profile view for the User  -->
     <div th:case="true">
-        <div th:insert="partials/view-profiles/nonOwner"></div>
+        <div th:insert="partials/view-profiles/owner"></div>
 
     </div>
     <!--  Profile of user that was selected  -->
     <div th:case="false">
-        <div th:insert="partials/view-profiles/Owner"></div>
+        <div th:insert="partials/view-profiles/non-owner"></div>
     </div>
 
 

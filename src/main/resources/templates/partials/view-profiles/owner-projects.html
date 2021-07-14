@@ -1,0 +1,89 @@
+<div class="container mx-5">
+  <div th:if="${ownerProfile.user.role.getId() == 1}">
+    <form th:action="@{profile/projects/create}" th:method="get">
+      <button>Add Project</button>
+    </form>
+    <h3>My Projects</h3>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <h2>Open Projects</h2>
+          <th:block th:each="project : ${ownerOpenProject}">
+            <div class="card w-50 m-2 p-3">
+              <form th:action="@{/profile}" th:method="post">
+                <div class="row profile-view">
+                  <label class="col"><strong>Project Title:</strong></label>
+                  <div class="col" th:text="${project.title}"></div>
+                </div>
+                <div class="row profile-view">
+                  <label class="col"><strong>Project Description: </strong></label>
+                  <div class="col" th:text="${project.description}"></div>
+                </div>
+                <div class="row profile-view">
+                  <label class="col"><strong>Status: </strong></label>
+                  <div class="col" th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
+                </div>
+                <div class="row profile-view">
+                  <label class="col"><strong>Project Created: </strong></label>
+                  <div class="col" th:text="${project.creationDate}"></div>
+                </div>
+                <div class="row profile-view">
+                  <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+                  <th:block th:each="category : ${project.categories}">
+                    <div class="col" th:text="${category.name}"></div>
+                  </th:block>
+                </div>
+
+              </form>
+
+              <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
+              <br>
+              <a th:href="@{/profile/projectImg/{id}/add(id=${project.getId()})}">Manage Project Images</a>
+            </div>
+          </th:block>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <h2>In Progress</h2>
+          <th:block th:each="project : ${ownerRestrictedProject}">
+            <div class="card w-50 m-2 p-3">
+              <form th:action="@{/profile}" th:method="post">
+                <div class="row profile-view">
+                  <label class="col"><strong>Project Title:</strong></label>
+                  <div class="col" th:text="${project.title}"></div>
+                </div>
+                <div class="row profile-view">
+                  <label class="col"><strong>Project Description: </strong></label>
+                  <div class="col" th:text="${project.description}"></div>
+                </div>
+                <div class="row profile-view">
+                  <label class="col"><strong>Status: </strong></label>
+                  <div class="col" th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
+                </div>
+                <div class="row profile-view">
+                  <label class="col"><strong>Project Created: </strong></label>
+                  <div class="col" th:text="${project.creationDate}"></div>
+                </div>
+                <div class="row profile-view">
+                  <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+                  <th:block th:each="category : ${project.categories}">
+                    <div class="col" th:text="${category.name}"></div>
+                  </th:block>
+                </div>
+
+              </form>
+
+              <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
+              <br>
+              <a th:href="@{/profile/projectImg/{id}/add(id=${project.getId()})}">Manage Project Images</a>
+            </div>
+          </th:block>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
