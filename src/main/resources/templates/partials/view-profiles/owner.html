@@ -16,7 +16,7 @@
                 </th:block>
             </div>
 
-            <div class="user-info row mx-md-n5 align-items-center" th:action="@{/profile/edit}">
+            <div class="user-info row mx-md-n5 align-items-center">
                 <th:block th:each="profile : ${ownerProfile}">
                     <div id="user-info" class="col px-md-5 ml-auto col-sm-auto justify-content-between">
 
@@ -69,6 +69,10 @@
                             <div th:text="${ownerProfile.user.getEmail()}"></div>
                         </div>
                     </div>
+                    <form th:action="@{/home/contact}" method="post">
+                        <input type="hidden" th:name="profileID" th:value="${ownerProfile.user.getId()}">
+                        <button type="submit" class="btn-outline-success">Contact Owner</button>
+                    </form>
                 </th:block>
             </div><!-- row user info-->
         </div><!-- row main content-->
@@ -100,9 +104,15 @@
                 </div>
                 <div class="row profile-view">
                     <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
-                    <th:block th:each="category : ${ownerProfile.categories}">
+                    <th:block th:each="category : ${project.categories}">
                         <div class="col" th:text="${category.name}"></div>
                     </th:block>
+                </div>
+                <div class="row profile-view">
+                    <form th:action="@{/home/claimed-project}" method="post">
+                        <input type="hidden" th:name="projectID" th:value="${project.getUser().getId()}">
+                        <button type="submit" class="btn-outline-success">Claim Project</button>
+                    </form>
                 </div>
             </div>
         </th:block>

@@ -195,7 +195,7 @@ public class HomeController {
     }
 
 
-    @PostMapping("/home")
+    @PostMapping("/home/contact")
     public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId) throws MessagingException, IOException {
         Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
         User contactUser = usersDao.getById(devId);
@@ -208,7 +208,7 @@ public class HomeController {
         return "redirect:/home";
     }
 
-    @PostMapping("/home/contact")
+    @PostMapping("/home/claimed-project")
     public String contactProject(@AuthenticationPrincipal User user, @RequestParam(name = "projectID") Long projectId) throws MessagingException, IOException, MessagingException, IOException {
         Project project = projectsDao.getProjectById(projectId);
         Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
@@ -219,9 +219,9 @@ public class HomeController {
         emailbody.put("primaryProfile", primaryProfile);
         emailbody.put("primaryUser", primaryUser);
         project.setStatus("in progress");
-        project.setDeveloperUser(contactUser);
+        project.setDeveloperUser(primaryUser);
         projectsDao.saveAndFlush(project);
-        email.sendProjectMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
+        email.sendProjectMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFullName(), emailbody);
         return "redirect:/home";
     }
 
