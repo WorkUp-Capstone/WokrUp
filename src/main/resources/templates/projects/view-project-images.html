@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/head :: head"></head>
-
+<head th:replace="partials/head :: head">
+  <title>Project Images</title>
+</head>
 <body>
-<nav th:replace="partials/navbar :: navbar"></nav>
+
+<form th:action="@{/profile/projects/images}" method="post">
 
 <th:block th:each="projectImage : ${projectImageList}">
   <div class="col form-group">
-    <embed th:width="800" th:height="1000" th:src="${projectImage.path}"><!--Submitted file size-->
+    <img th:src="${projectImage.path}">
   </div>
 </th:block>
 
+</form>
 
 </body>
 </html>

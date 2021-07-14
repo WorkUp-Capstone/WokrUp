@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+//@Indexed
 @Table(name="categories")
 public class Category {
     @Id

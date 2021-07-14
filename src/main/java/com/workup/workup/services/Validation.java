@@ -1,4 +1,4 @@
-package com.workup.workup.services.validation;
+package com.workup.workup.services;
 
 import com.workup.workup.models.User;
 

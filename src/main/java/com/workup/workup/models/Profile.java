@@ -6,13 +6,11 @@ package com.workup.workup.models;
 //import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 //import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+//@Indexed
 @Table(name = "profiles")
 public class Profile {
 
@@ -43,12 +41,10 @@ public class Profile {
     @Column
     private String profile_image_url;
 
-    @Column
-    private boolean chosen = false;
-
     @OneToOne
 //    @IndexedEmbedded
     private User user;
+
 
     @ManyToMany(cascade = CascadeType.ALL)
 //    @IndexedEmbedded
@@ -62,7 +58,7 @@ public class Profile {
     public Profile() {}
 
     // Constructors
-    public Profile(String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url, boolean chosen, List<Category> categories, User user) {
+    public Profile(String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url, List<Category> categories, User user) {
         this.about = about;
         this.portfolio_link = portfolio_link;
         this.resume_link = resume_link;
@@ -70,12 +66,11 @@ public class Profile {
         this.state = state;
         this.phone_number = phone_number;
         this.profile_image_url = profile_image_url;
-        this.chosen = chosen;
         this.categories = categories;
         this.user = user;
     }
 
-    public Profile(long id, String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url, boolean chosen, List<Category> categories, User user) {
+    public Profile(long id, String about, String portfolio_link, String resume_link, String city, String state, String phone_number, String profile_image_url, List<Category> categories, User user) {
         this.id = id;
         this.about = about;
         this.portfolio_link = portfolio_link;
@@ -84,7 +79,6 @@ public class Profile {
         this.state = state;
         this.phone_number = phone_number;
         this.profile_image_url = profile_image_url;
-        this.chosen = chosen;
         this.categories = categories;
         this.user = user;
     }
@@ -165,11 +159,4 @@ public class Profile {
         this.user = user;
     }
 
-    public boolean getChosen() {
-        return chosen;
-    }
-
-    public void setChosen(boolean chosen) {
-        this.chosen = chosen;
-    }
 }

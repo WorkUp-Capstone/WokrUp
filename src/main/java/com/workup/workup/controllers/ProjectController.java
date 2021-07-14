@@ -89,6 +89,19 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
     }
 
+    @GetMapping("/profile/projects/images")
+    public String viewProjectImages(Model model){
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User logged = userDao.getById(user.getId());
+
+        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(logged.getId());
+        model.addAttribute("projectImageList", projectImageList);
+
+        return "projects/view-project-images";
+    }
+
     //edit selected project
     @GetMapping("/projects/{id}/edit")
     public String editProjectForm(Model model, @PathVariable Long id, Model categoryModel) {
@@ -128,10 +141,12 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     }
 
 //    //create project images:
-    @GetMapping("/profile/projects/{id}/add")
-    public String addProjectImagesForm(Model model, @PathVariable Long id){
+    @GetMapping("/profile/projectImg/{id}/add")
+    public String viewProjectImagesForm(Model model, @PathVariable Long id){
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User logged = userDao.getById(user.getId());
 
         Project addProjectImg = projectDao.getById(id);
         model.addAttribute("addProjectImg", addProjectImg);
@@ -140,36 +155,33 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
         List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(addProjectImg.getId());
 
         model.addAttribute("projectImageList", projectImageList);
+        //model.addAttribute("project", projectDao.getProjectByUserIs(user));
+//        model.addAttribute("image", imageDao.getImageByProjectId(user));
 
         return "projects/add-project-img";
     }
 
     //save project images:
-    @PostMapping("/profile/projects/{id}/add")
+    @PostMapping("/profile/projectImg/{id}/add")
     public String saveProjectImages(@PathVariable Long id, @RequestParam(name = "project_img") String path){
 
 ProjectImage image = new ProjectImage();
 
        Project project = projectDao.getById(id);
 
+        //image.setId(id);
         image.setPath(path);
         image.setProject(project);
+
 
         imageDao.save(image);
 
         return "redirect:/profile";
     }
 
-    @PostMapping("/profile/image/{id}/delete")
-    public String deleteProjectImages(@PathVariable long id){
 
-       ProjectImage image = imageDao.getById(id);
-       Project imageProject = image.getProject();
 
-       Long imageProject_id = imageProject.getId();
-       imageDao.deleteById(id);
 
-       return "redirect:/profile/projects/" + imageProject_id + "/add";
-    }
+
 
 }

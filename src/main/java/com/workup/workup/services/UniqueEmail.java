@@ -1,6 +1,6 @@
-package com.workup.workup.services.validation;
+package com.workup.workup.services;
 
-import com.workup.workup.services.validation.UniqueEmailValidator;
+import com.workup.workup.models.User;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
