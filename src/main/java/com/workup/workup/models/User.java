@@ -48,10 +48,22 @@ public class User {
 
     private boolean passwordsEqual;
 
+    @OneToOne
+    private Profile profile;
+
     // Empty constructor for Spring
     public User() {}
 
     //Insert Constructor
+    public User(long id, String email, String password, String passwordRepeat, String first_name, String last_name, Role role, List<Project> projectList, boolean passwordsEqual, Profile profile) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.role = role;
+        this.profile = profile;
+    }
     public User(long id,String email, String password, String first_name, String last_name, Role role)
     {
         this.id = id;
@@ -129,6 +141,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Profile getProfile(){
+        return profile;
+    }
+
+    public void setProfile(Profile profile){
+        this.profile = profile;
     }
 
     public List<Project> getProject() {

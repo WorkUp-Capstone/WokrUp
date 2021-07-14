@@ -135,7 +135,7 @@ public class HomeController {
         List<Project> openProjects = new ArrayList<>();
 
         for(Project project : projects) {
-            if (project.getStatus().contains("open")) {
+            if (project.getStatus().contains("Open")) {
                 openProjects.add(project);
             }
         }
@@ -208,8 +208,8 @@ model.addAttribute("projectImageList", projectImage);
         return "search_result";
     }
 
-    @PostMapping("/home")
-    public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId, @RequestParam String keyword, Model model) throws MessagingException, IOException {
+    @PostMapping("/home/contact")
+    public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId) throws MessagingException, IOException {
         Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
         User contactUser = usersDao.getById(devId);
         User primaryUser = usersDao.getById(user.getId());
@@ -267,9 +267,7 @@ model.addAttribute("projectImageList", projectImage);
     }
 
 
-
-
-    @PostMapping("/home/contact")
+    @PostMapping("/home/claimed-project")
     public String contactProject(@AuthenticationPrincipal User user, @RequestParam(name = "projectID") Long projectId) throws MessagingException, IOException, MessagingException, IOException {
         Project project = projectsDao.getProjectById(projectId);
         Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
@@ -280,8 +278,9 @@ model.addAttribute("projectImageList", projectImage);
         emailbody.put("primaryProfile", primaryProfile);
         emailbody.put("primaryUser", primaryUser);
         project.setStatus("in progress");
+        project.setDeveloperUser(primaryUser);
         projectsDao.saveAndFlush(project);
-        email.sendProjectMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
+        email.sendProjectMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFullName(), emailbody);
         return "redirect:/home";
     }
 
