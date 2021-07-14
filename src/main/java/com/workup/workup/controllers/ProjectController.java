@@ -89,19 +89,6 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
     }
 
-//    @GetMapping("/profile/projects/images")
-//    public String viewProjectImages(Model model){
-//
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//        User logged = userDao.getById(user.getId());
-//
-//        List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(logged.getId());
-//        model.addAttribute("projectImageList", projectImageList);
-//
-//        return "projects/view-project-images";
-//    }
-
     //edit selected project
     @GetMapping("/projects/{id}/edit")
     public String editProjectForm(Model model, @PathVariable Long id, Model categoryModel) {
@@ -146,8 +133,6 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        User logged = userDao.getById(user.getId());
-
         Project addProjectImg = projectDao.getById(id);
         model.addAttribute("addProjectImg", addProjectImg);
         model.addAttribute("filestackapi", filestackApi);
@@ -155,8 +140,6 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
         List<ProjectImage> projectImageList = imageDao.getAllProjectImageByProjectId(addProjectImg.getId());
 
         model.addAttribute("projectImageList", projectImageList);
-        //model.addAttribute("project", projectDao.getProjectByUserIs(user));
-//        model.addAttribute("image", imageDao.getImageByProjectId(user));
 
         return "projects/add-project-img";
     }
@@ -169,21 +152,19 @@ ProjectImage image = new ProjectImage();
 
        Project project = projectDao.getById(id);
 
-        //image.setId(id);
         image.setPath(path);
         image.setProject(project);
-
 
         imageDao.save(image);
 
         return "redirect:/profile";
     }
 
-//    @PostMapping("/profile/projectImg/{id}/delete")
-//    public String deleteProjectImages(@PathVariable long id){
-//        imageDao.deleteById(id);
-//        return "redirect:/projects/add-project-img";
-//    }
+    @PostMapping("/profile/projectImg/{id}/delete")
+    public String deleteProjectImages(@PathVariable long id){
+        imageDao.deleteById(id);
+       // return "redirect:/profile/projectImg/{id}/add";
+    }
 
 
 

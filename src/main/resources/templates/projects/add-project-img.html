@@ -15,15 +15,19 @@
     <input style="display: none" class="submit" type="submit" value="Submit File to project">
   </form>
 
-<!--  <form th:action="@{/profile/projectImg/{id}/delete(id=${projectImage.getId()})}" th:method="POST">-->
-<!--    <button class="btn btn-danger">Delete</button>-->
-<!--  </form>-->
+
+
 </div>
 
 <th:block th:each="projectImage : ${projectImageList}">
   <div class="col form-group">
     <embed th:width="800" th:height="1000" th:src="${projectImage.path}"><!--Submitted file size-->
   </div>
+
+  <form method="post" th:action="@{/profile/projectImg/{id}/delete(id=${projectImage.id})}">
+    <button class="btn btn-danger">Delete File</button>
+  </form>
+
 </th:block>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
