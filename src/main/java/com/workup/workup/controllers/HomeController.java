@@ -173,40 +173,40 @@ model.addAttribute("projectImageList", projectImage);
 
 
     // THINGS TO ADD REMOVE MINIMUM CHARACTERS TO SEARCH
-    @GetMapping("/search")
-    public String search(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
-        List<Project> projectSearchResults;
-        List<Profile> profileSearchResults;
-        if (user.getRole().getRole().equalsIgnoreCase("developer")) {
-            List<Long> searchResult = projectSearch(keyword);
-            if (searchResult.isEmpty()) {
-                projectSearchResults = projectsDao.findAll();
-                model.addAttribute("searchResults", projectSearchResults);
-                model.addAttribute("searchString", "No Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
-            } else {
-                projectSearchResults = projectsDao.findAllById(searchResult);
-                model.addAttribute("searchResults", projectSearchResults);
-                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
-            }
-        } else {
-            List<Long> searchResult = devSearch(keyword);
-            if (searchResult.isEmpty()) {
-                profileSearchResults = profileDao.findAll();
-                model.addAttribute("searchResults", profileSearchResults);
-                model.addAttribute("searchString", "No Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
-            } else {
-                profileSearchResults = profileDao.findAllById(searchResult);
-                model.addAttribute("searchResults", profileSearchResults);
-                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
-                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
-            }
-        }
-        model.addAttribute("userRole", user.getRole().getRole());
-        return "search_result";
-    }
+//    @GetMapping("/search")
+//    public String search(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
+//        List<Project> projectSearchResults;
+//        List<Profile> profileSearchResults;
+//        if (user.getRole().getRole().equalsIgnoreCase("developer")) {
+//            List<Long> searchResult = projectSearch(keyword);
+//            if (searchResult.isEmpty()) {
+//                projectSearchResults = projectsDao.findAll();
+//                model.addAttribute("searchResults", projectSearchResults);
+//                model.addAttribute("searchString", "No Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
+//            } else {
+//                projectSearchResults = projectsDao.findAllById(searchResult);
+//                model.addAttribute("searchResults", projectSearchResults);
+//                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
+//            }
+//        } else {
+//            List<Long> searchResult = devSearch(keyword);
+//            if (searchResult.isEmpty()) {
+//                profileSearchResults = profileDao.findAll();
+//                model.addAttribute("searchResults", profileSearchResults);
+//                model.addAttribute("searchString", "No Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
+//            } else {
+//                profileSearchResults = profileDao.findAllById(searchResult);
+//                model.addAttribute("searchResults", profileSearchResults);
+//                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
+//            }
+//        }
+//        model.addAttribute("userRole", user.getRole().getRole());
+//        return "search_result";
+//    }
 
     @PostMapping("/home")
     public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId, @RequestParam String keyword, Model model) throws MessagingException, IOException {
@@ -228,9 +228,9 @@ model.addAttribute("projectImageList", projectImage);
         List<Profile> foundProfiles = new ArrayList<>();
         List<Project> projects = projectService.getProjectsByKeyword(keyword);
         List<Project> foundProjects = new ArrayList<>();
-        Category category = categoryService.findByName(keyword);
-        List<Project> foundCategories = projectsDao.findByCategoriesContains(category);
-        System.out.println(foundCategories);
+//        Category category = categoryService.findByName(keyword);
+//        List<Project> foundCategories = projectsDao.findByCategoriesContains(category);
+//        System.out.println(foundCategories);
         model.addAttribute("keyword", keyword);
 
 //        model.addAttribute("foundProfiles", profileService.getProfilesByKeyword(keyword));
