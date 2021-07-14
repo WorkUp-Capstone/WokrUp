@@ -44,8 +44,10 @@ public class UsersController {
         User logged = profile.getUser();
         List<Project> openProjects = projectsDao.getAllprojectsByStatusAndUser("Open", logged);
         List<Project> restrictedProjects = projectsDao.getAllprojectsByStatusAndUser("in progress", logged);
+        List<Project> closedProjects = projectsDao.getAllprojectsByStatusAndUser("Closed", logged);
         model.addAttribute("ownerOpenProject", openProjects);
         model.addAttribute("ownerRestrictedProject", restrictedProjects);
+        model.addAttribute("ownerClosedProject", closedProjects);
         model.addAttribute("authenticatedUser", user);
         model.addAttribute("ownerUser", logged);
         return "profile/view-profile";
@@ -125,6 +127,24 @@ public class UsersController {
         model.addAttribute("ownerProject", ownerProjects);
         return "profile/view-profile";
     }
+
+    @PostMapping("/home/choose-prospect")
+    public String acceptDecline(@RequestParam(name = "chosen") boolean chosen,
+                                @RequestParam(name = "projectId") Long projectId){
+
+        if (chosen == false){
+            Project projectToReset = projectsDao.getProjectById(projectId);
+            projectToReset.resetDeveloperUser();
+            projectsDao.saveAndFlush(projectToReset);
+        } else {
+            Project projectToReset = projectsDao.getProjectById(projectId);
+            Profile acceptProfile = profileDao.getProfileByUserIs(projectToReset.getDeveloperUser());
+            acceptProfile.setChosen(chosen);
+            profileDao.saveAndFlush(acceptProfile);
+        }
+        return "redirect:/profile";
+    }
+
 
 
 
