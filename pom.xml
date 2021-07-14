@@ -17,8 +17,6 @@
         <java.version>11</java.version>
         <hibernate.version>5.4.32.Final</hibernate.version>
         <elasticsearch.version>7.10.0</elasticsearch.version>
-        <property name="hibernate.search.default.directory_provider" value="filesystem"/>
-        <property name="hibernate.search.default.indexBase" value="./lucene/indexes"/>
     </properties>
     <dependencies>
         <dependency>
@@ -103,13 +101,6 @@
             <artifactId>guava</artifactId>
             <version>30.1.1-jre</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-orm</artifactId>
-            <version>5.6.0.Final</version>
-        </dependency>
-
 
     </dependencies>
 

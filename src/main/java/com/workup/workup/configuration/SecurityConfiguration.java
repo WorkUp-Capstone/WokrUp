@@ -1,6 +1,6 @@
 package com.workup.workup.configuration;
 
-import com.workup.workup.services.validation.UserDetailsLoader;
+import com.workup.workup.services.UserDetailsLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -59,7 +59,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/profile/projects/create",
                         "/profile/projects/edit/{id}",
                         "/profile",
-                        "/profile/view-prospect",
                         "/profile/edit",
                         "/home"
                 )

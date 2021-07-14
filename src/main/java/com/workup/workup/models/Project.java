@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Entity
+//@Indexed
 @Table(name = "projects")
 public class Project{
 
@@ -42,7 +43,7 @@ public class Project{
     private List<ProjectImage> images;
 
     @ManyToMany(cascade = CascadeType.ALL)
-
+//    @IndexedEmbedded
     @JoinTable(
             name = "project_categories",
             joinColumns = {@JoinColumn(name="project_id")},
@@ -55,7 +56,7 @@ public class Project{
     private User user;
 
     @OneToOne
-    private User developerUser = null;
+    private User developerUser;
 
     // CONSTRUCTORS
 
@@ -171,10 +172,6 @@ public class Project{
 
     public void setDeveloperUser(User developerUser) {
         this.developerUser = developerUser;
-    }
-
-    public void resetDeveloperUser() {
-        this.developerUser = null;
     }
 
     //    // MAYBE NEEDED FOR DATE CREATION AND COMPLETION WILL NEED TESTING DONE!!!!

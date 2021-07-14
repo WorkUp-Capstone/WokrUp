@@ -1,7 +1,6 @@
 package com.workup.workup.dao;
 
 
-import com.workup.workup.models.Category;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.ProjectImage;
 import com.workup.workup.models.User;
@@ -30,17 +29,12 @@ public interface ProjectsRepository extends JpaRepository<Project, Long> {
         "  (Match(city, state) AGAINST (?1))", nativeQuery = true)
     List<Long> projectSearch(String keyword);
 
-    @Query(value = "from Project p join Category c on p.id = c.id where p.title like %:keyword% or p.description like %:keyword% or c.name like %:keyword%")
-    List<Project> getProjectsByKeyword(String keyword);
 
 @Query(value = "SELECT * FROM projects WHERE projects.id = (?1)", nativeQuery = true)
         Project getProjectById(Long projectId);
 
 
     // need to add "find ALL by" projects in a list
-    List<Project> getAllProjectsByDeveloperUser (User developer);
+    List<Project> getAllProjectsByUserIdIs(Long ownerUserId);
 
-    List<Project> getAllprojectsByStatusAndUser(String status, User user);
-
-    List<Project> findByCategoriesContains(Category name);
 }
