@@ -18,4 +18,8 @@ public class CategoryService {
     public List<Category> getCategoriesByKeyword(String keyword) {
         return categoryDao.getCategoriesByKeyword(keyword);
     }
+
+    public Category findByName(String keyword) {
+        return categoryDao.findByName(keyword);
+    }
 }

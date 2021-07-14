@@ -1,10 +1,13 @@
 package com.workup.workup.controllers;
 
+import com.workup.workup.dao.CategoryRepository;
 import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
+import com.workup.workup.models.Category;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.User;
+import com.workup.workup.services.CategoryService;
 import com.workup.workup.services.Email.EmailServiceImplementation;
 import com.workup.workup.services.ProfileService;
 import com.workup.workup.services.ProjectService;
@@ -39,10 +42,12 @@ public class HomeController {
     private ProfileRepository profileDao;
     private UsersRepository usersDao;
     private PasswordEncoder passwordEncoder;
+    private CategoryRepository categoryDao;
     private final EmailServiceImplementation email;
     @Autowired private ProjectService projectService;
     @Autowired private UserService userService;
     @Autowired private ProfileService profileService;
+    @Autowired private CategoryService categoryService;
 
 
     public HomeController(ProjectsRepository projectsRepository, ProfileRepository profileRepository, UsersRepository usersRepository, PasswordEncoder passwordEncoder, EmailServiceImplementation email){
@@ -157,7 +162,9 @@ public class HomeController {
         List<Profile> foundProfiles = new ArrayList<>();
         List<Project> projects = projectService.getProjectsByKeyword(keyword);
         List<Project> foundProjects = new ArrayList<>();
-
+        Category category = categoryService.findByName(keyword);
+        List<Project> foundCategories = projectsDao.findByCategoriesContains(category);
+        System.out.println(foundCategories);
         model.addAttribute("keyword", keyword);
 
 //        model.addAttribute("foundProfiles", profileService.getProfilesByKeyword(keyword));
@@ -177,6 +184,7 @@ public class HomeController {
                     foundProfiles.add(profile);
                 }
         }
+        // TODO: Category search works, needs full connection
         model.addAttribute("foundProjects", foundProjects);
         model.addAttribute("foundProfiles", foundProfiles);
         return "search";

@@ -1,6 +1,7 @@
 package com.workup.workup.dao;
 
 
+import com.workup.workup.models.Category;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.ProjectImage;
 import com.workup.workup.models.User;
@@ -38,5 +39,7 @@ public interface ProjectsRepository extends JpaRepository<Project, Long> {
 
     // need to add "find ALL by" projects in a list
     List<Project> getAllProjectsByUserIdIs(Long ownerUserId);
+
+    List<Project> findByCategoriesContains(Category name);
 
 }
