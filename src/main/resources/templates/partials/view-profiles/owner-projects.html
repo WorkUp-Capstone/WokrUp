@@ -1,0 +1,8 @@
+<div class="container mx-5">
+  <div th:if="${ownerProfile.user.role.getId() == 1}">
+    <div th:insert="partials/view-profiles/role-owner"></div>
+  </div>
+  <div th:if="${ownerProfile.user.role.getId() == 2}">
+    <div th:insert="partials/view-profiles/role-dev"></div>
+  </div>
+</div>
