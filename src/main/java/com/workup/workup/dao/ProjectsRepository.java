@@ -29,7 +29,7 @@ public interface ProjectsRepository extends JpaRepository<Project, Long> {
 //        "  (Match(city, state) AGAINST (?1))", nativeQuery = true)
 //    List<Long> projectSearch(String keyword);
 
-    @Query(value = "from Project p where p.title like %:keyword% or p.description like %:keyword%")
+    @Query(value = "from Project p join Category c on p.id = c.id where p.title like %:keyword% or p.description like %:keyword% or c.name like %:keyword%")
     List<Project> getProjectsByKeyword(String keyword);
 
 @Query(value = "SELECT * FROM projects WHERE projects.id = (?1)", nativeQuery = true)
