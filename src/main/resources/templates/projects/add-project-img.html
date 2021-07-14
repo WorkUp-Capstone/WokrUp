@@ -6,42 +6,58 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="col form-group">
 
-  <form id="images" th:action="@{/profile/projectImg/{id}/add((id=${addProjectImg.getId()}))}" method="post" th:object="${addProjectImg}">
+  <label>Upload supporting documents or photos for your project</label>
 
-    <label for="projectImg">Upload supporting documents or photos for your project</label>
+  <form id="images" th:action="@{/profile/projects/{id}/add((id=${addProjectImg.getId()}))}" method="post" th:object="${addProjectImg}">
 
+    <button id="picker" type="button">Select File</button>
 
-    <input type="hidden" id="projectImg">
-
-    <button id="picker" type="button">Upload</button>
-    <input type="submit" value="Submit">
+    <input style="display: none" class="submit" type="submit" value="Submit File to project">
   </form>
+
+
+
 </div>
 
 <th:block th:each="projectImage : ${projectImageList}">
   <div class="col form-group">
-    <embed th:width="800" th:height="1000" th:src="${projectImage.path}">
+    <embed th:width="800" th:height="1000" th:src="${projectImage.path}"><!--Submitted file size-->
   </div>
+
+  <form method="post" th:action="@{/profile/image/{id}/delete(id=${projectImage.getId()})}">
+    <button class="btn btn-danger" type="submit">Delete File</button>
+  </form>
+
 </th:block>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 
 <script th:inline="javascript">
-  (function (){
+  (function () {
     const filestackapi = [[${filestackapi}]];
-    console.log(filestackapi);
     const client = filestack.init(filestackapi);
 
     const options = {
-      onUploadDone: (res) =>
-              $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),
-      accept:["image/*", ".pdf", "text/*"]
-    }
+
+              onUploadDone: (res) => {
+                $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`);
+
+                $('#images').prepend(`<embed width="800" height="1000" src='${res.filesUploaded[0].url}'>`); //preview container size for both image and pdf
+              },
+
+              imageDim: [800, null],
+              //maxFiles: 5,
+              accept: ["image/*", ".pdf", "text/*"],
+              fromSources: ["local_file_system"]
+            }
 
     $("#picker").click(function (){
       client.picker(options).open();
+
+      document.querySelector(".submit").style.display="block";
     })
+
   })();
 </script>
 </body>

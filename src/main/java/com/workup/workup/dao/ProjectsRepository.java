@@ -42,4 +42,5 @@ public interface ProjectsRepository extends JpaRepository<Project, Long> {
 
     List<Project> findByCategoriesContains(Category name);
 
+
 }
