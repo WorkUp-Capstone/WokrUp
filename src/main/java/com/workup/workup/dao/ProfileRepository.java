@@ -34,7 +34,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
     List<Profile> getAllByUserRole_Id(long id);
 
-    @Query(value = "from Profile p where p.about like %:keyword% or p.city like %:keyword% or p.state like %:keyword% or p.phone_number like %:keyword%")
+    @Query(value = "from Profile p join User u where p.about like %:keyword% or p.city like %:keyword% or p.state like %:keyword% or p.phone_number like %:keyword% or u.first_name like %:keyword% or u.last_name like %:keyword% or u.email like %:keyword%")
     List<Profile> getProfilesByKeyword(@Param("keyword")String keyword);
 
 }

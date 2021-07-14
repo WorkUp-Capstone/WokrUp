@@ -14,10 +14,10 @@
 </form>
 
 <!--TODO: Need to reference user story again about card display, then what info comes up when user clicks on card-->
-<div class="container" th:switch="${userRole}">
+<!--<div class="container" th:switch="${userRole}">-->
 
     <!--TODO: Need to reference ONLY Project owners profiles-->
-    <div class="card" th:case="'owner'">
+<!--    <div class="card" th:case="'owner'">-->
         <h4>Our Developers</h4>
         <th:block th:each="profile : ${foundProfiles}">
 
@@ -40,7 +40,7 @@
         </th:block>
     </div>
 
-    <div class="project-card" th:case="'developer'">
+<!--    <div class="project-card" th:case="'developer'">-->
         <h4>Currently Open Projects</h4>
         <th:block th:each="project : ${foundProjects}" class="project-block">
             <h3 th:text="${project.title}" ></h3>
