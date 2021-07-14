@@ -146,7 +146,6 @@ public class HomeController {
         return "home";
     }
 
-
     //      METHODS NEEDED FOR SEARCH TO WORK DECENT
 //    IMPROVEMENTS THAT ARE NEEDED ARE PARTIAL/FUZZY INTERPRETATION AND STATE IS ACTING FUNNY
     public List<Long> projectSearch(String searchString) {
@@ -194,9 +193,8 @@ public class HomeController {
         return "search_result";
     }
 
-
     @PostMapping("/home")
-    public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId) throws MessagingException, IOException {
+    public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId, @RequestParam String keyword, Model model) throws MessagingException, IOException {
         Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
         User contactUser = usersDao.getById(devId);
         User primaryUser = usersDao.getById(user.getId());
