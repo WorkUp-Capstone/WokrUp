@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Entity
-//@Indexed
 @Table(name = "projects")
 public class Project{
 
@@ -43,7 +42,7 @@ public class Project{
     private List<ProjectImage> images;
 
     @ManyToMany(cascade = CascadeType.ALL)
-//    @IndexedEmbedded
+
     @JoinTable(
             name = "project_categories",
             joinColumns = {@JoinColumn(name="project_id")},

@@ -1,4 +1,4 @@
-package com.workup.workup.services;
+package com.workup.workup.services.validation;
 
 import com.workup.workup.dao.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;

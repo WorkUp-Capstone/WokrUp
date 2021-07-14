@@ -1,6 +1,6 @@
 package com.workup.workup.configuration;
 
-import com.workup.workup.services.UserDetailsLoader;
+import com.workup.workup.services.validation.UserDetailsLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

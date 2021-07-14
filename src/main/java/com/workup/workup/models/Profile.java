@@ -6,11 +6,13 @@ package com.workup.workup.models;
 //import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 //import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-//@Indexed
 @Table(name = "profiles")
 public class Profile {
 
@@ -47,7 +49,6 @@ public class Profile {
     @OneToOne
 //    @IndexedEmbedded
     private User user;
-
 
     @ManyToMany(cascade = CascadeType.ALL)
 //    @IndexedEmbedded
