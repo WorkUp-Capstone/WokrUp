@@ -6,12 +6,20 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 
+<form th:action="@{/home/search}" method="get">
+    <label>
+        <input type="text" name="keyword" autocomplete="off" autocapitalize="off">
+    </label>
+    <button type=submit class="btn btn-outline-secondary">Search</button>
+</form>
+
 <!--TODO: Need to reference user story again about card display, then what info comes up when user clicks on card-->
 <div class="container" th:switch="${userRole}">
 
     <!--TODO: Need to reference ONLY Project owners profiles-->
     <div class="card" th:case="'owner'">
         <h4>Our Developers</h4>
+
         <th:block th:each="profile : ${devProfiles} ">
             <div class="card w-50 m-2 p-3 col">
 <div class="profile-photo">
@@ -48,13 +56,12 @@
                     <th:block th:each="category : ${profile.categories}">
                         <div class="col" th:text="${category.name}"></div>
                     </th:block>
-                </div>
+              </div>
 
-
-                <form th:action="@{/home}" method="post">
+                <form th:action="@{/home/contact}" method="post">
                     <input type="hidden" th:name="profileID" th:value="${profile.getUser().getId()}">
 
-                    <button type="submit" class="btn-outline-success" id="claim-project">Claim Developer</button>
+                    <button type="submit" class="btn-outline-success" id="claim-project">Reach Out!</button>
                 </form>
             </div>
         </th:block>
@@ -63,6 +70,7 @@
 
     <div class="project-card" th:case="'developer'">
         <h4>Currently Open Projects</h4>
+
         <th:block th:each="project : ${openProjects}">
             <div class="card w-50 m-2 p-3 col">
                 <div class="row profile-view">
@@ -90,13 +98,18 @@
                 </div>
 
                 <div class="row profile-view">
+
                     <input type="hidden" th:name="projectIma" th:value="${project.getImages()}">
-                    <a th:href="@{/profile/projects/images}"><span><h5 class="col">Project Images</h5></span></a>
+                    <a th:href="@{/home/project/{id}/images(id=${project.getId()})}"><span><h5 class="col">Project Images</h5></span></a>
                 </div>
 
-                <form th:action="@{/home/contact}" method="post">
-                    <input type="hidden" th:name="projectID" th:value="${project.getId()}">
-                    <button type="submit" class="btn-outline-success">Claim Project</button>
+<!--                <form th:action="@{/home/claimed-project}" method="post">-->
+<!--                    <input type="hidden" th:name="projectID" th:value="${project.getId()}">-->
+<!--                    <button type="submit" class="btn-outline-success">Claim Project</button>-->
+<!--                </form>-->
+                <form th:action="@{/home/view-prospect}" method="post">
+                    <input type="hidden" th:name="ownerID" th:value="${project.getUser().getId()}">
+                    <button type="submit" class="btn-outline-success">View Owner</button>
                 </form>
             </div>
         </th:block>
