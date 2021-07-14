@@ -55,7 +55,7 @@ public class Project{
     private User user;
 
     @OneToOne
-    private User developerUser;
+    private User developerUser = null;
 
     // CONSTRUCTORS
 
@@ -171,6 +171,10 @@ public class Project{
 
     public void setDeveloperUser(User developerUser) {
         this.developerUser = developerUser;
+    }
+
+    public void resetDeveloperUser() {
+        this.developerUser = null;
     }
 
     //    // MAYBE NEEDED FOR DATE CREATION AND COMPLETION WILL NEED TESTING DONE!!!!
