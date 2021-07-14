@@ -128,8 +128,8 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     }
 
 //    //create project images:
-    @GetMapping("/profile/projectImg/{id}/add")
-    public String viewProjectImagesForm(Model model, @PathVariable Long id){
+    @GetMapping("/profile/projects/{id}/add")
+    public String addProjectImagesForm(Model model, @PathVariable Long id){
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -145,7 +145,7 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     }
 
     //save project images:
-    @PostMapping("/profile/projectImg/{id}/add")
+    @PostMapping("/profile/projects/{id}/add")
     public String saveProjectImages(@PathVariable Long id, @RequestParam(name = "project_img") String path){
 
 ProjectImage image = new ProjectImage();
@@ -160,12 +160,25 @@ ProjectImage image = new ProjectImage();
         return "redirect:/profile";
     }
 
-    @PostMapping("/profile/projectImg/{id}/delete")
+    @PostMapping("/profile/image/{id}/delete")
     public String deleteProjectImages(@PathVariable long id){
+
         imageDao.deleteById(id);
-       // return "redirect:/profile/projectImg/{id}/add";
+
+
+       return "redirect:/profile";
     }
 
+//    @GetMapping("/profile/projects/{id}")
+//    public String viewProjectImages(@PathVariable long id, Model model){
+//
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//
+//        Project project = projectDao.getById(id);
+//        model.addAttribute("project", project);
+//        return "projects/add-project-img";
+//    }
 
 
 

@@ -8,7 +8,7 @@
 
   <label>Upload supporting documents or photos for your project</label>
 
-  <form id="images" th:action="@{/profile/projectImg/{id}/add((id=${addProjectImg.getId()}))}" method="post" th:object="${addProjectImg}">
+  <form id="images" th:action="@{/profile/projects/{id}/add((id=${addProjectImg.getId()}))}" method="post" th:object="${addProjectImg}">
 
     <button id="picker" type="button">Select File</button>
 
@@ -24,7 +24,7 @@
     <embed th:width="800" th:height="1000" th:src="${projectImage.path}"><!--Submitted file size-->
   </div>
 
-  <form method="post" th:action="@{/profile/projectImg/{id}/delete(id=${projectImage.id})}">
+  <form method="post" th:action="@{/profile/image/{id}/delete(id=${projectImage.getId()})}">
     <button class="btn btn-danger">Delete File</button>
   </form>
 
