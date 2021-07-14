@@ -1,0 +1,111 @@
+<form th:action="@{profile/projects/create}" th:method="get">
+  <button>Add Project</button>
+</form>
+<h3>My Projects</h3>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h2>Pending Projects</h2>
+
+      <th:block th:each="project : ${devProject}">
+
+        <div th:if="${project.getDeveloperUser().getProfile().getChosen() == false}" class="card w-50 m-2 p-3">
+          <form th:action="@{/profile}" th:method="post">
+            <div class="row profile-view">
+              <label class="col"><strong>Project Title:</strong></label>
+              <div class="col" th:text="${project.title}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Project Description: </strong></label>
+              <div class="col" th:text="${project.description}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Status: </strong></label>
+              <div class="col" th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Project Created: </strong></label>
+              <div class="col" th:text="${project.creationDate}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+              <th:block th:each="category : ${project.categories}">
+                <div class="col" th:text="${category.name}"></div>
+              </th:block>
+            </div>
+
+          </form>
+
+        </div>
+      </th:block>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h2>In Progress</h2>
+      <th:block th:each="project : ${devProject}">
+        <div th:if="${project.getStatus() == 'in progress'}" class="card w-50 m-2 p-3">
+          <form th:action="@{/profile}" th:method="post">
+            <div class="row profile-view">
+              <label class="col"><strong>Project Title:</strong></label>
+              <div class="col" th:text="${project.title}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Project Description: </strong></label>
+              <div class="col" th:text="${project.description}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Status: </strong></label>
+              <div class="col" th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Project Created: </strong></label>
+              <div class="col" th:text="${project.creationDate}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+              <th:block th:each="category : ${project.categories}">
+                <div class="col" th:text="${category.name}"></div>
+              </th:block>
+            </div>
+
+          </form>
+      </th:block>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h2>Complete Projects</h2>
+      <th:block th:each="project : ${devProject}">
+        <div th:if="${project.getStatus() == 'Closed'}" class="card w-50 m-2 p-3">
+          <form th:action="@{/profile}" th:method="post">
+            <div class="row profile-view">
+              <label class="col"><strong>Project Title:</strong></label>
+              <div class="col" th:text="${project.title}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Project Description: </strong></label>
+              <div class="col" th:text="${project.description}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Status: </strong></label>
+              <div class="col" th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Project Created: </strong></label>
+              <div class="col" th:text="${project.creationDate}"></div>
+            </div>
+            <div class="row profile-view">
+              <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+              <th:block th:each="category : ${project.categories}">
+                <div class="col" th:text="${category.name}"></div>
+              </th:block>
+            </div>
+          </form>
+        </div>
+      </th:block>
+    </div>
+  </div>
+</div>
+</div>

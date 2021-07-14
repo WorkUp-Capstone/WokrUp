@@ -35,7 +35,7 @@ public interface ProjectsRepository extends JpaRepository<Project, Long> {
 
 
     // need to add "find ALL by" projects in a list
-    List<Project> getAllProjectsByUserIdIs(Long ownerUserId);
+    List<Project> getAllProjectsByDeveloperUser (User developer);
 
     List<Project> getAllprojectsByStatusAndUser(String status, User user);
 }

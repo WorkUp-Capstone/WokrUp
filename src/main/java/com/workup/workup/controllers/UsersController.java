@@ -42,9 +42,11 @@ public class UsersController {
         profile = profileDao.getProfileByUserIs(user);
         model.addAttribute("ownerProfile", profile);
         User logged = profile.getUser();
+        List<Project> allDevProjects = projectsDao.getAllProjectsByDeveloperUser(logged);
         List<Project> openProjects = projectsDao.getAllprojectsByStatusAndUser("Open", logged);
         List<Project> restrictedProjects = projectsDao.getAllprojectsByStatusAndUser("in progress", logged);
         List<Project> closedProjects = projectsDao.getAllprojectsByStatusAndUser("Closed", logged);
+        model.addAttribute("devProject", allDevProjects);
         model.addAttribute("ownerOpenProject", openProjects);
         model.addAttribute("ownerRestrictedProject", restrictedProjects);
         model.addAttribute("ownerClosedProject", closedProjects);
