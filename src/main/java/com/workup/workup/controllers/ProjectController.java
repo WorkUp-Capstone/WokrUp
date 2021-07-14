@@ -163,25 +163,13 @@ ProjectImage image = new ProjectImage();
     @PostMapping("/profile/image/{id}/delete")
     public String deleteProjectImages(@PathVariable long id){
 
-        imageDao.deleteById(id);
+       ProjectImage image = imageDao.getById(id);
+       Project imageProject = image.getProject();
 
+       Long imageProject_id = imageProject.getId();
+       imageDao.deleteById(id);
 
-       return "redirect:/profile";
+       return "redirect:/profile/projects/" + imageProject_id + "/add";
     }
-
-//    @GetMapping("/profile/projects/{id}")
-//    public String viewProjectImages(@PathVariable long id, Model model){
-//
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//
-//        Project project = projectDao.getById(id);
-//        model.addAttribute("project", project);
-//        return "projects/add-project-img";
-//    }
-
-
-
-
 
 }
