@@ -121,7 +121,8 @@
                     </div>
                     <div class="row profile-view">
                         <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
-                        <th:block th:each="category : ${ownerProfile.categories}">
+                      
+                        <th:block th:each="category : ${project.categories}">
                             <div class="col" th:text="${category.name}"></div>
                         </th:block>
                     </div>
