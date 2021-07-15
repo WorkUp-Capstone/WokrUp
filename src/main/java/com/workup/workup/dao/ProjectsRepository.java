@@ -1,10 +1,8 @@
 package com.workup.workup.dao;
 
 
-import com.workup.workup.models.Category;
-import com.workup.workup.models.Project;
-import com.workup.workup.models.ProjectImage;
-import com.workup.workup.models.User;
+import com.workup.workup.models.*;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,12 +29,15 @@ public interface ProjectsRepository extends JpaRepository<Project, Long> {
 //        "  (Match(city, state) AGAINST (?1))", nativeQuery = true)
 //    List<Long> projectSearch(String keyword);
 
-    @Query(value = "from Project p left join Category c on p.id = c.id where p.title like %:keyword% or p.description like %:keyword% or c.name like %:keyword%")
+    @Query(value = "from Project p join Category c on p.id = c.id " +
+            "where p.title like %:keyword% or p.description like %:keyword% or c.name like %:keyword%")
     List<Project> getProjectsByKeyword(@Param("keyword")String keyword);
 
 @Query(value = "SELECT * FROM projects WHERE projects.id = (?1)", nativeQuery = true)
         Project getProjectById(Long projectId);
 
+    @NotNull
+    List<Project> findAll();
 
     // need to add "find ALL by" projects in a list
     List<Project> getAllProjectsByDeveloperUser (User developer);
