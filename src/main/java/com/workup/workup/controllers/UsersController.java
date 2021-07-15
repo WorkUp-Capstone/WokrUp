@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -120,9 +121,9 @@ public class UsersController {
     public String viewProspect(@RequestParam(name = "ownerID") Long id, Model model, @AuthenticationPrincipal User user){
         Profile prospectProfile = profileDao.getProfileByUserId(id);
         User prospectUser = prospectProfile.getUser();
-
+        User authenticatedUser = usersDao.getById(user.getId());
         List<Project> ownerProjects = projectsDao.getAllprojectsByStatusAndUser("Open", prospectUser);
-        model.addAttribute("authenticatedUser", user);
+        model.addAttribute("authenticatedUser", authenticatedUser);
         model.addAttribute("ownerUser", prospectUser);
         model.addAttribute("ownerProfile", prospectProfile);
         model.addAttribute("ownerProject", ownerProjects);
@@ -136,6 +137,7 @@ public class UsersController {
         if (chosen == false){
             Project projectToReset = projectsDao.getProjectById(projectId);
             projectToReset.resetDeveloperUser();
+            projectToReset.setStatus("Open");
             projectsDao.saveAndFlush(projectToReset);
         } else {
             Project projectToReset = projectsDao.getProjectById(projectId);
@@ -144,8 +146,38 @@ public class UsersController {
             acceptUser.setChosen(chosen);
             usersDao.saveAndFlush(acceptUser);
         }
+        return "redirect:/home";
+    }
+
+    @PostMapping("/home/review")
+    public String projectReview(@RequestParam(name= "projectID") Long id){
+        Project reviewProject = projectsDao.getProjectById(id);
+        reviewProject.setStatus("Closed");
+        projectsDao.saveAndFlush(reviewProject);
         return "redirect:/profile";
     }
+
+    @PostMapping("/home/closed")
+    public String completeProject(@RequestParam(name = "chosen") boolean chosen,
+                                @RequestParam(name = "projectId") Long projectId){
+
+        if (chosen == false){
+            Project projectToReset = projectsDao.getProjectById(projectId);
+            projectToReset.setStatus("in progress");
+            projectsDao.saveAndFlush(projectToReset);
+//            email needed
+        } else {
+            Project projectComplete = projectsDao.getProjectById(projectId);
+            projectComplete.setCompletionDate(new Date(System.currentTimeMillis()));
+            projectsDao.saveAndFlush(projectComplete);
+//            Profile acceptProfile = profileDao.getProfileByUserIs(projectToReset.getDeveloperUser());
+            User acceptUser = projectComplete.getDeveloperUser();
+            acceptUser.setChosen(false);
+            usersDao.saveAndFlush(acceptUser);
+        }
+        return "redirect:/profile";
+    }
+
 
 
 
