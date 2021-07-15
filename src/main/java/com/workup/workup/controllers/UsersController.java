@@ -3,6 +3,7 @@ package com.workup.workup.controllers;
 import com.workup.workup.dao.*;
 import com.workup.workup.models.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,14 +37,20 @@ public class UsersController {
     public String showOwnerProfile(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Profile profile;
-        User logged = usersDao.getById(user.getId());
+
         profile = profileDao.getProfileByUserIs(user);
         model.addAttribute("ownerProfile", profile);
-
-        List<Project> projectList;
-        projectList = projectsDao.getAllProjectsByUserIdIs(logged.getId());
-        model.addAttribute("ownerProject", projectList);
-
+        User logged = profile.getUser();
+        List<Project> allDevProjects = projectsDao.getAllProjectsByDeveloperUser(logged);
+        List<Project> openProjects = projectsDao.getAllprojectsByStatusAndUser("Open", logged);
+        List<Project> restrictedProjects = projectsDao.getAllprojectsByStatusAndUser("in progress", logged);
+        List<Project> closedProjects = projectsDao.getAllprojectsByStatusAndUser("Closed", logged);
+        model.addAttribute("devProject", allDevProjects);
+        model.addAttribute("ownerOpenProject", openProjects);
+        model.addAttribute("ownerRestrictedProject", restrictedProjects);
+        model.addAttribute("ownerClosedProject", closedProjects);
+        model.addAttribute("authenticatedUser", user);
+        model.addAttribute("ownerUser", logged);
         return "profile/view-profile";
     }
 
@@ -106,6 +113,41 @@ public class UsersController {
         profileDao.save(profile);
         return "redirect:/profile";
     }
+
+
+    // viewing project owner profile from home as dev
+    @PostMapping("/home/view-prospect")
+    public String viewProspect(@RequestParam(name = "ownerID") Long id, Model model, @AuthenticationPrincipal User user){
+        Profile prospectProfile = profileDao.getProfileByUserId(id);
+        User prospectUser = prospectProfile.getUser();
+
+        List<Project> ownerProjects = projectsDao.getAllprojectsByStatusAndUser("Open", prospectUser);
+        model.addAttribute("authenticatedUser", user);
+        model.addAttribute("ownerUser", prospectUser);
+        model.addAttribute("ownerProfile", prospectProfile);
+        model.addAttribute("ownerProject", ownerProjects);
+        return "profile/view-profile";
+    }
+
+    @PostMapping("/home/choose-prospect")
+    public String acceptDecline(@RequestParam(name = "chosen") boolean chosen,
+                                @RequestParam(name = "projectId") Long projectId){
+
+        if (chosen == false){
+            Project projectToReset = projectsDao.getProjectById(projectId);
+            projectToReset.resetDeveloperUser();
+            projectsDao.saveAndFlush(projectToReset);
+        } else {
+            Project projectToReset = projectsDao.getProjectById(projectId);
+            Profile acceptProfile = profileDao.getProfileByUserIs(projectToReset.getDeveloperUser());
+            acceptProfile.setChosen(chosen);
+            profileDao.saveAndFlush(acceptProfile);
+        }
+        return "redirect:/profile";
+    }
+
+
+
 
 
     //TODO: edit user attributes (First name, last name, password)

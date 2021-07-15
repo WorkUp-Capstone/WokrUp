@@ -135,7 +135,7 @@ public class HomeController {
         List<Project> openProjects = new ArrayList<>();
 
         for(Project project : projects) {
-            if (project.getStatus().contains("open")) {
+            if (project.getStatus().contains("Open")) {
                 openProjects.add(project);
             }
         }
@@ -173,6 +173,55 @@ model.addAttribute("projectImageList", projectImage);
 
 
     // THINGS TO ADD REMOVE MINIMUM CHARACTERS TO SEARCH
+
+//    @GetMapping("/search")
+//    public String search(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
+//        List<Project> projectSearchResults;
+//        List<Profile> profileSearchResults;
+//        if (user.getRole().getRole().equalsIgnoreCase("developer")) {
+//            List<Long> searchResult = projectSearch(keyword);
+//            if (searchResult.isEmpty()) {
+//                projectSearchResults = projectsDao.findAll();
+//                model.addAttribute("searchResults", projectSearchResults);
+//                model.addAttribute("searchString", "No Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
+//            } else {
+//                projectSearchResults = projectsDao.findAllById(searchResult);
+//                model.addAttribute("searchResults", projectSearchResults);
+//                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
+//            }
+//        } else {
+//            List<Long> searchResult = devSearch(keyword);
+//            if (searchResult.isEmpty()) {
+//                profileSearchResults = profileDao.findAll();
+//                model.addAttribute("searchResults", profileSearchResults);
+//                model.addAttribute("searchString", "No Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "No Results for '" + keyword + "'");
+//            } else {
+//                profileSearchResults = profileDao.findAllById(searchResult);
+//                model.addAttribute("searchResults", profileSearchResults);
+//                model.addAttribute("searchString", "Search Results for '" + keyword + "'");
+//                model.addAttribute("pageTitle", "Search Results for '" + keyword + "'");
+//            }
+//        }
+//        model.addAttribute("userRole", user.getRole().getRole());
+//        return "search_result";
+//    }
+
+    @PostMapping("/home/contact")
+    public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId) throws MessagingException, IOException {
+        Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
+        User contactUser = usersDao.getById(devId);
+        User primaryUser = usersDao.getById(user.getId());
+        HashMap<String,Object> emailbody = new HashMap<String,Object>();
+        emailbody.put("contactUser", contactUser);
+        emailbody.put("primaryProfile", primaryProfile);
+        emailbody.put("primaryUser", primaryUser);
+        email.sendUserMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
+        return "redirect:/home";
+    }
+
 //    @GetMapping("/search")
 //    public String search(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
 //        List<Project> projectSearchResults;
@@ -208,18 +257,19 @@ model.addAttribute("projectImageList", projectImage);
 //        return "search_result";
 //    }
 //
-//    @PostMapping("/home")
-//    public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId, @RequestParam String keyword, Model model) throws MessagingException, IOException {
-//        Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
-//        User contactUser = usersDao.getById(devId);
-//        User primaryUser = usersDao.getById(user.getId());
-//        HashMap<String,Object> emailbody = new HashMap<String,Object>();
-//        emailbody.put("contactUser", contactUser);
-//        emailbody.put("primaryProfile", primaryProfile);
-//        emailbody.put("primaryUser", primaryUser);
-//        email.sendUserMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
-//        return "redirect:/home";
-//    }
+    @PostMapping("/home")
+    public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId, @RequestParam String keyword, Model model) throws MessagingException, IOException {
+        Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
+        User contactUser = usersDao.getById(devId);
+        User primaryUser = usersDao.getById(user.getId());
+        HashMap<String,Object> emailbody = new HashMap<String,Object>();
+        emailbody.put("contactUser", contactUser);
+        emailbody.put("primaryProfile", primaryProfile);
+        emailbody.put("primaryUser", primaryUser);
+        email.sendUserMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
+        return "redirect:/home";
+    }
+
 
     @GetMapping("/home/search")
     public String searchResults(Model model, @AuthenticationPrincipal User user, String keyword) {
@@ -267,9 +317,7 @@ model.addAttribute("projectImageList", projectImage);
     }
 
 
-
-
-    @PostMapping("/home/contact")
+    @PostMapping("/home/claimed-project")
     public String contactProject(@AuthenticationPrincipal User user, @RequestParam(name = "projectID") Long projectId) throws MessagingException, IOException, MessagingException, IOException {
         Project project = projectsDao.getProjectById(projectId);
         Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
@@ -280,8 +328,9 @@ model.addAttribute("projectImageList", projectImage);
         emailbody.put("primaryProfile", primaryProfile);
         emailbody.put("primaryUser", primaryUser);
         project.setStatus("in progress");
+        project.setDeveloperUser(primaryUser);
         projectsDao.saveAndFlush(project);
-        email.sendProjectMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
+        email.sendProjectMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFullName(), emailbody);
         return "redirect:/home";
     }
 
