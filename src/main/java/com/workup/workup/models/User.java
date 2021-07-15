@@ -100,6 +100,7 @@ public class User {
         email = copy.email;
         password = copy.password;
         role = copy.role;
+        chosen = copy.chosen;
     }
 
     public long getId() {

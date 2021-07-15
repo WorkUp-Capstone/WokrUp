@@ -115,6 +115,7 @@ public class HomeController {
             return modelAndView;
         }
         if (!StringUtils.isEmpty(password)) {
+            user.setChosen(false);
             user.setPassword(passwordEncoder.encode(password));
             user.setPasswordRepeat(passwordEncoder.encode(passwordRepeat));
             // saves user and instantiates new profile
@@ -210,15 +211,21 @@ model.addAttribute("projectImageList", projectImage);
 
     @PostMapping("/home/contact")
     public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId) throws MessagingException, IOException {
-        Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
-        User contactUser = usersDao.getById(devId);
-        User primaryUser = usersDao.getById(user.getId());
-        HashMap<String,Object> emailbody = new HashMap<String,Object>();
-        emailbody.put("contactUser", contactUser);
-        emailbody.put("primaryProfile", primaryProfile);
-        emailbody.put("primaryUser", primaryUser);
-        email.sendUserMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
-        return "redirect:/home";
+        try {
+            Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
+            User contactUser = usersDao.getById(devId);
+            User primaryUser = usersDao.getById(user.getId());
+            HashMap<String, Object> emailbody = new HashMap<String, Object>();
+            emailbody.put("contactUser", contactUser);
+            emailbody.put("primaryProfile", primaryProfile);
+            emailbody.put("primaryUser", primaryUser);
+            email.sendUserMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
+        } catch (Error e) {
+            System.out.println(e.getMessage());
+        throw e;}
+
+            return "redirect:/home";
+
     }
 
 //    @GetMapping("/search")
@@ -287,7 +294,7 @@ model.addAttribute("projectImageList", projectImage);
 //        model.addAttribute("foundProjects", projectService.getProjectsByKeyword(keyword));
 
         for(Project project : projects) {
-                if (project.getStatus().contains("open")) {
+                if (project.getStatus().contains("Open")) {
 
                     foundProjects.add(project);
                 }
