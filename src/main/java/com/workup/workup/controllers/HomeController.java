@@ -173,7 +173,6 @@ model.addAttribute("projectImageList", projectImage);
 
 
     // THINGS TO ADD REMOVE MINIMUM CHARACTERS TO SEARCH
-
 //    @GetMapping("/search")
 //    public String search(@Param("searchString") String keyword, Model model, @AuthenticationPrincipal User user) {
 //        List<Project> projectSearchResults;

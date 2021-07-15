@@ -81,7 +81,7 @@
         <br>
         <a th:href="@{/profile/projectImg/{id}/add(id=${project.getId()})}">Manage Project Images</a>
 
-        <div th:if="${project.getDeveloperUser().getProfile().getChosen() == false}">
+        <div th:if="${project.getDeveloperUser().isChosen() == false}">
           <form th:action="@{/home/choose-prospect}" method="post">
             <input type="hidden" th:name="projectId" th:value="${project.getId()}">
             <button type="submit" class="btn-outline-success" name="chosen" value="true">Accept</button>

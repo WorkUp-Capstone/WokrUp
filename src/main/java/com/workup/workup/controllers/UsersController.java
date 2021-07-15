@@ -139,9 +139,10 @@ public class UsersController {
             projectsDao.saveAndFlush(projectToReset);
         } else {
             Project projectToReset = projectsDao.getProjectById(projectId);
-            Profile acceptProfile = profileDao.getProfileByUserIs(projectToReset.getDeveloperUser());
-            acceptProfile.setChosen(chosen);
-            profileDao.saveAndFlush(acceptProfile);
+//            Profile acceptProfile = profileDao.getProfileByUserIs(projectToReset.getDeveloperUser());
+           User acceptUser = projectToReset.getDeveloperUser();
+            acceptUser.setChosen(chosen);
+            usersDao.saveAndFlush(acceptUser);
         }
         return "redirect:/profile";
     }
