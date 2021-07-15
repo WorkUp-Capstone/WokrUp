@@ -31,8 +31,9 @@
           $('#image').prepend(`<img src='${res.filesUploaded[0].url}'>`);
       },
 
-      imageDim: [100, 100],
-        accept:["image/*"]
+        imageDim: [100, 100],
+        accept:["image/*"],
+        fromSources: ["local_file_system"]
     }
 
     $("#picker").click(function (){
