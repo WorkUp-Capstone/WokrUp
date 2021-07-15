@@ -25,9 +25,9 @@
                         <div class="col" th:text="${category.name}"></div>
                     </th:block>
                 </div>
-                <div class="row profile-view">
+                <div th:if="${authenticatedUser.isChosen() == false}" class="row profile-view">
                     <form th:action="@{/home/claimed-project}" method="post">
-                        <input type="hidden" th:name="projectID" th:value="${project.getUser().getId()}">
+                        <input type="hidden" th:name="projectID" th:value="${project.getId()}">
                         <button type="submit" class="btn-outline-success">Claim Project</button>
                     </form>
                 </div>
