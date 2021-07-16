@@ -3,6 +3,7 @@ package com.workup.workup.dao;
 import com.workup.workup.models.Profile;
 import com.workup.workup.models.Role;
 import com.workup.workup.models.User;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,6 +32,9 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
             "  (Match(first_name, last_name) AGAINST (?1))"
             , nativeQuery = true)
     List<Long> devSearch(String searchString);
+
+    @NotNull
+    List<Profile> findAll();
 
     List<Profile> getAllByUserRole_Id(long id);
 

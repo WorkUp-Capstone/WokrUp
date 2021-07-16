@@ -39,6 +39,10 @@ public class User {
 //    @KeywordField
     private String last_name;
 
+
+    @Column
+    private boolean chosen = false;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
@@ -48,10 +52,29 @@ public class User {
 
     private boolean passwordsEqual;
 
+
     // Empty constructor for Spring
     public User() {}
 
     //Insert Constructor
+    public User(long id, String email, String password, String passwordRepeat, String first_name, String last_name, boolean chosen, Role role, List<Project> projectList) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.chosen = chosen;
+        this.role = role;
+    }
+
+    public User(long id, String email, String password, String passwordRepeat, String first_name, String last_name, Role role, List<Project> projectList, boolean passwordsEqual) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.role = role;
+    }
     public User(long id,String email, String password, String first_name, String last_name, Role role)
     {
         this.id = id;
@@ -77,6 +100,7 @@ public class User {
         email = copy.email;
         password = copy.password;
         role = copy.role;
+        chosen = copy.chosen;
     }
 
     public long getId() {
@@ -147,4 +171,14 @@ public class User {
     public String getFullName(){
         return this.first_name + " " + this.last_name;
     }
+
+    public boolean isChosen() {
+        return chosen;
+    }
+
+    public void setChosen(boolean chosen) {
+        this.chosen = chosen;
+    }
+
+
 }

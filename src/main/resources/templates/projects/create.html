@@ -8,16 +8,16 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="container">
     <div class="form-group">
-        <h3>Create a new project: </h3>
+        <h3>Create New Project: </h3>
         <form th:action="@{/projects/create}" th:method="post" th:object="${project}">
 
-            <label>Name of Project:</label>
+            <label>Title</label>
             <input name="title" th:field="*{title}"/>
 
-            <label>Overall Description of Project:</label>
+            <label>Description</label>
             <input name="description" th:field="*{description}"/>
 
-            <label>What categories would you like to include in your project:
+            <label>Preferred Languages & Frameworks
                 <select multiple th:field="*{categories}" class="form-control">
                     <div th:block th:each="category: ${categoryList}">
                         <option th:text="${category.name}" th:value="${category.id}"></option>
@@ -27,7 +27,7 @@
             <div>
                 <label style="visibility:hidden">Project Status
                     <select th:field="*{status}">
-                        <option th:value="open" selected>Open</option>
+                        <option th:value="Open" selected>Open</option>
                         <option th:value="in_progress">In progress</option>
                     </select>
                 </label>

@@ -59,6 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/profile/projects/create",
                         "/profile/projects/edit/{id}",
                         "/profile",
+                        "/profile/view-prospect",
                         "/profile/edit",
                         "/home"
                 )

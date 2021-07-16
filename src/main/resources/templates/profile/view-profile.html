@@ -5,10 +5,18 @@
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<div class="container mx-5">
-    <h3>My Profile</h3>
+<div th:switch="${authenticatedUser.getId() == ownerUser.getId()}">
+    <!--  normal profile view for the User  -->
+    <div th:case="true">
+        <div th:insert="partials/view-profiles/owner"></div>
 
-    <div class="card row justify-content-between mx-0">
+    </div>
+    <!--  Profile of user that was selected  -->
+    <div th:case="false">
+        <div th:insert="partials/view-profiles/non-owner"></div>
+    </div>
+
+<!--     <div class="card row justify-content-between mx-0">
         <div class="main-content row p-3">
             <div class="profile-photo col-md-auto col-sm-auto mr-5">
                 <form th:action="@{profile/profileImg/add}" th:method="get">
@@ -87,13 +95,13 @@
                     </div>
                 </th:block>
             </div><!-- row user info-->
-        </div><!-- row main content-->
-    </div><!-- card-->
-</div><!-- container-->
-<br>
+        <!-- </div> row main content
+    </div> card
+</div> container-->
+<!-- <br>
 
 
-<div class="container mx-5">
+<!-- <div class="container mx-5">
     <h3>My Projects</h3>
     <div th:if="${ownerProfile.user.role.getId() == 1}">
         <form th:action="@{profile/projects/create}" th:method="get">
@@ -131,11 +139,8 @@
 
                 <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
                 <br>
-                <a th:href="@{/profile/projects/{id}/add(id=${project.getId()})}">Manage Project Images</a>
+                <a th:href="@{/profile/projects/{id}/add(id=${project.getId()})}">Manage Project Images</a> -->
 
-            </div>
-        </th:block>
-    </div>
 </div>
 </body>
 </html>
