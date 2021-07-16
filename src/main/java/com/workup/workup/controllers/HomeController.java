@@ -130,7 +130,7 @@ public class HomeController {
         List<Project> openProjects = new ArrayList<>();
 
         for(Project project : projects) {
-            if (project.getStatus().contains("open")) {
+            if (project.getStatus().contains("Open")) {
                 openProjects.add(project);
             }
         }
@@ -196,24 +196,25 @@ model.addAttribute("projectImageList", projectImage);
         List<Profile> foundProfiles = new ArrayList<>();
         List<Project> projects = projectService.getProjectsByKeyword(keyword);
         List<Project> foundProjects = new ArrayList<>();
-        Category category = categoryService.findByName(keyword);
-        List<Project> foundCategories = projectsDao.findByCategoriesContains(category);
 
         model.addAttribute("keyword", keyword);
 
+//        model.addAttribute("foundProfiles", profileService.getProfilesByKeyword(keyword));
+//        model.addAttribute("foundProfiles", userService.getUsersByKeyword(keyword));
+//        model.addAttribute("foundProjects", projectService.getProjectsByKeyword(keyword));
 
         for(Project project : projects) {
-                if (project.getStatus().contains("open")) {
+            if (project.getStatus().contains("Open")) {
 
-                    foundProjects.add(project);
-                }
+                foundProjects.add(project);
+            }
         }
 
         for(Profile profile : profiles) {
-                if (profile.getUser().getRole().getId() == 2) {
-
-                    foundProfiles.add(profile);
-                }
+            if (profile.getUser().getRole().getId() == 2) {
+//                    model.addAttribute("foundProjects", userService.getUsersByKeyword(keyword));
+                foundProfiles.add(profile);
+            }
         }
         // TODO: Category search works, needs full connection
         model.addAttribute("foundProjects", foundProjects);
