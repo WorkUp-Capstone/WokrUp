@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/head :: head"></head>
-<body>
+<head th:replace="partials/head :: head">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="welcome-body">
 <nav th:replace="partials/navbar :: navbar"></nav>
 
-<h1>Welcome to WorkUp</h1>
-<br><br>
-<h3>Our Vision</h3>
-<p>We strive to fulfill a niche, but necessary purpose - <strong>helping young developers to grow their portfolio and confidence</strong>.
+<h1 class="welcome-h1">WorkUp Logo</h1>
+<div class="welcome-container mx-3 mt-3">
+<h3 class="welcome-h3">Our Vision</h3>
+<p class="welcome-p">We strive to fulfill a niche, but necessary purpose - <strong>helping young developers to grow their portfolio and confidence</strong>.
     At WorkUp, we allow for grads of career-accelerating "boot camps" to connect with experienced developers while they pursue a job in
 their newfound career.</p>
 <br>
-<p><em>As a project owner</em>, you may have some projects that you want a fresh pair of eyes on, or maybe you're looking for
+<p class="welcome-p"><em>As a project owner</em>, you may have some projects that you want a fresh pair of eyes on, or maybe you're looking for
 some junior-level developers to acquire for your team. While our main goal is <strong>not</strong> to promote recruitment, we
 believe the trade-off of miscellaneous workloads for real-world experience and network-building to be mutually beneficial. You can peruse
 potential candidates and make contact with them if you believe they may suit your expectations!</p>
 <br>
-<p><em>As a new developer</em>, you may look at all available projects currently up for grabs; once a project is selected, you're expected to
+<p class="welcome-p"><em>As a new developer</em>, you may look at all available projects currently up for grabs; once a project is selected, you're expected to
     see it through to the end! Don't feel discouraged, though. You have an opportunity to review exactly what you're getting yourself into, and
 may even contact the project owner via email for more details, if you'd like. Transparency is key, here. There's no shame in acknowledging your
 current limits. By the way, these side projects are an amazing way to get credibility! Make some new connections and
 broaden your programming horizons!</p>
-<button><a href="/register">Start Today</a></button>
+<button type="button"><a href="/register">Start Today</a></button>
+</div>
 
-<footer th:replace="partials/footer :: footer"></footer>
+<footer th:replace="partials/footer :: footer" class="welcome-footer"></footer>
+
 </body>
 </html>

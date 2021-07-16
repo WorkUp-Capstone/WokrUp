@@ -5,10 +5,32 @@
 
 
 /*welcome*/
-body{
+.welcome-body{
+    background-color: cornsilk;
+    font-family: 'Source Sans Pro',sans-serif;
+}
+.welcome-h1{
+    font-family: 'Jost', sans-serif;
+    text-align: center;
+    color: #f18c55;
+    margin: 2% 0 2% 0;
+
+}
+.welcome-h3{
+    color: #f18c55;
+    text-align: center;
 }
 
+.welcome-p{
+    color:#073b4c;
+    text-align: center;
 
+}
+
+.welcome-footer{
+    position:fixed;
+    bottom:0;
+}
 
 
 
