@@ -79,7 +79,7 @@
         </div>
         <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
         <br>
-        <a th:href="@{/profile/projectImg/{id}/add(id=${project.getId()})}">Manage Files</a>
+        <a th:href="@{/profile/projects/{id}/add(id=${project.getId()})}">Manage Files</a>
 
         <div th:if="${project.getDeveloperUser().isChosen() == false}">
           <form th:action="@{/home/choose-prospect}" method="post">
