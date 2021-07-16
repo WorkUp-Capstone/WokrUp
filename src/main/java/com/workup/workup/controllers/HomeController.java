@@ -158,15 +158,15 @@ model.addAttribute("projectImageList", projectImage);
     @PostMapping("/home/contact")
     public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId) throws MessagingException, IOException {
 
-        Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
-        User contactUser = usersDao.getById(devId);
-        User primaryUser = usersDao.getById(user.getId());
-        HashMap<String,Object> emailbody = new HashMap<String,Object>();
-        emailbody.put("contactUser", contactUser);
-        emailbody.put("primaryProfile", primaryProfile);
-        emailbody.put("primaryUser", primaryUser);
-        email.sendUserMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
-        return "redirect:/home";
+//        Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
+//        User contactUser = usersDao.getById(devId);
+//        User primaryUser = usersDao.getById(user.getId());
+//        HashMap<String,Object> emailbody = new HashMap<String,Object>();
+//        emailbody.put("contactUser", contactUser);
+//        emailbody.put("primaryProfile", primaryProfile);
+//        emailbody.put("primaryUser", primaryUser);
+//        email.sendUserMessageUsingThymeleafTemplate(contactUser.getEmail(), contactUser.getFirstName() + contactUser.getFirstName(), emailbody);
+//        return "redirect:/home";
 
         try {
             Profile primaryProfile = profileDao.getProfileByUserId(user.getId());
