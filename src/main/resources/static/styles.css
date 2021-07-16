@@ -1,3 +1,9 @@
+/*font family*/
+/*font-family: 'Jost', sans-serif;*/
+/*font-family: 'Source Sans Pro', sans-serif;*/
+
+
+
 .profile-view{
     flex-wrap: nowrap;
 }
@@ -10,18 +16,18 @@
     padding: 0; !important;
 }
 
-html,
-body {
+body{
     height: 100%;
-    font-family: 'Source Sans Pro', sans-serif;
-}
 
-navbar, h1 {
-    font-family: 'Jost', sans-serif;
 }
 
 #sticky-footer{
     flex-shrink: 0;
 }
 
-
+/*non mobile view*/
+@media screen and (min-width:812px)
+{
+    body{
+    }
+}
