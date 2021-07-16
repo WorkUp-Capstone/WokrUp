@@ -96,19 +96,20 @@
                             </div> <!-- form-group end.// -->
                            <!-- <div th:if="${editOwnerProfile.user.role.getId() == 2}"> -->
                                 <div class="form-group">
-                                    <label>Preferred Languages/Frameworks</label>
+                                    <label>Preferred Languages & Frameworks</label>
+                                    <p>(cmd+click to select multiple)</p>
                                     <select multiple th:field="*{categories}" class="form-control">
                                         <div th:block th:each="category: ${categoryList}">
                                             <option th:text="${category.name}" th:value="${category.id}"></option>
                                         </div>
                                     </select>
                                 </div>
-                                <p>Shift and click to select multiple.</p>
+
 
 
                         <div class="form-group">
                             <br>
-                            <button type="submit" class="btn btn-primary btn-block">Save Profile</button>
+                            <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
                         </div> <!-- form-group// -->
                         </div>
                     </form>
