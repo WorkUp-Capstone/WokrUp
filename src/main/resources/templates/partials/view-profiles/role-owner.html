@@ -1,33 +1,33 @@
+<h3>Project Board</h3>
 <form th:action="@{profile/projects/create}" th:method="get">
   <button>Add Project</button>
 </form>
-<h3>My Projects</h3>
 <br>
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <h2>Open Projects</h2>
+      <h2>Open</h2>
       <th:block th:each="project : ${ownerOpenProject}">
-        <div class="card w-50 m-2 p-3">
+        <div class="card w-75 m-2 p-3">
           <form th:action="@{/profile}" th:method="post">
             <div class="row profile-view">
-              <label class="col"><strong>Project Title:</strong></label>
+              <label class="col"><strong>Title</strong></label>
               <div class="col" th:text="${project.title}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Project Description: </strong></label>
+              <label class="col"><strong>Description</strong></label>
               <div class="col" th:text="${project.description}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Status: </strong></label>
+              <label class="col"><strong>Status</strong></label>
               <div class="col" th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Project Created: </strong></label>
+              <label class="col"><strong>Created On</strong></label>
               <div class="col" th:text="${project.creationDate}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+              <label class="col"><strong>Languages & Frameworks</strong></label>
               <th:block th:each="category : ${project.categories}">
                 <div class="col" th:text="${category.name}"></div>
               </th:block>
@@ -37,7 +37,7 @@
 
           <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
           <br>
-          <a th:href="@{/profile/projects/{id}/add(id=${project.getId()})}">Manage Project Images</a>
+          <a th:href="@{/profile/projects/{id}/add(id=${project.getId()})}">Manage Files</a>
         </div>
       </th:block>
     </div>
@@ -49,23 +49,23 @@
         <div class="card w-50 m-2 p-3">
           <form th:action="@{/profile}" th:method="post">
             <div class="row profile-view">
-              <label class="col"><strong>Project Title:</strong></label>
+              <label class="col"><strong>Title</strong></label>
               <div class="col" th:text="${project.title}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Project Description: </strong></label>
+              <label class="col"><strong>Description</strong></label>
               <div class="col" th:text="${project.description}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Status: </strong></label>
+              <label class="col"><strong>Status</strong></label>
               <div class="col" th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Project Created: </strong></label>
+              <label class="col"><strong>Created On</strong></label>
               <div class="col" th:text="${project.creationDate}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+              <label class="col"><strong>Languages & Frameworks </strong></label>
               <th:block th:each="category : ${project.categories}">
                 <div class="col" th:text="${category.name}"></div>
               </th:block>
@@ -73,13 +73,13 @@
 
           </form>
           <div class="row profile-view">
-            <label class="col"><strong>Active Developer: </strong></label>
+            <label class="col"><strong>Active Developer</strong></label>
             <div class="col" th:text="${project.getDeveloperUser().getFullName()}"></div>
           </div>
         </div>
         <a th:href="@{/projects/{id}/edit(id=${project.getId()})}">Edit Project </a>
         <br>
-        <a th:href="@{/profile/projectImg/{id}/add(id=${project.getId()})}">Manage Project Images</a>
+        <a th:href="@{/profile/projects/{id}/add(id=${project.getId()})}">Manage Files</a>
 
         <div th:if="${project.getDeveloperUser().isChosen() == false}">
           <form th:action="@{/home/choose-prospect}" method="post">
@@ -97,34 +97,34 @@
   </div>
   <div class="row">
     <div class="col-6">
-      <h2>Closed Projects</h2>
+      <h2>Closed</h2>
       <th:block th:each="project : ${ownerClosedProject}">
         <div th:if="${project.getStatus() == 'Closed'}" class="card w-50 m-2 p-3">
           <form th:action="@{/profile}" th:method="post">
             <div class="row profile-view">
-              <label class="col"><strong>Project Title:</strong></label>
+              <label class="col"><strong>Title</strong></label>
               <div class="col" th:text="${project.title}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Project Description: </strong></label>
+              <label class="col"><strong>Description</strong></label>
               <div class="col" th:text="${project.description}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Status: </strong></label>
+              <label class="col"><strong>Status</strong></label>
               <div class="col" th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Project Created: </strong></label>
+              <label class="col"><strong>Created On</strong></label>
               <div class="col" th:text="${project.creationDate}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+              <label class="col"><strong>Languages & Frameworks </strong></label>
               <th:block th:each="category : ${project.categories}">
                 <div class="col" th:text="${category.name}"></div>
               </th:block>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Completed By: </strong></label>
+              <label class="col"><strong>Completed On </strong></label>
               <div class="col" th:text="${project.getDeveloperUser().getFullName()}"></div>
             </div>
           </form>
