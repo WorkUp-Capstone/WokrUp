@@ -171,8 +171,9 @@ model.addAttribute("projectImageList", projectImage);
         throw e;}
 
             return "redirect:/home";
-
     }
+
+
 
     @PostMapping("/home")
     public String contactUser(@AuthenticationPrincipal User user, @RequestParam(name = "profileID") Long devId, @RequestParam String keyword, Model model) throws MessagingException, IOException {
@@ -195,9 +196,7 @@ model.addAttribute("projectImageList", projectImage);
         List<Profile> foundProfiles = new ArrayList<>();
         List<Project> projects = projectService.getProjectsByKeyword(keyword);
         List<Project> foundProjects = new ArrayList<>();
-//        Category category = categoryService.findByName(keyword);
-//        List<Project> foundCategories = projectsDao.findByCategoriesContains(category);
-//        System.out.println(foundCategories);
+
         model.addAttribute("keyword", keyword);
 
 //        model.addAttribute("foundProfiles", profileService.getProfilesByKeyword(keyword));
