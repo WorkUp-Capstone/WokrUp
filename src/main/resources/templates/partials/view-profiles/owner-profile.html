@@ -24,27 +24,27 @@
           <div id="user-info" class="col px-md-5 ml-auto col-sm-auto justify-content-between">
 
             <div class="row profile-view">
-              <label class="col"><strong>My Name: </strong></label>
+              <label class="col"><strong>Name</strong></label>
               <div th:text="${ownerProfile.user.getFullName()}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>About Me: </strong></label>
+              <label class="col"><strong>About Me</strong></label>
               <div th:text="${ownerProfile.about}"></div>
             </div>
 
             <div class="row profile-view">
-              <label class="col"><strong>Portfolio:</strong></label>
+              <label class="col"><strong>Portfolio</strong></label>
               <div th:text="${ownerProfile.portfolio_link}"></div>
             </div>
 
             <div class="row profile-view">
-              <label class="col"><strong>Resume Link:</strong></label>
+              <label class="col"><strong>Resume Link</strong></label>
               <div th:text="${ownerProfile.resume_link}"></div>
             </div>
             <div th:if="${ownerProfile.user.role.getId() == 2}">
 
               <div class="row profile-view">
-                <label class="col"><strong>Preferred Languages/Frameworks</strong></label>
+                <label class="col"><strong>Preferred Languages & Frameworks</strong></label>
                 <th:block th:each="category : ${ownerProfile.categories}">
                   <div th:text="${category.name}"></div>
                 </th:block>
@@ -54,21 +54,21 @@
 
           <div class="col-sm-auto col-px-md-5 ml-auto justify-content-between">
             <div class="row profile-view">
-              <label class="col"><strong>City: </strong></label>
+              <label class="col"><strong>City</strong></label>
               <div th:text="${ownerProfile.city}"></div>
             </div>
 
             <div class="row profile-view">
-              <label class="col"><strong>State: </strong></label>
+              <label class="col"><strong>State</strong></label>
               <div th:text="${ownerProfile.state}"></div>
             </div>
 
             <div class="row profile-view">
-              <label class="col"><strong>Phone Number: </strong></label>
+              <label class="col"><strong>Phone Number</strong></label>
               <div th:text="${ownerProfile.phone_number}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Email: </strong></label>
+              <label class="col"><strong>Email</strong></label>
               <div th:text="${ownerProfile.user.getEmail()}"></div>
             </div>
           </div>
