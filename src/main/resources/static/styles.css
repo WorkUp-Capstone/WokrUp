@@ -32,6 +32,13 @@
     bottom:0;
 }
 
+.btn{
+    border-color: #f18c55;
+    color: #f18c55;
+    font-weight: bold;
+    align-items: end;
+}
+
 
 
 
