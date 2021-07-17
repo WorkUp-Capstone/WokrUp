@@ -34,8 +34,14 @@
 
             <div class="row profile-view">
               <label class="col"><strong>Portfolio</strong></label>
-              <div><a href="#" th:href= "@{/(ownerProfile.portfolio_link)}"><span th:text="${ownerProfile.portfolio_link}"></span></a></div>
+              <div th:text="${ownerProfile.portfolio_link}"></div>
             </div>
+
+            <!--Got the input to go to a link, just don't know how to make it go to the value the user put in. Currently just takes the user to home-->
+<!--            <div class="row profile-view">-->
+<!--              <label class="col"><strong>Portfolio</strong></label>-->
+<!--              <div><a href="#" th:href= "@{/(ownerProfile.portfolio_link)}"><span th:text="${ownerProfile.portfolio_link}"></span></a></div>-->
+<!--            </div>-->
 
             <div class="row profile-view">
               <label class="col"><strong>Resume Link</strong></label>
