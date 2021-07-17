@@ -8,7 +8,24 @@
 body{
     background-color: cornsilk;
     font-family: 'Jost', sans-serif;
+    font-weight: bold;
+    font-size: large;
 }
+
+p{
+    color:#073b4c;
+    font-weight: bold;
+    font-size: large;
+}
+
+.btn{
+    border-color: #f18c55;
+    color: #f18c55;
+    font-weight: bold;
+    align-items: center;
+    height: 2em;
+}
+
 .welcome-h1{
     text-align: center;
     color: #f18c55;
@@ -34,15 +51,32 @@ body{
     bottom:0;
 }
 
-.btn{
+#start-btn{
     border-color: #f18c55;
     color: #f18c55;
     font-weight: bold;
-    align-items: end;
-    width: 50%;
+    align-items: center;
+    width: 10em;
     height: 2em;
+    align-self:center;
+
 }
 
+.login-h1{
+    text-align: center;
+    margin: 1em;
+    font-weight: bold;
+}
+
+#login-btn{
+    font-weight: bold;
+    color: #fefae0;
+    background-color: #073b4c;
+    border-color: #f18c55;
+    border-width: medium;
+    text-align: center;
+
+}
 
 
 
@@ -96,6 +130,8 @@ body{
 /*navbar*/
 nav .navbar-nav li a{
     color: #f18c55 !important;
+    font-weight:bolder;
+    font-size: large;
 }
 
 h1 {
