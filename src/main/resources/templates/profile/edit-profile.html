@@ -16,24 +16,24 @@
 
                             <div class="col form-group">
                                 <label>About </label>
-                                <input th:field="*{about}" type="text" class="form-control">
+                                <textarea th:field="*{about}" type="text" class="form-control"></textarea>
                             </div> <!-- form-group end.// -->
                             <div class="col form-group">
                                 <label>Portfolio Link</label>
-                                <input th:field="*{portfolio_link}" type="text" class="form-control">
+                                <input th:field="*{portfolio_link}" type="url" class="form-control" th:value="*{portfolio_link}">
                             </div> <!-- form-group end.// -->
 
                             <div class="col form-group">
                                 <label>Resume Link</label>
-                                <input th:field="*{resume_link}" type="text" class="form-control">
+                                <input th:field="*{resume_link}" type="url" class="form-control">
                             </div>
 
-                            <div class="form-group">
+                            <div class="col form-group">
                                 <label>City</label>
                                 <input th:field="*{city}" type="text" class="form-control input-lg">
                             </div>
 
-                            <div class="form-group">
+                            <div class="col form-group">
                                 <label>State</label>
                                 <select th:field="*{state}" class="form-control">
                                     <option value="AL">Alabama</option>

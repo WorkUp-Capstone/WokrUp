@@ -34,7 +34,7 @@
 
             <div class="row profile-view">
               <label class="col"><strong>Portfolio</strong></label>
-              <div th:text="${ownerProfile.portfolio_link}"></div>
+              <div><a href="#" th:href= "@{/(ownerProfile.portfolio_link)}"><span th:text="${ownerProfile.portfolio_link}"></span></a></div>
             </div>
 
             <div class="row profile-view">
