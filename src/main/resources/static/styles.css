@@ -61,7 +61,9 @@ body{
 
 
 /*navbar*/
-
+.navbar-nav {
+    color: #f18c55; !important
+}
 
 
 
