@@ -37,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /** Login configuration */
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/") // user's home page, it can be any URL
+                .defaultSuccessUrl("/profile") // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login page
 
                 /** Logout configuration */
@@ -61,7 +61,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/profile",
                         "/profile/view-prospect",
                         "/profile/edit",
-                        "/home"
+                        "/home",
+                        "/profile/profileImg/add",
+                        "profile/projects/{id}/add",
+                        "home/view-prospect"
+
                 )
                 .authenticated()
         ;
