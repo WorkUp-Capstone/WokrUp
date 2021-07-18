@@ -9,13 +9,13 @@ body{
     background-color: cornsilk;
     font-family: 'Jost', sans-serif;
     font-weight: bold;
-    font-size: large;
+    /*font-size: large;*/
 }
 
 p{
     color:#073b4c;
     font-weight: bold;
-    font-size: large;
+    /*font-size: large;*/
 }
 
 .btn{
@@ -46,22 +46,23 @@ p{
 
 }
 
-.welcome-footer{
-    position:fixed;
-    bottom:0;
-}
-
 #start-btn{
     border-color: #f18c55;
     color: #f18c55;
     font-weight: bold;
-    align-items: center;
+    text-align: center;
     width: 10em;
     height: 2em;
     align-self:center;
 
 }
 
+.login-main{
+    font-weight: bolder;
+    color: #073b4c;
+    text-align: center;
+
+}
 .login-h1{
     text-align: center;
     margin: 1em;
@@ -69,14 +70,18 @@ p{
 }
 
 #login-btn{
-    font-weight: bold;
+    font-weight: bolder;
     color: #fefae0;
-    background-color: #073b4c;
-    border-color: #f18c55;
-    border-width: medium;
+    background-color: #096971;
     text-align: center;
+    align-items: center;
+    justify-items: center;
+    width: 10em;
+    height: 2em;
+    border-color: #096971;
 
 }
+
 
 
 
@@ -106,12 +111,89 @@ p{
 
 /*home*/
 
+/*.home-search{*/
+/*    margin: .5em;*/
+/*}*/
+.search{
+    margin-right: .5rem;
+}
 
+.home-h1{
+    text-align: center;
+    margin: 2.5rem;
+    font-weight: bolder;
+    color: #f18c55;
 
+}
 
+.home-boundary {
+    display: flex;
+    background-color: #568a7f;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 90%;
+    max-height: 100%;
+    border-radius: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+/*.card-holder{*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    justify-content: space-between;*/
+/*}*/
 
+.home-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 0 1 50%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    align-self: flex-start;
+}
 
+.home-article {
+    margin: .5rem;
+    border-radius: 1rem;
+    background: white;
+    width: 90%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: medium;
+    text-align: center;
+}
 
+.home-text-section {
+    position: relative;
+    bottom: 1.5rem;
+    align-items: center;
+
+}
+.home-img-section{
+    margin-top: 1rem;
+}
+
+#claim-project{
+    background-color: #568a7f;
+    border-color: #568a7f;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    height: 2em;
+    margin-bottom: .5rem;
+    align-self: center;
+    text-align: center;
+}
+
+.row-home{
+    flex-direction: column;
+}
 
 
 
