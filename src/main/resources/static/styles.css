@@ -188,7 +188,9 @@ h1 {
 /*misc*/
 footer {
     background-color: #073b4c;
+    position: sticky;
     max-width: 100%;
+    margin-top: auto;
 }
 /*TODO: getting footer text to be orange or show up better*/
 footer .footer a, h4, small{
@@ -196,7 +198,6 @@ footer .footer a, h4, small{
 }
 
 .footer {
-    position: fixed;
     left: 0 ; right: 0; bottom: 0;
     height: 5em;
     margin-top: 1.5em;
