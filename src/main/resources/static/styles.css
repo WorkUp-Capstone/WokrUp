@@ -186,6 +186,22 @@ h1 {
 
 
 /*misc*/
+footer {
+    background-color: #073b4c;
+    max-width: 100%;
+}
+/*TODO: getting footer text to be orange or show up better*/
+footer .footer a, h4, small{
+    text-decoration-color: #f18c55;
+}
+
+.footer {
+    position: fixed;
+    left: 0 ; right: 0; bottom: 0;
+    height: 5em;
+    margin-top: 1.5em;
+    padding-top: inherit;
+}
 
 
 /*abouts us*/
