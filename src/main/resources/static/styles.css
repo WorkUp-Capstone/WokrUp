@@ -101,10 +101,54 @@ body{
 /*misc*/
 
 
+/*abouts us*/
 
+.about-us{
+    background-color: #FEFAE0;
+    font-family: 'Jost', sans-serif;;
 
+}
 
+#abouts-us{
+    display: flex;
+    flex-direction: row;
+    margin: 10% 0 10% 0;
+}
 
+.aboutus-head{
+    margin-top: 5%;
+}
+
+.aboutus-text{
+    margin-top: 3%;
+}
+
+.aboutus-individual{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.aboutus-individual >
+a{
+    color: #F18C55;
+}
+
+#vanessa{
+    margin-top: 7%;
+}
+
+/*tos*/
+
+.tos-body{
+    margin: 0 5%;
+}
+
+.tos-contact{
+    display: flex;
+    flex-direction: column;
+}
 
 
 
