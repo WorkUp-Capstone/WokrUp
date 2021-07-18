@@ -3,20 +3,30 @@
 <head th:replace="partials/head :: head"></head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<h1>Log In</h1>
+<div class="container">
+<h1 class="login-h1">Log In</h1>
 <div th:if="${param.error}">
     Invalid Username or Password. Please try again.
 </div>
 <div th:if="${param.logout}">
     You have been successfully logged out.
 </div>
-
 <form th:action="@{/login}" method="post">
-    <label for="email">Email</label>
-    <input id="email" name="username" type="text"/>
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password"/>
-    <input type="submit" value="Log In">
+    <div class="row mb-3">
+    <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+    <input id="email" class="form-control" name="username" type="email"/>
+        </div>
+    </div>
+    <div class="row mb-3">
+    <label for="password" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+    <input id="password" name="password" class="form-control" type="password"/>
+        </div>
+    </div>
+    <button id="login-btn" type="submit" class="btn btn-outline-*">Log In</button>
 </form>
+</div>
+<footer th:replace="partials/footer :: #sticky-footer"></footer>
 </body>
 </html>

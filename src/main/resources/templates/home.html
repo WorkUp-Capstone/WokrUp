@@ -111,10 +111,17 @@
                     <input type="hidden" th:name="ownerID" th:value="${project.getUser().getId()}">
                     <button type="submit" class="btn-outline-success">View Owner</button>
                 </form>
+                <div>
+                    <form th:action="@{/home/claimed-project}" method="post">
+                        <input type="hidden" th:name="projectID" th:value="${project.getId()}">
+                        <button type="submit" class="btn-outline-success">Claim Project</button>
+                    </form>
+                </div>
             </div>
         </th:block>
     </div>
     <!--TODO: extract info based on role -->
 </div>
+<footer th:replace="partials/footer :: #sticky-footer"></footer>
 </body>
 </html>

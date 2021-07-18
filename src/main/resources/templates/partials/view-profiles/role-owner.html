@@ -118,13 +118,13 @@
               <div class="col" th:text="${project.creationDate}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Languages & Frameworks </strong></label>
+              <label class="col"><strong>Languages & Frameworks</strong></label>
               <th:block th:each="category : ${project.categories}">
                 <div class="col" th:text="${category.name}"></div>
               </th:block>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Completed On </strong></label>
+              <label class="col"><strong>Completed On</strong></label>
               <div class="col" th:text="${project.getDeveloperUser().getFullName()}"></div>
             </div>
           </form>
