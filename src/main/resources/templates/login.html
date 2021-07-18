@@ -3,7 +3,7 @@
 <head th:replace="partials/head :: head"></head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<div class="login-main container">
+<div class="login-main container" style="min-height: 32em;">
 <h1 class="login-h1">Log In</h1>
 <div th:if="${param.error}">
     Invalid Username or Password. Please try again.

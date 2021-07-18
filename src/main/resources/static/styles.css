@@ -214,6 +214,17 @@ nav .navbar-nav li a{
     color: #f18c55 !important;
     font-weight:bolder;
     font-size: large;
+    float: right;
+}
+
+button.navbar-toggler{
+    border-color: #f18c55;
+    float: right;
+}
+
+.navbar-toggler-icon{
+    justify-content: flex-end;
+    color: #f18c55; !important;
 }
 
 h1 {
@@ -257,6 +268,23 @@ h1 {
 
 
 /*misc*/
+footer {
+    background-color: #073b4c;
+    position: sticky;
+    max-width: 100%;
+    margin-top: auto;
+}
+/*TODO: getting footer text to be orange or show up better*/
+footer .footer a, h4, small{
+    text-decoration-color: #f18c55;
+}
+
+.footer {
+    left: 0 ; right: 0; bottom: 0;
+    height: 5em;
+    margin-top: 1.5em;
+    padding-top: inherit;
+}
 
 
 /*abouts us*/
@@ -288,8 +316,7 @@ h1 {
     align-items: center;
 }
 
-.aboutus-individual >
-a{
+.aboutus-individual > a{
     color: #F18C55;
 }
 
