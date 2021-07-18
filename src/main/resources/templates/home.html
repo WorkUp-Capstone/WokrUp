@@ -18,17 +18,16 @@
 </div>
 
 <div th:switch="${userRole}">
-    <div class="home-boundary">
-    <!--TODO: Need to reference ONLY Project owners profiles-->
+<!--    <div class="home-boundary">-->
+    <div class="home-h2">
+        <h2>Our Developers</h2>
+    </div>
     <div th:case="'owner'">
-        <div class="home-h4">
-        <h4>Our Developers</h4>
-        </div>
-
+       <div class="home-boundary">
         <th:block th:each="profile : ${devProfiles} ">
-            <div class="card-grid">
-            <article class="card">
-                <section>
+            <div class="home-card-grid">
+            <article class="home-card">
+                <section class="home-img-section">
 <div class="profile-photo">
                 <div th:if="${profile.profile_image_url == null}">
                     <div>
@@ -42,51 +41,51 @@
 </div>
                 </section>
                 <hr>
-                <section class="text-section">
+                <section class="home-text-section col">
 <!--                <div class="row profile-view">-->
-                    <h3 class="col" th:text="${profile.user.getFullName()}"></h3>
+                    <h3 class="row" th:text="${profile.user.getFullName()}"></h3>
                     <hr>
 <!--                </div>-->
                 </section>
-                <section class="text-section">
+                <section class="home-text-section col">
 <!--                <div class="row profile-view">-->
-                    <h5 class="col">About</h5>
-                    <p class="col" th:text="${profile.about}"></p>
+                    <h5 class="row">About</h5>
+                    <p class="row" th:text="${profile.about}"></p>
 <!--                </div>-->
                     <hr>
                 </section>
-                <section class="text-section">
+                <section class="home-text-section col">
 <!--                <div class="row profile-view">-->
-                    <h5 class="col">Portfolio</h5>
-                    <p class="col" th:text="${profile.portfolio_link}"></p>
+                    <h5 class="row">Portfolio</h5>
+                    <p class="row" th:text="${profile.portfolio_link}"></p>
 <!--                </div>-->
                     <hr>
                 </section>
-                <section class="text-section">
+                <section class="home-text-section col">
 <!--                <div class="row profile-view">-->
-                    <h5 class="col">Resume</h5>
-                    <p class="col" th:text="${profile.resume_link}"></p>
+                    <h5 class="row">Resume</h5>
+                    <p class="row" th:text="${profile.resume_link}"></p>
 <!--                </div>-->
                     <hr>
                 </section>
-                <section class="text-section">
+                <section class="home-text-section col">
 <!--                <div class="row profile-view">-->
-                    <h5 class="col">Preferred Languages & Frameworks</h5>
+                    <h5 class="row">Preferred Languages & Frameworks</h5>
                     <th:block th:each="category : ${profile.categories}">
-                        <div class="col" th:text="${category.name}"></div>
+                        <p class="row" th:text="${category.name}"></p>
                     </th:block>
 <!--              </div>-->
                 </section>
                 <form th:action="@{/home/contact}" method="post">
                     <input type="hidden" th:name="profileID" th:value="${profile.getUser().getId()}">
 
-                    <button type="submit" class="btn-outline-success" id="claim-project">Reach Out!</button>
+                    <button type="submit" class="btn btn-outline-*" id="claim-project">Reach Out!</button>
                 </form>
-
             </article>
             </div>
         </th:block>
-    </div>
+<!--    </div>-->
+       </div>
     </div>
 
 

@@ -9,13 +9,13 @@ body{
     background-color: cornsilk;
     font-family: 'Jost', sans-serif;
     font-weight: bold;
-    font-size: large;
+    /*font-size: large;*/
 }
 
 p{
     color:#073b4c;
     font-weight: bold;
-    font-size: large;
+    /*font-size: large;*/
 }
 
 .btn{
@@ -44,11 +44,6 @@ p{
     font-weight: bold;
     font-size: large;
 
-}
-
-.welcome-footer{
-    position:fixed;
-    bottom:0;
 }
 
 #start-btn{
@@ -120,12 +115,12 @@ p{
 /*    margin: .5em;*/
 /*}*/
 .search{
-    margin-right: .5em;
+    margin-right: .5rem;
 }
 
-.home-h4{
+.home-h2{
     text-align: center;
-    margin: .5em;
+    margin: .4rem;
     font-weight: bolder;
     color: #f18c55;
 
@@ -137,38 +132,62 @@ p{
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
-    max-width: 80%;
+    max-width: 90%;
     max-height: 100%;
+    border-radius: 1rem;
+    /*flex-wrap: wrap;*/
+    justify-content: space-between;
 }
+/*.card-holder{*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    justify-content: space-between;*/
+/*}*/
 
-.text-section {
+.home-text-section {
     position: relative;
-    bottom: 1.5em;
+    bottom: 1.5rem;
+    text-align: center;
+
 }
 
-.card-grid {
+.home-card-grid {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.card {
-    margin: .5em;
-    border-radius: 2px;
+.home-card {
+    margin: .5rem;
+    border-radius: 1rem;
     background: white;
-    width: 450px;
-    height: 600px;
+    width: 90%;
+    height: 50%;
     /* the following declarations make the card a flex container and justify and align its flex items */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    font-size: medium;
 }
 
-section{
-    margin-top: 1em;
+.home-img-section{
+    margin-top: 1rem;
 }
+
+#claim-project{
+    background-color: #568a7f;
+    border-color: #568a7f;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    height: 2em;
+    margin-bottom: .5rem;
+    align-self: center;
+    text-align: center;
+}
+
 
 
 
