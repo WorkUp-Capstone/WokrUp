@@ -132,6 +132,17 @@ nav .navbar-nav li a{
     color: #f18c55 !important;
     font-weight:bolder;
     font-size: large;
+    float: right;
+}
+
+button.navbar-toggler{
+    border-color: #f18c55;
+    float: right;
+}
+
+.navbar-toggler-icon{
+    justify-content: flex-end;
+    color: #f18c55; !important;
 }
 
 h1 {
@@ -206,8 +217,7 @@ h1 {
     align-items: center;
 }
 
-.aboutus-individual >
-a{
+.aboutus-individual > a{
     color: #F18C55;
 }
 
