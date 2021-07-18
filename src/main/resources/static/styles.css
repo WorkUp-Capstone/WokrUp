@@ -55,13 +55,19 @@ p{
     border-color: #f18c55;
     color: #f18c55;
     font-weight: bold;
-    align-items: center;
+    text-align: center;
     width: 10em;
     height: 2em;
     align-self:center;
 
 }
 
+.login-main{
+    font-weight: bolder;
+    color: #073b4c;
+    text-align: center;
+
+}
 .login-h1{
     text-align: center;
     margin: 1em;
@@ -69,14 +75,18 @@ p{
 }
 
 #login-btn{
-    font-weight: bold;
+    font-weight: bolder;
     color: #fefae0;
-    background-color: #073b4c;
-    border-color: #f18c55;
-    border-width: medium;
+    background-color: #096971;
     text-align: center;
+    align-items: center;
+    justify-items: center;
+    width: 10em;
+    height: 2em;
+    border-color: #096971;
 
 }
+
 
 
 
@@ -106,12 +116,59 @@ p{
 
 /*home*/
 
+/*.home-search{*/
+/*    margin: .5em;*/
+/*}*/
+.search{
+    margin-right: .5em;
+}
 
+.home-h4{
+    text-align: center;
+    margin: .5em;
+    font-weight: bolder;
+    color: #f18c55;
 
+}
 
+.home-boundary {
+    display: flex;
+    background-color: #568a7f;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 80%;
+    max-height: 100%;
+}
 
+.text-section {
+    position: relative;
+    bottom: 1.5em;
+}
 
+.card-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
 
+.card {
+    margin: .5em;
+    border-radius: 2px;
+    background: white;
+    width: 450px;
+    height: 600px;
+    /* the following declarations make the card a flex container and justify and align its flex items */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+section{
+    margin-top: 1em;
+}
 
 
 
