@@ -4,10 +4,12 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="welcome.css">
 </head>
-<body class="welcome-body">
+<body class="welcome-body h-100 m-0">
 <nav th:replace="partials/navbar :: navbar"></nav>
 
-<div class="welcome-container mx-3 mt-3">
+
+<div class="welcome-container min-vh-100 mx-3 mt-3">
+    <div class="content pb-3 p-20"></div>
     <div class="container">
         <h3 class="welcome-h3 text-md-left mx-3">Our Vision</h3>
         <p class="welcome-p ">We strive to fulfill a niche, but necessary purpose - <strong>helping inexperienced
@@ -16,260 +18,271 @@
             provide tangible in field experiences while they pursue a job in
             their newfound career.</p>
     </div>
-
     <br>
     <div class="welcome-experiences">
         <div class="container">
             <div class="my-4">
                 <h3 class="welcome-h3 mx-3">Experience WorkUp </h3>
-                <h6 class="text-md-center">as a...</h6>
+                <h6 class="welcome-p text-md-center">as a...</h6>
             </div>
 
+            <div class="row">
+                <div class="col-6 text-center text-md-right">
+                    <button id="client" class="btn btn-outline-*" href="#ownerInfo" role="button">Project Owner
+                    </button>
+                </div>
+                <div class="col-6 text-center text-md-left">
+                    <button id="dev" class="btn btn-outline-*" href="#devInfo" role="button">Developers</button>
+                </div>
+            </div>
+            <br>
+            <div class="container">
                 <div class="row">
-                    <div class="col-6 text-center text-md-right">
-                        <button id="client" class="btn btn-outline-*" href="#ownerInfo" role="button">Project Owner
-                        </button>
-                    </div>
-                    <div class="col-6 text-center text-md-left">
-                        <button id="dev" class="btn btn-outline-*" href="#devInfo" role="button">Developers</button>
+                    <div class="ownerInfo col d-none">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="d-block w-100" alt="First slide">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 ">
+                                                <h4 class="welcome-h3">Easy Start</h4>
+                                                <p class="welcome-p">Register an account and start posting projects, but
+                                                    it's proven
+                                                    that
+                                                    most people ignore empty profiles, so get more traffic to your
+                                                    projects for better turnaround
+                                                    by having a filled in profile.</p>
+                                            </div>
+                                            <div class="col-6 d-none d-md-block">
+                                                <img src="img/signup.png" height="250px" width="auto" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-block w-100" alt="Second slide">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 ">
+                                                <h4 class="welcome-h3">Add Projects</h4>
+                                                <p class="welcome-p">You can immediately start to add projects and lets
+                                                    be real that
+                                                    is why your here!
+                                                    All you need to do is go to your profile and add a project,
+                                                    after filling out and submitting
+                                                    your project. It will now be listed to all available developers
+                                                    to look at and claim.</p>
+                                            </div>
+                                            <div class="col-6 d-none d-md-block">
+                                                <img src="img/add.png" height="250px" width="auto" alt="">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-block w-100" alt="Third slide">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 ">
+                                                <h4 class="welcome-h3">Options</h4>
+                                                <p class="welcome-p">As the owner of a project you get to choose who
+                                                    will ultimately
+                                                    work on your project.
+                                                    Inspect devs profiles and reach out or wait and have them come
+                                                    to you. Once a project
+                                                    is claimed you can either accept or decline the dev, once a dev
+                                                    is accepted it
+                                                    is expected that you connect to talk about expectations.</p>
+                                            </div>
+                                            <div class="col d-none d-md-block">
+                                                <img src="img/option.png" height="250px" width="auto" alt="">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-block w-100" alt="Fourth slide">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 ">
+                                                <h4 class="welcome-h3">Closing a project</h4>
+                                                <p class="welcome-p">Once a dev has finished the project to their best
+                                                    abilities you
+                                                    will be notified that
+                                                    they are ready for you to review it, here you get the final say.
+                                                    You can either send
+                                                    it back notifying the dev that you intend to communicate the
+                                                    changes or mark it complete.</p>
+                                            </div>
+                                            <div class="col-6 d-none d-md-block">
+                                                <img src="img/complete.png" height="250px" width="auto" alt="">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-block w-100" alt="fifth slide">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h4 class="welcome-h3">Your costs</h4>
+                                                <p class="welcome-p">Free work seems to good to be true, and it is; your
+                                                    cost is to
+                                                    ensure that you give a
+                                                    personal reference to the dev in regards to his work, stay on
+                                                    top of your profile project area
+                                                    to address all notifications of project status, and if satisfied
+                                                    spread WorkUp by word of mouth.</p>
+                                                <div><a class="ml-auto position-relative btn btn-outline-*"
+                                                        href="/register"
+                                                        role="button" style="z-index: 1000">List Projects Now!</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                               data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                               data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <br>
+                <div class="row">
+                    <div class="devInfo d-none col d-none">
+                        <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators2" data-slide-to="2"></li>
+                                <li data-target="#carouselExampleIndicators2" data-slide-to="3"></li>
+
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="d-block w-100" alt="First slide">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 ">
+                                                <h4 class="welcome-h3">Easy Start</h4>
+                                                <p class="welcome-p">Register an account, set up a profile, and start
+                                                    searching for
+                                                    projects to work on.
+                                                    You can search for projects that include your skills or look at
+                                                    what other options the owner
+                                                    of a project has to offer.
+                                                </p>
+                                            </div>
+                                            <div class="col-6 d-none d-md-block">
+                                                <img src="img/signup.png" height="250px" width="auto" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-block w-100" alt="Second slide">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 ">
+                                                <h4 class="welcome-h3">Claim a project</h4>
+                                                <p class="welcome-p">Claim a project, when an owner accepts it you will
+                                                    see it in your
+                                                    profile, and can start immediately
+                                                    to connect with the owner to flesh out the details and establish
+                                                    expectations. This is all done via email.</p>
+                                            </div>
+                                            <div class="col-6 d-none d-md-block">
+                                                <img src="img/claim.png" height="250px" width="auto" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-block w-100" alt="Third slide">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 ">
+                                                <h4 class="welcome-h3">Ready for review</h4>
+                                                <p class="welcome-p">Once you have a completed project submit for review
+                                                    and be
+                                                    notified if it need more work or if it is completed.
+                                                    If more needs to be done communicate the owner will communicate
+                                                    to re-establish expectations and resubmit when appropriate.
+                                                    Otherwise, the cycle repeats.</p>
+                                            </div>
+                                            <div class="col-6 d-none d-md-block">
+                                                <img src="img/review.png" height="250px" width="auto" alt="">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-block w-100" alt="fourth slide">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h4 class="welcome-h3">Your benefits</h4>
+                                                <p class="welcome-p">You gain experience on real life projects, while
+                                                    solidifying and
+                                                    possibly learning new skills and technologies while establishing
+                                                    a networking
+                                                    connection to the owner. You will also gain a professional
+                                                    reference and portfolio work that will gain you another step
+                                                    closer to attaining a
+                                                    the experience needed to land the career you want!</p>
+                                                <div><a class="ml-auto position-relative btn btn-outline-*"
+                                                        href="/register"
+                                                        role="button" style="z-index: 1000">Start getting
+                                                    experience!</a></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button"
+                               data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button"
+                               data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="container">
-                    <div class="row">
-                        <div class="ownerInfo col d-none">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <div class="d-block w-100" alt="First slide">
-                                            <div class="row">
-                                                <div class="col-12 col-md-6 ">
-                                                    <h4>Easy Start</h4>
-                                                    <p>Register an account and start posting projects, but it's proven
-                                                        that
-                                                        most people ignore empty profiles, so get more traffic to your
-                                                        projects for better turnaround
-                                                        by having a filled in profile.</p>
-                                                </div>
-                                                <div class="col-6 d-none d-md-block">
-                                                    <img src="img/signup.png" height="250px" width="auto" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="d-block w-100" alt="Second slide">
-                                            <div class="row">
-                                                <div class="col-12 col-md-6 ">
-                                                    <h4>Add Projects</h4>
-                                                    <p>You can immediately start to add projects and lets be real that
-                                                        is why your here!
-                                                        All you need to do is go to your profile and add a project,
-                                                        after filling out and submitting
-                                                        your project. It will now be listed to all available developers
-                                                        to look at and claim.</p>
-                                                </div>
-                                                <div class="col-6 d-none d-md-block">
-                                                    <img src="" alt="">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="d-block w-100" alt="Third slide">
-                                            <div class="row">
-                                                <div class="col-12 col-md-6 ">
-                                                    <h4>Options</h4>
-                                                    <p>As the owner of a project you get to choose who will ultimately
-                                                        work on your project.
-                                                        Inspect devs profiles and reach out or wait and have them come
-                                                        to you. Once a project
-                                                        is claimed you can either accept or decline the dev, once a dev
-                                                        is accepted it
-                                                        is expected that you connect to talk about expectations.</p>
-                                                </div>
-                                                <div class="col d-none d-md-block">
-                                                    <img src="" alt="">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="d-block w-100" alt="Fourth slide">
-                                            <div class="row">
-                                                <div class="col-12 col-md-6 ">
-                                                    <h4>Closing a project</h4>
-                                                    <p>Once a dev has finished the project to their best abilities you
-                                                        will be notified that
-                                                        they are ready for you to review it, here you get the final say.
-                                                        You can either send
-                                                        it back notifying the dev that you intend to communicate the
-                                                        changes or mark it complete.</p>
-                                                </div>
-                                                <div class="col-6 d-none d-md-block">
-                                                    <img src="" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="d-block w-100" alt="fifth slide">
-                                            <div class="row">
-                                                <div class="col-12 col-md-6 ">
-                                                    <h4>Your costs</h4>
-                                                    <p>Free work seems to good to be true, and it is; your cost is to
-                                                        ensure that you give a
-                                                        personal reference to the dev in regards to his work, stay on
-                                                        top of your profile project area
-                                                        to address all notifications of project status, and if satisfied
-                                                        spread WorkUp by word of mouth.</p>
-                                                    <div><a class=" ml-auto btn btn-outline-*" href="/register"
-                                                            role="button">List your project Now!</a></div>
-                                                </div>
-                                                <div class="col-6 d-none d-md-block">
-                                                    <img src="" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                                   data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                                   data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="devInfo d-none col d-none">
-                            <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators2" data-slide-to="2"></li>
-                                    <li data-target="#carouselExampleIndicators2" data-slide-to="3"></li>
-
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <div class="d-block w-100" alt="First slide">
-                                            <div class="row">
-                                                <div class="col-12 col-md-6 ">
-                                                    <h4>Easy Start</h4>
-                                                    <p>Register an account, set up a profile, and start searching for
-                                                        projects to work on.
-                                                        You can search for projects that include your skills or look at
-                                                        what other options the owner
-                                                        of a project has to offer.
-                                                    </p>
-                                                </div>
-                                                <div class="col-6 d-none d-md-block">
-                                                    <img src="" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="d-block w-100" alt="Second slide">
-                                            <div class="row">
-                                                <div class="col-12 col-md-6 ">
-                                                    <h4>Claim a project</h4>
-                                                    <p>Claim a project, when an owner accepts it you will see it in your
-                                                        profile, and can start immediately
-                                                        to connect with the owner to flesh out the details and establish
-                                                        expectations. This is all done via email.</p>
-                                                </div>
-                                                <div class="col-6 d-none d-md-block">
-                                                    <img src="" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="d-block w-100" alt="Third slide">
-                                            <div class="row">
-                                                <div class="col-12 col-md-6 ">
-                                                    <h4>Ready for review</h4>
-                                                    <p>Once you have a completed project submit for review and be
-                                                        notified if it need more work or if it is completed.
-                                                        If more needs to be done communicate the owner will communicate
-                                                        to re-establish expectations and resubmit when appropriate.
-                                                        Otherwise, the cycle repeats.</p>
-                                                </div>
-                                                <div class="col-6 d-none d-md-block">
-                                                    <img src="" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="d-block w-100" alt="fourth slide">
-                                            <div class="row">
-                                                <div class="col-12 col-md-6 ">
-                                                    <h4>Your benefits</h4>
-                                                    <p>You gain experience on real life projects, while solidifying and
-                                                        possibly learning new skills and technologies while establishing
-                                                        a networking
-                                                        connection to the owner. You will also gain a professional
-                                                        reference and portfolio work that will gain you another step
-                                                        closer to attaining a
-                                                        the experience needed to land the career you want!</p>
-                                                    <div><a class="ml-auto btn btn-outline-*" href="/register"
-                                                            role="button">Start getting experience!</a></div>
-                                                </div>
-                                                <div class="col-6 d-none d-md-block">
-                                                    <img src="" alt="">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button"
-                                   data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button"
-                                   data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="my-4 d-none d-md-block mx-4">
-                            <h3 class="welcome-h3 text-left">Mutualism at WorkUp</h3>
-                            <p class="welcome-p text-left">Here at WorkUp we know that experience is king in any job
-                                field, but for those transiting careers into the tech industry without prior experience
-                                it can be hard to grab the attention and compete for the career we want. That is why we
-                                exist, bringing clients and devs together in a way that fosters communication
-                                and reinforcement of a real-world project to showcase the devs skills all while
-                                producing a solution to the clients very real needs.</p>
-                        </div>
+                    <div class="my-4 d-none d-md-block mx-4">
+                        <h3 class="welcome-h3 text-left">Mutualism at WorkUp</h3>
+                        <p class="welcome-p text-left">Here at WorkUp we know that experience is king in any job
+                            field, but for those transiting careers into the tech industry without prior experience
+                            it can be hard to grab the attention and compete for the career we want. That is why we
+                            exist, bringing clients and devs together in a way that fosters communication
+                            and reinforcement of a real-world project to showcase the devs skills all while
+                            producing a solution to the clients very real needs.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 <footer th:replace="partials/footer :: footer" class="welcome-footer"></footer>
 <script>
     $('#dev').on('click', function (e) {

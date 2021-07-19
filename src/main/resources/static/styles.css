@@ -87,6 +87,10 @@ div.carousel-item > div:first-child{
     min-height: 250px; !important;
 
 }
+.welcome-footer {
+    height: 50px;
+    margin-top: -50px;
+}
 
 
 
@@ -318,6 +322,7 @@ footer a{
     margin-top: 1.5em;
     padding-top: inherit;
 }
+
 
 
 /*abouts us*/
