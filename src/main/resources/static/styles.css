@@ -87,6 +87,18 @@ div.carousel-item > div:first-child{
     min-height: 250px; !important;
 }
 
+.modal-body, #modal {
+    background-color: #073b4c;
+}
+
+.modal-header, #email, #password {
+    background-color: #fefae0;
+}
+
+.modal .login-main {
+    color: #F18C55;
+}
+
 
 
 

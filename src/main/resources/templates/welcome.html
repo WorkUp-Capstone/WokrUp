@@ -272,6 +272,14 @@
 </div>
 <footer th:replace="partials/footer :: footer" class="welcome-footer"></footer>
 <script>
+    $(document).ready(function() {
+        $('#loginModal').modal('show');
+    });
+
+    $('.login-navbar').click(function(){
+        $('#loginModal').modal('show');
+    })
+
     $('#dev').on('click', function (e) {
         $('.devInfo').toggleClass('d-none');
         if ($('.ownerInfo').hasClass('d-none') == false) {
@@ -284,6 +292,7 @@
             $('.devInfo').toggleClass('d-none');
         }
     });
+
 </script>
 
 </body>
