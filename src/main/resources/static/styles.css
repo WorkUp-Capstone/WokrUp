@@ -167,10 +167,11 @@ p{
     justify-content: center;
     font-size: medium;
     text-align: center;
+    padding: 1rem;
 }
 
 .home-text-section {
-    position: relative;
+    position: inherit;
     bottom: 1.5rem;
     align-items: center;
 
