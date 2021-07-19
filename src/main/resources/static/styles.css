@@ -172,7 +172,7 @@ p{
 
 .home-text-section {
     position: inherit;
-    bottom: 1.5rem;
+    margin-bottom: .5rem;
     align-items: center;
 
 }
@@ -192,12 +192,38 @@ p{
     text-align: center;
 }
 
+#reach-out{
+    background-color: #568a7f;
+    border-color: #568a7f;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    height: 2em;
+    margin-bottom: .5rem;
+    align-self: center;
+    text-align: center;
+}
+
 .row-home{
     flex-direction: column;
 }
 
+#view-owner-btn{
+    border:none;
+    font-weight: bold;
+    align-items: center;
+    height: 2em;
+    font-size: medium;
+}
 
+.home-files{
+    color: #f18c55;
+    margin-bottom: 1rem;!important;
+}
 
+#view-owner-p{
+    color:#f18c55;
+}
 
 
 
