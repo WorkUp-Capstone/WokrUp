@@ -44,8 +44,8 @@
 
     <div class="">
       <h2 class="text-center">In Progress</h2>
-      <th:block th:each="project : ${devProject}">
-        <div th:if="${project.getStatus() != 'Open' && project.getDeveloperUser().isChosen() == true && project.completionDate == null}" class="card profile-profect-card">
+      <th:block th:each="project : ${devProject}" th:if="${project.getStatus() != 'Open' && project.getDeveloperUser().isChosen() == true && project.completionDate == null}">
+        <div class="card profile-profect-card">
             <div th:if="${project.getStatus() == 'Closed'}" class="profile-view">
                 <h6 class="text-center">This projects is awaiting review!</h6>
             </div>
@@ -75,29 +75,27 @@
               <th:block th:each="category : ${project.categories}">
                 <div class="field-text" th:text="${category.name}"></div>
 
-            <div class="row project-buttons"></div>
               </th:block>
-              <form th:action="@{/home/view-prospect}" method="post">
-                <input type="hidden" th:name="ownerID" th:value="${project.getUser().getId()}">
-                <button type="submit" class="btn-outline-success">View Owner</button>
-              </form>
-
-                <div th:if="${project.getStatus() == 'in progress'}">
-                    <form th:action="@{/home/review}" method="post">
-                        <input type="hidden" th:name="projectID" th:value="${project.getId()}">
-                        <button type="submit" class="btn-outline-success">Ready for Review</button>
-                    </form>
-                </div>
 
             </div>
         </div>
+          <form th:action="@{/home/view-prospect}" method="post">
+              <input type="hidden" th:name="ownerID" th:value="${project.getUser().getId()}">
+              <button type="submit" class="btn-outline-success">View Owner</button>
+          </form>
+          <div th:if="${project.getStatus() == 'in progress'}">
+              <form th:action="@{/home/review}" method="post">
+                  <input type="hidden" th:name="projectID" th:value="${project.getId()}">
+                  <button type="submit" class="btn-outline-success">Ready for Review</button>
+              </form>
+          </div>
       </th:block>
     </div>
 
     <div class="">
       <h2 class="text-center">Complete</h2>
-      <th:block th:each="project : ${devProject}">
-        <div th:if="${project.getStatus() == 'Closed' && project.completionDate != null}" class="card profile-profect-card">
+      <th:block th:each="project : ${devProject}" th:if="${project.getStatus() == 'Closed' && project.completionDate != null}">
+        <div  class="card profile-profect-card">
 
             <div class="row profile-view">
               <label class="field-name"><strong>Title:</strong></label>
@@ -129,14 +127,16 @@
               <th:block th:each="category : ${project.categories}">
                 <div class="field-text" th:text="${category.name}"></div>
 
-            <div class="row project-buttons"></div>
               </th:block>
+
+            </div>
+        </div>
+          <div class="row">
               <form th:action="@{/home/view-prospect}" method="post">
-                <input type="hidden" th:name="ownerID" th:value="${project.getUser().getId()}">
-                <button type="submit" class="btn-outline-success">View Owner</button>
+                  <input type="hidden" th:name="ownerID" th:value="${project.getUser().getId()}">
+                  <button type="submit" class="btn-outline-success">View Owner</button>
               </form>
-            </div>
-            </div>
+          </div>
       </th:block>
     </div>
 </div>
