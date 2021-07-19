@@ -2,34 +2,173 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/head :: head">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="welcome.css">
 </head>
 <body class="welcome-body">
 <nav th:replace="partials/navbar :: navbar"></nav>
 
-<h1 class="welcome-h1">WorkUp Logo</h1>
 <div class="welcome-container mx-3 mt-3">
-<h3 class="welcome-h3 mx-3">Our Vision</h3>
-<p class="welcome-p">We strive to fulfill a niche, but necessary purpose - <strong>helping young developers to grow their portfolio and confidence</strong>.
-    At WorkUp, we allow for grads of career-accelerating "boot camps" to connect with experienced developers while they pursue a job in
-their newfound career.</p>
-<br>
-    <div class="container">
-        <div class="row">
-            <p class="welcome-p col align-self-start"><em>As a project owner</em>, you may have some projects that you want a fresh pair of eyes on, or maybe you're looking for
-            some junior-level developers to acquire for your team. While our main goal is <strong>not</strong> to promote recruitment, we
-            believe the trade-off of miscellaneous workloads for real-world experience and network-building to be mutually beneficial. You can peruse
-            potential candidates and make contact with them if you believe they may suit your expectations!</p>
-            <p class="welcome-p col align-self-end"><em>As a new developer</em>, you may look at all available projects currently up for grabs; once a project is selected, you're expected to
-                see it through to the end! Don't feel discouraged, though. You have an opportunity to review exactly what you're getting yourself into, and
-            may even contact the project owner via email for more details, if you'd like. Transparency is key, here. There's no shame in acknowledging your
-            current limits. By the way, these side projects are an amazing way to get credibility! Make some new connections and
-            broaden your programming horizons!</p>
+    <h3 class="welcome-h3 mx-3">Our Vision</h3>
+    <p class="welcome-p">We strive to fulfill a niche, but necessary purpose - <strong>helping inexperienced developers to grow their portfolio and confidence</strong>.
+        At WorkUp, we allow for grads of career-accelerators to connect to real-projects by real clients that provide tangible in field experiences while they pursue a job in
+        their newfound career.</p>
+    <br>
+    <div class="welcome-experiences">
+
+    <div>
+        <h3 class="welcome-h3 mx-3">Experience WorkUp </h3>
+        <h6>as a...</h6>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <button id="client" class="btn btn-outline-*" href="#ownerInfo" role="button">Project Owner</button>
+        </div>
+        <div class="col-6">
+            <button id="dev" class="btn btn-outline-*" href="#devInfo" role="button">Developers</button>
         </div>
     </div>
-<div><a id="start-btn" class="btn btn-outline-*" href="/register" role="button">Start Today</a></div>
-</div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="ownerInfo col d-none">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
 
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="d-block w-100" alt="First slide">
+                                <h4>Easy Start</h4>
+                                    <p>Register an account and start posting projects, but it's proven that
+                                        most people ignore empty profiles, so get more traffic to your projects for better turnaround
+                                        by having a filled in profile.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-block w-100" alt="Second slide">
+                                <h4>Add Projects</h4>
+                                <p>You can immediately start to add projects and lets be real that is why your here!
+                                All you need to do is go to your profile and add a project, after filling out and submitting
+                                    your project. It will now be listed to all available developers to look at and claim.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-block w-100" alt="Third slide">
+                                <h4>Options</h4>
+                                <p>As the owner of a project you get to choose who will ultimately work on your project.
+                                    Inspect devs profiles and reach out or wait and have them come to you. Once a project
+                                    is claimed you can either accept or decline the dev, once a dev is accepted it
+                                    is expected that you connect to talk about expectations.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-block w-100" alt="Fourth slide">
+                                <h4>Closing a project</h4>
+                                <p>Once a dev has finished the project to their best abilities you will be notified that
+                                    they are ready for you to review it, here you get the final say. You can either send
+                                    it back notifying the dev that you intend to communicate the changes or mark it complete.</p>
+                            </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="d-block w-100" alt="fifth slide">
+                                    <h4>Your costs</h4>
+                                    <p>Free work seems to good to be true, and it is; your cost is to ensure that you give a
+                                        personal reference to the dev in regards to his work, stay on top of your profile project area
+                                        to address all notifications of project status, and if satisfied spread WorkUp by word of mouth.</p>
+                                    <div><a class="btn btn-outline-*" href="/register" role="button">List your project Now!</a></div>
+                                </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="devInfo d-none col d-none">
+                <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators2" data-slide-to="2"></li>
+                        <li data-target="#carouselExampleIndicators2" data-slide-to="3"></li>
+
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="d-block w-100" alt="First slide">
+                                <h4>Easy Start</h4>
+                                <p>Register an account, set up a profile, and start searching for projects to work on.
+                                    You can search for projects that include your skills or look at what other options the owner
+                                    of a project has to offer.
+                                    </p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-block w-100" alt="Second slide">
+                                <h4>Claim a project</h4>
+                                <p>Claim a project, when an owner accepts it you will see it in your profile, and can start immediately
+                                    to connect with the owner to flesh out the details and establish expectations. This is all done via email.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-block w-100" alt="Third slide">
+                                <h4>Ready for review</h4>
+                                <p>Once you have a completed project submit for review and be notified if it need more work or if it is completed.
+                                If more needs to be done communicate with the owner to re-establish expectations and resubmit when appropriate. Otherwise, the cycle repeats.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-block w-100" alt="fourth slide">
+                                <h4>Your benefits</h4>
+                                <p>You gain experience on real life projects, while solidifying and possibly learning new skills and technologies while establishing a networking
+                                    connection to the owner. You will also gain a professional reference and portfolio work that will gain you another step closer to attaining a
+                                the experience needed to land the career you want!</p>
+                                <div><a class="btn btn-outline-*" href="/register" role="button">List your project Now!</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
 <footer th:replace="partials/footer :: footer" class="welcome-footer"></footer>
+<script>
+    $('#dev').on('click', function (e) {
+        $('.devInfo').toggleClass('d-none');
+        if ($('.ownerInfo').hasClass('d-none') == false) {
+            $('.ownerInfo').toggleClass('d-none');
+        }
+    });
+    $('#client').on('click', function (e) {
+        $('.ownerInfo').toggleClass('d-none');
+        if ($('.devInfo').hasClass('d-none') == false) {
+            $('.devInfo').toggleClass('d-none');
+        }
+    });
+</script>
 
 </body>
 </html>
