@@ -1,8 +1,11 @@
-<div class="container mx-5">
-  <h3>My Profile</h3>
-  <div class="card row justify-content-between mx-0">
+<div class="container profile">
+
+  <div class="card profile-card-outer col">
+    <h3 class="text-center">My Profile</h3>
+
     <div class="main-content row p-3">
-      <div class="profile-photo col-md-auto col-sm-auto mr-5">
+      <div class="col-3">
+      <div class="profile-photo col-md-auto col-sm-auto">
         <form th:action="@{profile/profileImg/add}" th:method="get">
           <th:block th:each="profile : ${ownerProfile}">
             <div th:if="${ownerProfile.profile_image_url == null}">
@@ -18,60 +21,59 @@
           </th:block>
         </form>
       </div>
+      </div>
 
-      <div class="user-info row mx-md-n5 align-items-center" th:action="@{/profile/edit}">
+        <div class="col-9">
+      <div class="user-info row mx-md-n5" th:action="@{/profile/edit}">
         <th:block th:each="profile : ${ownerProfile}">
-          <div id="user-info" class="col px-md-5 ml-auto col-sm-auto justify-content-between">
 
             <div class="row profile-view">
-              <label class="col"><strong>Name</strong></label>
-              <div th:text="${ownerProfile.user.getFullName()}"></div>
-            </div>
-            <div class="row profile-view">
-              <label class="col"><strong>About Me</strong></label>
-              <div th:text="${ownerProfile.about}"></div>
+              <label class="field-name"><strong>Name:   </strong></label>
+              <div class="field-text" th:text="${ownerProfile.user.getFullName()}"></div>
             </div>
 
             <div class="row profile-view">
-              <label class="col"><strong>Portfolio</strong></label>
-              <div th:text="${ownerProfile.portfolio_link}"></div>
+              <label class="field-name"><strong>About Me:   </strong></label>
+              <div class="field-text" th:text="${ownerProfile.about}"></div>
             </div>
 
             <div class="row profile-view">
-              <label class="col"><strong>Resume Link</strong></label>
-              <div th:text="${ownerProfile.resume_link}"></div>
+              <label class="field-name"><strong>Portfolio:   </strong></label>
+              <div class="field-text" th:text="${ownerProfile.portfolio_link}"></div>
+            </div>
+
+            <div class="row profile-view">
+              <label class="field-name"><strong>Resume Link:   </strong></label>
+              <div class="field-text" th:text="${ownerProfile.resume_link}"></div>
             </div>
             <div th:if="${ownerProfile.user.role.getId() == 2}">
 
               <div class="row profile-view">
-                <label class="col"><strong>Preferred Languages & Frameworks</strong></label>
+                <label class="field-name"><strong>Preferred Languages & Frameworks: </strong></label>
                 <th:block th:each="category : ${ownerProfile.categories}">
-                  <div th:text="${category.name}"></div>
+                  <div class="field-text" th:text="${category.name}"></div>
                 </th:block>
               </div>
             </div>
-          </div>
 
-          <div class="col-sm-auto col-px-md-5 ml-auto justify-content-between">
             <div class="row profile-view">
-              <label class="col"><strong>City</strong></label>
-              <div th:text="${ownerProfile.city}"></div>
+              <label class="field-name"><strong>City:   </strong></label>
+              <div class="field-text" th:text="${ownerProfile.city}"></div>
             </div>
 
             <div class="row profile-view">
-              <label class="col"><strong>State</strong></label>
-              <div th:text="${ownerProfile.state}"></div>
+              <label class="field-name"><strong>State:   </strong></label>
+              <div class="field-text" th:text="${ownerProfile.state}"></div>
             </div>
 
             <div class="row profile-view">
-              <label class="col"><strong>Phone Number</strong></label>
-              <div th:text="${ownerProfile.phone_number}"></div>
+              <label class="field-name"><strong>Phone Number:   </strong></label>
+              <div class="field-text" th:text="${ownerProfile.phone_number}"></div>
             </div>
             <div class="row profile-view">
-              <label class="col"><strong>Email</strong></label>
-              <div th:text="${ownerProfile.user.getEmail()}"></div>
+              <label class="field-name"><strong>Email:   </strong></label>
+              <div class="field-text" th:text="${ownerProfile.user.getEmail()}"></div>
             </div>
-          </div>
           <br>
           <div class="col edit-profile-btn ml-5">
             <form th:action="@{/profile/edit}" th:method="get">
@@ -83,3 +85,4 @@
     </div><!-- row main content-->
   </div><!-- card-->
 </div><!-- container-->
+</div>
