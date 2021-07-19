@@ -1,20 +1,564 @@
-.profile-view{
+/*font family*/
+/*font-family: 'Jost', sans-serif;*/
+/*font-family: 'Source Sans Pro', sans-serif;*/
+
+
+
+/*welcome*/
+body{
+    background-color: cornsilk;
+    font-family: 'Jost', sans-serif;
+    font-weight: bold;
+    /*font-size: large;*/
+}
+
+p{
+    color:#073b4c;
+    font-weight: bold;
+    /*font-size: large;*/
+}
+
+.btn{
+    border-color: #f18c55;
+    color: #f18c55;
+    font-weight: bold;
+    align-items: center;
+    height: 2em;
+}
+
+.welcome-h1{
+    text-align: center;
+    color: #f18c55;
+    margin: 2% 0 2% 0;
+
+}
+.welcome-h3{
+    color: #f18c55;
+    font-weight: bold;
+    text-align: center;
+}
+
+.welcome-p{
+    color:#073b4c;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+
+}
+
+#start-btn{
+    border-color: #f18c55;
+    color: #f18c55;
+    font-weight: bold;
+    text-align: center;
+    width: 10em;
+    height: 2em;
+    align-self:center;
+
+}
+
+.login-main{
+    font-weight: bolder;
+    color: #073b4c;
+    text-align: center;
+
+}
+.login-h1{
+    text-align: center;
+    margin: 1em;
+    font-weight: bold;
+}
+
+#login-btn{
+    font-weight: bolder;
+    color: #fefae0;
+    background-color: #096971;
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+    width: 10em;
+    height: 2em;
+    border-color: #096971;
+
+}
+
+div.carousel-item > div:first-child{
+    min-height: 250px; !important;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*home*/
+
+/*.home-search{*/
+/*    margin: .5em;*/
+/*}*/
+.search{
+    margin-right: .5rem;
+}
+
+.home-h1{
+    text-align: center;
+    margin: 2.5rem;
+    font-weight: bolder;
+    color: #f18c55;
+
+}
+
+.home-boundary {
+    display: flex;
+    background-color: #568a7f;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 90%;
+    max-height: 100%;
+    border-radius: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+/*.card-holder{*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    justify-content: space-between;*/
+/*}*/
+
+.home-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 0 1 50%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    align-self: flex-start;
+}
+
+.home-article {
+    margin: .5rem;
+    border-radius: 1rem;
+    background: white;
+    width: 90%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: medium;
+    text-align: center;
+    padding: 1rem;
+}
+
+.home-text-section {
+    position: inherit;
+    margin-bottom: .5rem;
+    align-items: center;
+
+}
+.home-img-section{
+    margin-top: 1rem;
+}
+
+#claim-project{
+    background-color: #568a7f;
+    border-color: #568a7f;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    height: 2em;
+    margin-bottom: .5rem;
+    align-self: center;
+    text-align: center;
+}
+
+#reach-out{
+    background-color: #568a7f;
+    border-color: #568a7f;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    height: 2em;
+    margin-bottom: .5rem;
+    align-self: center;
+    text-align: center;
+}
+
+.row-home{
+    flex-direction: column;
+}
+
+#view-owner-btn{
+    border:none;
+    font-weight: bold;
+    align-items: center;
+    height: 2em;
+    font-size: medium;
+}
+
+.home-files{
+    color: #f18c55;
+    margin-bottom: 1rem;!important;
+}
+
+#view-owner-p{
+    color:#f18c55;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*navbar*/
+nav .navbar-nav li a{
+    color: #f18c55 !important;
+    font-weight:bolder;
+    font-size: large;
+    float: right;
+}
+
+button.navbar-toggler{
+    border-color: #f18c55;
+    float: right;
+}
+
+.navbar-toggler-icon{
+    justify-content: flex-end;
+    color: #f18c55; !important;
+}
+
+h1 {
+    font-family: 'Jost', sans-serif;
+    color: #f18c55;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*login & register*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*misc*/
+footer {
+    background-color: #073b4c;
+    color: #f18c55;
+    max-width: 100%;
+    margin-top: auto;
+}
+/*TODO: getting footer text to be orange or show up better*/
+footer a{
+    color: #f18c55;
+}
+
+.footer {
+    left: 0 ; right: 0; bottom: 0;
+    height: 5em;
+    margin-top: 1.5em;
+    padding-top: inherit;
+}
+
+
+/*abouts us*/
+
+.about-us{
+    background-color: #FEFAE0;
+    font-family: 'Jost', sans-serif;;
+
+}
+
+#abouts-us{
+    display: flex;
+    flex-direction: row;
+    margin: 10% 0 10% 0;
+}
+
+.aboutus-head{
+    margin-top: 5%;
+}
+
+.aboutus-text{
+    margin-top: 3%;
+}
+
+.aboutus-individual{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.aboutus-individual > a{
+    color: #F18C55;
+}
+
+#vanessa{
+    margin-top: 7%;
+}
+
+/*tos*/
+
+.tos-body{
+    margin: 0 5%;
+}
+
+.tos-contact{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+textarea .contact-us {
+    width: auto;
+    height: auto;
+}
+
+
+
+/* profile view*/
+.owner-profile-view{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.main-content .row{
     flex-wrap: nowrap;
 }
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
 
-#user-info .col{
-    flex-grow: revert;
 }
 
-.names{
-    padding: 0; !important;
+.profile-card-outer{
+    width: inherit;
 }
 
-html,
-body {
-    height: 100%;
+.profile-card{
+    display: flex;
+    flex-direction: row;
+    max-width: 80%;
 }
 
-#sticky-footer{
-    flex-shrink: 0;
+.profile-photo{
+    margin-right: 0;!important;
+}
+
+.user-info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 3%;
+}
+
+.field-name{
+    margin-left: 10%;
+}
+
+.field-text{
+    margin-left: 1.2rem;
+}
+
+.owner-project-cards{
+
+}
+
+.projects-view{
+    display: flex;
+    justify-content: center;
+    margin: 0 10% 0 0;
+}
+
+.inprogress-options{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*non mobile view*/
+@media screen and (min-width:812px)
+{
+
+    /*welcome*/
+    body{
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*home*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*navbar*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*login & register*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*misc*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

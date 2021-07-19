@@ -1,26 +1,26 @@
 <div class="container mx-5">
     <div th:if="${ownerProfile.user.role.getId() == 1}">
-        <h3>Their Projects</h3>
+        <h3><span th:text="${ownerProfile.getUser().fullName}"></span> Projects</h3>
         <th:block th:each="project : ${ownerProject}">
             <div class="card w-50 m-2 p-3">
                 <div class="row profile-view">
-                    <label class="col"><strong>Project Title:</strong></label>
+                    <label class="col"><strong>Title</strong></label>
                     <div class="col" th:text="${project.title}"></div>
                 </div>
                 <div class="row profile-view">
-                    <label class="col"><strong>Project Description: </strong></label>
+                    <label class="col"><strong>Description</strong></label>
                     <div class="col" th:text="${project.description}"></div>
                 </div>
                 <div class="row profile-view">
-                    <label class="col"><strong>Status: </strong></label>
+                    <label class="col"><strong>Status</strong></label>
                     <div class="col" th:text="${project.status.toUpperCase().replace('_', ' ')}"></div>
                 </div>
                 <div class="row profile-view">
-                    <label class="col"><strong>Project Created: </strong></label>
+                    <label class="col"><strong>Created On</strong></label>
                     <div class="col" th:text="${project.creationDate}"></div>
                 </div>
                 <div class="row profile-view">
-                    <label class="col"><strong>Preferred Languages/Frameworks </strong></label>
+                    <label class="col"><strong>Preferred Languages & Frameworks </strong></label>
                     <th:block th:each="category : ${project.categories}">
                         <div class="col" th:text="${category.name}"></div>
                     </th:block>
