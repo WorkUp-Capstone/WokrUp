@@ -422,13 +422,13 @@ textarea .contact-us {
 }
 
 .owner-project-cards{
-    margin: 0 0 0 0;!important;
+
 }
 
 .projects-view{
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    margin: 0 10% 0 0;
 }
 
 .inprogress-options{
