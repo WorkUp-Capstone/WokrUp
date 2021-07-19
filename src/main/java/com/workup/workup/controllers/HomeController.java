@@ -259,4 +259,10 @@ model.addAttribute("projectImageList", projectImage);
     public String tos(){
         return "tos";
     }
+
+    @GetMapping("/faq")
+    public String faq() { return "faq"; }
+
+    @GetMapping("/contact-us")
+    public String contactUs() { return "contact-us"; }
 }

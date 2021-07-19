@@ -24,17 +24,17 @@
         </ul>
         <!-- Sign up/Login nav-links (not logged in) -->
         <div sec:authorize="!isAuthenticated()">
-        <div>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/register">Sign up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-            </ul>
-        </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Sign up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                </ul>
             </div>
+        </div>
         <!-- These items will only display if the user is logged in -->
         <div sec:authorize="isAuthenticated()">
         <div>
