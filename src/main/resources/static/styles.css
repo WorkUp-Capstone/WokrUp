@@ -448,8 +448,15 @@ textarea .contact-us {
     background-color: #073b4c ;
 }
 
-.edit-profile-card {
+.edit-card {
     background-color: #fefae0;
+
+    /*border: #096971 solid;*/
+    /*border-radius: 1rem;*/
+}
+
+.title-edit {
+    color: #F18C55;
 }
 
 
