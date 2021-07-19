@@ -273,6 +273,13 @@
 <footer th:replace="partials/footer :: footer" class="welcome-footer"></footer>
 <script>
     $(document).ready(function() {
+        console.log("page ready")
+        if ($('#navbar').hasClass("collapse")) {
+            console.log("page inside")
+            $('#navbar').collapse('show')
+            $('#loginModal').modal('show');
+        }
+        console.log("page outside")
         $('#loginModal').modal('show');
     });
 
