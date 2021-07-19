@@ -9,6 +9,7 @@ body{
     background-color: cornsilk;
     font-family: 'Jost', sans-serif;
     font-weight: bold;
+
     /*font-size: large;*/
 }
 
@@ -84,7 +85,6 @@ p{
 
 div.carousel-item > div:first-child{
     min-height: 250px; !important;
-
 }
 
 
@@ -304,7 +304,7 @@ footer {
     background-color: #073b4c;
     color: #f18c55;
     max-width: 100%;
-    margin-top: auto;
+    /*margin-top: auto;*/
 }
 /*TODO: getting footer text to be orange or show up better*/
 footer a{
@@ -373,75 +373,6 @@ textarea .contact-us {
     width: auto;
     height: auto;
 }
-
-
-
-/* profile view*/
-.owner-profile-view{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.main-content .row{
-    flex-wrap: nowrap;
-}
-.profile{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2%;
-
-}
-
-.profile-card-outer{
-    width: inherit;
-}
-
-.profile-card{
-    display: flex;
-    flex-direction: row;
-    max-width: 80%;
-}
-
-.profile-photo{
-    margin-right: 0;!important;
-}
-
-.user-info{
-    display: flex;
-    flex-direction: column;
-    margin-left: 3%;
-}
-
-.field-name{
-    margin-left: 10%;
-}
-
-.field-text{
-    margin-left: 1.2rem;
-}
-
-.owner-project-cards{
-    margin: 0 0 0 0;!important;
-}
-
-.projects-view{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.inprogress-options{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-
-
-
-
 
 
 
