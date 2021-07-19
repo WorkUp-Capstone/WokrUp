@@ -82,6 +82,11 @@ p{
 
 }
 
+div.carousel-item > div:first-child{
+    min-height: 250px; !important;
+
+}
+
 
 
 
