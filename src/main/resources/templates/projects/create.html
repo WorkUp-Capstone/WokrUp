@@ -9,7 +9,7 @@
 <div class="container">
     <div class="form-group">
         <h3>Create New Project: </h3>
-        <form th:action="@{/projects/create}" th:method="post" th:object="${project}">
+        <form th:action="@{/projects/create}" th:method="post" th:object="${project}" style="margin-bottom: 22em;">
 
             <label>Title</label>
             <input name="title" th:field="*{title}"/>

@@ -7,10 +7,10 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+    <div class="row justify-content-center" style="margin-bottom: 8em;">
+        <div class="col-md-6 edit-card">
                     <form th:action="@{/projects/{id}/edit(id=${editProject.getId()})}" method="post" th:object="${editProject}">
-                        <h4><strong>Edit Project</strong></h4>
+                        <h4 class="title-edit border-bottom"><strong>Edit Project</strong></h4>
                             <div class="col form-group">
                                 <label for="title">Title</label>
                                 <input th:field="*{title}" type="text" name="title" id="title" class="form-control" placeholder="Title">
@@ -40,7 +40,7 @@
                             </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                            <button type="submit" class="submit-button btn btn-primary btn-block">Save Changes</button>
                         </div>
                     </form>
             </div>
