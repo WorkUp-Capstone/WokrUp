@@ -142,11 +142,6 @@ div.carousel-item > div:first-child{
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-/*.card-holder{*/
-/*    display: flex;*/
-/*    flex-wrap: wrap;*/
-/*    justify-content: space-between;*/
-/*}*/
 
 .home-card {
     display: flex;
