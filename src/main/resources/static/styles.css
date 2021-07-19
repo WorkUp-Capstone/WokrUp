@@ -167,11 +167,12 @@ p{
     justify-content: center;
     font-size: medium;
     text-align: center;
+    padding: 1rem;
 }
 
 .home-text-section {
-    position: relative;
-    bottom: 1.5rem;
+    position: inherit;
+    margin-bottom: .5rem;
     align-items: center;
 
 }
@@ -191,12 +192,38 @@ p{
     text-align: center;
 }
 
+#reach-out{
+    background-color: #568a7f;
+    border-color: #568a7f;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    height: 2em;
+    margin-bottom: .5rem;
+    align-self: center;
+    text-align: center;
+}
+
 .row-home{
     flex-direction: column;
 }
 
+#view-owner-btn{
+    border:none;
+    font-weight: bold;
+    align-items: center;
+    height: 2em;
+    font-size: medium;
+}
 
+.home-files{
+    color: #f18c55;
+    margin-bottom: 1rem;!important;
+}
 
+#view-owner-p{
+    color:#f18c55;
+}
 
 
 
