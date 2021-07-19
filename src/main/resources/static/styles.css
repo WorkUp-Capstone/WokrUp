@@ -443,7 +443,14 @@ textarea .contact-us {
 
 
 
+/* edit-profile*/
+.submit-button {
+    background-color: #073b4c ;
+}
 
+.edit-profile-card {
+    background-color: #fefae0;
+}
 
 
 
