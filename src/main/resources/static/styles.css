@@ -270,13 +270,13 @@ h1 {
 /*misc*/
 footer {
     background-color: #073b4c;
-    position: sticky;
+    color: #f18c55;
     max-width: 100%;
     margin-top: auto;
 }
 /*TODO: getting footer text to be orange or show up better*/
-footer .footer a, h4, small{
-    text-decoration-color: #f18c55;
+footer a{
+    color: #f18c55;
 }
 
 .footer {
@@ -337,7 +337,10 @@ footer .footer a, h4, small{
 
 
 
-
+textarea .contact-us {
+    width: auto;
+    height: auto;
+}
 
 
 

@@ -6,9 +6,12 @@
 </head>
 <body>
     <footer th:fragment="footer" id="sticky-footer" class="footer">
-        <div class="container text-center" id="footer">
-            <h4><strong>Support</strong></h4>
-            <a th:href="@{/about-us}">About Us</a>
+        <div class="container text-center " id="footer">
+            <!-- <h4><strong>Support</strong></h4> -->
+            <a th:href="@{/about-us}" style="padding-right: 1em;">About Us</a>
+            <a th:href="@{/faq}" style="padding-right: 1em;">FAQ</a>
+            <a th:href="@{/contact-us}" style="padding-right: 1em;">Contact Us</a>
+            <br>
             <small> Copyright &copy; Workup</small>
         </div>
     </footer>
