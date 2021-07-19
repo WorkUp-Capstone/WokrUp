@@ -469,7 +469,124 @@ textarea .contact-us {
 
 
 
+/* Edit Images*/
+.images-boundary {
+    display: flex;
+    background-color: #568a7f;
+    align-items: center;
+    width: 50rem;
+    height: 25rem;
+    border-radius: 1rem;
+    justify-content: space-evenly;
+    margin: 4rem auto 11em;
+}
 
+.images-article{
+    margin: .5rem;
+    border-radius: 1rem;
+    background: white;
+    width: 45em;
+    height: 20em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: medium;
+    text-align: center;
+    padding: 1rem;
+}
+
+.images-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 0 1 50%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#picker {
+    background-color: #568a7f;
+    border-color: #568a7f;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    height: 2em;
+    margin-bottom: .5rem;
+    align-self: center;
+    text-align: center;
+}
+.edit-profile {
+    margin-top: 4rem;
+}
+
+#submit-pic {
+    background-color:#F18C55;
+    border-color:#F18C55;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    height: 2em;
+    margin-bottom: .5rem;
+    align-self: center;
+    text-align: center;
+    width: 6.5em;
+
+}
+
+.project-h3{
+    color: #073b4c;
+}
+
+
+
+
+.files-article {
+    margin: 2rem auto auto;
+    border-radius: 1rem;
+    background: #F18C55;
+    width: 55em;
+    height: 70em;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+
+}
+
+#delete-file {
+    background-color:red;
+    border-color:red;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    height: 2em;
+    margin-bottom: .5rem;
+    margin-top: 1.5rem;
+    align-self: center;
+    text-align: center;
+    width: 6.5em;
+}
+
+.edit-file{
+    margin: auto;
+    text-align: center;
+}
+
+#submit-file {
+    background-color:#F18C55;
+    border-color:#F18C55;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    height: 2em;
+    /*margin-bottom: .5rem;*/
+    align-self: center;
+    text-align: center;
+    width: 6.5em;
+    margin: auto;
+}
 /*non mobile view*/
 @media screen and (min-width:812px)
 {
