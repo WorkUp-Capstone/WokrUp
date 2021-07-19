@@ -85,6 +85,7 @@ p{
 
 div.carousel-item > div:first-child{
     min-height: 250px; !important;
+
 }
 
 
@@ -304,7 +305,7 @@ footer {
     background-color: #073b4c;
     color: #f18c55;
     max-width: 100%;
-    /*margin-top: auto;*/
+    margin-top: auto;
 }
 /*TODO: getting footer text to be orange or show up better*/
 footer a{
@@ -373,6 +374,8 @@ textarea .contact-us {
     width: auto;
     height: auto;
 }
+
+
 
 /* profile view*/
 .owner-profile-view{
