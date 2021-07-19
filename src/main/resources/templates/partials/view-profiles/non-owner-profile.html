@@ -51,7 +51,7 @@
                             <div class="row profile-view">
                                 <label class="field-name"><strong>Preferred Languages & Frameworks: </strong></label>
                                 <th:block th:each="category : ${ownerProfile.categories}">
-                                    <div class="field-text" th:text="${category.name}"></div>
+                                    <div class="field-text" th:text="${category.name.replace('_', ' ')}"></div>
                                 </th:block>
                             </div>
                         </div>
