@@ -384,7 +384,7 @@ textarea .contact-us {
     justify-content: center;
 }
 .main-content .row{
-    flex-wrap: nowrap;
+
 }
 .profile{
     display: flex;
@@ -422,14 +422,14 @@ textarea .contact-us {
     margin-left: 1.2rem;
 }
 
-.owner-project-cards{
+.owner-project-card .row{
+
 
 }
 
 .projects-view{
     display: flex;
     justify-content: center;
-    margin: 0 10% 0 0;
 }
 
 .inprogress-options{
