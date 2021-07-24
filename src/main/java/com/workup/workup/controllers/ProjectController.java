@@ -155,7 +155,7 @@ ProjectImage image = new ProjectImage();
         image.setPath(path);
         image.setProject(project);
 
-        imageDao.save(image);
+         imageDao.save(image);
 
         return "redirect:/profile";
     }

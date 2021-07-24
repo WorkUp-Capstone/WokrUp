@@ -139,6 +139,7 @@ public class UsersController {
             projectToReset.resetDeveloperUser();
             projectToReset.setStatus("Open");
             projectsDao.saveAndFlush(projectToReset);
+            return "redirect:/home";
         } else {
             Project projectToReset = projectsDao.getProjectById(projectId);
 //            Profile acceptProfile = profileDao.getProfileByUserIs(projectToReset.getDeveloperUser());
@@ -146,7 +147,7 @@ public class UsersController {
             acceptUser.setChosen(chosen);
             usersDao.saveAndFlush(acceptUser);
         }
-        return "redirect:/home";
+        return "redirect:/profile";
     }
 
     @PostMapping("/home/review")

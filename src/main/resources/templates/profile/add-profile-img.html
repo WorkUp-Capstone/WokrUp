@@ -4,15 +4,27 @@
 
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<div class="col form-group">
+    <div class="home-h1">
+        <h1>Profile Photo Booth</h1>
+    </div>
+<div class="images-boundary">
+    <div class="images-card">
+        <article class="images-article">
+            <div class="mb-auto">
+                <h3>Upload a profile image</h3>
+            </div>
     <form id="image" th:action="@{/profile/profileImg/add}" method="post" th:object="${userProfile}">
 
-        <label>Select a profile image</label>
+        <div class="edit-profile">
+      <button id="picker" type="button" class="btn btn-outline-*">Select Photo</button>
 
-      <button id="picker" type="button">Select Photo</button>
+        <button id="submit-pic" type="submit" class="btn btn-outline-*">Submit</button>
+        </div>
 
-    <input type="submit" value="Submit">
+<!--    <input type="submit" value="Submit">-->
     </form>
+        </article>
+    </div>
     </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

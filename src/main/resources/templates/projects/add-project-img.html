@@ -4,30 +4,39 @@
 
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<div class="col form-group">
-
-  <label>Upload supporting documents or photos for your project</label>
+  <div class="home-h1">
+    <h1>Project Files & Images</h1>
+    <div class="project-h3">
+    <h3>Upload supporting documents or photos for your project</h3>
+    </div>
+  </div>
 
   <form id="images" th:action="@{/profile/projects/{id}/add((id=${addProjectImg.getId()}))}" method="post" th:object="${addProjectImg}">
 
-    <button id="picker" type="button">Select File</button>
+    <div class="edit-file">
+    <button id="picker" type="button" class="btn btn-outline-*">Select File</button>
+    </div>
 
-    <input style="display: none" class="submit" type="submit" value="Submit File to project">
+      <button style="display: none" id="submit-file" type="submit" class="btn btn-outline-*">Submit File</button>
+
+<!--    <input style="display: none" class="submit" type="submit" value="Submit File to project">-->
+
+
+
   </form>
 
 
 
-</div>
 
 <th:block th:each="projectImage : ${projectImageList}">
-  <div class="col form-group">
+      <article class="files-article">
     <embed th:width="800" th:height="1000" th:src="${projectImage.path}"><!--Submitted file size-->
-  </div>
+
 
   <form method="post" th:action="@{/profile/image/{id}/delete(id=${projectImage.getId()})}">
-    <button class="btn btn-danger" type="submit">Delete File</button>
+    <button id="delete-file" class="btn btn-outline-*" type="submit">Delete File</button>
   </form>
-
+    </article>
 </th:block>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -43,7 +52,7 @@
               onUploadDone: (res) => {
                 $('#images').append(`<input type="hidden" name="project_img" value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`);
 
-                $('#images').prepend(`<embed width="800" height="1000" src='${res.filesUploaded[0].url}'>`); //preview container size for both image and pdf
+                $('#images').prepend(`<article class="files-article"><embed width="800" height="1000" src='${res.filesUploaded[0].url}'></article>`); //preview container size for both image and pdf
               },
 
               imageDim: [800, null],
@@ -55,8 +64,14 @@
     $("#picker").click(function (){
       client.picker(options).open();
 
-      document.querySelector(".submit").style.display="block";
-    })
+      document.querySelector("#submit-file").style.display="block";
+    });
+
+    $("#delete-file").click(function () {
+     if (!confirm("Are you sure you want to delete file?")){
+       return false;
+     }
+    });
 
   })();
 </script>
