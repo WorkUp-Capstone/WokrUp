@@ -1,3 +1,4 @@
+/* (C)2021 */
 package com.workup.workup.configuration;
 
 import com.workup.workup.services.validation.UserDetailsLoader;
@@ -25,8 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(usersLoader) // How to find users by their username
+        auth.userDetailsService(usersLoader) // How to find users by their username
                 .passwordEncoder(passwordEncoder()) // How to encode and verify passwords
         ;
     }
@@ -64,10 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/home",
                         "/profile/profileImg/add",
                         "profile/projects/{id}/add",
-                        "home/view-prospect"
-
-                )
-                .authenticated()
-        ;
+                        "home/view-prospect")
+                .authenticated();
     }
 }
