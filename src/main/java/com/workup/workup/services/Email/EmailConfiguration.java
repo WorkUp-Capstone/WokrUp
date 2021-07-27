@@ -2,6 +2,7 @@ package com.workup.workup.services.Email;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
@@ -14,6 +15,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.util.Properties;
 
+@Configuration
 @PropertySource(value = {"classpath:application.properties"})
 public class EmailConfiguration {
 
@@ -67,8 +69,6 @@ public class EmailConfiguration {
     @Bean
     public ITemplateResolver thymeleafTemplateResolver() {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-//        templateResolver.setPrefix("templates/");
-//        templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML");
         templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
