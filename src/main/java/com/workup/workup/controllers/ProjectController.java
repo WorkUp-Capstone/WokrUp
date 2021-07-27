@@ -92,7 +92,6 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
     //edit selected project
     @GetMapping("/projects/{id}/edit")
     public String editProjectForm(Model model, @PathVariable Long id, Model categoryModel) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Project projectToEdit = projectDao.getById(id);
         model.addAttribute("editProject", projectToEdit);
         categoryModel.addAttribute("categoryList", categoryDao.findAll());
@@ -130,8 +129,6 @@ public ProjectController(CategoryRepository categoryDao, ProjectsRepository proj
 //    //create project images:
     @GetMapping("/profile/projects/{id}/add")
     public String addProjectImagesForm(Model model, @PathVariable Long id){
-
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Project addProjectImg = projectDao.getById(id);
         model.addAttribute("addProjectImg", addProjectImg);

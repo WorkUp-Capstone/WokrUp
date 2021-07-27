@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "projects")
-public class Project{
+public class Project {
 
     // TABLE CREATION AND COLUMNS
 
@@ -29,13 +29,13 @@ public class Project{
 //    @FullTextField
     private String description;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private Date creationDate;
 
-    @Column (nullable = true)
+    @Column(nullable = true)
     private Date completionDate;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String status;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
@@ -45,8 +45,8 @@ public class Project{
 
     @JoinTable(
             name = "project_categories",
-            joinColumns = {@JoinColumn(name="project_id")},
-            inverseJoinColumns = {@JoinColumn(name="category_id")}
+            joinColumns = {@JoinColumn(name = "project_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")}
     )
     private List<Category> categories;
 
@@ -60,11 +60,12 @@ public class Project{
     // CONSTRUCTORS
 
     // Empty constructor for Spring to work
-    public Project(){}
+    public Project() {
+    }
 
     // Read constructor includes Id
 
-    public Project(long id, String title, String description, User user, User developerUser, List<ProjectImage> images, List<Category> categories, String status, java.sql.Date creationDate,java.sql.Date completedDate){
+    public Project(long id, String title, String description, User user, User developerUser, List<ProjectImage> images, List<Category> categories, String status, java.sql.Date creationDate, java.sql.Date completedDate) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -73,20 +74,20 @@ public class Project{
         this.images = images;
         this.categories = categories;
         this.status = status;
-        this.completionDate = completedDate;
-        this.creationDate = creationDate;
+        this.completionDate = new Date(completedDate.getTime());
+        this.creationDate = new Date(creationDate.getTime());
     }
 
     // Insert constructor no Id needed
 
-    public Project(String title, String description, User user, List<ProjectImage> images, List<Category> categories, String status, java.sql.Date creationDate){
+    public Project(String title, String description, User user, List<ProjectImage> images, List<Category> categories, String status, java.sql.Date creationDate) {
         this.title = title;
         this.description = description;
         this.user = user;
         this.images = images;
         this.categories = categories;
         this.status = status;
-        this.creationDate = creationDate;
+        this.creationDate = new Date(creationDate.getTime());
     }
 
 
@@ -118,19 +119,19 @@ public class Project{
     }
 
     public Date getCreationDate() {
-        return creationDate;
+        return new Date(creationDate.getTime());
     }
 
     public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+        this.creationDate = new Date(creationDate.getTime());
     }
 
     public Date getCompletionDate() {
-        return completionDate;
+        return new Date(completionDate.getTime());
     }
 
     public void setCompletionDate(Date completionDate) {
-        this.completionDate = completionDate;
+        this.completionDate = new Date(completionDate.getTime());
     }
 
     public String getStatus() {
@@ -185,6 +186,7 @@ public class Project{
     @Lob
     @Column(columnDefinition = "BLOB")
     private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     private java.sql.Date parseDate(String date) {
         try {
             return new Date(DATE_FORMAT.parse(date).getTime());

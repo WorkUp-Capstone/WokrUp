@@ -26,7 +26,7 @@ public class KeysController {
     public String apikey(){
         StringBuilder keysJs = new StringBuilder();
         for (Map.Entry<String,String> entry : configProperties.getJsKeys().entrySet()){
-            keysJs.append(String.format("const %s_API_KEY = '%s';\n", entry.getKey().toUpperCase(), entry.getValue()));
+            keysJs.append(String.format("const %s_API_KEY = '%s';%n", entry.getKey().toUpperCase(), entry.getValue()));
         }
 
         return keysJs.toString();
