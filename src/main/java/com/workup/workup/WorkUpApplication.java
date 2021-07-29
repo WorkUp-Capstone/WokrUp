@@ -11,8 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @SpringBootApplication
 public class WorkUpApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(WorkUpApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(WorkUpApplication.class, args);
+  }
 }

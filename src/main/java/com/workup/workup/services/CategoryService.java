@@ -12,14 +12,13 @@ import java.util.List;
 @Service
 public class CategoryService {
 
-    @Autowired
-    CategoryRepository categoryDao;
+  @Autowired CategoryRepository categoryDao;
 
-    public List<Category> getCategoriesByKeyword(String keyword) {
-        return categoryDao.getCategoriesByKeyword(keyword);
-    }
+  public List<Category> getCategoriesByKeyword(String keyword) {
+    return categoryDao.getCategoriesByKeyword(keyword);
+  }
 
-    public Category findByName(String keyword) {
-        return categoryDao.findByName(keyword);
-    }
+  public Category findByName(String keyword) {
+    return categoryDao.findByName(keyword);
+  }
 }

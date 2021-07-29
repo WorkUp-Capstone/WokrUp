@@ -10,11 +10,9 @@ import java.util.List;
 @Service
 public class ProjectService {
 
-    @Autowired
-    private ProjectsRepository projectsDao;
+  @Autowired private ProjectsRepository projectsDao;
 
-    public List<Project> getProjectsByKeyword(String keyword){
-        return projectsDao.getProjectsByKeyword(keyword);
-    }
-
+  public List<Project> getProjectsByKeyword(String keyword) {
+    return projectsDao.getProjectsByKeyword(keyword);
+  }
 }
