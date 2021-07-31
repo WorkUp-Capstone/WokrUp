@@ -19,75 +19,74 @@ import java.util.Properties;
 @PropertySource(value = {"classpath:application.properties"})
 public class EmailConfiguration {
 
-    @Value("${spring.mail.host}")
-    private String mailServerHost;
+  @Value("${spring.mail.host}")
+  private String mailServerHost;
 
-    @Value("${spring.mail.port}")
-    private Integer mailServerPort;
+  @Value("${spring.mail.port}")
+  private Integer mailServerPort;
 
-    @Value("${spring.mail.username}")
-    private String mailServerUsername;
+  @Value("${spring.mail.username}")
+  private String mailServerUsername;
 
-    @Value("${spring.mail.password}")
-    private String mailServerPassword;
+  @Value("${spring.mail.password}")
+  private String mailServerPassword;
 
-    @Value("${spring.mail.properties.mail.smtp.auth}")
-    private String mailServerAuth;
+  @Value("${spring.mail.properties.mail.smtp.auth}")
+  private String mailServerAuth;
 
-    @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
-    private String mailServerStartTls;
+  @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
+  private String mailServerStartTls;
 
-    @Value("${spring.mail.templates.path}")
-    private String mailTemplatesPath;
+  @Value("${spring.mail.templates.path}")
+  private String mailTemplatesPath;
 
-    @Bean
-    public JavaMailSender getJavaMailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+  @Bean
+  public JavaMailSender getJavaMailSender() {
+    JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
-        mailSender.setHost(mailServerHost);
-        mailSender.setPort(mailServerPort);
+    mailSender.setHost(mailServerHost);
+    mailSender.setPort(mailServerPort);
 
-        mailSender.setUsername(mailServerUsername);
-        mailSender.setPassword(mailServerPassword);
+    mailSender.setUsername(mailServerUsername);
+    mailSender.setPassword(mailServerPassword);
 
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", mailServerAuth);
-        props.put("mail.smtp.starttls.enable", mailServerStartTls);
-        props.put("mail.debug", "true");
+    Properties props = mailSender.getJavaMailProperties();
+    props.put("mail.transport.protocol", "smtp");
+    props.put("mail.smtp.auth", mailServerAuth);
+    props.put("mail.smtp.starttls.enable", mailServerStartTls);
+    props.put("mail.debug", "true");
 
-        return mailSender;
-    }
+    return mailSender;
+  }
 
-    @Bean
-    public SimpleMailMessage templateSimpleMessage() {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setText("This is the test email template for your email:\n%s\n");
-        return message;
-    }
+  @Bean
+  public SimpleMailMessage templateSimpleMessage() {
+    SimpleMailMessage message = new SimpleMailMessage();
+    message.setText("This is the test email template for your email:\n%s\n");
+    return message;
+  }
 
-    @Bean
-    public ITemplateResolver thymeleafTemplateResolver() {
-        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setTemplateMode("HTML");
-        templateResolver.setCharacterEncoding("UTF-8");
-        return templateResolver;
-    }
+  @Bean
+  public ITemplateResolver thymeleafTemplateResolver() {
+    ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+    templateResolver.setTemplateMode("HTML");
+    templateResolver.setCharacterEncoding("UTF-8");
+    return templateResolver;
+  }
 
-    @Bean
-    public ResourceBundleMessageSource emailMessageSource() {
-        final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("mailMessages");
-        return messageSource;
-    }
+  @Bean
+  public ResourceBundleMessageSource emailMessageSource() {
+    final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+    messageSource.setBasename("mailMessages");
+    return messageSource;
+  }
 
-    @Bean
-    public SpringTemplateEngine thymeleafTemplateEngine(ITemplateResolver templateResolver, ResourceBundleMessageSource emailMessageSource) {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver);
-        templateEngine.setTemplateEngineMessageSource(emailMessageSource);
-        return templateEngine;
-    }
-
-
+  @Bean
+  public SpringTemplateEngine thymeleafTemplateEngine(
+      ITemplateResolver templateResolver, ResourceBundleMessageSource emailMessageSource) {
+    SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+    templateEngine.setTemplateResolver(templateResolver);
+    templateEngine.setTemplateEngineMessageSource(emailMessageSource);
+    return templateEngine;
+  }
 }

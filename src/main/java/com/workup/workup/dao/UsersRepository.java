@@ -14,10 +14,12 @@ import java.util.List;
 // USER MODEL NOT CONNECTED YET! DELETE WHEN CONNECTED!!!! //
 public interface UsersRepository extends JpaRepository<User, Long> {
 
-    User findByEmail(String email);
+  User findByEmail(String email);
 
-    boolean existsByEmail(String email);
+  boolean existsByEmail(String email);
 
-    @Query(value = "from User u where u.first_name like %:keyword% or u.last_name like %:keyword% or u.email like %:keyword%")
-    List<User> getUsersByKeyword(@Param("keyword")String keyword);
+  @Query(
+      value =
+          "from User u where u.first_name like %:keyword% or u.last_name like %:keyword% or u.email like %:keyword%")
+  List<User> getUsersByKeyword(@Param("keyword") String keyword);
 }

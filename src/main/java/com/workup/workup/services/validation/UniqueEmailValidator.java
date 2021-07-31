@@ -10,11 +10,10 @@ import javax.validation.ConstraintValidatorContext;
 @Component
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
 
-    @Autowired
-    UsersRepository usersRepository;
+  @Autowired UsersRepository usersRepository;
 
-    @Override
-    public boolean isValid(String email, ConstraintValidatorContext context) {
-        return !usersRepository.existsByEmail(email);
-    }
+  @Override
+  public boolean isValid(String email, ConstraintValidatorContext context) {
+    return !usersRepository.existsByEmail(email);
+  }
 }

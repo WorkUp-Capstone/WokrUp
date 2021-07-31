@@ -10,11 +10,9 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
-    private UsersRepository usersDao;
+  @Autowired private UsersRepository usersDao;
 
-    public List<User> getUsersByKeyword(String keyword) {
-        return usersDao.getUsersByKeyword(keyword);
-    }
-
+  public List<User> getUsersByKeyword(String keyword) {
+    return usersDao.getUsersByKeyword(keyword);
+  }
 }

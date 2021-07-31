@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ImagesRepository extends JpaRepository<ProjectImage, Long> {
 
-    List<ProjectImage>getAllProjectImageByProjectId(Long ownerUserId);
+  List<ProjectImage> getAllProjectImageByProjectId(Long ownerUserId);
 
-    List<ProjectImage>findAllProjectImagesByProjectId(Long projectId);
+  List<ProjectImage> findAllProjectImagesByProjectId(Long projectId);
 }

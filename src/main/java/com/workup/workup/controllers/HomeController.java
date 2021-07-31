@@ -1,4 +1,3 @@
-/* (C)2021 */
 package com.workup.workup.controllers;
 
 import com.workup.workup.dao.ImagesRepository;
@@ -48,6 +47,7 @@ public class HomeController {
     @Autowired private ProfileService profileService;
     @Autowired private CategoryService categoryService;
 
+
     public HomeController(
             ProjectsRepository projectsRepository,
             ProfileRepository profileRepository,
@@ -87,9 +87,9 @@ public class HomeController {
         boolean strongPassword = Pattern.matches("[a-zA-Z0-9]", password);
         boolean isPasswordConfirmed = password.equals(passwordRepeat);
 
-        Validation validate = new Validation();
-        modelAndView.setViewName("registration");
-        modelAndView.addObject("user", user);
+    Validation validate = new Validation();
+    modelAndView.setViewName("registration");
+    modelAndView.addObject("user", user);
 
         if (validate.emailHasError(email)) {
             String emailError = "Input a proper email (___@mailservice.com)";
@@ -124,13 +124,13 @@ public class HomeController {
         return modelAndView;
     }
 
-    @GetMapping("/home")
-    public String home(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("userRole", user.getRole().getRole());
-        List<Profile> profiles = profileDao.findAll();
-        List<Profile> devProfiles = new ArrayList<>();
-        List<Project> projects = projectsDao.findAll();
-        List<Project> openProjects = new ArrayList<>();
+  @GetMapping("/home")
+  public String home(Model model, @AuthenticationPrincipal User user) {
+    model.addAttribute("userRole", user.getRole().getRole());
+    List<Profile> profiles = profileDao.findAll();
+    List<Profile> devProfiles = new ArrayList<>();
+    List<Project> projects = projectsDao.findAll();
+    List<Project> openProjects = new ArrayList<>();
 
         for (Project project : projects) {
             if (project.getStatus().contains("Open")) {
@@ -151,12 +151,12 @@ public class HomeController {
     @GetMapping("/home/project/{id}/images")
     public String viewProjectImages(Model model, @PathVariable Long id) {
 
-        List<ProjectImage> projectImage = imageDao.findAllProjectImagesByProjectId(id);
+    List<ProjectImage> projectImage = imageDao.findAllProjectImagesByProjectId(id);
 
         model.addAttribute("projectImageList", projectImage);
 
-        return "projects/view-project-images";
-    }
+    return "projects/view-project-images";
+  }
 
     @PostMapping("/home/contact")
     public String contactUser(
@@ -211,7 +211,7 @@ public class HomeController {
         List<Project> projects = projectService.getProjectsByKeyword(keyword);
         List<Project> foundProjects = new ArrayList<>();
 
-        model.addAttribute("keyword", keyword);
+    model.addAttribute("keyword", keyword);
 
         //        model.addAttribute("foundProfiles", profileService.getProfilesByKeyword(keyword));
         //        model.addAttribute("foundProfiles", userService.getUsersByKeyword(keyword));
@@ -220,9 +220,9 @@ public class HomeController {
         for (Project project : projects) {
             if (project.getStatus().contains("Open")) {
 
-                foundProjects.add(project);
-            }
-        }
+        foundProjects.add(project);
+      }
+    }
 
         for (Profile profile : profiles) {
             if (profile.getUser().getRole().getId() == 2) {

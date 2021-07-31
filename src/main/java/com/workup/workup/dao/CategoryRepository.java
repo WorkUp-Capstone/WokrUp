@@ -11,11 +11,10 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    @Query(value = "from Category c where c.name like %:keyword%")
-    List<Category> getCategoriesByKeyword(@Param("keyword")String keyword);
+  @Query(value = "from Category c where c.name like %:keyword%")
+  List<Category> getCategoriesByKeyword(@Param("keyword") String keyword);
 
-    List<Project> findProjectById(Long id);
+  List<Project> findProjectById(Long id);
 
-    Category findByName(String name);
-
+  Category findByName(String name);
 }

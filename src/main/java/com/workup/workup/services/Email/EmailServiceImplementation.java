@@ -20,95 +20,100 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service("EmailService")
-public class EmailServiceImplementation implements EmailService{
+public class EmailServiceImplementation implements EmailService {
 
-    private static final String defaultEmail = "admin@example.com";
+  private static final String defaultEmail = "admin@example.com";
 
-    @Autowired
-    private JavaMailSender emailSender;
+  @Autowired private JavaMailSender emailSender;
 
-    @Autowired
-    private SimpleMailMessage templateSimpleMessage;
+  @Autowired
+  private SimpleMailMessage templateSimpleMessage;
 
-    @Autowired
-    private SpringTemplateEngine thymeleafTemplateEngine;
+  @Autowired private SpringTemplateEngine thymeleafTemplateEngine;
 
-    @Value("classpath:/temporary.png")
-    private Resource resourceFile;
+  @Value("classpath:/temporary.png")
+  private Resource resourceFile;
 
-    @Override
-    public void sendSimpleMessage(String to, String subject, String body) {
-        try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(defaultEmail);
-            message.setTo(to);
-            message.setSubject(subject);
-            message.setText(body);
+  @Override
+  public void sendSimpleMessage(String to, String subject, String body) {
+    try {
+      SimpleMailMessage message = new SimpleMailMessage();
+      message.setFrom(defaultEmail);
+      message.setTo(to);
+      message.setSubject(subject);
+      message.setText(body);
 
-            emailSender.send(message);
-        } catch (MailException exception) {
-            exception.printStackTrace();
-        }
+      emailSender.send(message);
+    } catch (MailException exception) {
+      exception.printStackTrace();
     }
+  }
 
-    @Override
-    public void sendHtmlMessage(String to, String subject, String htmlBody) throws MessagingException {
-        MimeMessage message = emailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-        helper.setFrom(defaultEmail);
-        helper.setTo(to);
-        helper.setSubject(subject);
-        helper.setText(htmlBody, true);
-        helper.addInline("attachment.png", (org.springframework.core.io.Resource) resourceFile);
-        emailSender.send(message);
-    }
+  @Override
+  public void sendHtmlMessage(String to, String subject, String htmlBody)
+      throws MessagingException {
+    MimeMessage message = emailSender.createMimeMessage();
+    MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+    helper.setFrom(defaultEmail);
+    helper.setTo(to);
+    helper.setSubject(subject);
+    helper.setText(htmlBody, true);
+    helper.addInline("attachment.png", (org.springframework.core.io.Resource) resourceFile);
+    emailSender.send(message);
+  }
 
     @Override
     public void sendSimpleMessageUsingTemplate(String to, String subject, String... templateModel) {
-        String text = String.format(templateSimpleMessage.getText(), templateModel);
-        sendSimpleMessage(to,subject,text);
+      String text = String.format(templateSimpleMessage.getText(), templateModel);
+      sendSimpleMessage(to,subject,text);
     }
 
-    @Override
-    public void sendMessageWithAttachment(String to, String subject, String body, String pathToAttachment) {
-        try {
-            MimeMessage message = emailSender.createMimeMessage();
-            // pass 'true' to the constructor to create a multipart message
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+  @Override
+  public void sendMessageWithAttachment(
+      String to, String subject, String body, String pathToAttachment) {
+    try {
+      MimeMessage message = emailSender.createMimeMessage();
+      // pass 'true' to the constructor to create a multipart message
+      MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-            helper.setFrom(defaultEmail);
-            helper.setTo(to);
-            helper.setSubject(subject);
-            helper.setText(body);
+      helper.setFrom(defaultEmail);
+      helper.setTo(to);
+      helper.setSubject(subject);
+      helper.setText(body);
 
-            FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
-            helper.addAttachment("Invoice", file);
+      FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
+      helper.addAttachment("Invoice", file);
 
-            emailSender.send(message);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+      emailSender.send(message);
+    } catch (MessagingException e) {
+      e.printStackTrace();
     }
+  }
 
-    @Override
-    public void sendUserMessageUsingThymeleafTemplate(String to, String subject, HashMap<String, Object> templateModel) throws IOException, MessagingException {
-            Context thymeleafContext = new Context();
-            thymeleafContext.setVariables(templateModel);
+  @Override
+  public void sendUserMessageUsingThymeleafTemplate(
+      String to, String subject, HashMap<String, Object> templateModel)
+      throws IOException, MessagingException {
+    Context thymeleafContext = new Context();
+    thymeleafContext.setVariables(templateModel);
 
-            String htmlBody = thymeleafTemplateEngine.process("mail-templates/mail-contact-user.html", thymeleafContext);
+    String htmlBody =
+        thymeleafTemplateEngine.process("mail-templates/mail-contact-user.html", thymeleafContext);
 
-            sendHtmlMessage(to, subject, htmlBody);
-        }
+    sendHtmlMessage(to, subject, htmlBody);
+  }
 
+  @Override
+  public void sendProjectMessageUsingThymeleafTemplate(
+      String to, String subject, HashMap<String, Object> templateModel)
+      throws IOException, MessagingException {
+    Context thymeleafContext = new Context();
+    thymeleafContext.setVariables(templateModel);
 
-    @Override
-    public void sendProjectMessageUsingThymeleafTemplate(String to, String subject, HashMap<String, Object> templateModel) throws IOException, MessagingException {
-        Context thymeleafContext = new Context();
-        thymeleafContext.setVariables(templateModel);
+    String htmlBody =
+        thymeleafTemplateEngine.process(
+            "mail-templates/mail-contact-project.html", thymeleafContext);
 
-        String htmlBody = thymeleafTemplateEngine.process("mail-templates/mail-contact-project.html", thymeleafContext);
-
-        sendHtmlMessage(to, subject, htmlBody);
-    }
+    sendHtmlMessage(to, subject, htmlBody);
+  }
 }
-

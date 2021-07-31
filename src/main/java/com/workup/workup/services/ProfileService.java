@@ -11,13 +11,10 @@ import java.util.List;
 @Service
 public class ProfileService {
 
-    @Autowired
-    private ProfileRepository profilesDao;
-    @Autowired
-    private UsersRepository usersDao;
+  @Autowired private ProfileRepository profilesDao;
+  @Autowired private UsersRepository usersDao;
 
-    public List<Profile> getProfilesByKeyword(String keyword) {
-        return profilesDao.getProfilesByKeyword(keyword);
-    }
-
+  public List<Profile> getProfilesByKeyword(String keyword) {
+    return profilesDao.getProfilesByKeyword(keyword);
+  }
 }
