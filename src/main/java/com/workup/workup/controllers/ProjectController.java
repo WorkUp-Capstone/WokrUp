@@ -1,15 +1,19 @@
+/* (C)2021 */
 package com.workup.workup.controllers;
 
 import com.workup.workup.dao.*;
-import com.workup.workup.models.*;
-import org.springframework.beans.factory.annotation.Value;
 import com.workup.workup.dao.CategoryRepository;
 import com.workup.workup.dao.ProfileRepository;
 import com.workup.workup.dao.ProjectsRepository;
 import com.workup.workup.dao.UsersRepository;
+import com.workup.workup.models.*;
 import com.workup.workup.models.Category;
 import com.workup.workup.models.Project;
 import com.workup.workup.models.User;
+import java.sql.Date;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

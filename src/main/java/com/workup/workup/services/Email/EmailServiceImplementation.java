@@ -26,7 +26,8 @@ public class EmailServiceImplementation implements EmailService {
 
   @Autowired private JavaMailSender emailSender;
 
-  private SimpleMailMessage template;
+  @Autowired
+  private SimpleMailMessage templateSimpleMessage;
 
   @Autowired private SpringTemplateEngine thymeleafTemplateEngine;
 
@@ -61,11 +62,11 @@ public class EmailServiceImplementation implements EmailService {
     emailSender.send(message);
   }
 
-  @Override
-  public void sendSimpleMessageUsingTemplate(String to, String subject, String... templateModel) {
-    String text = String.format(template.getText(), templateModel);
-    sendSimpleMessage(to, subject, text);
-  }
+    @Override
+    public void sendSimpleMessageUsingTemplate(String to, String subject, String... templateModel) {
+      String text = String.format(templateSimpleMessage.getText(), templateModel);
+      sendSimpleMessage(to,subject,text);
+    }
 
   @Override
   public void sendMessageWithAttachment(
