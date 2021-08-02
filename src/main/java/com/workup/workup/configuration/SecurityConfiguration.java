@@ -33,25 +33,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
-        /** Login configuration */
+//         Login configuration
         .formLogin()
         .loginPage("/login")
         .defaultSuccessUrl("/profile") // user's home page, it can be any URL
         .permitAll() // Anyone can go to the login page
 
-        /** Logout configuration */
+//        Logout configuration
         .and()
         .logout()
         .logoutSuccessUrl("/login?logout")
         // append a query string value, need to verify where they get sent after logout
 
-        /** Pages that can be viewed without having to log in */
+//        Pages that can be viewed without having to log in
         .and()
         .authorizeRequests()
         .antMatchers("/") // anyone can see the home and the ads pages
         .permitAll()
 
-        /** Pages that require authentication */
+//         Pages that require authentication
         .and()
         .authorizeRequests()
         .antMatchers(
