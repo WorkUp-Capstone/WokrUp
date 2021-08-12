@@ -1,16 +1,13 @@
 package com.workup.workup.dao;
 
 import com.workup.workup.models.Profile;
-import com.workup.workup.models.Role;
 import com.workup.workup.models.User;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-
-import java.util.List;
 
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
   Profile findById(long id);
