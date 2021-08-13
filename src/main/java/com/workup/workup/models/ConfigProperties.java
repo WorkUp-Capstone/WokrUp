@@ -1,8 +1,7 @@
 package com.workup.workup.models;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.util.Map;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "config")
 public class ConfigProperties {
