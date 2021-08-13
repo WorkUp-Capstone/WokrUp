@@ -1,8 +1,5 @@
 package com.workup.workup.models;
 
-// import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
-// import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
-
 import javax.persistence.*;
 import java.util.List;
 
